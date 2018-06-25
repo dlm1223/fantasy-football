@@ -77,7 +77,7 @@ simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1,
   # picks
 }
 
-#get top lineup--faster function---doesn't handle multiple eligible players well
+#get top lineup--faster function---doesn't handle multiple eligible players
 # getTopLineup2<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="Sim"){
 #   picks<-picks[order(picks[, scoring], decreasing = T),]
 #   

@@ -2,7 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-*.png
 model fitting.R
 organize player data.R
 scrape player data.R
