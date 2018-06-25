@@ -1,0 +1,22 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.png
+*.jpeg
+model fitting.R
+organize player data.R
+scrape player data.R
+smooth variables.R
+model fitting 2.R
+model fitting organize fantasypoints.R
+all data, optimize by round.R
+analyze draft parameters.R
+all data 2018.R
+Scoring/
+Player Data/
+Misc Data/
+Articles/
+FFAnalytics/
+FantasyPros__Overall_ADP_Rankings.csv
+archived links.txt
