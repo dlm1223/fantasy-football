@@ -77,22 +77,22 @@ simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1,
   # picks
 }
 
-#get top lineup--faster function
-getTopLineup2<-function(picks, numRB=2, numWR=3, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="Sim"){
-  picks<-picks[order(picks[, scoring], decreasing = T),]
-  
-  for(i in c("RB", "WR", "TE", "QB", "DST", "K")){
-    picks[, i]<-ifelse(grepl(i, picks$Pos), cumsum(grepl(i, picks$Pos)), NA)
-  }
-  test<-picks[which(picks$RB<=numRB| picks$WR<=numWR| picks$QB<=numQB|picks$DST<=numDST| picks$TE<=numTE| picks$K<=numK),] #starters
-  flex<-picks[which(!picks$Player%in% test$Player&grepl("RB|WR|TE", picks$Pos)),][1,] #flex
-  test<-rbind(test, flex)
-  test[, !colnames(test)%in%  c("RB", "WR", "TE", "QB", "DST", "K", "RB|WR|TE"),]
-}
+#get top lineup--faster function---doesn't handle multiple eligible players well
+# getTopLineup2<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="Sim"){
+#   picks<-picks[order(picks[, scoring], decreasing = T),]
+#   
+#   for(i in c("RB", "WR", "TE", "QB", "DST", "K")){
+#     picks[, i]<-ifelse(grepl(i, picks$Pos), cumsum(grepl(i, picks$Pos)), NA)
+#   }
+#   test<-picks[which(picks$RB<=numRB| picks$WR<=numWR| picks$QB<=numQB|picks$DST<=numDST| picks$TE<=numTE| picks$K<=numK),] #starters
+#   flex<-picks[which(!picks$Player%in% test$Player&grepl("RB|WR|TE", picks$Pos)),][1,] #flex
+#   test<-rbind(test, flex)
+#   test[, !colnames(test)%in%  c("RB", "WR", "TE", "QB", "DST", "K", "RB|WR|TE"),]
+# }
 
 
 #get optimal starting lineup
-getTopLineup<-function(picks, numRB=2, numWR=3, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="Sim", optmode="lpsolve"){
+getTopLineup<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="Sim", optmode="lpsolve"){
   
   model <- list()
   A<-matrix(0, ncol=nrow(picks), nrow=20) #cols=decision variables, rows=constraints on variables
