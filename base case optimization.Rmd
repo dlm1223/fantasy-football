@@ -6,7 +6,6 @@ output:
     variant: markdown_github
   html_document:
     toc: true
-
 ---
 
 ---
@@ -18,7 +17,6 @@ options(width = 10000)
 ```
 
 Optimizing your strategy for a fantasy football draft is an interesting problem. Should you should go RB early? Wait on RB's? Should you do something productive with your free time instead of fantasy football? (probably). Optimizing your draft picks can be viewed as an optimization where you try to maximize the projected points of your selected players. In this post I will go through my optimization methodology. To start, I have a dataframe of players and their projected points and their ADPs (Average draft positions).
-
 
 ```{r include=F, eval=T , echo=F}
 ###load and prepare data
@@ -69,7 +67,7 @@ adp<-adp[order(adp$ADP_est, decreasing = F),]
 ```
 
 ```{r include=T, eval=T , echo=T}
-head(adp, 20)
+head(adp, 25)
 ```
 
 
@@ -168,7 +166,7 @@ For the more complicated case, my methodology will be to get an optimal lineup, 
 
 ###Error Analysis
 
-I summarize below the projection error (actual-projected) for 2012-2017, grouped by projection range and position.
+I summarize below the projection error (projected-actual) for 2012-2017, grouped by projection range and position.
 
 ```{r include=T, eval=T , echo=F}
 
@@ -180,12 +178,12 @@ projections$Pos<-ifelse(grepl("LB", projections$Pos), "LB",
 projections$Pos[grepl("FB", projections$Pos)]<-"RB"
 projections$Pos<-gsub("[/]", ";", projections$Pos)
 projections$fantPts_bin<-cut(projections$fantPts_agg, breaks=c(-50, 50, 100, 150, 200, 250, 400))
-
-errors<-ddply(projections[which(projections$Season>=2012& !is.na(projections$fantPts_bin) & projections$Pos!=""),], .(fantPts_bin, Pos),summarize,  
-              mean=mean(fantPts-fantPts_agg, na.rm=T),
-              median=median(fantPts-fantPts_agg, na.rm=T),
-              sd=sd(fantPts-fantPts_agg, na.rm=T), 
-              n=sum(!is.na(fantPts-fantPts_agg)))
+errors<-ddply(projections[which(projections$Season>=2012& projections$fantPts_agg>=50& !is.na(projections$fantPts_bin) & projections$Pos!=""),], .(fantPts_bin, Pos),summarize,  
+              meanError=mean(fantPts_agg-fantPts, na.rm=T),
+              medianError=median(fantPts_agg-fantPts, na.rm=T),
+              meanRelativeError=mean((fantPts_agg-fantPts)/fantPts_agg, na.rm=T),
+              sdError=sd(fantPts_agg-fantPts, na.rm=T), 
+              n=sum(!is.na(fantPts_agg-fantPts)))
 errors<-errors[errors$n>20,]
 errors<-errors[order(errors$Pos, errors$fantPts_bin),]
 errors<-errors[which(errors$Pos%in% c("K",  "DST", "QB", "RB", "WR", "TE")),]
@@ -195,22 +193,23 @@ errors
 Plotting the above standard deviations of the errors by position:
 
 ```{r  fig1, include=T, eval=T , echo=F,  fig.height = 3, fig.width = 5, fig.align = "center"}
-ggplot(errors, aes(fantPts_bin, sd,colour=Pos)) + 
-    geom_line(aes(group = Pos)) + geom_point()+
-    xlab("Projection") +ylab("SD of Projection Error")
+
+ggplot(errors, aes(fantPts_bin, sdError,colour=Pos)) + 
+  geom_line(aes(group = Pos)) + geom_point()+
+  xlab("Projection") +ylab("SD of Projection Error")
 
 ```
 
 I can also look at an example plot of one of these subgroups ex: WRs with projections between 150-200:
 
 ```{r fig2, include=T, eval=T , echo=F, fig.height = 3, fig.width = 5, fig.align = "center"}
-hist(projections$fantPts[projections$Pos=="WR"& projections$Season%in% 2012:2017& as.character(projections$fantPts_bin)=="(150,200]"]-
-       projections$fantPts_agg[projections$Pos=="WR"& projections$Season%in% 2012:2017& as.character(projections$fantPts_bin)=="(150,200]"], 
-     main="WR Actual-Projected, 150 to 200 FPTS projected", xlab="")
+hist(projections$fantPts_agg[projections$Pos=="WR"& projections$Season%in% 2012:2017& as.character(projections$fantPts_bin)=="(150,200]"]-
+       projections$fantPts[projections$Pos=="WR"& projections$Season%in% 2012:2017& as.character(projections$fantPts_bin)=="(150,200]"], 
+     main="WR Projected-Actual, 150 to 200 FPTS projected", xlab="")
 ```
 
 
-Looking at the above data and plots, I see how error variance is a function of position and projection. Looking at the example histogram above, the errors do appear pretty normally distributed. I should mention that in the table I do see that there appears to be bias in my projections for certain positions (negative mean/median value implies projections that are too high), I will revisit this at another time and for now assume unbiased errors. Below is an overview of the assumptions I am making when I simulate the seasons.
+Looking at the above data and plots, I see how error variance is a function of position and projection. Looking at the example histogram above, the errors do appear pretty normally distributed. I should mention that in the table I do see that there appears to be bias in my projections for certain positions (positive mean/median value implies projections that are overprojecting), I will revisit this at another time and for now assume unbiased errors. Below is an overview of the assumptions I am making when I simulate the seasons.
 
 **Assumption 1.** For simplicity I am assuming that errors are normally distributed with mean 0 and a standard deviation based on the SD for their position and projection.<br /> **Assumption 2.**  I also assume that you will be able to pick up undrafted players. I assume you will be able to get the third highest performing undrafted player at each position. This may be aggressive but it's likely that if you only need DST and TE mid-season, you will be able to get a strong one at both.
 
@@ -242,26 +241,44 @@ Finally, I can repeat this a large number of times to get the mean-simulated opt
 
 The last step of the system is to test different parameters. I can specify things like number of players to take at each position or whether I should lock in a certain player. I repeat the above simulation many times and I want to find the parameters that result in the best mean-simulated optimal lineup. Below I plot the simulation results for different parameter combinations. <br /> <br /> 
 
-![](Base Case Parameter Plot.jpeg)
+![](HALF scoring-base case parameters.jpeg)
 
-<br /> In the plot you can see the effect of different actions. For example, it suggests you should definitely take 2 QBs, as the 1 QB test (case 5) performs very poorly. Taking Antonio Brown instead of Kamara in round 1 slightly decreases the median-simulated starting lineup, despite Antonio Brown's raw projection actually being higher than Kamara's. The planned draft from the optimal parameter combo (case 4) is shown below.
-
-```{r  include=T, eval=T , echo=T}
-getPicks(slot="Slot4", numRB=4, numWR = 4,numTE=2,numK=1,numQB=2, numDST=2,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')
-```
-
-<br /> For comparison, below is the one with Antonio Brown:
+<br /> In the plot you can see the effect of different actions. For example, it suggests you should definitely take 2 QBs, as the 1 QB test (case 6) performs very poorly. Taking Antonio Brown instead of Kamara in round 1 slightly decreases the median-simulated starting lineup, despite Antonio Brown's raw projection actually being higher than Kamara's. The planned draft from the optimal parameter combo (case 3) is shown below.
 
 ```{r  include=T, eval=T , echo=T}
-getPicks(slot="Slot4", numRB=4, numWR = 4,numTE=2,numK=1,numQB=2, numDST=1,numFLEX = 1,shift=0,  out=c(), fix="Antonio Brown", scoring='HALF')
+getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')
 ```
 
+
+###Analyzing Bias
+Before I mentioned that the projections I am using have been biased for certain positions. For the last part of my analysis I'd like to see how the bias might affect my results. Looking at the errors, I'm going to create a shifted projection "HALF2" that accounts for bias and then I will repeat the previous analysis.
+
+```{r  include=T, eval=T , echo=T}
+#shift RB-20, TE-10, QB-10, WR-15, DST+10:
+adp$HALF2<-ifelse(adp$Pos=="RB"& adp$HALF>=100, adp$HALF-20,
+                  ifelse(adp$Pos%in% c("TE", "QB")& adp$HALF>100, adp$HALF-10, 
+                         ifelse(grepl("WR", adp$Pos)& adp$HALF>100, adp$HALF-15, 
+                                ifelse(adp$Pos%in% "DST", adp$HALF+10, adp$HALF   )))) 
+
+#getPicks() with "HALF2" scoring
+getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF2')
+
+```
+
+
+The optimal solution for the base case does not change anything Thinking about it, it makes sense. I need to take a fixed number at each position and so am basically judging each position independently and shifting it doesn't have an effect. Next I repeat the parameter optimization to see the effect of my projections' bias on that.
+
+
+![](HALF2 scoring-base case parameters.jpeg)
+
+
+The results are similar. The only difference is that it makes more sense to take an extra WR instead of an RB because it will have a greater chance of being useful in the final starting lineup flex spot. These results make sense and back up many of the initial findings.
 
 ---
 
 ##Conclusion
 
-In conclusion, I created a system that optimizes to get the best eventual starting lineup for fantasy football. In testing different strategies, it seems you should definitely draft 2 QBs, and probably draft RB first, though that is less clear.  One main flaw still remaining in all of this is the uncertainty in opponent picks. If an optimal strategy depends on getting a high value QB in round 10 for example, it should factor in what happens if someone else takes the QB. In addition, I should look into the projection bias because if Kamara's projection is biased more than Antonio Brown's that will make a big difference. I will look into these things in a future post. <br /><br />
+In conclusion, I created a system that optimizes to get the best eventual starting lineup for fantasy football. In testing different strategies, it seems you should definitely draft 2 QBs, you should probably draft RB first, and you should most likely not do zero-RB. I also looked at bias in my projections and found that having projections that are biased for a certain position does not have much effect on the results. The main flaw still remaining in all of this is the uncertainty in opponent picks. If an optimal strategy depends on getting a high value QB in round 10 for example, it should factor in what happens if someone else takes the QB. I will talk about that in a future post. <br /><br />
 
 
 

@@ -1,9 +1,12 @@
 library(plyr)
-library(rvest)
 library(dplyr)
+library(rvest)
+library(ggplot2)
+library(data.table)
 library(XML)
 library(lpSolve)
-library(ggplot2)
+library(zoo)
+library(MASS)
 options(stringsAsFactors = F)
 source('functions.R', encoding = 'UTF-8')
 
@@ -111,6 +114,7 @@ ffpros<-Reduce(function(x, y) merge(x, y, all=TRUE, by=c("Player", "Pos")), list
 
 adp<-merge(ffcalc[ffcalc$Year==2018, c("Player", "ADP_est", "ADPSD_est")], ffpros, by=c("Player"), all=T)
 
+adp$Pos[adp$Player=="Chris Thompson"& adp$Pos=="WR;RB"]<-"RB"
 
 
 save(list=c("adp", "ffcalc", "ffpros"), file="Draft Data.RData")
@@ -119,6 +123,7 @@ save(list=c("adp", "ffcalc", "ffpros"), file="Draft Data.RData")
 ####PREPARE DRAFT DATA#####
 
 load("Draft Data.RData")
+
 # adp$ADP_sim<-rnorm(nrow(adp), mean = adp$ADP_est, sd=adp$ADPSD_est)
 
 adp<-adp[order(adp$ADP_est, decreasing = F),]
@@ -155,6 +160,7 @@ adp<-adp[, !grepl("[.]", colnames(adp))]
 adp<-adp[order(adp$ADP_est, decreasing = F),]
 
 head(adp, 15)
+
 ###DRAFT PICK OPTIMIZATION#####
 
 getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, numFLEX=1, numDST=1, shift=0,
@@ -226,10 +232,12 @@ getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, 
   picks[,c("Player", "ADP_est", adpCol, "Pos",scoring, "Slot")]
 }
 #shift means shift everyone's ADP to be x% earlier i.e. if someone''s adp is 100, need to take them at 80
+adp$HALF2<-ifelse(adp$Pos=="RB"& adp$HALF>=100, adp$HALF-20,
+                  ifelse(adp$Pos%in% c("TE", "QB")& adp$HALF>100, adp$HALF-10, 
+                         ifelse(grepl("WR", adp$Pos)& adp$HALF>100, adp$HALF-15, 
+                                ifelse(adp$Pos%in% "DST", adp$HALF+10, adp$HALF   )))) 
 
-adp$HALF2<-ifelse(adp$Pos=="RB", adp$HALF-15, adp$HALF) #effect of biased running back projections?
-
-pickDF<- getPicks(slot="Slot4", numRB=4, numWR = 6, numFLEX = 0,numQB=2,shift=0,numDST=1,
+pickDF<- getPicks(slot="Slot4", numRB=5, numWR =5 , numFLEX = 0,numQB=2,shift=0,numDST=1, numK=1,numTE=1,
                   out=c(), fix=c(), scoring='HALF')
 pickDF
 
@@ -244,9 +252,9 @@ picks<-getPicks(slot="Slot4", numRB=4, numWR =4,numFLEX=1,numQB=2,numTE=2,numDST
                 strategy=c(),shift=0,
                 scoring='HALF', fix=c(),
                 out=c(#"Doug Baldwin"
-                      # adp$Player[adp$Pos=="QB"& adp$ADP_Rank<69]
-                      # ,adp$Player[adp$Pos=="WR"& adp$ADP_Rank<52]
-                      # ,adp$Player[adp$Pos=="DST"& adp$ADP_Rank<141]
+                  # adp$Player[adp$Pos=="QB"& adp$ADP_Rank<69]
+                  # ,adp$Player[adp$Pos=="WR"& adp$ADP_Rank<52]
+                  # ,adp$Player[adp$Pos=="DST"& adp$ADP_Rank<141]
                 ))
 picks
 nrow(picks)

@@ -45,56 +45,66 @@ adp$PPR<-ifelse(is.na(adp$PPR.y), adp$PPR.x, adp$PPR.y)
 adp<-adp[, !grepl("[.]", colnames(adp))]
 adp<-adp[order(adp$ADP_est, decreasing = F),]
 
+adp$HALF2<-ifelse(adp$Pos=="RB"& adp$HALF>=100, adp$HALF-20,
+                  ifelse(adp$Pos%in% c("TE", "QB")& adp$HALF>100, adp$HALF-10, 
+                         ifelse(grepl("WR", adp$Pos)& adp$HALF>100, adp$HALF-15, 
+                                ifelse(adp$Pos%in% "DST", adp$HALF+10, adp$HALF   )))) 
 head(adp, 15)
 
 source("simulate season.R")
 
 #analyze parameters
 
-picks1<-getPicks(slot="Slot4", numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')
-simScores1<-replicate(10000, simSeason(picks, scoring="HALF"))
+scoring<-"HALF"
+
+
+picks1<-getPicks(slot="Slot4", numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
+simScores1<-replicate(10000, simSeason(picks1, scoring=scoring))
 
 #rb heavy?
-picks1.5<-getPicks(slot="Slot4", numRB=6, numWR = 4,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')
-simScores1.5<-replicate(10000, simSeason(picks1.5, scoring="HALF"))
+picks1A<-getPicks(slot="Slot4", numRB=6, numWR = 4,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
+simScores1A<-replicate(10000, simSeason(picks1A, scoring=scoring))
+
+picks1B<-getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
+simScores1B<-replicate(10000, simSeason(picks1B, scoring=scoring))
 
 #take 2 TEs/QBs?
-picks2<-getPicks(slot="Slot4", numRB=4, numWR = 4,numTE=2,numK=1,numQB=2, numDST=1,numFLEX = 1,shift=0,  out=c(), fix=c(), scoring='HALF')
-simScores2<-replicate(10000, simSeason(picks2, scoring="HALF"))
+picks2<-getPicks(slot="Slot4", numRB=5, numWR = 4,numTE=2,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
+simScores2<-replicate(10000, simSeason(picks2, scoring=scoring))
 
 #take 2 TEs, DST and QB?
-picks3<-getPicks(slot="Slot4", numRB=4, numWR = 4,numTE=2,numK=1,numQB=2, numDST=2,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')
-simScores3<-replicate(10000, simSeason(picks3, scoring="HALF"))
+picks3<-getPicks(slot="Slot4", numRB=4, numWR = 4,numTE=2,numK=1,numQB=2, numDST=2,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
+simScores3<-replicate(10000, simSeason(picks3, scoring=scoring))
 
 
 #take 1QB and 2 DST/TE?
-picks4<-getPicks(slot="Slot4", numRB=4, numWR = 4,numTE=2,numK=1,numQB=1, numDST=2,numFLEX = 1,shift=0,  out=c(), fix=c(), scoring='HALF')
-simScores4<-replicate(10000, simSeason(picks4, scoring="HALF"))
+picks4<-getPicks(slot="Slot4", numRB=5, numWR = 4,numTE=2,numK=1,numQB=1, numDST=2,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
+simScores4<-replicate(10000, simSeason(picks4, scoring=scoring))
 
 #2 TE/QB + take Antonio Brown at pick 1?
-picks5<-getPicks(slot="Slot4", numRB=4, numWR =4 ,numTE=2,numK=1,numQB=2, numDST=1,numFLEX = 1,shift=0,  out=c(), fix="Antonio Brown", scoring='HALF')
-simScores5<-replicate(10000, simSeason(picks5, scoring="HALF"))
+picks5<-getPicks(slot="Slot4", numRB=5, numWR =5 ,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix="Antonio Brown", scoring=scoring)
+simScores5<-replicate(10000, simSeason(picks5, scoring=scoring))
 
 #Antonio Brown + RB heavy?
-picks6<-getPicks(slot="Slot4", numRB=6, numWR = 4,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix="Antonio Brown", scoring='HALF')
-simScores6<-replicate(10000, simSeason(picks6, scoring="HALF"))
+picks6<-getPicks(slot="Slot4", numRB=6, numWR = 4,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix="Antonio Brown", scoring=scoring)
+simScores6<-replicate(10000, simSeason(picks6, scoring=scoring))
 
 #zero-RB in R1-4?
-picks7<-getPicks(slot="Slot4", numRB=4, numWR = 4,numTE=2,numK=1,numQB=2, numDST=1,numFLEX = 1,shift=0,  out=adp$Player[adp$ADP_Rank<=51& adp$Pos=="RB"], fix=c(), scoring='HALF')
-simScores7<-replicate(10000, simSeason(picks7, scoring="HALF"))
+picks7<-getPicks(slot="Slot4", numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=adp$Player[adp$ADP_Rank<=51& adp$Pos=="RB"], fix=c(), scoring=scoring)
+simScores7<-replicate(10000, simSeason(picks7, scoring=scoring))
 
 #TE in R2?
-picks8<-getPicks(slot="Slot4", numRB=4, numWR = 4,numTE=2,numK=1,numQB=2, numDST=1,numFLEX = 1,shift=0,  out=, fix="Robert Gronkowski", scoring='HALF')
-simScores8<-replicate(10000, simSeason(picks8, scoring="HALF"))
+picks8<-getPicks(slot="Slot4", numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=, fix="Robert Gronkowski", scoring=scoring)
+simScores8<-replicate(10000, simSeason(picks8, scoring=scoring))
 summary(simScores6)
 
 
-Parameters<-c("1. RBx5,WRx5,QBx2,K/DST/TEx1", "2. RBx6,WRx4,QBx2,K/DST/TEx1",
-              "3. RBx4, WRx4, QB/TEx2, FLEX/K/DSTx1",    "4. RBx4, WRx4, QB/TE/DSTx2, Kx1",
-              "5. RBx4, WRx4, TE/DSTx2, QB/FLEX/Kx1", "case 3+Antonio Brown", "case 2+Antonio Brown", "case 3+Zero RB in R1-4",
-              "case 3+Gronk in R2" )
+Parameters<-c("1. RBx5,WRx5,QBx2,K/DST/TEx1", "2. RBx6,WRx4,QBx2,K/DST/TEx1","3. RBx4,WRx6,QBx2,K/DST/TEx1",
+              "4. RBx5, WRx4, QB/TEx2, K/DSTx1",    "5 RBx4, WRx4, QB/TE/DSTx2, Kx1",  "6. RBx5, WRx4, TE/DSTx2, QB/Kx1", 
+              "case 1+Antonio Brown in R1", "case 2+Antonio Brown in R1", "case 1+Zero RB in R1-4",
+              "case 1+Gronk in R2" )
 
-Sims<-c(simScores1, simScores1.5, simScores2, simScores3, simScores4, simScores5, simScores6, simScores7, simScores8)
+Sims<-c(simScores1, simScores1A,simScores1B ,simScores2, simScores3, simScores4, simScores5, simScores6, simScores7, simScores8)
 Sims<-data.frame(Sim=Sims, Parameter=rep(Parameters, each=10000))
 Sims<-ddply(Sims, .(Parameter), summarize, 
             N    = length(Sim),
@@ -109,8 +119,8 @@ ggplot(Sims, aes(x=Parameter, y=mean, fill=Parameter)) +
            size=.3) +      # Thinner lines
   theme(axis.text.x=element_blank(), 
         axis.title.x = element_blank()
-        )+
-  coord_cartesian(ylim=c(1750, 1950))+
+  )+
+  coord_cartesian(ylim=c(1750, 1900))+
   geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
                 size=.3,    # Thinner lines
                 width=.2,
@@ -119,3 +129,4 @@ ggplot(Sims, aes(x=Parameter, y=mean, fill=Parameter)) +
   ylab("Mean-Simulated Starting Lineup (10,000 sims)") +
   ggtitle("Simulation Results for Different Draft Parameters")
 
+ggsave(paste0(scoring, " scoring-base case parameters.jpeg"),width = 7, height=4 , units = "in")

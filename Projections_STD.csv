@@ -1,6 +1,6 @@
 "Player","Season","PosFFA","Team","fantPts_agg","fantPts"
 "Aaron Brown",2011,"","Det",15.3476403729267,0.9
-"Aaron Burbridge",2018,"WR","Sfo",8.94599058263991,NA
+"Aaron Burbridge",2018,"WR","Sfo",8.59599058263991,NA
 "Aaron Burbridge",2016,"WR","Sfo",30.7441569556117,8.8
 "Aaron Colvin",2018,"CB","Hou",44.1735274261479,NA
 "Aaron Colvin",2017,"DB","Jax",48.8832799369411,50
@@ -17,17 +17,17 @@
 "Aaron Hernandez",2012,"TE","Nwe",133.018958885248,78.8
 "Aaron Hernandez",2011,"TE","Nwe",94.0109604182105,135.5
 "Aaron Hernandez",2010,"TE","Nwe",40.8,97
-"Aaron Jones",2018,"RB","Gnb",88.8486302644548,NA
+"Aaron Jones",2018,"RB","Gnb",87.5152969311214,NA
 "Aaron Jones",2017,"RB","Gnb",34.691063305179,71
 "Aaron Lynch",2018,"DE","Chi",52.6435987749389,NA
 "Aaron Lynch",2017,"LB","Sfo",25.0463019138138,12.5
 "Aaron Lynch",2016,"LB","Sfo",54.7350662118862,19.25
 "Aaron Lynch",2015,"LB","Sfo",53.7686419495232,58.75
 "Aaron Maybin",2012,"","Nyj",39.0278151822426,1
-"Aaron Ripkowski",2018,"FB","Gnb",5.8,NA
+"Aaron Ripkowski",2018,"FB","Gnb",5.9,NA
 "Aaron Ripkowski",2017,"RB","Gnb",34.6583333333333,5.2
 "Aaron Ripkowski",2016,"RB","Gnb",9.01416666666667,37.6
-"Aaron Rodgers",2018,"QB","Gnb",289.231707083468,NA
+"Aaron Rodgers",2018,"QB","Gnb",289.751707083468,NA
 "Aaron Rodgers",2017,"QB","Gnb",337.265406656443,137.6
 "Aaron Rodgers",2016,"QB","Gnb",310.075889762243,387.02
 "Aaron Rodgers",2015,"QB","Gnb",320.570199880365,309.24
@@ -66,7 +66,7 @@
 "Adam Hayward",2013,"LB","Tam",29.6648748592656,23
 "Adam Hayward",2012,"LB","Tam",28.8631983774183,23
 "Adam Hayward",2011,"LB","Tam",33.8621491846023,32
-"Adam Humphries",2018,"WR","Tam",73.1676868766773,NA
+"Adam Humphries",2018,"WR","Tam",72.6676868766774,NA
 "Adam Humphries",2017,"WR","Tam",66.3531218386102,67.7
 "Adam Humphries",2016,"WR","Tam",52.672558160824,76
 "Adam Humphries",2015,"","Tam",14.7057679531833,32
@@ -78,7 +78,7 @@
 "Adam Jones",2012,"DB","Cin",28.3494472749951,53.5
 "Adam Shaheen",2018,"TE","Chi",37.0043763052921,NA
 "Adam Shaheen",2017,"TE","Chi",20.762817644872,30.7
-"Adam Thielen",2018,"WR","Min",120.185798464672,NA
+"Adam Thielen",2018,"WR","Min",139.085798464672,NA
 "Adam Thielen",2017,"WR","Min",99.4193670780895,148.7
 "Adam Thielen",2016,"WR","Min",14.597050504485,128.2
 "Adam Thielen",2015,"WR","Min",19.589233918583,23.3
@@ -155,7 +155,7 @@
 "Aj Derby",2018,"TE","Mia",22.6287608876152,NA
 "Aj Feeley",2011,"QB","Lar",26.810552522396,24.32
 "Aj Francis",2018,"DL","Nyg",8.03731404773506,NA
-"Aj Green",2018,"WR","Cin",149.238612745713,NA
+"Aj Green",2018,"WR","Cin",143.438612745713,NA
 "Aj Green",2017,"WR","Cin",158.820299948739,151.8
 "Aj Green",2016,"WR","Cin",163.223605116655,120.4
 "Aj Green",2015,"WR","Cin",167.68254392117,187.7
@@ -176,7 +176,7 @@
 "Aj Klein",2016,"LB","Car",38.8322901739369,36
 "Aj Klein",2015,"LB","Car",44.8101141819802,62.75
 "Aj Klein",2014,"LB","Car",40.3354699850321,41
-"Aj Mccarron",2018,"QB","Buf",105.131872633027,NA
+"Aj Mccarron",2018,"QB","Buf",100.78520596636,NA
 "Aj Mccarron",2017,"QB","Cin",25.0546951177171,2.64
 "Aj Mccarron",2015,"QB","Cin",11.8424939747342,57.26
 "Akeem Ayers",2015,"LB","Lar",43.4966910858306,56.75
@@ -233,7 +233,7 @@
 "Albert Mcclellan",2014,"","Bal",0.414210852080011,20.5
 "Albert Mcclellan",2013,"","Bal",37.305936980237,12
 "Albert Mcclellan",2012,"LB","Bal",54.0859823687307,61
-"Albert Wilson",2018,"WR","Mia",54.3758656727559,NA
+"Albert Wilson",2018,"WR","Mia",67.475865672756,NA
 "Albert Wilson",2017,"WR","Kan",44.2247195481081,74
 "Albert Wilson",2016,"WR","Kan",63.9938213541512,50.9
 "Albert Wilson",2015,"WR","Kan",53.9335311529845,59.7
@@ -241,7 +241,7 @@
 "Aldon Smith",2014,"LB","Sfo",61,19.5
 "Aldon Smith",2013,"LB","Sfo",91.2039762400785,56.75
 "Aldon Smith",2012,"LB","Sfo",77.8627359144294,123
-"Aldrick Robinson",2018,"WR","Sfo",25.0491622047203,NA
+"Aldrick Robinson",2018,"WR","Sfo",13.7991622047203,NA
 "Aldrick Robinson",2017,"WR","Sfo",34.3552909162764,38
 "Aldrick Robinson",2016,"WR","Atl",20.5555622589681,44.3
 "Aldrick Robinson",2014,"","Was",27,0.6
@@ -259,10 +259,10 @@
 "Alexander Carrington",2013,"DE","Buf",52.7903987027586,9
 "Alexander Carrington",2012,"","Buf",24.7934551916535,42
 "Alexander Carrington",2011,"DE","Buf",29.2748004469013,27
-"Alexander Collins",2018,"RB","Bal",131.093895065711,NA
+"Alexander Collins",2018,"RB","Bal",135.027228399044,NA
 "Alexander Collins",2017,"RB","Bal",7.2,148
 "Alexander Collins",2016,"RB","Sea",25.5124266996856,24.9
-"Alexander Erickson",2018,"WR","Cin",16.1069353638217,NA
+"Alexander Erickson",2018,"WR","Cin",15.7069353638217,NA
 "Alexander Erickson",2017,"WR","Cin",12.6228376350342,25.6
 "Alexander Erickson",2016,"WR","Cin",14.0441114786168,7.1
 "Alexander Gray",2018,"TE","Atl",-16.0142426770366,NA
@@ -277,7 +277,7 @@
 "Alexander Okafor",2016,"LB","Ari",23.975,25.25
 "Alexander Okafor",2015,"LB","Ari",71.9063182832123,37.5
 "Alexander Okafor",2014,"LB","Ari",62.75,58.25
-"Alexander Smith",2018,"QB","Was",266.698217298001,NA
+"Alexander Smith",2018,"QB","Was",265.311550631334,NA
 "Alexander Smith",2017,"QB","Kan",222.163399647968,302.18
 "Alexander Smith",2016,"QB","Kan",235.201222616384,233.78
 "Alexander Smith",2015,"QB","Kan",232.908558450981,274.24
@@ -316,7 +316,7 @@
 "Allen Bailey",2015,"DL","Kan",49.332314538876,55.25
 "Allen Bailey",2014,"DL","Kan",45.0608263376483,54.5
 "Allen Bailey",2012,"DE","Kan",30.5870592799264,6
-"Allen Hurns",2018,"WR","Dal",77.0729255438662,NA
+"Allen Hurns",2018,"WR","Dal",83.8229255438662,NA
 "Allen Hurns",2017,"WR","Jax",81.5071310652226,60.4
 "Allen Hurns",2016,"WR","Jax",132.072971557975,65.7
 "Allen Hurns",2015,"WR","Jax",97.739102211032,161.1
@@ -324,14 +324,14 @@
 "Allen Lazard",2018,"WR","Jax",14.4699762870227,NA
 "Allen Reisner",2013,"TE","Jax",20.6359374592787,4
 "Allen Reisner",2011,"","Min",7.80340920110257,0.5
-"Allen Robinson",2018,"WR","Chi",106.924309545969,NA
+"Allen Robinson",2018,"WR","Chi",108.024309545969,NA
 "Allen Robinson",2017,"WR","Jax",132.166329744166,1.7
 "Allen Robinson",2016,"WR","Jax",171.191744317223,124.3
 "Allen Robinson",2015,"WR","Jax",117.6693402034,224
 "Allen Robinson",2014,"WR","Jax",54.3037326100048,66.8
 "Alonzo Russell",2018,"WR","Nyg",-5.05173539811027,NA
 "Alphonso Smith",2011,"LCB","Det",47.1208157651968,51.25
-"Alshon Jeffery",2018,"WR","Phi",117.814041079224,NA
+"Alshon Jeffery",2018,"WR","Phi",118.214041079224,NA
 "Alshon Jeffery",2017,"WR","Phi",128.213400705271,132.9
 "Alshon Jeffery",2016,"WR","Chi",162.517349321512,94.1
 "Alshon Jeffery",2015,"WR","Chi",157.092686528399,104.7
@@ -345,19 +345,19 @@
 "Alterraun Verner",2013,"CB","Ten",81.0574029586699,92.75
 "Alterraun Verner",2012,"CB","Ten",72.8659423512242,96.5
 "Alterraun Verner",2011,"CB","Ten",72.4517220081945,56.75
-"Alvin Kamara",2018,"RB","Nor",209.596964740358,NA
+"Alvin Kamara",2018,"RB","Nor",210.130298073692,NA
 "Alvin Kamara",2017,"RB","Nor",62.6036170745186,237.4
 "Amani Toomer",2008,"WR","Nyg",63.6,82
-"Amara Darboh",2018,"WR","Sea",14.9863362739835,NA
+"Amara Darboh",2018,"WR","Sea",24.7863362739835,NA
 "Amara Darboh",2017,"WR","Sea",14.5242041636194,7.1
-"Amari Cooper",2018,"WR","Oak",135.238033268659,NA
+"Amari Cooper",2018,"WR","Oak",120.638033268659,NA
 "Amari Cooper",2017,"WR","Oak",144.856588338487,110.4
 "Amari Cooper",2016,"WR","Oak",152.492627655971,145.3
 "Amari Cooper",2015,"WR","Oak",112.732130319933,140.7
 "Amari Spievey",2012,"SS","Det",75.1116666877219,19.5
 "Amari Spievey",2011,"SS","Det",67.7263904418,83.75
 "Amba Etta Tawo",2018,"WR","Nyg",35.8765393075607,NA
-"Ameer Abdullah",2018,"RB","Det",58.9194904135549,NA
+"Ameer Abdullah",2018,"RB","Det",62.9861570802216,NA
 "Ameer Abdullah",2017,"RB","Det",128.069439265523,99.4
 "Ameer Abdullah",2016,"RB","Det",130.413876846689,21.8
 "Ameer Abdullah",2015,"RB","Det",110.551742139099,92
@@ -393,7 +393,7 @@
 "Andre Hall",2016,"DB","Hou",62.8939912699595,54.5
 "Andre Hall",2015,"DB","Hou",38.2415200435826,58.5
 "Andre Hall",2008,"RB","Den",49,18.9
-"Andre Holmes",2018,"WR","Buf",31.8883893533216,NA
+"Andre Holmes",2018,"WR","Buf",15.1383893533216,NA
 "Andre Holmes",2017,"WR","Buf",40.4777097836455,30
 "Andre Holmes",2016,"WR","Oak",34.1883626098112,30.6
 "Andre Holmes",2015,"WR","Oak",53.234646289667,44.1
@@ -409,7 +409,7 @@
 "Andre Johnson",2008,"WR","Hou",209,203.5
 "Andre Levrone",2018,"WR","Bal",9.60267350866839,NA
 "Andre Patton",2018,"WR","Sdg",4.42177697310633,NA
-"Andre Roberts",2018,"WR","Nyj",11.1000809972548,NA
+"Andre Roberts",2018,"WR","Nyj",9.00016199450968,NA
 "Andre Roberts",2017,"WR","Atl",21.9651103296192,1.2
 "Andre Roberts",2016,"WR","Det",19.8153154415605,36.8
 "Andre Roberts",2015,"WR","Was",63.9293829817348,19.5
@@ -436,7 +436,7 @@
 "Andrew Hawkins",2015,"WR","Cle",82.4090579420138,25.6
 "Andrew Hawkins",2014,"WR","Cle",71.4590903721189,95.9
 "Andrew Hawkins",2013,"WR","Cin",52.6216666666667,20.2
-"Andrew Luck",2018,"QB","Ind",271.722293391723,NA
+"Andrew Luck",2018,"QB","Ind",278.908960058389,NA
 "Andrew Luck",2016,"QB","Ind",308.686830773388,322.7
 "Andrew Luck",2015,"QB","Ind",338.241933106083,140.84
 "Andrew Luck",2014,"QB","Ind",287.321664813311,377.74
@@ -453,7 +453,7 @@
 "Andrew Sendejo",2014,"SS","Min",49.5839871252068,31.3
 "Andrew Turzilli",2015,"","Ten",5.92989061587871,2.5
 "Andrew Walter",2008,"QB","Oak",25.84,7.06
-"Andy Dalton",2018,"QB","Cin",235.585777225067,NA
+"Andy Dalton",2018,"QB","Cin",232.2791105584,NA
 "Andy Dalton",2017,"QB","Cin",253.259457094241,228.7
 "Andy Dalton",2016,"QB","Cin",270.806996417228,270.64
 "Andy Dalton",2015,"QB","Cin",251.254053675829,255.2
@@ -525,7 +525,7 @@
 "Anthony Levine",2015,"DB","Bal",32.1169925523914,13.3
 "Anthony Levine",2014,"RCB","Bal",32.3503413874781,27
 "Anthony Mccoy",2012,"TE","Sea",26.1302339012197,47.1
-"Anthony Miller",2018,"WR","Chi",43.8641579381057,NA
+"Anthony Miller",2018,"WR","Chi",45.8641579381057,NA
 "Anthony Sherman",2018,"RB","Kan",11.2,NA
 "Anthony Sherman",2017,"RB","Kan",3.38875,14.7
 "Anthony Sherman",2016,"RB","Kan",6.22566666666667,1.1
@@ -561,7 +561,7 @@
 "Antonio Allen",2014,"DB","Nyj",63.0464115353406,46.75
 "Antonio Andrews",2016,"RB","Ten",31.0181308042725,1.5
 "Antonio Andrews",2015,"RB","Ten",22.9118333333333,91.04
-"Antonio Brown",2018,"WR","Pit",196.449560186657,NA
+"Antonio Brown",2018,"WR","Pit",197.199560186657,NA
 "Antonio Brown",2017,"WR","Pit",192.705195948102,207.3
 "Antonio Brown",2016,"WR","Pit",226.817559456791,201.3
 "Antonio Brown",2015,"WR","Pit",204.787733565561,250.2
@@ -571,7 +571,7 @@
 "Antonio Brown",2011,"WR","Pit",39.1649306261198,132.9
 "Antonio Bryant",2009,"WR","Tam",124.5,84
 "Antonio Bryant",2008,"WR","Tam",44.5,167
-"Antonio Callaway",2018,"WR","Cle",41.9920625998896,NA
+"Antonio Callaway",2018,"WR","Cle",43.0920625998896,NA
 "Antonio Chatman",2008,"WR","Cin",7.2,17.8
 "Antonio Cromartie",2016,"DB","Ind",36.9137578661246,18
 "Antonio Cromartie",2015,"DB","Nyj",62.2170017957181,37.5
@@ -625,9 +625,9 @@
 "Aqib Talib",2013,"LCB","Nwe",72.1653460886209,64
 "Aqib Talib",2012,"LCB","Nwe/tam",72.3318173387002,61
 "Aqib Talib",2011,"LCB","Tam",72.671769354362,62.5
-"Ardarius Stewart",2018,"WR","Nyj",36.7003297852447,NA
+"Ardarius Stewart",2018,"WR","Nyj",17.5503297852447,NA
 "Ardarius Stewart",2017,"WR","Nyj",41.482890032465,10.9
-"Ari",2018,"DST","Ari",99,NA
+"Ari",2018,"DST","Ari",102,NA
 "Ari",2017,"DST","Ari",120,112
 "Ari",2016,"DST","Ari",119,146
 "Ari",2015,"DST","Ari",110,186
@@ -682,7 +682,7 @@
 "Ashlee Palmer",2013,"LB","Det",53.3572360011136,37
 "Ashlee Palmer",2011,"","Det",47.3661673643026,8
 "Atari Bigby",2012,"SS","Sdg",45.0520439162955,64
-"Atl",2018,"DST","Atl",97,NA
+"Atl",2018,"DST","Atl",98,NA
 "Atl",2017,"DST","Atl",91,99
 "Atl",2016,"DST","Atl",85,110
 "Atl",2015,"DST","Atl",96,94
@@ -706,7 +706,7 @@
 "Austin Davis",2017,"QB","Sea",1.644,-0.1
 "Austin Davis",2014,"QB","Lar",28.8733049546602,122.64
 "Austin Duke",2018,"WR","Car",-0.147939201354218,NA
-"Austin Ekeler",2018,"RB","Sdg",74.8342937269262,NA
+"Austin Ekeler",2018,"RB","Sdg",74.9009603935929,NA
 "Austin Ekeler",2017,"RB","Sdg",22.3047867042885,79.9
 "Austin Hooper",2018,"TE","Atl",74.0845534767512,NA
 "Austin Hooper",2017,"TE","Atl",75.5279178383321,70.6
@@ -733,7 +733,7 @@
 "Avery Williamson",2015,"LB","Ten",93.5193479513985,97.5
 "Bacarri Rambo",2015,"DB","Buf",19.780667807494,75.25
 "Bacarri Rambo",2014,"","Buf/was",41.9574136130333,11.5
-"Baker Mayfield",2018,"QB","Cle",38.2142719469154,NA
+"Baker Mayfield",2018,"QB","Cle",24.8942719469154,NA
 "Bal",2018,"DST","Bal",122,NA
 "Bal",2017,"DST","Bal",95,187
 "Bal",2016,"DST","Bal",90,129
@@ -779,10 +779,10 @@
 "Benardrick Mckinney",2016,"LB","Hou",90.746971347811,124.5
 "Bene Benwikere",2016,"DB","Car",68.3341130667998,15.75
 "Bene Benwikere",2015,"DB","Car",41.3848019626081,66.5
-"Benjamin Braunecker",2018,"TE","Chi",15.1067970106375,NA
+"Benjamin Braunecker",2018,"TE","Chi",15.1567970106375,NA
 "Benjamin Braunecker",2017,"","Chi",1.2,3.5
 "Benjamin Braunecker",2016,"TE","Chi",2.81844808659465,4.1
-"Benjamin Cunningham",2018,"RB","Chi",10.742385221945,NA
+"Benjamin Cunningham",2018,"RB","Chi",10.942385221945,NA
 "Benjamin Cunningham",2017,"RB","Chi",14.6182115232244,36.9
 "Benjamin Cunningham",2016,"RB","Lar",61.001482013002,19.2
 "Benjamin Cunningham",2015,"RB","Lar",55.7070710321181,39
@@ -804,7 +804,7 @@
 "Benjamin Patrick",2010,"TE","Ari",24.4,12.3
 "Benjamin Patrick",2009,"TE","Ari",18.9,26.6
 "Benjamin Patrick",2008,"TE","Ari",27.5,10.4
-"Benjamin Roethlisberger",2018,"QB","Pit",268.880713316823,NA
+"Benjamin Roethlisberger",2018,"QB","Pit",267.827379983489,NA
 "Benjamin Roethlisberger",2017,"QB","Pit",267.648114152535,272.74
 "Benjamin Roethlisberger",2016,"QB","Pit",278.215916904769,263.16
 "Benjamin Roethlisberger",2015,"QB","Pit",281.945288361561,228.42
@@ -836,7 +836,7 @@
 "Benjarvus Green Ellis",2011,"RB","Nwe",146.526916688367,148.6
 "Benjarvus Green Ellis",2010,"RB","Nwe",15.9,187.3
 "Benjarvus Green Ellis",2009,"RB","Nwe",11.4,12.5
-"Bennie Fowler",2018,"WR","Chi",28.1285956804516,NA
+"Bennie Fowler",2018,"WR","Chi",42.0285956804516,NA
 "Bennie Fowler",2017,"WR","Den",33.3726705563828,53
 "Bennie Fowler",2016,"WR","Den",34.9189500102352,26.5
 "Bennie Fowler",2015,"WR","Den",12.9327169564811,20.3
@@ -868,7 +868,7 @@
 "Bernard Scott",2011,"RB","Cin",56.0216205519512,59.8
 "Bernard Scott",2010,"RB","Cin",62.5,41.9
 "Bernard Scott",2009,"RB","Cin",44.5,44.8
-"Bilal Powell",2018,"RB","Nyj",95.8488893897365,NA
+"Bilal Powell",2018,"RB","Nyj",90.5155560564032,NA
 "Bilal Powell",2017,"RB","Nyj",121.805146809771,122.2
 "Bilal Powell",2016,"RB","Nyj",92.0767656823016,139
 "Bilal Powell",2015,"RB","Nyj",58.6983240407621,88.1
@@ -920,7 +920,7 @@
 "Blake Bell",2017,"TE","Min",5.74233333333333,1.9
 "Blake Bell",2016,"TE","Sfo",22.6817300330028,8.5
 "Blake Bell",2015,"TE","Sfo",3.80393387272739,18.6
-"Blake Bortles",2018,"QB","Jax",260.748475854598,NA
+"Blake Bortles",2018,"QB","Jax",261.001809187931,NA
 "Blake Bortles",2017,"QB","Jax",204.741552253975,262.68
 "Blake Bortles",2016,"QB","Jax",281.998615256024,292.1
 "Blake Bortles",2015,"QB","Jax",225.672928546805,338.12
@@ -957,7 +957,7 @@
 "Bobby Wagner",2015,"LB","Sea",129.363925796293,110.25
 "Bobby Wagner",2014,"LB","Sea",132.015288122588,101
 "Bobby Wagner",2013,"MLB","Sea",125.288889415632,122.5
-"Boston Scott",2018,"RB","Nor",23.3066061753807,NA
+"Boston Scott",2018,"RB","Nor",11.9732728420473,NA
 "Bradie Ewing",2013,"RB","Atl",3.24,2.9
 "Bradie James",2012,"MLB","Hou",77.4924815224116,70.75
 "Bradie James",2011,"MLB","Dal",107.244780946022,42
@@ -1003,7 +1003,7 @@
 "Branden Oliver",2015,"RB","Sdg",60.719426073641,22
 "Branden Oliver",2014,"RB","Sdg",9.42523381015227,109.3
 "Brandian Ross",2013,"SS","Oak",34.8783169265376,76
-"Brandin Cooks",2018,"WR","Lar",146.606393720238,NA
+"Brandin Cooks",2018,"WR","Lar",128.506393720238,NA
 "Brandin Cooks",2017,"WR","Nwe",148.93211427383,154.2
 "Brandin Cooks",2016,"WR","Nor",153.485746664602,168.3
 "Brandin Cooks",2015,"WR","Nor",140.543571913637,169.6
@@ -1037,7 +1037,7 @@
 "Brandon Carr",2013,"LCB","Dal",67.0339171290164,92.75
 "Brandon Carr",2012,"LCB","Dal",67.0641952290156,73.25
 "Brandon Carr",2011,"RCB","Kan",72.4121297310153,64.5
-"Brandon Coleman",2018,"WR","Nor",36.7257480199738,NA
+"Brandon Coleman",2018,"WR","Nor",17.9257480199738,NA
 "Brandon Coleman",2017,"WR","Nor",47.9326785937375,50.4
 "Brandon Coleman",2016,"WR","Nor",53.3289240787871,46.1
 "Brandon Coleman",2015,"WR","Nor",72.0491372263886,57.4
@@ -1080,7 +1080,7 @@
 "Brandon Johnson",2011,"LB","Cin",37.8060645949991,34
 "Brandon Jones",2008,"WR","Ten",13.6,54.4
 "Brandon King",2016,"DB","Nwe",19.9898983109338,8.5
-"Brandon Lafell",2018,"WR","Cin",68.9359430759371,NA
+"Brandon Lafell",2018,"WR","Cin",71.0359430759371,NA
 "Brandon Lafell",2017,"WR","Cin",89.2856569150636,72.8
 "Brandon Lafell",2016,"WR","Cin",80.1324002240496,122
 "Brandon Lafell",2015,"WR","Nwe",85.2273070460214,52.4
@@ -1097,7 +1097,7 @@
 "Brandon Manumaleuna",2009,"TE","Sdg",8.2,1.3
 "Brandon Manumaleuna",2008,"TE","Sdg",11.5,24.7
 "Brandon Marshall",2018,"OLB","Den",93.5631487804447,NA
-"Brandon Marshall",2018,"WR","Sea",80.0846552252037,NA
+"Brandon Marshall",2018,"WR","Sea",67.5346552252037,NA
 "Brandon Marshall",2017,"WR","Nyg",109.67966249928,15.4
 "Brandon Marshall",2017,"LB","Den",94.890761811238,110
 "Brandon Marshall",2016,"WR","Nyj",160.572391098073,96.8
@@ -1160,7 +1160,6 @@
 "Brandon Stokley",2009,"WR","Den",40.5,56.7
 "Brandon Stokley",2008,"WR","Den",60.5,70.8
 "Brandon Tate",2017,"WR","Buf",15.2558074362056,14.1
-"Brandon Tate",2016,"WR","Buf",0.1,16.5
 "Brandon Tate",2015,"WR","Cin",18.5986647046178,11.9
 "Brandon Tate",2014,"WR","Cin",18.9656903724245,27.4
 "Brandon Tate",2013,"WR","Cin",25.1430207312288,0.6
@@ -1186,7 +1185,7 @@
 "Brandon Williams",2014,"","Car",0.6,4.4
 "Brandon Zylstra",2018,"WR","Min",16.9316481862537,NA
 "Braxton Berrios",2018,"WR","Nwe",19.7404077908619,NA
-"Braxton Miller",2018,"WR","Hou",38.3073442386437,NA
+"Braxton Miller",2018,"WR","Hou",36.0573442386437,NA
 "Braxton Miller",2017,"WR","Hou",38.784969693243,22.3
 "Braxton Miller",2016,"WR","Hou",43.6441506410022,15.9
 "Braylon Edwards",2012,"WR","Nyj/sea",45.3189289548048,25.9
@@ -1218,7 +1217,7 @@
 "Brenton Bersin",2016,"WR","Car",12.1681178005803,1.7
 "Brenton Bersin",2015,"WR","Car",15.1651830013409,9.9
 "Brenton Bersin",2014,"WR","Car",30.3017159569679,21.1
-"Breshad Perriman",2018,"WR","Bal",46.5573779271041,NA
+"Breshad Perriman",2018,"WR","Bal",16.2073779271041,NA
 "Breshad Perriman",2017,"WR","Bal",85.1410392142373,7.7
 "Breshad Perriman",2016,"WR","Bal",54.8802278572554,68.1
 "Brett Favre",2010,"QB","Min",226.84,120.16
@@ -1281,7 +1280,7 @@
 "Brian Peters",2016,"","Hou",23.9758138605317,10
 "Brian Poole",2018,"S","Atl",65.8521142485374,NA
 "Brian Poole",2017,"DB","Atl",70.7984436587973,61.5
-"Brian Quick",2018,"WR","Was",22.1934392313195,NA
+"Brian Quick",2018,"WR","Was",10.9434392313195,NA
 "Brian Quick",2017,"WR","Was",34.3756286807519,7.6
 "Brian Quick",2016,"WR","Lar",30.7934591320362,74.4
 "Brian Quick",2015,"WR","Lar",80.0305837399577,10.2
@@ -1307,7 +1306,7 @@
 "Brian Westbrook",2009,"RB","Phi",208,57.5
 "Brian Westbrook",2008,"RB","Phi",241.7,215.8
 "Brian Williams",2011,"","Nyg",35.6236219501782,1
-"Brice Butler",2018,"WR","Ari",36.9355134899168,NA
+"Brice Butler",2018,"WR","Ari",33.9855134899168,NA
 "Brice Butler",2017,"WR","Dal",34.4284090506245,49.7
 "Brice Butler",2016,"WR","Dal",34.6589548398106,39.9
 "Brice Butler",2014,"WR","Oak",16.9819658270248,40
@@ -1327,7 +1326,7 @@
 "Brock Coyle",2017,"LB","Sfo",14.4058414662133,59.75
 "Brock Coyle",2016,"LB","Sea",19.5,14
 "Brock Coyle",2015,"LB","Sea",16.526073483299,4
-"Brock Osweiler",2018,"QB","Mia",21.3579956162773,NA
+"Brock Osweiler",2018,"QB","Mia",21.1179956162773,NA
 "Brock Osweiler",2017,"QB","Den",8.77408333333332,70.92
 "Brock Osweiler",2016,"QB","Hou",208.381776548777,185.98
 "Brock Osweiler",2015,"QB","Den",5.38366277219207,124.78
@@ -1356,7 +1355,7 @@
 "Bruce Carter",2015,"LB","Tam",65.3751115191956,45.5
 "Bruce Carter",2014,"LB","Dal",75.7721531536371,93.25
 "Bruce Carter",2013,"LB","Dal",68.2869728048224,96
-"Bruce Ellington",2018,"WR","Hou",27.1525727295612,NA
+"Bruce Ellington",2018,"WR","Hou",27.1025727295612,NA
 "Bruce Ellington",2017,"WR","Hou",24.9955483467532,46.7
 "Bruce Ellington",2015,"WR","Sfo",27.3999426739654,16
 "Bruce Ellington",2014,"WR","Sfo",25.5287952468454,27
@@ -1401,7 +1400,7 @@
 "Bryce Petty",2018,"QB","Mia",-16.6870050091112,NA
 "Bryce Petty",2017,"QB","Nyj",36.070360053946,28.26
 "Bryce Petty",2016,"QB","Nyj",8.44624486928043,39.26
-"Bryce Treggs",2018,"WR","Phi",6.5,NA
+"Bryce Treggs",2018,"WR","Phi",3.4,NA
 "Bryce Williams",2018,"TE","Ari",20.2382470182637,NA
 "Brynden Trawick",2018,"S","Ten",24.4158006281464,NA
 "Brynden Trawick",2017,"DB","Ten",30.447509247885,10.5
@@ -1412,7 +1411,7 @@
 "Bud Dupree",2017,"LB","Pit",58.5438972839394,60
 "Bud Dupree",2016,"LB","Pit",51.405638829141,38.25
 "Budda Baker",2018,"FS","Ari",78.9777342560932,NA
-"Buf",2018,"DST","Buf",89,NA
+"Buf",2018,"DST","Buf",90,NA
 "Buf",2017,"DST","Buf",94,106
 "Buf",2016,"DST","Buf",94,105
 "Buf",2015,"DST","Buf",126,98
@@ -1479,9 +1478,9 @@
 "Calvin Pace",2011,"LB","Nyj",74.5796325570829,96.5
 "Calvin Pryor",2016,"DB","Nyj",84.9665645540647,65.5
 "Calvin Pryor",2015,"DB","Nyj",74.1846983785859,76
-"Calvin Ridley",2018,"WR","Atl",75.0445467519192,NA
+"Calvin Ridley",2018,"WR","Atl",78.0445467519192,NA
 "Cam Johnson",2018,"DE","Det",23.7744707824562,NA
-"Cam Newton",2018,"QB","Car",284.548203234828,NA
+"Cam Newton",2018,"QB","Car",284.708203234828,NA
 "Cam Newton",2017,"QB","Car",276.798233140088,313.48
 "Cam Newton",2016,"QB","Car",327.002451039841,268.26
 "Cam Newton",2015,"QB","Car",269.491588610419,401.08
@@ -1497,11 +1496,11 @@
 "Cam Thomas",2013,"DT","Sdg",40.8632425973548,28.75
 "Cam Thomas",2012,"DT","Sdg",15.1491293033039,18
 "Cam Thomas",2011,"DT","Sdg",25.0472234560993,29
-"Cameron Artis Payne",2018,"RB","Car",33.8488049109144,NA
+"Cameron Artis Payne",2018,"RB","Car",33.915471577581,NA
 "Cameron Artis Payne",2017,"RB","Car",25.8328470180528,15.7
 "Cameron Artis Payne",2016,"RB","Car",54.3985614928207,27.5
 "Cameron Artis Payne",2015,"RB","Car",36.5110638580665,30.1
-"Cameron Brate",2018,"TE","Tam",80.6550616630939,NA
+"Cameron Brate",2018,"TE","Tam",80.5050616630939,NA
 "Cameron Brate",2017,"TE","Tam",82.9920072914988,95.1
 "Cameron Brate",2016,"TE","Tam",58.2254046753852,114
 "Cameron Heyward",2018,"DE","Pit",67.018253348117,NA
@@ -1560,8 +1559,8 @@
 "Carlos Dunlap",2013,"DE","Cin",71.5768986050155,94.75
 "Carlos Dunlap",2012,"DE","Cin",59.2345441312502,86.75
 "Carlos Dunlap",2011,"DE","Cin",48.152825395057,31.75
-"Carlos Henderson",2018,"WR","Den",23.8033898687284,NA
-"Carlos Hyde",2018,"RB","Cle",98.2314340836716,NA
+"Carlos Henderson",2018,"WR","Den",28.2533898687284,NA
+"Carlos Hyde",2018,"RB","Cle",101.831434083672,NA
 "Carlos Hyde",2017,"RB","Sfo",144.359542683032,175
 "Carlos Hyde",2016,"RB","Sfo",144.845593693432,163.1
 "Carlos Hyde",2015,"RB","Sfo",147.423913619948,70.3
@@ -1581,14 +1580,14 @@
 "Carson Palmer",2010,"QB","Cin",219.06,243.8
 "Carson Palmer",2009,"QB","Cin",213.1,222.06
 "Carson Palmer",2008,"QB","Cin",224.46,41.04
-"Carson Wentz",2018,"QB","Phi",295.405109339168,NA
+"Carson Wentz",2018,"QB","Phi",295.738442672502,NA
 "Carson Wentz",2017,"QB","Phi",239.307755383449,282.74
 "Carson Wentz",2016,"QB","Phi",111.938544748087,226.98
 "Cary Williams",2015,"DB","Sea",67.981671285483,48.5
 "Cary Williams",2014,"DB","Phi",71.9710116955471,72.5
 "Cary Williams",2013,"RCB","Phi",73.3575634139662,83.75
 "Cary Williams",2012,"RCB","Bal",68.1590659257457,104
-"Case Keenum",2018,"QB","Den",222.997966284313,NA
+"Case Keenum",2018,"QB","Den",223.077966284313,NA
 "Case Keenum",2017,"QB","Min",8.16806078148471,244.88
 "Case Keenum",2016,"QB","Lar",110.353620091986,124.14
 "Case Keenum",2015,"QB","Lar",31.5545119925369,46.62
@@ -1613,7 +1612,6 @@
 "Cassius Vaughn",2012,"LCB","Ind",31.0029813103299,76.25
 "Cassius Vaughn",2011,"LCB","Den",40.2512446647206,32.75
 "Cayleb Jones",2018,"WR","Min",6.06332228108559,NA
-"Cecil Shorts",2016,"WR","Tam",-1.9,15.2
 "Cecil Shorts",2015,"WR","Hou",88.552622870157,67.94
 "Cecil Shorts",2014,"WR","Jax",111.651189090514,64.98
 "Cecil Shorts",2013,"WR","Jax",129.664115876651,95.7
@@ -1643,7 +1641,7 @@
 "Chad Greenway",2013,"LB","Min",104.459280937943,133.25
 "Chad Greenway",2012,"LB","Min",98.0493845909706,145.25
 "Chad Greenway",2011,"LB","Min",103.871153484882,133.5
-"Chad Hansen",2018,"WR","Nyj",26.8680049731071,NA
+"Chad Hansen",2018,"WR","Nyj",14.0680049731071,NA
 "Chad Hansen",2017,"WR","Nyj",27.4285447369058,9.4
 "Chad Henne",2018,"QB","Kan",11.3526729654117,NA
 "Chad Henne",2017,"QB","Jax",43.4312352717247,-0.5
@@ -1662,7 +1660,7 @@
 "Chad Kelly",2018,"QB","Den",34.0081219585637,NA
 "Chad Pennington",2009,"QB","Mia",201.08,17.22
 "Chad Pennington",2008,"QB","Mia",169.5,227.32
-"Chad Williams",2018,"WR","Ari",31.4788408404874,NA
+"Chad Williams",2018,"WR","Ari",28.4788408404874,NA
 "Chad Williams",2017,"WR","Ari",25.921720839671,6.4
 "Champ Bailey",2013,"LCB","Den",59.476769399811,14.5
 "Champ Bailey",2012,"LCB","Den",56.5874679507747,78.5
@@ -1684,7 +1682,7 @@
 "Charcandrick West",2017,"RB","Kan",71.8465749872901,46.2
 "Charcandrick West",2016,"RB","Kan",61.3070160841659,66.1
 "Charcandrick West",2015,"RB","Kan",17.9085758857365,112.8
-"Charles Clay",2018,"TE","Buf",75.8596735015877,NA
+"Charles Clay",2018,"TE","Buf",76.0096735015877,NA
 "Charles Clay",2017,"TE","Buf",74.1481246978118,67.8
 "Charles Clay",2016,"TE","Buf",84.7721971150313,79.2
 "Charles Clay",2015,"TE","Buf",81.9872884223047,70.8
@@ -1709,7 +1707,7 @@
 "Charles Johnson",2013,"DE","Car",74.2273055690386,65.5
 "Charles Johnson",2012,"DE","Car",66.2014507217888,92.75
 "Charles Johnson",2011,"DE","Car",69.4179609568735,72.5
-"Charles Sims",2018,"RB","Tam",49.011251821922,NA
+"Charles Sims",2018,"RB","Tam",48.611251821922,NA
 "Charles Sims",2017,"RB","Tam",74.1439452160013,38.4
 "Charles Sims",2016,"RB","Tam",109.394101724989,43.9
 "Charles Sims",2015,"RB","Tam",82.4610576228001,129
@@ -1733,7 +1731,7 @@
 "Charlie Whitehurst",2013,"QB","Sdg",5.28733333333333,-0.5
 "Charlie Whitehurst",2011,"QB","Sea",60.006985573283,16.22
 "Charlie Whitehurst",2010,"QB","Sea",57.06,35.58
-"Charone Peake",2018,"WR","Nyj",28.3481378496412,NA
+"Charone Peake",2018,"WR","Nyj",12.6981378496412,NA
 "Charone Peake",2017,"WR","Nyj",41.6665432624222,0.3
 "Charone Peake",2016,"WR","Nyj",6.88808198055185,18.6
 "Chase Allen",2018,"LB","Mia",26.6028693704345,NA
@@ -1749,7 +1747,7 @@
 "Chase Daniel",2012,"QB","Nor",-1.55367982494707,2.1
 "Chase Daniel",2011,"QB","Nor",-4.86708280511492,0.86
 "Chase Daniel",2010,"QB","Nor",2.72,2.24
-"Chase Edmonds",2018,"RB","Ari",54.9055386343784,NA
+"Chase Edmonds",2018,"RB","Ari",54.9722053010451,NA
 "Chase Ford",2014,"TE","Min",8.5,31.8
 "Chase Litton",2018,"QB","Kan",54.2000731496904,NA
 "Chase Reynolds",2016,"RB","Lar",3.18666666666666,13.9
@@ -1759,14 +1757,14 @@
 "Chaz Schilens",2011,"WR","Oak",20.0415408754912,39.1
 "Chaz Schilens",2010,"WR","Oak",51.7,10
 "Chaz Schilens",2009,"WR","Oak",77.5,48.5
-"Chester Rogers",2018,"WR","Ind",45.2976094755458,NA
+"Chester Rogers",2018,"WR","Ind",54.7476094755458,NA
 "Chester Rogers",2017,"WR","Ind",49.0927553365027,35.2
 "Chester Rogers",2016,"WR","Ind",35.5769994313662,27.3
 "Chester Taylor",2011,"RB","Ari",15.6,22.8
 "Chester Taylor",2010,"RB","Chi",78,58.6
 "Chester Taylor",2009,"RB","Min",113.2,84.7
 "Chester Taylor",2008,"RB","Min",133.7,115.96
-"Chi",2018,"DST","Chi",104,NA
+"Chi",2018,"DST","Chi",106,NA
 "Chi",2017,"DST","Chi",73,138
 "Chi",2016,"DST","Chi",91,85
 "Chi",2015,"DST","Chi",95,81
@@ -1796,7 +1794,7 @@
 "Chris Canty",2013,"DE","Bal",45.34797003285,39
 "Chris Canty",2011,"RDT","Nyg",41.4875837650008,55.5
 "Chris Carr",2011,"DB","Bal",66.0605706927071,22.5
-"Chris Carson",2018,"RB","Sea",76.6098858933462,NA
+"Chris Carson",2018,"RB","Sea",78.6098858933462,NA
 "Chris Carson",2017,"RB","Sea",37.2799685079928,32.7
 "Chris Carter",2016,"","Bal/ind",17.8854000761031,6.5
 "Chris Carter",2015,"LB","Cin",1.25,10.5
@@ -1812,7 +1810,7 @@
 "Chris Clemons",2012,"DE","Sea",60.711661041598,77.25
 "Chris Clemons",2011,"DE","Sea",58.8568342685883,86.5
 "Chris Clemons",2011,"","Mia",66.3631018315618,16
-"Chris Conley",2018,"WR","Kan",64.5661829551221,NA
+"Chris Conley",2018,"WR","Kan",44.5661829551221,NA
 "Chris Conley",2017,"WR","Kan",70.6333585284688,17.5
 "Chris Conley",2016,"WR","Kan",52.6045614748069,53
 "Chris Conley",2015,"WR","Kan",40.8968216253795,25.9
@@ -1841,7 +1839,7 @@
 "Chris Givens",2013,"WR","Lar",112.701590653015,55.7
 "Chris Givens",2012,"WR","Lar",31.4645395471554,89
 "Chris Gocong",2011,"LB","Cle",66.1035740865105,82.75
-"Chris Godwin",2018,"WR","Tam",57.0436333003601,NA
+"Chris Godwin",2018,"WR","Tam",60.4936333003601,NA
 "Chris Godwin",2017,"WR","Tam",43.0844015339232,58.5
 "Chris Gragg",2015,"TE","Buf",14.374122961818,15
 "Chris Gragg",2014,"TE","Buf",16.0968296520915,10.8
@@ -1857,7 +1855,7 @@
 "Chris Harris",2011,"SS","Chi/det",74.1230607902232,34.75
 "Chris Henry",2009,"WR","Cin",98.5,35.6
 "Chris Henry",2008,"RB","Cin",21.7,34
-"Chris Hogan",2018,"WR","Nwe",97.6105046459972,NA
+"Chris Hogan",2018,"WR","Nwe",106.210504645997,NA
 "Chris Hogan",2017,"WR","Nwe",86.2533056680322,75.6
 "Chris Hogan",2016,"WR","Nwe",58.1781394985547,90.9
 "Chris Hogan",2015,"WR","Buf",37.1685815596592,57.56
@@ -1869,7 +1867,7 @@
 "Chris Houston",2013,"LCB","Det",70.0414832957291,54
 "Chris Houston",2012,"LCB","Det",73.5057751347803,72
 "Chris Houston",2011,"LCB","Det",68.4692213710648,88.75
-"Chris Ivory",2018,"RB","Buf",65.9617024988973,NA
+"Chris Ivory",2018,"RB","Buf",62.6950358322306,NA
 "Chris Ivory",2017,"RB","Jax",54.7918621977013,63.7
 "Chris Ivory",2016,"RB","Jax",115.773823271949,74.5
 "Chris Ivory",2015,"RB","Nyj",134.068446596439,172.7
@@ -1913,7 +1911,7 @@
 "Chris Matthews",2017,"","Bal",11.08206724621,2.5
 "Chris Mccain",2018,"LB","Ind",16.6294976908729,NA
 "Chris Mccain",2015,"LB","Mia",51.402500352184,7.5
-"Chris Moore",2018,"WR","Bal",25.0648919659353,NA
+"Chris Moore",2018,"WR","Bal",30.2648919659353,NA
 "Chris Moore",2017,"WR","Bal",16.620361180658,41.9
 "Chris Moore",2016,"WR","Bal",23.2770090288955,6.5
 "Chris Neild",2013,"","Was",18.2834095263635,7
@@ -1941,7 +1939,7 @@
 "Chris Smith",2016,"DL","Jax",26.532938466933,6.5
 "Chris Smith",2015,"DL","Jax",15.3231191207019,11.75
 "Chris Thompson",2018,"WR","Hou",12.625854530045,NA
-"Chris Thompson",2018,"RB","Was",102.618293253306,NA
+"Chris Thompson",2018,"RB","Was",98.3516265866394,NA
 "Chris Thompson",2017,"","Hou",19.3414077183119,8.4
 "Chris Thompson",2017,"RB","Was",80.5860905539975,116.4
 "Chris Thompson",2016,"RB","Was",69.314989373386,98.5
@@ -1959,19 +1957,19 @@
 "Christian Jones",2017,"LB","Chi",15.2215269385476,89
 "Christian Jones",2016,"LB","Chi",45.1036203856467,12.5
 "Christian Jones",2015,"LB","Chi",103.956446946782,80
-"Christian Kirk",2018,"WR","Ari",56.7200900201496,NA
+"Christian Kirk",2018,"WR","Ari",56.6700900201496,NA
 "Christian Kirksey",2018,"OLB","Cle",97.3995608494501,NA
 "Christian Kirksey",2017,"LB","Cle",105.974050967714,138.75
 "Christian Kirksey",2016,"LB","Cle",94.3038324743025,139.75
 "Christian Kirksey",2015,"LB","Cle",85.3912140822404,67.75
-"Christian Mccaffrey",2018,"RB","Car",172.716380445987,NA
+"Christian Mccaffrey",2018,"RB","Car",174.84971377932,NA
 "Christian Mccaffrey",2017,"RB","Car",126.713373136095,148.6
 "Christian Ponder",2014,"QB","Min",42.3017271101307,14.48
 "Christian Ponder",2013,"QB","Min",167.532775206081,122.02
 "Christian Ponder",2012,"QB","Min",202.228539772699,211.2
 "Christian Ponder",2011,"QB","Min",44.9046669551648,135.02
 "Christian Scotland Williamson",2018,"TE","Pit",-12.0760227762157,NA
-"Christine Michael",2018,"RB","Ind",19.6818745403897,NA
+"Christine Michael",2018,"RB","Ind",23.4818745403897,NA
 "Christine Michael",2016,"","Gnb/sea",97.9869946367104,115
 "Christine Michael",2014,"RB","Sea",70.1793468591223,18.7
 "Christine Michael",2013,"RB","Sea",39.3769245956262,7.9
@@ -1979,13 +1977,13 @@
 "Chykie Brown",2016,"","Cin",21.4132134047424,2
 "Chykie Brown",2013,"","Bal",38.2731421840495,9.5
 "Cierre Wood",2015,"","Buf",10.7945984443478,-0.3
-"Cin",2018,"DST","Cin",91,NA
+"Cin",2018,"DST","Cin",93,NA
 "Cin",2017,"DST","Cin",89,97
 "Cin",2016,"DST","Cin",112,96
 "Cin",2015,"DST","Cin",99,143
 "Cin",2014,"DST","Cin",122,105
 "Cj Ah You",2011,"RDT","Lar",20.6675595133091,9
-"Cj Anderson",2018,"RB","Car",84.7056040274634,NA
+"Cj Anderson",2018,"RB","Car",82.7056040274634,NA
 "Cj Anderson",2017,"RB","Den",136.188831740703,145.1
 "Cj Anderson",2016,"RB","Den",155.938265024063,86.5
 "Cj Anderson",2015,"RB","Den",192.239693372631,116.3
@@ -2011,7 +2009,7 @@
 "Cj Mosley",2014,"DL","Det",30.0056513170379,32.75
 "Cj Mosley",2013,"DT","Det",25.0771854768305,18
 "Cj Mosley",2012,"DT","Jax",36.8817901862504,58.75
-"Cj Prosise",2018,"RB","Sea",27.7314421907344,NA
+"Cj Prosise",2018,"RB","Sea",24.9314421907344,NA
 "Cj Prosise",2017,"RB","Sea",83.5100346275584,11
 "Cj Prosise",2016,"RB","Sea",46.7762994543191,44
 "Cj Spiller",2017,"RB","Kan",22.4607445446174,NA
@@ -2075,13 +2073,13 @@
 "Clinton Portis",2010,"RB","Was",175,40.2
 "Clinton Portis",2009,"RB","Was",227,65.1
 "Clinton Portis",2008,"RB","Was",223,218.5
-"Clive Walford",2018,"TE","Nyj",30.7105205962642,NA
+"Clive Walford",2018,"TE","Nyj",22.0105205962642,NA
 "Clive Walford",2017,"TE","Oak",38.6140891415359,8
 "Clive Walford",2016,"TE","Oak",64.2386721814132,53.9
 "Clive Walford",2015,"TE","Oak",30.1307417832807,50.9
 "Clyde Gates",2013,"WR","Nyj",21.9093717198257,12.2
 "Clyde Gates",2011,"","Mia",33.6149846487285,2.3
-"Cobi Hamilton",2018,"WR","Ari",17.1696269269218,NA
+"Cobi Hamilton",2018,"WR","Ari",21.2392538538437,NA
 "Cobi Hamilton",2016,"WR","Pit",14.9374335997234,35.4
 "Coby Fleener",2017,"TE","Nor",84.1541812164553,41.5
 "Coby Fleener",2016,"TE","Nor",98.3720467106415,87.3
@@ -2090,7 +2088,7 @@
 "Coby Fleener",2013,"TE","Ind",56.5254281041601,84.8
 "Coby Fleener",2012,"TE","Ind",75.9797718883497,40.1
 "Codey Mcelroy",2018,"TE","Lar",-3.87246761732022,NA
-"Cody Core",2018,"WR","Cin",15.3326847442747,NA
+"Cody Core",2018,"WR","Cin",14.0326847442747,NA
 "Cody Core",2017,"WR","Cin",26.7474873849051,NA
 "Cody Core",2016,"WR","Cin",28.5284179369101,20
 "Cody Davis",2018,"S","Jax",15.3543428461914,NA
@@ -2103,7 +2101,7 @@
 "Cody Kessler",2018,"QB","Jax",7.09054172049048,NA
 "Cody Kessler",2017,"QB","Cle",59.004741911262,3.94
 "Cody Kessler",2016,"QB","Cle",22.3421591598408,79
-"Cody Latimer",2018,"WR","Nyg",32.2076558505,NA
+"Cody Latimer",2018,"WR","Nyg",33.6576558505,NA
 "Cody Latimer",2017,"WR","Den",19.4075380059236,40.7
 "Cody Latimer",2016,"WR","Den",25.0213578697946,7.6
 "Cody Latimer",2015,"WR","Den",52.5360408339165,12
@@ -2112,7 +2110,7 @@
 "Cody Parkey",2017,"K","Mia",86.316549570648,98
 "Cody Parkey",2015,"K","Phi",146.675575515061,17
 "Cody Parkey",2014,"K","Phi",132.012966200466,164.5
-"Cole Beasley",2018,"WR","Dal",72.2226241569511,NA
+"Cole Beasley",2018,"WR","Dal",56.0226241569511,NA
 "Cole Beasley",2017,"WR","Dal",98.9855302448629,55.4
 "Cole Beasley",2016,"WR","Dal",62.77705292901,114
 "Cole Beasley",2015,"WR","Dal",59.9556406598574,81.6
@@ -2171,7 +2169,7 @@
 "Connor Hamlett",2016,"TE","Cle",-1.08400437894529,7.7
 "Cooper Helfet",2015,"TE","Sea",14.0106792593749,13
 "Cooper Helfet",2014,"TE","Sea",4.47665315496994,30.5
-"Cooper Kupp",2018,"WR","Lar",93.9783219583473,NA
+"Cooper Kupp",2018,"WR","Lar",114.428321958347,NA
 "Cooper Kupp",2017,"WR","Lar",46.8265026519259,114.9
 "Cooper Rush",2018,"QB","Dal",7.00402790200322,NA
 "Cooper Rush",2017,"QB","Dal",21.1162503269517,1.38
@@ -2179,7 +2177,7 @@
 "Corbin Bryant",2016,"DL","Buf",36.7274771561549,8
 "Corbin Bryant",2015,"DL","Buf",21.7460734991756,36
 "Corbin Bryant",2014,"","Buf",25.07353381291,19.75
-"Cordarrelle Patterson",2018,"WR","Nwe",33.1834276675404,NA
+"Cordarrelle Patterson",2018,"WR","Nwe",28.3834276675404,NA
 "Cordarrelle Patterson",2017,"WR","Oak",37.5983081070744,55
 "Cordarrelle Patterson",2016,"WR","Min",25.6023115955094,67.6
 "Cordarrelle Patterson",2015,"WR","Min",62.1831305684862,14.5
@@ -2190,12 +2188,12 @@
 "Corey Brown",2016,"WR","Car",45.5291434379583,32.2
 "Corey Brown",2015,"WR","Car",75.2785789559278,72.5
 "Corey Brown",2014,"WR","Car",15.283370906942,57.1
-"Corey Clement",2018,"RB","Phi",88.6604919638823,NA
+"Corey Clement",2018,"RB","Phi",89.727158630549,NA
 "Corey Clement",2017,"RB","Phi",12.8235064374,80.4
-"Corey Coleman",2018,"WR","Cle",78.0408820539558,NA
+"Corey Coleman",2018,"WR","Cle",54.0908820539559,NA
 "Corey Coleman",2017,"WR","Cle",89.1834383497806,42.5
 "Corey Coleman",2016,"WR","Cle",89.4358121853606,60.3
-"Corey Davis",2018,"WR","Ten",78.8039148651652,NA
+"Corey Davis",2018,"WR","Ten",87.0039148651652,NA
 "Corey Davis",2017,"WR","Ten",85.0505613019241,35.5
 "Corey Fuller",2015,"WR","Det",37.3750777218151,7.6
 "Corey Fuller",2014,"WR","Det",12.9172548731847,25.2
@@ -2205,7 +2203,7 @@
 "Corey Graham",2013,"CB","Bal",61.911466098169,96.5
 "Corey Graham",2012,"LCB","Bal",35.1331306317727,69.5
 "Corey Graham",2011,"","Chi",37.8573451968637,33.25
-"Corey Grant",2018,"RB","Jax",39.5033359202419,NA
+"Corey Grant",2018,"RB","Jax",42.7033359202419,NA
 "Corey Grant",2017,"RB","Jax",9.87178389486511,40.9
 "Corey Grant",2016,"RB","Jax",4.03210232503412,31.9
 "Corey Grant",2015,"RB","Jax",5.99106405771968,-0.5
@@ -2326,7 +2324,7 @@
 "Curtis Painter",2013,"QB","Nyg",1.3815569236743,0.0800000000000002
 "Curtis Painter",2011,"QB","Ind",31.2564445475291,85.34
 "Curtis Riley",2018,"CB","Nyg",50.50501332525,NA
-"Curtis Samuel",2018,"WR","Car",51.6006320764476,NA
+"Curtis Samuel",2018,"WR","Car",45.4006320764476,NA
 "Curtis Samuel",2017,"WR","Car",56.4243247860799,17.9
 "Cyril Grayson",2018,"WR","Sea",10.253612278993,NA
 "Cyrus Gray",2014,"RB","Kan",18.5545746509285,9.1
@@ -2336,7 +2334,7 @@
 "Daimion Stafford",2016,"DB","Ten",22.0881111156166,57.25
 "Daimion Stafford",2015,"DB","Ten",21.9347716523204,29.5
 "Daimion Stafford",2014,"","Ten",39.072758656955,38.25
-"Dak Prescott",2018,"QB","Dal",265.148404751277,NA
+"Dak Prescott",2018,"QB","Dal",265.228404751277,NA
 "Dak Prescott",2017,"QB","Dal",278.546192191633,279.66
 "Dak Prescott",2016,"QB","Dal",171.389402557054,298.88
 "Dal",2018,"DST","Dal",100,NA
@@ -2351,10 +2349,10 @@
 "Dallas Clark",2009,"TE","Ind",111.2,171.7
 "Dallas Clark",2008,"TE","Ind",91,118.8
 "Dallas Goedert",2018,"TE","Phi",32.4185539710075,NA
-"Dalton Crossan",2018,"RB","Tam",11.3768131027847,NA
-"Dalton Schultz",2018,"TE","Dal",27.4890955535973,NA
+"Dalton Crossan",2018,"RB","Tam",11.310146436118,NA
+"Dalton Schultz",2018,"TE","Dal",27.4390955535973,NA
 "Dalton Sturm",2018,"QB","Dal",53.4533905932432,NA
-"Dalvin Cook",2018,"RB","Min",181.971107769412,NA
+"Dalvin Cook",2018,"RB","Min",181.304441102745,NA
 "Dalvin Cook",2017,"RB","Min",159.140615979298,54.4
 "Dalvin Tomlinson",2018,"DT","Nyg",49.247887513278,NA
 "Dalyn Dawkins",2018,"RB","Ten",14.1431447035025,NA
@@ -2376,10 +2374,10 @@
 "Damien Wilson",2018,"ILB","Dal",36.1571411144717,NA
 "Damien Wilson",2017,"LB","Dal",40.0185304843621,32
 "Damien Wilson",2016,"LB","Dal",25.998868616267,36.25
-"Damiere Byrd",2018,"WR","Car",21.7422337432639,NA
+"Damiere Byrd",2018,"WR","Car",20.1422337432639,NA
 "Damiere Byrd",2017,"WR","Car",15.1212268436237,29.7
 "Damiere Byrd",2016,"","Car",17.2624160802658,1.6
-"Damion Ratley",2018,"WR","Cle",12.1708206840074,NA
+"Damion Ratley",2018,"WR","Cle",12.3708206840074,NA
 "Damion Square",2018,"DE","Sdg",17.0103512987058,NA
 "Damion Square",2017,"DL","Sdg",15.7760175610822,19.5
 "Damon Harrison",2018,"DT","Nyg",57.2341249337803,NA
@@ -2393,7 +2391,7 @@
 "Damontre Moore",2015,"","Mia/nyg",40.3319686654197,39
 "Damontre Moore",2014,"DL","Nyg",41.9415959440745,47.25
 "Damoreea Stringfellow",2018,"WR","Sea",7.16806833557577,NA
-"Dan Amendola",2018,"WR","Mia",64.1563117307085,NA
+"Dan Amendola",2018,"WR","Mia",66.7063117307085,NA
 "Dan Amendola",2017,"WR","Nwe",38.2451690634611,77.9
 "Dan Amendola",2016,"WR","Nwe",64.023751328884,46.3
 "Dan Amendola",2015,"WR","Nwe",44.398897139193,85.34
@@ -2409,8 +2407,8 @@
 "Dan Bailey",2014,"K","Dal",144.295377613719,151
 "Dan Bailey",2013,"K","Dal",131.551785649436,155
 "Dan Bailey",2012,"K","Dal",134.795997447335,138
-"Dan Braverman",2018,"WR","Kan",7.62097764501013,NA
-"Dan Brown",2018,"WR","Chi",13.7192894353637,NA
+"Dan Braverman",2018,"WR","Kan",9.14195529002026,NA
+"Dan Brown",2018,"WR","Chi",13.9692894353637,NA
 "Dan Brown",2017,"TE","Chi",22.3658366058099,12.9
 "Dan Brown",2015,"WR","Bal",19.3606479284231,6.4
 "Dan Campbell",2008,"TE","Det",14,2.1
@@ -2473,7 +2471,7 @@
 "Dan Trevathan",2015,"LB","Den",97.5338956725842,110.5
 "Dan Trevathan",2014,"LB","Den",88.574184997962,10
 "Dan Trevathan",2013,"LB","Den",63.2598836058727,150.75
-"Dan Vitale",2018,"FB","Cle",1.7,NA
+"Dan Vitale",2018,"FB","Cle",1.8,NA
 "Dan Vitale",2017,"RB","Cle",3.86,1.9
 "Dan Wilcox",2008,"TE","Bal",24,13.9
 "Dan Williams",2016,"DL","Oak",36.0179688703459,15.75
@@ -2521,7 +2519,7 @@
 "Dante Fowler",2017,"DL","Jax",45.7659695406295,50.5
 "Dante Hall",2008,"WR","Lar",17.5,11.4
 "Dante Hughes",2011,"CB","Sdg",40.0706413839407,42.5
-"Dante Pettis",2018,"WR","Sfo",33.444836265936,NA
+"Dante Pettis",2018,"WR","Sfo",33.494836265936,NA
 "Dante Rosario",2014,"TE","Chi",11.7264772044321,9.6
 "Dante Rosario",2013,"TE","Chi",13.7341704745941,1.3
 "Dante Rosario",2012,"TE","Sdg",23.0274650770583,25.5
@@ -2559,7 +2557,7 @@
 "Darius Butler",2014,"DB","Ind",57.732499009344,57
 "Darius Butler",2013,"LCB","Ind",43.7853635123768,80.5
 "Darius Jackson",2018,"RB","Dal",4.47547294936414,NA
-"Darius Jennings",2018,"WR","Ten",25.7019885892258,NA
+"Darius Jennings",2018,"WR","Ten",44.2039771784516,NA
 "Darius Jennings",2015,"WR","Cle",10.7162700709542,11.7
 "Darius Kilgo",2016,"DL","Den",24.5,3.5
 "Darius Latham",2017,"DL","Oak",25.8660105752476,5
@@ -2627,7 +2625,7 @@
 "Darren Waller",2015,"WR","Bal",18.5326419956444,1.8
 "Darrin Walls",2015,"DB","Nyj",22.8443925238812,11
 "Darrin Walls",2014,"CB","Nyj",23.3235195240888,54
-"Darrius Heyward Bey",2018,"WR","Pit",16.5303907500588,NA
+"Darrius Heyward Bey",2018,"WR","Pit",9.83039075005881,NA
 "Darrius Heyward Bey",2017,"WR","Pit",23.508706767429,13.9
 "Darrius Heyward Bey",2016,"WR","Pit",27.8648631942193,35.4
 "Darrius Heyward Bey",2015,"WR","Pit",18.8195699150746,43.4
@@ -2674,8 +2672,8 @@
 "Datone Jones",2015,"DL","Gnb",30.6512392554862,33
 "Datone Jones",2014,"DL","Gnb",36.8575502449391,30
 "Daunte Culpepper",2009,"QB","Det",52.28,52.9
-"Daurice Fountain",2018,"WR","Ind",19.1258611964183,NA
-"Davante Adams",2018,"WR","Gnb",129.668654968776,NA
+"Daurice Fountain",2018,"WR","Ind",19.3258611964183,NA
+"Davante Adams",2018,"WR","Gnb",141.618654968776,NA
 "Davante Adams",2017,"WR","Gnb",112.117758797643,148.5
 "Davante Adams",2016,"WR","Gnb",63.7230540909523,169.7
 "Davante Adams",2015,"WR","Gnb",107.090949834348,54.3
@@ -2732,7 +2730,7 @@
 "David Irving",2018,"DE","Dal",48.2752982074839,NA
 "David Irving",2017,"DL","Dal",33.9845559075072,44
 "David Irving",2016,"DL","Dal",47.9907310445473,46
-"David Johnson",2018,"RB","Ari",200.348197301172,NA
+"David Johnson",2018,"RB","Ari",200.281530634506,NA
 "David Johnson",2017,"RB","Ari",249.899254241557,7
 "David Johnson",2016,"TE","Pit",3.62094939176101,8
 "David Johnson",2016,"RB","Ari",193.276629707603,325.8
@@ -2744,15 +2742,15 @@
 "David Mayo",2018,"ILB","Car",27.4629251863433,NA
 "David Mayo",2017,"LB","Car",29.1622947998674,14
 "David Mayo",2016,"LB","Car",7.75,18.5
-"David Moore",2018,"WR","Sea",17.087215318959,NA
-"David Morgan",2018,"TE","Min",17.1483504762149,NA
+"David Moore",2018,"WR","Sea",27.8744306379179,NA
+"David Morgan",2018,"TE","Min",17.1983504762149,NA
 "David Morgan",2017,"TE","Min",15.9453653030372,15.5
 "David Morgan",2016,"TE","Min",9.11240218011881,0.4
 "David Nelson",2014,"WR","Nyj",40.6538285215554,6.5
 "David Nelson",2013,"WR","Nyj",21.545,54.3
 "David Nelson",2012,"WR","Buf",76.2931779133114,3.1
 "David Nelson",2011,"WR","Buf",59.0957530672755,95.8
-"David Njoku",2018,"TE","Cle",73.0023868567345,NA
+"David Njoku",2018,"TE","Cle",72.9523868567345,NA
 "David Njoku",2017,"TE","Cle",48.1688091854991,62.7
 "David Onyemata",2018,"DT","Nor",41.544397278148,NA
 "David Onyemata",2017,"DL","Nor",19.6959650381588,37.5
@@ -2789,7 +2787,7 @@
 "Dawuane Smoot",2018,"DE","Jax",36.4229486953951,NA
 "Dean Lowry",2018,"DE","Gnb",31.7251281542076,NA
 "Dean Lowry",2017,"DL","Gnb",44.6348076116898,37
-"Deandre Hopkins",2018,"WR","Hou",158.68805608431,NA
+"Deandre Hopkins",2018,"WR","Hou",172.18805608431,NA
 "Deandre Hopkins",2017,"WR","Hou",137.768666982342,213.8
 "Deandre Hopkins",2016,"WR","Hou",177.789752350766,119.4
 "Deandre Hopkins",2015,"WR","Hou",145.683936393592,218.1
@@ -2801,7 +2799,7 @@
 "Deandre Levy",2012,"LB","Det",86.7576746238433,85.75
 "Deandre Levy",2011,"LB","Det",96.5543040092484,107.75
 "Deandre Smelter",2016,"","Sfo",23.5567436873852,2.3
-"Deandre Washington",2018,"RB","Oak",21.3410171621223,NA
+"Deandre Washington",2018,"RB","Oak",21.7410171621223,NA
 "Deandre Washington",2017,"RB","Oak",62.7138043488823,51
 "Deandre Washington",2016,"RB","Oak",69.0777759835094,68.2
 "Deandrew White",2018,"WR","Hou",4.08799344062765,NA
@@ -2813,7 +2811,7 @@
 "Deangelo Hall",2013,"LCB","Was",90.0294468250606,114
 "Deangelo Hall",2012,"LCB","Was",84.9069577834478,116
 "Deangelo Hall",2011,"LCB","Was",94.3219342784228,102.75
-"Deangelo Henderson",2018,"RB","Den",47.3533181036295,NA
+"Deangelo Henderson",2018,"RB","Den",47.4199847702962,NA
 "Deangelo Henderson",2017,"RB","Den",20.7872317473471,10.9
 "Deangelo Tyson",2014,"DE","Bal",34.2718219566347,22.5
 "Deangelo Williams",2016,"RB","Pit",96.0525496907633,82.1
@@ -2825,15 +2823,15 @@
 "Deangelo Williams",2010,"RB","Car",210.2,46.2
 "Deangelo Williams",2009,"RB","Car",230.4,172.9
 "Deangelo Williams",2008,"RB","Car",138.3,283.6
-"Deangelo Yancey",2018,"WR","Gnb",27.4546928067947,NA
+"Deangelo Yancey",2018,"WR","Gnb",42.1093856135894,NA
 "Deante Burton",2018,"WR","Atl",24.6959652599786,NA
-"Deanthony Thomas",2018,"RB","Kan",10.6193165813376,NA
+"Deanthony Thomas",2018,"RB","Kan",10.8193165813376,NA
 "Deanthony Thomas",2017,"WR","Kan",21.5719951112366,26.7
 "Deanthony Thomas",2016,"WR","Kan",22.7053792219178,6.4
 "Deanthony Thomas",2015,"RB","Kan",55.8710887588593,29.4
 "Deanthony Thomas",2014,"RB","Kan",36.5740975714897,38.9
 "Deatrich Wise",2018,"DE","Nwe",36.0477008484216,NA
-"Dede Westbrook",2018,"WR","Jax",44.1612530468446,NA
+"Dede Westbrook",2018,"WR","Jax",57.1612530468446,NA
 "Dede Westbrook",2017,"WR","Jax",25.577757972565,39.9
 "Dedrick Epps",2012,"","Nyj",11.5159193669513,-1.1
 "Dee Ford",2018,"DE","Kan",52.1208447255769,NA
@@ -2859,7 +2857,7 @@
 "Dekoda Watson",2012,"","Tam",39.1377163201688,19
 "Dekoda Watson",2011,"LB","Tam",39.9213158428866,31.5
 "Delance Turner",2018,"RB","Bal",13.4833332781458,NA
-"Delanie Walker",2018,"TE","Ten",102.37840765458,NA
+"Delanie Walker",2018,"TE","Ten",102.42840765458,NA
 "Delanie Walker",2017,"TE","Ten",98.8945601477305,100.5
 "Delanie Walker",2016,"TE","Ten",116.144793715807,123.1
 "Delanie Walker",2015,"TE","Ten",93.0223997960094,148.4
@@ -2880,7 +2878,7 @@
 "Demarco Murray",2012,"RB","Dal",168.241367742146,111.4
 "Demarco Murray",2011,"RB","Dal",46.0342296469966,120
 "Demarco Sampson",2011,"","Ari",13.8729813208244,3.6
-"Demarcus Ayers",2018,"WR","Chi",25.843338323206,NA
+"Demarcus Ayers",2018,"WR","Chi",46.386676646412,NA
 "Demarcus Ayers",2016,"WR","Pit",14.0471114944644,10.1
 "Demarcus Dobbs",2015,"DL","Sea",26.4411006614256,12
 "Demarcus Dobbs",2014,"","Sea/sfo",26.4791544619633,20
@@ -2888,7 +2886,7 @@
 "Demarcus Lawrence",2017,"DL","Dal",65.8594361005242,104.25
 "Demarcus Lawrence",2016,"DL","Dal",48.7521861803161,18
 "Demarcus Lawrence",2015,"DL","Dal",56.475,78
-"Demarcus Robinson",2018,"WR","Kan",29.4261579172696,NA
+"Demarcus Robinson",2018,"WR","Kan",25.6261579172696,NA
 "Demarcus Robinson",2017,"WR","Kan",16.4886666666667,21.2
 "Demarcus Ware",2016,"LB","Den",67.4216995011048,22.5
 "Demarcus Ware",2015,"DL","Den",68.0117514745698,46.75
@@ -2902,7 +2900,7 @@
 "Demario Davis",2015,"LB","Nyj",110.068404083037,87.5
 "Demario Davis",2014,"LB","Nyj",94.6468857956355,115.75
 "Demario Davis",2013,"LB","Nyj",62.5595278753944,96.75
-"Demaryius Thomas",2018,"WR","Den",128.307754386888,NA
+"Demaryius Thomas",2018,"WR","Den",122.507754386888,NA
 "Demaryius Thomas",2017,"WR","Den",135.022080759243,122.9
 "Demaryius Thomas",2016,"WR","Den",155.737022058925,134.3
 "Demaryius Thomas",2015,"WR","Den",196.562229420962,162.4
@@ -2963,7 +2961,7 @@
 "Deon Bush",2017,"DB","Chi",25.1412618369429,5
 "Deon Butler",2010,"WR","Sea",58.4,63.1
 "Deon Butler",2009,"WR","Sea",14.4,17.5
-"Deon Cain",2018,"WR","Ind",21.0210477228245,NA
+"Deon Cain",2018,"WR","Ind",21.2210477228245,NA
 "Deon Grant",2011,"S","Nyg",54.9171754160993,66.75
 "Deon Simon",2018,"NT","Nyj",18.1504782289096,NA
 "Deone Bucannon",2018,"SS","Ari",83.0718492499179,NA
@@ -2971,7 +2969,7 @@
 "Deone Bucannon",2016,"DB","Ari",119.387577544741,88.5
 "Deone Bucannon",2015,"DB","Ari",75.4818163397385,144.25
 "Deontay Burnett",2018,"WR","Ten",45.9973633849688,NA
-"Deonte Thompson",2018,"WR","Dal",50.0645183655713,NA
+"Deonte Thompson",2018,"WR","Dal",36.3145183655713,NA
 "Deonte Thompson",2017,"WR","Buf/chi",13.1986339803141,67
 "Deonte Thompson",2016,"WR","Chi",16.2060054240514,36.9
 "Deonte Thompson",2013,"WR","Bal",20.9090852744825,9.6
@@ -2986,7 +2984,7 @@
 "Derek Anderson",2009,"QB","Cle",33.74,48.32
 "Derek Anderson",2008,"QB","Cle",242.8,96.1
 "Derek Barnett",2018,"DE","Phi",62.7582436773993,NA
-"Derek Carr",2018,"QB","Oak",247.687693401282,NA
+"Derek Carr",2018,"QB","Oak",247.874360067949,NA
 "Derek Carr",2017,"QB","Oak",279.598922081434,217.44
 "Derek Carr",2016,"QB","Oak",276.680849430346,268.48
 "Derek Carr",2015,"QB","Oak",228.68272954385,286.28
@@ -3050,9 +3048,9 @@
 "Derrick Ward",2009,"RB","Tam",159,73.9
 "Derrick Ward",2008,"RB","Nyg",57.5,152.9
 "Derrick Willies",2018,"WR","Cle",7.06607186237354,NA
-"Derrius Guice",2018,"RB","Was",100.333576288763,NA
+"Derrius Guice",2018,"RB","Was",100.266909622096,NA
 "Derron Smith",2016,"DB","Cin",3.45,6.5
-"Desean Jackson",2018,"WR","Tam",97.5764056457371,NA
+"Desean Jackson",2018,"WR","Tam",95.6264056457371,NA
 "Desean Jackson",2017,"WR","Tam",111.052737907006,88.6
 "Desean Jackson",2016,"WR","Was",117.38011407366,124.5
 "Desean Jackson",2015,"WR","Was",136.184913493252,76.8
@@ -3064,7 +3062,7 @@
 "Desean Jackson",2009,"WR","Phi",138.7,199.3
 "Desean Jackson",2008,"WR","Phi",53.5,123.8
 "Deshaun Foster",2008,"RB","Sfo",53.9,46.7
-"Deshaun Watson",2018,"QB","Hou",295.890387576197,NA
+"Deshaun Watson",2018,"QB","Hou",295.997054242864,NA
 "Deshaun Watson",2017,"QB","Hou",112.270635940145,174.86
 "Deshawn Shead",2017,"DB","Sea",26.8464673992956,2
 "Deshawn Shead",2016,"DB","Sea",46.111154541863,82.75
@@ -3092,7 +3090,7 @@
 "Desmond Trufant",2015,"DB","Atl",79.9174561519978,54.25
 "Desmond Trufant",2014,"DB","Atl",80.2090506069763,80.25
 "Destiny Vaeao",2017,"DL","Phi",28.0672917877375,9
-"Det",2018,"DST","Det",102,NA
+"Det",2018,"DST","Det",96,NA
 "Det",2017,"DST","Det",82,157
 "Det",2016,"DST","Det",86,86
 "Det",2015,"DST","Det",107,101
@@ -3105,7 +3103,7 @@
 "Devante Harris",2017,"DB","Nor",14.8510984772077,17.5
 "Devante Mays",2018,"RB","Gnb",5.4730375134746,NA
 "Devante Mays",2017,"RB","Gnb",14.1015762610642,-1.9
-"Devante Parker",2018,"WR","Mia",104.854411861307,NA
+"Devante Parker",2018,"WR","Mia",102.954411861307,NA
 "Devante Parker",2017,"WR","Mia",108.951467596666,73
 "Devante Parker",2016,"WR","Mia",100.067832699573,98.4
 "Devante Parker",2015,"WR","Mia",74.0919940031901,67.4
@@ -3122,7 +3120,7 @@
 "Devin Aromashodu",2012,"WR","Min",35.2641351753969,18.2
 "Devin Aromashodu",2011,"WR","Min",32.1457400297877,52.8
 "Devin Aromashodu",2010,"WR","Chi",77.6,14.9
-"Devin Funchess",2018,"WR","Car",95.9147213831894,NA
+"Devin Funchess",2018,"WR","Car",114.264721383189,NA
 "Devin Funchess",2017,"WR","Car",82.3180226455646,132
 "Devin Funchess",2016,"WR","Car",83.6974096362545,61.1
 "Devin Funchess",2015,"WR","Car",74.443129650665,75.3
@@ -3166,12 +3164,12 @@
 "Devon Wylie",2012,"WR","Kan",16.6672560471231,5.3
 "Devondre Campbell",2018,"OLB","Atl",77.2471018932241,NA
 "Devondre Campbell",2017,"LB","Atl",81.9049833934341,88.5
-"Devonta Freeman",2018,"RB","Atl",179.329401936662,NA
+"Devonta Freeman",2018,"RB","Atl",178.929401936662,NA
 "Devonta Freeman",2017,"RB","Atl",189.666168199365,164.2
 "Devonta Freeman",2016,"RB","Atl",173.15148645878,230.1
 "Devonta Freeman",2015,"RB","Atl",111.168335467798,243.9
 "Devonta Freeman",2014,"RB","Atl",76.2661586040008,57.3
-"Devontae Booker",2018,"RB","Den",102.880121836541,NA
+"Devontae Booker",2018,"RB","Den",103.013455169874,NA
 "Devontae Booker",2017,"RB","Den",60.9997767555659,61.4
 "Devontae Booker",2016,"RB","Den",87.2632579901804,111.7
 "Devonte Boyd",2018,"WR","Cin",6.94716449869607,NA
@@ -3209,7 +3207,7 @@
 "Dion Lewis",2015,"RB","Nwe",41.8825792798041,84.2
 "Dion Lewis",2012,"RB","Phi",66.4743114818973,15.3
 "Dion Lewis",2011,"","Phi",36.2541460557355,15.9
-"Dion Sims",2018,"TE","Chi",22.8568275412223,NA
+"Dion Sims",2018,"TE","Chi",22.9068275412223,NA
 "Dion Sims",2017,"TE","Chi",41.4101507263716,24
 "Dion Sims",2016,"TE","Mia",26.8478522049743,49.6
 "Dion Sims",2015,"TE","Mia",35.8639277826908,16.7
@@ -3218,7 +3216,7 @@
 "Dj Alexander",2018,"OLB","Sea",28.4775152025869,NA
 "Dj Alexander",2017,"LB","Sea",7.228922523768,10.5
 "Dj Alexander",2016,"LB","Kan",19.9790792695269,21.5
-"Dj Chark",2018,"WR","Jax",47.8502214770642,NA
+"Dj Chark",2018,"WR","Jax",47.9002214770642,NA
 "Dj Foster",2018,"RB","Ari",7.35299220019348,NA
 "Dj Foster",2016,"WR","Nwe",23.5796655024857,2.6
 "Dj Hackett",2008,"WR","Car",95.9,16.1
@@ -3228,7 +3226,7 @@
 "Dj Hayden",2015,"DB","Oak",70.6725808228879,82.25
 "Dj Hayden",2014,"DB","Oak",89.75,54.25
 "Dj Jones",2018,"DT","Sfo",25.6805093219485,NA
-"Dj Moore",2018,"WR","Car",63.5523291384756,NA
+"Dj Moore",2018,"WR","Car",69.7023291384756,NA
 "Dj Moore",2013,"","Car",33.2291103299934,4.5
 "Dj Moore",2012,"","Chi",51.825198186722,42
 "Dj Moore",2011,"","Chi",42.5027545922233,62.5
@@ -3320,7 +3318,7 @@
 "Donovan Mcnabb",2010,"QB","Was",221.86,189.18
 "Donovan Mcnabb",2009,"QB","Phi",254.04,244.22
 "Donovan Mcnabb",2008,"QB","Phi",227.3,262.34
-"Donta Foreman",2018,"RB","Hou",83.4993314790712,NA
+"Donta Foreman",2018,"RB","Hou",89.5659981457379,NA
 "Donta Foreman",2017,"RB","Hou",48.9764752980447,51
 "Donta Hightower",2018,"ILB","Nwe",56.3788401814158,NA
 "Donta Hightower",2017,"LB","Nwe",91.3733009093988,18
@@ -3339,7 +3337,7 @@
 "Dontari Poe",2014,"DL","Kan",54.0930066369246,58.5
 "Dontari Poe",2013,"NT","Kan",50.6955250108135,62.25
 "Donte Deayon",2018,"DB","Nyg",35.8861384481421,NA
-"Donte Moncrief",2018,"WR","Jax",87.6776021447274,NA
+"Donte Moncrief",2018,"WR","Jax",70.5776021447273,NA
 "Donte Moncrief",2017,"WR","Ind",101.220713035899,51.1
 "Donte Moncrief",2016,"WR","Ind",125.338965103979,72.6
 "Donte Moncrief",2015,"WR","Ind",69.3541734097006,109.3
@@ -3363,7 +3361,7 @@
 "Dorial Green Beckham",2016,"WR","Phi",72.1403533563843,51.2
 "Dorial Green Beckham",2015,"WR","Ten",52.2889089558301,78.9
 "Dorin Dickerson",2013,"TE","Det",4.25,3.4
-"Doug Baldwin",2018,"WR","Sea",134.085035699543,NA
+"Doug Baldwin",2018,"WR","Sea",132.535035699543,NA
 "Doug Baldwin",2017,"WR","Sea",141.294114599757,146.3
 "Doug Baldwin",2016,"WR","Sea",136.578429616993,159.6
 "Doug Baldwin",2015,"WR","Sea",106.141889946638,190.9
@@ -3371,7 +3369,7 @@
 "Doug Baldwin",2013,"WR","Sea",59.7981502662799,108.4
 "Doug Baldwin",2012,"WR","Sea",83.6586516214149,54.6
 "Doug Baldwin",2011,"WR","Sea",27.9398979520926,102.6
-"Doug Martin",2018,"RB","Oak",69.856213130195,NA
+"Doug Martin",2018,"RB","Oak",69.7228797968616,NA
 "Doug Martin",2017,"RB","Tam",119.073343537564,65
 "Doug Martin",2016,"RB","Tam",165.251673918166,71.5
 "Doug Martin",2015,"RB","Tam",128.489566770423,199.3
@@ -3393,7 +3391,7 @@
 "Dre Kirkpatrick",2014,"LCB","Cin",46.7087561107344,42.25
 "Dres Anderson",2018,"WR","Ind",2.22108201118309,NA
 "Drew Bennett",2008,"WR","Lar",69.4,0.4
-"Drew Brees",2018,"QB","Nor",271.779576520306,NA
+"Drew Brees",2018,"QB","Nor",271.806243186973,NA
 "Drew Brees",2017,"QB","Nor",308.993237873006,270.56
 "Drew Brees",2016,"QB","Nor",303.34073874804,355.32
 "Drew Brees",2015,"QB","Nor",309.466296596807,319.2
@@ -3420,7 +3418,7 @@
 "Duke Ihenacho",2016,"DB","Was",14.95,65
 "Duke Ihenacho",2015,"DB","Was",26.105,2
 "Duke Ihenacho",2014,"","Was",55.9838421001519,0.5
-"Duke Johnson",2018,"RB","Cle",92.1886714251977,NA
+"Duke Johnson",2018,"RB","Cle",91.9886714251977,NA
 "Duke Johnson",2017,"RB","Cle",102.300321952773,142.1
 "Duke Johnson",2016,"RB","Cle",119.752361552723,91.2
 "Duke Johnson",2015,"RB","Cle",71.1759078017237,103.3
@@ -3430,7 +3428,7 @@
 "Dunta Robinson",2013,"CB","Kan",49.5840896296517,18
 "Dunta Robinson",2012,"CB","Atl",58.3896706996425,94
 "Dunta Robinson",2011,"RCB","Atl",63.0315714136209,57
-"Durham Smythe",2018,"TE","Mia",14.5,NA
+"Durham Smythe",2018,"TE","Mia",14.4,NA
 "Duron Harmon",2017,"DB","Nwe",32.5039748704524,38
 "Duron Harmon",2016,"DB","Nwe",24.4951503587379,36.25
 "Duron Harmon",2015,"DB","Nwe",15.8918539766708,30.75
@@ -3448,7 +3446,7 @@
 "Dwan Edwards",2014,"","Car",14.5812197287035,49.75
 "Dwan Edwards",2013,"LDT","Car",46.3910631509607,27
 "Dwan Edwards",2011,"DE","Buf",54.2033430446128,48.75
-"Dwayne Allen",2018,"TE","Nwe",14.2296063289082,NA
+"Dwayne Allen",2018,"TE","Nwe",14.1796063289082,NA
 "Dwayne Allen",2017,"TE","Nwe",45.5544798823701,14.6
 "Dwayne Allen",2016,"TE","Ind",65.9289491424991,76.6
 "Dwayne Allen",2015,"TE","Ind",76.7106380161484,17
@@ -3466,7 +3464,7 @@
 "Dwayne Gratz",2016,"DB","Jax",31.3077761648882,5
 "Dwayne Gratz",2015,"DB","Jax",33.5571796242271,24.5
 "Dwayne Gratz",2014,"DB","Jax",62.8638894306197,70.25
-"Dwayne Harris",2018,"WR","Oak",6.43320532823584,NA
+"Dwayne Harris",2018,"WR","Oak",3.98320532823584,NA
 "Dwayne Harris",2017,"WR","Nyg",18.2953532699833,1.5
 "Dwayne Harris",2016,"WR","Nyg",36.4480121283248,7.3
 "Dwayne Harris",2015,"WR","Nyg",23.7789345578067,76.8
@@ -3520,7 +3518,7 @@
 "Earnest Graham",2010,"RB","Tam",30.7,36.98
 "Earnest Graham",2009,"RB","Tam",138.9,17.5
 "Earnest Graham",2008,"RB","Tam",180.9,97.82
-"Ed Dickson",2018,"TE","Sea",34.4332374160651,NA
+"Ed Dickson",2018,"TE","Sea",32.7332374160651,NA
 "Ed Dickson",2017,"TE","Car",18.0346637645228,49.7
 "Ed Dickson",2016,"TE","Car",21.91440207096,19.4
 "Ed Dickson",2015,"TE","Car",20.9319070857898,24.1
@@ -3587,7 +3585,7 @@
 "Eli Apple",2017,"DB","Nyg",55.789498069475,53
 "Eli Harold",2017,"LB","Sfo",48.9654219957413,38
 "Eli Harold",2016,"LB","Sfo",22.4627087045448,45.5
-"Eli Manning",2018,"QB","Nyg",243.37233883105,NA
+"Eli Manning",2018,"QB","Nyg",239.505672164384,NA
 "Eli Manning",2017,"QB","Nyg",255.418069975924,210.32
 "Eli Manning",2016,"QB","Nyg",279.817176206973,248.18
 "Eli Manning",2015,"QB","Nyg",268.161953853834,307.54
@@ -3602,7 +3600,7 @@
 "Eli Rogers",2016,"WR","Pit",43.7886493529398,78
 "Elijah Hood",2018,"RB","Car",24.401820021298,NA
 "Elijah Marks",2018,"WR","Kan",14.7918551502182,NA
-"Elijah Mcguire",2018,"RB","Nyj",61.7397461569455,NA
+"Elijah Mcguire",2018,"RB","Nyj",66.3397461569455,NA
 "Elijah Mcguire",2017,"RB","Nyj",39.5602543866358,57.2
 "Elijah Wellman",2018,"FB","Was",66.3379938000001,NA
 "Elijhaa Penny",2018,"RB","Ari",22.8035212555274,NA
@@ -3617,7 +3615,7 @@
 "Elvis Dumervil",2013,"LB","Bal",74.9774739107634,55.25
 "Elvis Dumervil",2012,"DE","Den",60.3501348204936,90
 "Elvis Dumervil",2011,"DE","Den",72.5434997437244,64.75
-"Emanuel Byrd",2018,"TE","Gnb",13.3103607450598,NA
+"Emanuel Byrd",2018,"TE","Gnb",26.0207214901196,NA
 "Emanuel Byrd",2017,"","Gnb",1.90411439470325,3.1
 "Emmanuel Lamur",2018,"LB","Oak",36.9954508526031,NA
 "Emmanuel Lamur",2017,"LB","Min",45.25,15.5
@@ -3626,7 +3624,7 @@
 "Emmanuel Lamur",2014,"LB","Cin",68.6770636027225,88
 "Emmanuel Ogbah",2018,"DE","Cle",62.5089884357105,NA
 "Emmanuel Ogbah",2017,"DL","Cle",67.0860355708376,53.5
-"Emmanuel Sanders",2018,"WR","Den",106.992622284557,NA
+"Emmanuel Sanders",2018,"WR","Den",105.442622284557,NA
 "Emmanuel Sanders",2017,"WR","Den",126.003596193798,67.5
 "Emmanuel Sanders",2016,"WR","Den",132.342133125516,133.6
 "Emmanuel Sanders",2015,"WR","Den",148.573808539242,150.4
@@ -3675,7 +3673,7 @@
 "Eric Saubert",2018,"TE","Atl",3.7,NA
 "Eric Smith",2012,"S","Nyj",53.1203170766243,22.75
 "Eric Smith",2011,"S","Nyj",61.1961684118581,94.5
-"Eric Tomlinson",2018,"TE","Nyj",8.70174704724229,NA
+"Eric Tomlinson",2018,"TE","Nyj",8.75174704724229,NA
 "Eric Tomlinson",2017,"TE","Nyj",13.6519376674931,18.1
 "Eric Weddle",2018,"DB","Bal",73.1642066523983,NA
 "Eric Weddle",2017,"DB","Bal",85.8874190110919,102
@@ -3753,7 +3751,7 @@
 "Ezekiel Ansah",2016,"DL","Det",87.2628165306243,37
 "Ezekiel Ansah",2015,"DL","Det",81.320647043605,98.75
 "Ezekiel Ansah",2014,"DL","Det",64.1510011171032,78.75
-"Ezekiel Elliott",2018,"RB","Dal",225.072486441193,NA
+"Ezekiel Elliott",2018,"RB","Dal",225.072486441194,NA
 "Ezekiel Elliott",2017,"RB","Dal",164.035412159189,177.2
 "Ezekiel Elliott",2016,"RB","Dal",182.039631328944,293.4
 "Fabian Moreau",2018,"CB","Was",35.5758495347831,NA
@@ -3783,7 +3781,7 @@
 "Frank Clark",2018,"DE","Sea",60.8833782051532,NA
 "Frank Clark",2017,"DL","Sea",59.5111069357216,61
 "Frank Clark",2016,"DL","Sea",35.1327828682379,75
-"Frank Gore",2018,"RB","Mia",83.6248196502432,NA
+"Frank Gore",2018,"RB","Mia",77.1581529835765,NA
 "Frank Gore",2017,"RB","Ind",127.240407607198,144.6
 "Frank Gore",2016,"RB","Ind",130.918355359874,176.2
 "Frank Gore",2015,"RB","Ind",147.558410502286,159.4
@@ -3826,7 +3824,7 @@
 "Fred Taylor",2010,"RB","Nwe",67.6,16.1
 "Fred Taylor",2009,"RB","Nwe",114.7,50.6
 "Fred Taylor",2008,"RB","Jax",143,69.4
-"Freddie Martino",2018,"WR","Tam",20.2584525824198,NA
+"Freddie Martino",2018,"WR","Tam",13.9084525824198,NA
 "Freddie Martino",2017,"WR","Tam",22.339106828653,9.6
 "Freddie Martino",2016,"","Tam",8.22938197071896,20.2
 "Frostee Rucker",2017,"DL","Ari",19.8407617585329,35.25
@@ -3890,7 +3888,7 @@
 "Geno Hayes",2013,"LB","Jax",56.4599067406345,84.5
 "Geno Hayes",2012,"LB","Chi",64.4033891673891,17
 "Geno Hayes",2011,"LB","Tam",87.5032203790916,72.25
-"Geno Smith",2018,"QB","Sdg",2.43460447089753,NA
+"Geno Smith",2018,"QB","Sdg",2.5012711375642,NA
 "Geno Smith",2017,"QB","Nyg",8.13935748341113,13.68
 "Geno Smith",2016,"QB","Nyj",53.8240470869887,8.94
 "Geno Smith",2015,"QB","Nyj",82.2202545066523,21
@@ -3937,14 +3935,14 @@
 "Gerald Sensabaugh",2012,"FS","Dal",73.0436663940133,55.5
 "Gerald Sensabaugh",2011,"FS","Dal",74.001905771583,90
 "Gerard Warren",2011,"","Nwe",13.3941812049054,15.5
-"Geremy Davis",2018,"WR","Sdg",5.74420975503218,NA
+"Geremy Davis",2018,"WR","Sdg",4.14420975503218,NA
 "Geremy Davis",2015,"WR","Nyg",17.2369520497944,2.1
-"Geronimo Allison",2018,"WR","Gnb",41.4007529447254,NA
+"Geronimo Allison",2018,"WR","Gnb",42.3507529447254,NA
 "Geronimo Allison",2017,"WR","Gnb",46.166479288357,23.3
 "Geronimo Allison",2016,"WR","Gnb",23.9154893148197,32.2
 "Gibril Wilson",2011,"DB","Cin",67.0248659143808,33
 "Giorgio Tavecchio",2018,"K","Oak",107.57773597954,NA
-"Giovani Bernard",2018,"RB","Cin",89.7908308670748,NA
+"Giovani Bernard",2018,"RB","Cin",88.4574975337414,NA
 "Giovani Bernard",2017,"RB","Cin",95.0587375820866,108.7
 "Giovani Bernard",2016,"RB","Cin",131.234849601869,83.3
 "Giovani Bernard",2015,"RB","Cin",128.119688741226,132.2
@@ -3970,7 +3968,7 @@
 "Gnb",2016,"DST","Gnb",109,100
 "Gnb",2015,"DST","Gnb",114,123
 "Gnb",2014,"DST","Gnb",111,147
-"Golden Tate",2018,"WR","Det",105.396439014122,NA
+"Golden Tate",2018,"WR","Det",99.246439014122,NA
 "Golden Tate",2017,"WR","Det",130.333611208637,130.5
 "Golden Tate",2016,"WR","Det",130.526090189719,130.1
 "Golden Tate",2015,"WR","Det",140.084175327327,119.4
@@ -4130,7 +4128,7 @@
 "Hines Ward",2010,"WR","Pit",145.5,103.3
 "Hines Ward",2009,"WR","Pit",133.5,150.7
 "Hines Ward",2008,"WR","Pit",126.8,146.7
-"Hou",2018,"DST","Hou",104,NA
+"Hou",2018,"DST","Hou",106,NA
 "Hou",2017,"DST","Hou",110,83
 "Hou",2016,"DST","Hou",115,97
 "Hou",2015,"DST","Hou",115,157
@@ -4146,7 +4144,7 @@
 "Husain Abdullah",2014,"FS","Kan",59.0206525268161,81.25
 "Husain Abdullah",2013,"DB","Kan",44.2204680055783,40.5
 "Husain Abdullah",2011,"FS","Min",66.6765847223011,57.25
-"Ian Thomas",2018,"TE","Car",24.9515129910617,NA
+"Ian Thomas",2018,"TE","Car",24.9015129910617,NA
 "Ian Williams",2015,"DL","Sfo",41.881229526333,68
 "Ian Williams",2014,"DL","Sfo",29,26
 "Ibraheim Campbell",2018,"SS","Hou",28.9886254875107,NA
@@ -4181,14 +4179,14 @@
 "Isaac Sopoaga",2011,"NT","Sfo",31.2481499642737,29.3
 "Isaac Whitney",2018,"WR","Oak",13.5555147661244,NA
 "Isaiah Burse",2014,"","Den",44.8715712569812,NA
-"Isaiah Crowell",2018,"RB","Nyj",121.820689346837,NA
+"Isaiah Crowell",2018,"RB","Nyj",110.220689346837,NA
 "Isaiah Crowell",2017,"RB","Cle",154.813917593282,113.5
 "Isaiah Crowell",2016,"RB","Cle",119.873103583619,165.1
 "Isaiah Crowell",2015,"RB","Cle",125.808294351413,118.8
 "Isaiah Crowell",2014,"RB","Cle",44.1103604432888,113.4
 "Isaiah Ekejiuba",2011,"","Det",28.4277642130351,0.5
 "Isaiah Ford",2018,"WR","Mia",34.7307569610654,NA
-"Isaiah Mckenzie",2018,"WR","Den",27.6904083134826,NA
+"Isaiah Mckenzie",2018,"WR","Den",18.1404083134826,NA
 "Isaiah Mckenzie",2017,"WR","Den",25.149336575268,3.3
 "Isaiah Pead",2016,"RB","Mia",6.30423773539441,2.8
 "Isaiah Pead",2015,"","Lar",2.5,-1.7
@@ -4218,11 +4216,10 @@
 "Jace Amaro",2018,"TE","Kan",15.5900392077177,NA
 "Jace Amaro",2016,"","Ten",9.5,5.9
 "Jace Amaro",2014,"TE","Nyj",51.1072943424816,46.5
-"Jace Billingsley",2018,"WR","Det",6,NA
 "Jack Crawford",2017,"DL","Atl",13.8866776138952,4
 "Jack Crawford",2016,"DL","Dal",24.1485642244372,27
 "Jack Crawford",2015,"DL","Dal",13.4478638902581,31.5
-"Jack Doyle",2018,"TE","Ind",90.3174215870752,NA
+"Jack Doyle",2018,"TE","Ind",88.3674215870752,NA
 "Jack Doyle",2017,"TE","Ind",77.8128937819339,89
 "Jack Doyle",2016,"TE","Ind",29.6290873128469,86.4
 "Jack Doyle",2015,"TE","Ind",22.2950157194313,13.2
@@ -4249,7 +4246,7 @@
 "Jacob Tamme",2011,"TE","Ind",21.1,23.7
 "Jacob Tamme",2010,"TE","Ind",5.9,87.1
 "Jacob Tamme",2009,"TE","Ind",18.5,3.5
-"Jacoby Brissett",2018,"QB","Ind",22.8206243449102,NA
+"Jacoby Brissett",2018,"QB","Ind",24.0872910115769,NA
 "Jacoby Brissett",2017,"QB","Ind",0.092,216.92
 "Jacoby Brissett",2016,"QB","Nwe",14.7730772101621,28.3
 "Jacoby Ford",2013,"WR","Oak",53.4893030226479,9.4
@@ -4267,7 +4264,7 @@
 "Jacquian Williams",2013,"LB","Nyg",42.7042607672461,61.5
 "Jacquian Williams",2012,"LB","Nyg",57.8473831573847,29
 "Jacquies Smith",2015,"DL","Tam",53.2281821117429,53.5
-"Jacquizz Rodgers",2018,"RB","Tam",31.4708374687678,NA
+"Jacquizz Rodgers",2018,"RB","Tam",31.4041708021012,NA
 "Jacquizz Rodgers",2017,"RB","Tam",67.3744016991568,37.8
 "Jacquizz Rodgers",2015,"RB","Chi",54.1823137038911,5.1
 "Jacquizz Rodgers",2014,"RB","Atl",68.1341792696679,51
@@ -4298,13 +4295,12 @@
 "Jairus Byrd",2011,"FS","Buf",79.4949459251071,125.25
 "Jake Ballard",2013,"TE","Ari",43.31,19.5
 "Jake Ballard",2011,"TE","Nyg",33.1487442300493,84.4
-"Jake Butt",2018,"TE","Den",34.9078266031934,NA
+"Jake Butt",2018,"TE","Den",34.9578266031934,NA
 "Jake Delhomme",2010,"QB","Cle",125.56,35.68
 "Jake Delhomme",2009,"QB","Car",199.7,100.6
 "Jake Delhomme",2008,"QB","Car",202.06,191.62
 "Jake Elliott",2018,"K","Phi",128.142714811176,NA
 "Jake Kumerow",2018,"WR","Gnb",-8.53434149250545,NA
-"Jake Lampman",2018,"WR","Tam",6.5,NA
 "Jake Locker",2014,"QB","Ten",204.735960211967,72.92
 "Jake Locker",2013,"QB","Ten",156.049773434827,103.74
 "Jake Locker",2012,"QB","Ten",147.954528642882,147.14
@@ -4318,17 +4314,17 @@
 "Jake Ryan",2016,"LB","Gnb",65.6493580133315,79
 "Jake Stoneburner",2015,"TE","Mia",0.1,16.7
 "Jake Wieneke",2018,"WR","Min",6.60795314757117,NA
-"Jakeem Grant",2018,"WR","Mia",22.5417578660991,NA
+"Jakeem Grant",2018,"WR","Mia",37.9917578660991,NA
 "Jakeem Grant",2017,"WR","Mia",2.40233333333333,33.5
 "Jakeem Grant",2016,"WR","Mia",17.3636242593317,6.1
-"Jaleel Scott",2018,"WR","Bal",17.8707413461656,NA
+"Jaleel Scott",2018,"WR","Bal",17.7707413461656,NA
 "Jalen Collins",2016,"DB","Atl",28.0676920312762,43
 "Jalen Mills",2018,"CB","Phi",73.6122824777449,NA
 "Jalen Mills",2017,"DB","Phi",54.0510812566172,82.75
 "Jalen Parmele",2014,"","Ari",6.4,NA
 "Jalen Parmele",2012,"RB","Jax",35.4345340628596,20.3
 "Jalen Reeves Maybin",2018,"OLB","Det",43.1396111066016,NA
-"Jalen Richard",2018,"RB","Oak",51.4954648071135,NA
+"Jalen Richard",2018,"RB","Oak",51.5621314737802,NA
 "Jalen Richard",2017,"RB","Oak",68.7675524367441,61.1
 "Jalen Richard",2016,"RB","Oak",23.8346115822833,86.5
 "Jalen Simmons",2018,"RB","Nyg",40.2659816831332,NA
@@ -4351,7 +4347,7 @@
 "Jamaal Charles",2009,"RB","Kan",67.4,191.7
 "Jamaal Charles",2008,"RB","Kan",20.7,64.9
 "Jamaal Jones",2018,"WR","Car",16.0882042512642,NA
-"Jamaal Williams",2018,"RB","Gnb",92.4344812444449,NA
+"Jamaal Williams",2018,"RB","Gnb",91.5011479111116,NA
 "Jamaal Williams",2017,"RB","Gnb",83.1355564820731,117.8
 "Jamal Adams",2018,"SS","Nyj",86.9259326883223,NA
 "Jamal Agnew",2018,"CB","Det",37.3108280743145,NA
@@ -4377,7 +4373,7 @@
 "Jameel Mcclain",2012,"MLB","Bal",81.9012335993661,75.5
 "Jameel Mcclain",2011,"LB","Bal",75.8012735595455,81.25
 "Jameill Showers",2018,"QB","Dal",31.655588078361,NA
-"Jameis Winston",2018,"QB","Tam",257.301968089428,NA
+"Jameis Winston",2018,"QB","Tam",225.021968089428,NA
 "Jameis Winston",2017,"QB","Tam",277.405633049421,222.66
 "Jameis Winston",2016,"QB","Tam",265.190652803722,278.1
 "Jameis Winston",2015,"QB","Tam",250.691862306039,289.98
@@ -4393,7 +4389,7 @@
 "James Casey",2013,"TE","Phi",46.7566305964181,3.1
 "James Casey",2012,"TE","Hou",20.535,51.6
 "James Casey",2010,"TE","Hou",21.6,9.8
-"James Conner",2018,"RB","Pit",44.9588959521787,NA
+"James Conner",2018,"RB","Pit",45.0255626188454,NA
 "James Conner",2017,"RB","Pit",32.7029834041092,14.4
 "James Cowser",2018,"LB","Oak",30.4703057820656,NA
 "James Cowser",2017,"LB","Oak",26.4842181207894,27.5
@@ -4453,8 +4449,8 @@
 "James Starks",2012,"RB","Gnb",72.4372627208569,34.6
 "James Starks",2011,"RB","Gnb",77.0784855909599,83.4
 "James Thrash",2008,"WR","Was",7.9,14.1
-"James Washington",2018,"WR","Pit",52.2077689570061,NA
-"James White",2018,"RB","Nwe",112.064717553064,NA
+"James Washington",2018,"WR","Pit",52.2577689570061,NA
+"James White",2018,"RB","Nwe",110.73138421973,NA
 "James White",2017,"RB","Nwe",105.607323124339,78
 "James White",2016,"RB","Nwe",88.1410534245298,101.7
 "James White",2015,"RB","Nwe",39.8597960902082,82.6
@@ -4472,7 +4468,7 @@
 "Jamie Meder",2018,"DT","Cle",21.7016818610257,NA
 "Jamie Meder",2017,"DL","Cle",34.1758669655409,11.5
 "Jamie Meder",2016,"DL","Cle",33.2064412053531,46
-"Jamison Crowder",2018,"WR","Was",116.079363276784,NA
+"Jamison Crowder",2018,"WR","Was",105.479363276784,NA
 "Jamison Crowder",2017,"WR","Was",122.059449318955,100.3
 "Jamison Crowder",2016,"WR","Was",86.2882459545617,130.5
 "Jamison Crowder",2015,"WR","Was",36.4328931436586,72.6
@@ -4512,7 +4508,7 @@
 "Jared Crick",2015,"DL","Hou",59.0782423587898,55
 "Jared Crick",2014,"DL","Hou",41.812497796985,58.25
 "Jared Crick",2013,"DE","Hou",30.3904893157756,18
-"Jared Goff",2018,"QB","Lar",255.987877484363,NA
+"Jared Goff",2018,"QB","Lar",256.25454415103,NA
 "Jared Goff",2017,"QB","Lar",179.604102217472,266.26
 "Jared Goff",2016,"QB","Lar",79.918260849741,64.16
 "Jared Odrick",2016,"DL","Jax",44.1031818337471,17.5
@@ -4521,7 +4517,7 @@
 "Jared Odrick",2013,"DT","Mia",29.7414006073559,61.75
 "Jared Odrick",2012,"DE","Mia",55.2899293711334,51
 "Jarett Dillard",2011,"WR","Jax",34.2356414590355,35.2
-"Jarius Wright",2018,"WR","Car",15.3323690251638,NA
+"Jarius Wright",2018,"WR","Car",10.5323690251638,NA
 "Jarius Wright",2017,"WR","Min",28.167333882588,31.8
 "Jarius Wright",2016,"WR","Min",39.2644366825295,12.7
 "Jarius Wright",2015,"WR","Min",52.4665044095717,45.1
@@ -4530,7 +4526,7 @@
 "Jarius Wright",2012,"WR","Min",31.3017564455618,44.1
 "Jarius Wynn",2014,"DT","Buf",25.0376857170127,24.25
 "Jarius Wynn",2013,"DE","Dal/sdg",25.3938384171092,18.5
-"Jaron Brown",2018,"WR","Sea",41.129322190224,NA
+"Jaron Brown",2018,"WR","Sea",32.529322190224,NA
 "Jaron Brown",2017,"WR","Ari",37.7532594674372,71.7
 "Jaron Brown",2016,"WR","Ari",23.2015670256138,24.7
 "Jaron Brown",2015,"WR","Ari",29.2927719129163,20.4
@@ -4562,7 +4558,7 @@
 "Jarvis Jones",2016,"LB","Pit",50.0808951660809,52.75
 "Jarvis Jones",2015,"LB","Pit",38.4581543851892,39.75
 "Jarvis Jones",2014,"LB","Pit",58.5585668053923,23.5
-"Jarvis Landry",2018,"WR","Cle",122.655634825315,NA
+"Jarvis Landry",2018,"WR","Cle",118.255634825315,NA
 "Jarvis Landry",2017,"WR","Mia",129.75180210342,148
 "Jarvis Landry",2016,"WR","Mia",152.114713793853,137.3
 "Jarvis Landry",2015,"WR","Mia",126.971289406977,163.36
@@ -4670,18 +4666,18 @@
 "Javon Ringer",2010,"RB","Ten",65,40.3
 "Javon Walker",2009,"WR","Oak",47.5,NA
 "Javon Walker",2008,"WR","Oak",95.8,25.6
-"Javon Wims",2018,"WR","Chi",9.8604134277942,NA
+"Javon Wims",2018,"WR","Chi",10.1604134277942,NA
 "Javontee Herndon",2015,"WR","Sdg",25.2152700196568,20.8
-"Javorius Allen",2018,"RB","Bal",52.8967754404238,NA
+"Javorius Allen",2018,"RB","Bal",58.6967754404238,NA
 "Javorius Allen",2017,"RB","Bal",39.957490224607,120.1
 "Javorius Allen",2016,"RB","Bal",75.8133151999891,4.9
 "Javorius Allen",2015,"RB","Bal",47.7483660823063,100.7
-"Jax",2018,"DST","Jax",129,NA
+"Jax",2018,"DST","Jax",130,NA
 "Jax",2017,"DST","Jax",98,203
 "Jax",2016,"DST","Jax",99,69
 "Jax",2015,"DST","Jax",100,109
 "Jax",2014,"DST","Jax",83,111
-"Jay Ajayi",2018,"RB","Phi",139.403041830829,NA
+"Jay Ajayi",2018,"RB","Phi",138.869708497495,NA
 "Jay Ajayi",2017,"RB","Mia/phi",132.788873655047,111.1
 "Jay Ajayi",2016,"RB","Mia",87.4628894610771,188.3
 "Jay Ajayi",2015,"RB","Mia",25.1236314155359,33.7
@@ -4708,7 +4704,7 @@
 "Jay Prosch",2016,"RB","Hou",5.679,1.5
 "Jay Prosch",2015,"RB","Hou",10.4110666666667,3.3
 "Jay Prosch",2014,"RB","Hou",4.9,2.4
-"Jaydon Mickens",2018,"WR","Jax",7.5,NA
+"Jaydon Mickens",2018,"WR","Jax",7.6,NA
 "Jaye Howard",2016,"DL","Kan",66.5207006477036,24
 "Jaye Howard",2015,"DL","Kan",49.6342921740627,74.25
 "Jaye Howard",2014,"DL","Kan",30.5,38
@@ -4745,7 +4741,7 @@
 "Jeff Heuerman",2018,"TE","Den",32.1294820642917,NA
 "Jeff Heuerman",2017,"TE","Den",22.7079662489026,26.2
 "Jeff Heuerman",2016,"TE","Den",34.6954856796508,14.1
-"Jeff Janis",2018,"WR","Cle",10.1449315000132,NA
+"Jeff Janis",2018,"WR","Cle",7.79493150001321,NA
 "Jeff Janis",2017,"WR","Gnb",13.5117039136967,1.2
 "Jeff Janis",2016,"WR","Gnb",21.2746845724399,25.1
 "Jeff Janis",2015,"WR","Gnb",34.367069364429,7.9
@@ -4761,7 +4757,7 @@
 "Jeff Tuel",2013,"QB","Buf",33.9924514118887,15.06
 "Jeff Webb",2008,"WR","Kan",34.5,4.6
 "Jeffery Wilson",2018,"RB","Sfo",18.9913243072098,NA
-"Jehu Chesson",2018,"WR","Kan",11.4424931034692,NA
+"Jehu Chesson",2018,"WR","Kan",9.59249310346922,NA
 "Jehu Chesson",2017,"WR","Kan",12.0700967551039,1.8
 "Jelani Jenkins",2016,"LB","Mia",84.1402319927472,24.5
 "Jelani Jenkins",2015,"LB","Mia",104.754305610534,75
@@ -4785,7 +4781,7 @@
 "Jeremy Hill",2016,"RB","Cin",151.386930566778,155.3
 "Jeremy Hill",2015,"RB","Cin",188.236374816692,153.3
 "Jeremy Hill",2014,"RB","Cin",102.508282309831,183.9
-"Jeremy Kerley",2018,"WR","Buf",35.9957037621803,NA
+"Jeremy Kerley",2018,"WR","Buf",30.5957037621803,NA
 "Jeremy Kerley",2017,"WR","Nyj",45.2,25.7
 "Jeremy Kerley",2016,"WR","Sfo",24.6143795385115,84.7
 "Jeremy Kerley",2015,"WR","Nyj",52.5559377973444,27.2
@@ -4827,7 +4823,7 @@
 "Jerheme Urban",2011,"WR","Kan",48.009401546342,10.2
 "Jerheme Urban",2009,"WR","Ari",37.8,18.6
 "Jerheme Urban",2008,"WR","Ari",44,69.52
-"Jerick Mckinnon",2018,"RB","Sfo",162.226452803643,NA
+"Jerick Mckinnon",2018,"RB","Sfo",163.159786136976,NA
 "Jerick Mckinnon",2017,"RB","Min",60.6526743816073,125.1
 "Jerick Mckinnon",2016,"RB","Min",77.2165625642349,103.4
 "Jerick Mckinnon",2015,"RB","Min",73.0209039718813,62.4
@@ -4845,7 +4841,7 @@
 "Jermaine Gresham",2012,"TE","Cin",90.8029340375828,101.7
 "Jermaine Gresham",2011,"TE","Cin",84.8340625160874,93.6
 "Jermaine Gresham",2010,"TE","Cin",46.5,69.1
-"Jermaine Kearse",2018,"WR","Nyj",71.7552966940953,NA
+"Jermaine Kearse",2018,"WR","Nyj",68.6052966940953,NA
 "Jermaine Kearse",2017,"WR","Nyj",59.326,111
 "Jermaine Kearse",2016,"WR","Sea",82.2094490189758,57.1
 "Jermaine Kearse",2015,"WR","Sea",73.2894882231845,98.5
@@ -4940,11 +4936,11 @@
 "Jim Dray",2013,"TE","Ari",17.1037284631771,31.5
 "Jim Dray",2012,"","Ari",18.236128828888,1.5
 "Jim Dray",2011,"","Ari",19.0421602359956,2.5
-"Jim Garoppolo",2018,"QB","Sfo",227.760349550043,NA
+"Jim Garoppolo",2018,"QB","Sfo",227.920349550043,NA
 "Jim Garoppolo",2016,"QB","Nwe",57.4561612856266,36.98
 "Jim Garoppolo",2015,"QB","Nwe",19.7802582708112,-0.26
 "Jim Garoppolo",2014,"QB","Nwe",26.6010089876934,12.18
-"Jim Graham",2018,"TE","Gnb",85.9591115827768,NA
+"Jim Graham",2018,"TE","Gnb",86.0591115827768,NA
 "Jim Graham",2017,"TE","Sea",110.221692421029,112
 "Jim Graham",2016,"TE","Sea",97.6440367594077,124.3
 "Jim Graham",2015,"TE","Sea",133.227821699199,72.5
@@ -4977,7 +4973,7 @@
 "Jimmie Ward",2016,"DB","Sfo",62.3990172102009,69.25
 "Jimmie Ward",2015,"DB","Sfo",33.3431452858942,70.75
 "Jj Arrington",2008,"RB","Ari",12.2,62.2
-"Jj Nelson",2018,"WR","Ari",59.8108947617785,NA
+"Jj Nelson",2018,"WR","Ari",53.4608947617785,NA
 "Jj Nelson",2017,"WR","Ari",79.2962597249414,64.5
 "Jj Nelson",2016,"WR","Ari",43.3639835877779,105.1
 "Jj Nelson",2015,"WR","Ari",22.1251579392333,41.9
@@ -4993,7 +4989,7 @@
 "Jj Wilcox",2016,"DB","Dal",38.5634900973341,52.75
 "Jj Wilcox",2015,"DB","Dal",73.5345560119328,51.25
 "Jj Wilcox",2014,"DB","Dal",65.3351837747435,88.75
-"Jmon Moore",2018,"WR","Gnb",25.0449908943072,NA
+"Jmon Moore",2018,"WR","Gnb",24.6449908943072,NA
 "Jo Lonn Dunbar",2014,"LB","Lar",53.5218934621128,37.5
 "Jo Lonn Dunbar",2012,"LB","Lar",67.9067817813549,142.75
 "Jo Lonn Dunbar",2011,"LB","Nor",32.5168979261974,82.5
@@ -5011,7 +5007,7 @@
 "Johnnielee Higgins",2010,"WR","Oak",39.5,10.3
 "Johnnielee Higgins",2009,"WR","Oak",64.5,28.4
 "Johnnielee Higgins",2008,"WR","Oak",28.5,82
-"Johnny Holton",2018,"WR","Oak",16.9942243147634,NA
+"Johnny Holton",2018,"WR","Oak",21.3942243147634,NA
 "Johnny Holton",2017,"WR","Oak",9.35513162383369,35.8
 "Johnny Holton",2016,"","Oak",19.7291002274595,5.7
 "Johnny Jolly",2013,"DE","Gnb",21.9932307026824,26
@@ -5055,7 +5051,7 @@
 "Jonathan Bostic",2018,"LB","Pit",81.2133187947643,NA
 "Jonathan Bostic",2017,"LB","Ind",22.4,90
 "Jonathan Bostic",2014,"LB","Chi",63.2516012927652,76
-"Jonathan Brown",2018,"WR","Bal",83.2599626829053,NA
+"Jonathan Brown",2018,"WR","Bal",70.1099626829053,NA
 "Jonathan Brown",2017,"WR","Ari",93.9447435549909,48.9
 "Jonathan Brown",2016,"WR","Ari",111.663845307103,64.7
 "Jonathan Brown",2015,"WR","Ari",99.3609519901433,142.5
@@ -5141,7 +5137,7 @@
 "Jonathan Phillips",2013,"TE","Sdg",19.6401532687366,3
 "Jonathan Phillips",2012,"TE","Dal",33.1783370171155,11.5
 "Jonathan Phillips",2011,"TE","Dal",31.5397882904594,16.1
-"Jonathan Ross",2018,"WR","Cin",62.1,NA
+"Jonathan Ross",2018,"WR","Cin",59.2,NA
 "Jonathan Ross",2017,"WR","Cin",50.3105428933322,-0.8
 "Jonathan Simon",2018,"DE","Ind",64.6200154847671,NA
 "Jonathan Simon",2017,"LB","Ind",55.372162389302,57.25
@@ -5166,7 +5162,7 @@
 "Jonathan Wendling",2013,"","Det",28.3144063392898,12
 "Jonathan Wendling",2012,"FS","Det",31.0074927556812,26
 "Jonathan Wendling",2011,"SS","Det",35.0521551682913,22.5
-"Jonathan Williams",2018,"RB","Nor",8.06241620415158,NA
+"Jonathan Williams",2018,"RB","Nor",2.86241620415158,NA
 "Jonathan Williams",2016,"RB","Buf",14.438476638733,11.4
 "Jonathon Amaya",2011,"","Nor",36.4169681739318,18
 "Jonnu Smith",2018,"TE","Ten",39.9996049437,NA
@@ -5190,15 +5186,15 @@
 "Jordan Hicks",2017,"LB","Phi",105.619633317487,25.5
 "Jordan Hicks",2016,"LB","Phi",103.060710547576,104.25
 "Jordan Hill",2015,"DL","Sea",31.6415161410166,23.5
-"Jordan Howard",2018,"RB","Chi",145.245281639764,NA
+"Jordan Howard",2018,"RB","Chi",155.711948306431,NA
 "Jordan Howard",2017,"RB","Chi",190.749604164056,176.7
 "Jordan Howard",2016,"RB","Chi",53.7632453545431,201.1
 "Jordan Jenkins",2018,"OLB","Nyj",63.1715928843367,NA
 "Jordan Jenkins",2017,"LB","Nyj",50.1567731080972,58
-"Jordan Lasley",2018,"WR","Bal",23.5072283710133,NA
+"Jordan Lasley",2018,"WR","Bal",23.4072283710133,NA
 "Jordan Leggett",2018,"TE","Nyj",57.9508651400692,NA
 "Jordan Leslie",2018,"WR","Den",14.3994887411591,NA
-"Jordan Matthews",2018,"WR","Nwe",88.6469860744065,NA
+"Jordan Matthews",2018,"WR","Nwe",77.4469860744065,NA
 "Jordan Matthews",2017,"WR","Buf",112.067292846627,32.2
 "Jordan Matthews",2016,"WR","Phi",132.65807127173,98.4
 "Jordan Matthews",2015,"WR","Phi",141.835588743333,145.7
@@ -5232,7 +5228,7 @@
 "Jordan Senn",2011,"LB","Car",29.002536510562,73.75
 "Jordan Shipley",2011,"WR","Cin",71.1385521844613,1.4
 "Jordan Shipley",2010,"WR","Cin",51.9,78
-"Jordan Taylor",2018,"WR","Den",24.4487933554988,NA
+"Jordan Taylor",2018,"WR","Den",16.5487933554988,NA
 "Jordan Taylor",2017,"WR","Den",28.4479678876593,14.2
 "Jordan Taylor",2016,"WR","Den",17.4827232606516,30.9
 "Jordan Thomas",2018,"TE","Hou",15.2269848539567,NA
@@ -5243,7 +5239,7 @@
 "Jordan Veasy",2018,"WR","Ten",19.827070105713,NA
 "Jordan Wilkins",2018,"RB","Ind",22.9425220840441,NA
 "Jordan Willis",2018,"DE","Cin",34.8892154867048,NA
-"Jordy Nelson",2018,"WR","Oak",133.719122840186,NA
+"Jordy Nelson",2018,"WR","Oak",97.9191228401855,NA
 "Jordy Nelson",2017,"WR","Gnb",165.654200130583,84.2
 "Jordy Nelson",2016,"WR","Gnb",164.75594507655,207.7
 "Jordy Nelson",2014,"WR","Gnb",166.397132620076,229.9
@@ -5264,7 +5260,7 @@
 "Joseph Callahan",2017,"QB","Gnb",36.4510617386161,0.44
 "Joseph Fauria",2014,"TE","Det",43.9362630075917,13.4
 "Joseph Fauria",2013,"TE","Det",30.8832729980032,62.7
-"Joseph Flacco",2018,"QB","Bal",189.878193261552,NA
+"Joseph Flacco",2018,"QB","Bal",189.984859928219,NA
 "Joseph Flacco",2017,"QB","Bal",231.670398464057,196.04
 "Joseph Flacco",2016,"QB","Bal",241.879023010773,253.48
 "Joseph Flacco",2015,"QB","Bal",247.431518604432,175.94
@@ -5292,7 +5288,7 @@
 "Joseph Mcknight",2014,"RB","Kan",11.515830152638,18.7
 "Joseph Mcknight",2012,"RB","Nyj",70.1886855428359,25.7
 "Joseph Mcknight",2011,"RB","Nyj",54.0327139760249,33.3
-"Joseph Mixon",2018,"RB","Cin",133.063238169603,NA
+"Joseph Mixon",2018,"RB","Cin",133.12990483627,NA
 "Joseph Mixon",2017,"RB","Cin",115.808233247764,111.3
 "Joseph Morgan",2014,"WR","Nor",32.0458676274089,15.9
 "Joseph Morgan",2012,"WR","Nor",42.0688846262791,56
@@ -5312,8 +5308,8 @@
 "Joseph Young",2013,"","Ind",36.5314180505454,3
 "Joseph Young",2012,"SS","Ind",40.069888872349,29
 "Joshua Adams",2018,"RB","Phi",24.0288831287051,NA
-"Joshua Allen",2018,"QB","Buf",71.7863267978969,NA
-"Joshua Bellamy",2018,"WR","Chi",26.625480747362,NA
+"Joshua Allen",2018,"QB","Buf",57.7463267978969,NA
+"Joshua Bellamy",2018,"WR","Chi",22.275480747362,NA
 "Joshua Bellamy",2017,"WR","Chi",19.1156325567645,44.2
 "Joshua Bellamy",2016,"WR","Chi",16.1055878509688,37.9
 "Joshua Bellamy",2015,"WR","Chi",9.45,34.4
@@ -5344,7 +5340,7 @@
 "Joshua Cribbs",2009,"WR","Cle",48.9,83.32
 "Joshua Cribbs",2008,"WR","Cle",5.4,36.82
 "Joshua Dobbs",2018,"QB","Pit",44.91956191807,NA
-"Joshua Doctson",2018,"WR","Was",71.44625270217,NA
+"Joshua Doctson",2018,"WR","Was",89.64625270217,NA
 "Joshua Doctson",2017,"WR","Was",69.5778012683677,84.8
 "Joshua Doctson",2016,"WR","Was",35.7433026024033,6.6
 "Joshua Evans",2015,"DB","Jax",32.8036521832851,53
@@ -5357,7 +5353,7 @@
 "Joshua Freeman",2011,"QB","Tam",239.151358985211,229.48
 "Joshua Freeman",2010,"QB","Tam",210.7,264.44
 "Joshua Freeman",2009,"QB","Tam",22.2,110.3
-"Joshua Gordon",2018,"WR","Cle",130.19085940361,NA
+"Joshua Gordon",2018,"WR","Cle",130.34085940361,NA
 "Joshua Gordon",2017,"WR","Cle",22.3333333333333,39.5
 "Joshua Gordon",2014,"WR","Cle",47.2524166666666,30.3
 "Joshua Gordon",2013,"WR","Cle",122.1025,227.4
@@ -5373,7 +5369,7 @@
 "Joshua Hill",2015,"TE","Nor",54.7407345502882,24
 "Joshua Hill",2014,"TE","Nor",19.7187120120712,47.6
 "Joshua Hill",2013,"TE","Nor",15.428293297576,9.6
-"Joshua Huff",2018,"WR","Nor",8.32527999996228,NA
+"Joshua Huff",2018,"WR","Nor",11.2505599999246,NA
 "Joshua Huff",2016,"WR","Phi/tam",53.2695265044148,24.8
 "Joshua Huff",2015,"WR","Phi",41.2464356275564,49.2
 "Joshua Huff",2014,"WR","Phi",35.4554750547051,14.5
@@ -5384,7 +5380,7 @@
 "Joshua Lambo",2018,"K","Jax",121.25858982798,NA
 "Joshua Lambo",2016,"K","Sdg",123.496257629049,126
 "Joshua Lambo",2015,"K","Sdg",87.063248343957,128
-"Joshua Malone",2018,"WR","Cin",19.0216130120054,NA
+"Joshua Malone",2018,"WR","Cin",17.3216130120054,NA
 "Joshua Malone",2017,"WR","Cin",22.1449314341072,12.5
 "Joshua Martin",2018,"LB","Nyj",38.0341186106658,NA
 "Joshua Martin",2017,"LB","Nyj",32.911565826386,47.75
@@ -5397,7 +5393,7 @@
 "Joshua Mauro",2018,"DE","Nyg",22.3886416531824,NA
 "Joshua Mauro",2017,"DL","Ari",51.5816695862439,21.5
 "Joshua Mauro",2016,"DL","Ari",12.9735372863535,35.5
-"Joshua Mccown",2018,"QB","Nyj",106.602045300985,NA
+"Joshua Mccown",2018,"QB","Nyj",106.668711967652,NA
 "Joshua Mccown",2017,"QB","Nyj",139.858785137269,220.44
 "Joshua Mccown",2016,"QB","Cle",55.1053870442577,64.1
 "Joshua Mccown",2015,"QB","Cle",156.827707620941,140.16
@@ -5424,7 +5420,7 @@
 "Joshua Perkins",2016,"TE","Atl",-1.48251480548134,10.2
 "Joshua Reed",2009,"WR","Buf",52.5,35.1
 "Joshua Reed",2008,"WR","Buf",54.9,65.7
-"Joshua Reynolds",2018,"WR","Lar",23.8296744228722,NA
+"Joshua Reynolds",2018,"WR","Lar",38.9296744228722,NA
 "Joshua Reynolds",2017,"WR","Lar",16.9375625971235,16.4
 "Joshua Robinson",2017,"DB","Tam",10.925,10.5
 "Joshua Robinson",2016,"DB","Tam",7.9,11
@@ -5432,7 +5428,7 @@
 "Joshua Robinson",2015,"RB","Ind",36.869523325793,5.2
 "Joshua Robinson",2014,"CB","Min",53.3389549826614,54.25
 "Joshua Robinson",2013,"LCB","Min",71.5192506527651,61
-"Joshua Rosen",2018,"QB","Ari",141.024020970108,NA
+"Joshua Rosen",2018,"QB","Ari",140.917354303441,NA
 "Joshua Scobee",2015,"K","Pit",115.356618708802,27
 "Joshua Scobee",2014,"K","Jax",117.164858365163,96
 "Joshua Scobee",2013,"K","Jax",116.395058715608,104
@@ -5459,9 +5455,9 @@
 "Jt Thomas",2014,"MLB","Jax",24.6673234328289,88.5
 "Jt Thomas",2013,"LB","Jax",36.2798528367177,27.5
 "Jude Adjei Barimah",2016,"LB","Tam",47.4655441956757,31
-"Juju Smith Schuster",2018,"WR","Pit",101.580915211924,NA
+"Juju Smith Schuster",2018,"WR","Pit",141.580915211924,NA
 "Juju Smith Schuster",2017,"WR","Pit",39.8327882454395,139.7
-"Julian Edelman",2018,"WR","Nwe",115.92937341389,NA
+"Julian Edelman",2018,"WR","Nwe",101.02937341389,NA
 "Julian Edelman",2016,"WR","Nwe",135.344476735317,132.3
 "Julian Edelman",2015,"WR","Nwe",134.305453030165,111.5
 "Julian Edelman",2014,"WR","Nwe",122.714625197201,136.6
@@ -5471,7 +5467,7 @@
 "Julian Edelman",2010,"WR","Nwe",74.5,16
 "Julian Stanford",2018,"LB","Buf",26.765312826535,NA
 "Julian Stanford",2017,"LB","Nyj",27.2524058687988,17.5
-"Julio Jones",2018,"WR","Atl",175.994662679126,NA
+"Julio Jones",2018,"WR","Atl",172.444662679126,NA
 "Julio Jones",2017,"WR","Atl",185.409166623933,163.9
 "Julio Jones",2016,"WR","Atl",196.552133717984,176.9
 "Julio Jones",2015,"WR","Atl",182.306393758552,233.1
@@ -5558,7 +5554,7 @@
 "Justin Gilbert",2015,"DB","Cle",32.1318227554494,10.5
 "Justin Griffith",2008,"RB","Oak",23.5,14.7
 "Justin Hardee",2018,"WR","Nor",28.5231813349011,NA
-"Justin Hardy",2018,"WR","Atl",31.4779760997662,NA
+"Justin Hardy",2018,"WR","Atl",21.3779760997662,NA
 "Justin Hardy",2017,"WR","Atl",34.5417400083109,40.1
 "Justin Hardy",2016,"WR","Atl",46.1138375633076,44.3
 "Justin Hardy",2015,"WR","Atl",37.7675970209976,19.4
@@ -5569,7 +5565,7 @@
 "Justin Houston",2014,"LB","Kan",90.701235027476,139
 "Justin Houston",2013,"LOLB","Kan",81.7455306128715,81.5
 "Justin Houston",2012,"LOLB","Kan",75.8894933387118,99.25
-"Justin Hunter",2018,"WR","Pit",20.1131211895182,NA
+"Justin Hunter",2018,"WR","Pit",13.9631211895182,NA
 "Justin Hunter",2017,"WR","Pit",29.8440680238487,8.3
 "Justin Hunter",2015,"WR","Ten",57.6319145021137,32.4
 "Justin Hunter",2014,"WR","Ten",87.1387707722916,67.8
@@ -5605,7 +5601,7 @@
 "Justin Tucker",2013,"K","Bal",134.97427237643,162
 "Justin Tuggle",2015,"LB","Hou",20.3281325727401,15.5
 "Justin Tuggle",2014,"LB","Hou",72.5385672780952,38.75
-"Justin Watson",2018,"WR","Tam",24.9646546188809,NA
+"Justin Watson",2018,"WR","Tam",24.9146546188809,NA
 "Juston Burris",2018,"CB","Nyj",38.2290541811836,NA
 "Juston Burris",2017,"DB","Nyj",36.4633934061289,30.75
 "Juwan Thompson",2016,"FB","Den",7.5,8.6
@@ -5614,7 +5610,7 @@
 "Kadeem Carey",2016,"RB","Chi",56.6354186274436,18.1
 "Kadeem Carey",2015,"RB","Chi",24.971946798273,33.8
 "Kadeem Carey",2014,"RB","Chi",41.3786991560277,21.5
-"Kaelin Clay",2018,"WR","Buf",14.383278274285,NA
+"Kaelin Clay",2018,"WR","Buf",14.233278274285,NA
 "Kahlil Bell",2011,"RB","Chi",43.8262804269268,51
 "Kai Forbath",2018,"K","Min",122.484508224574,NA
 "Kai Forbath",2017,"K","Min",120.168970965011,149
@@ -5624,8 +5620,8 @@
 "Kai Nacua",2018,"FS","Bal",18.7416604928547,NA
 "Kaimi Fairbairn",2018,"K","Hou",112.518978032908,NA
 "Kaimi Fairbairn",2017,"K","Hou",24.96,105
-"Kalen Ballage",2018,"RB","Mia",36.2864136655275,NA
-"Kalif Raymond",2018,"WR","Nyg",6.5,NA
+"Kalen Ballage",2018,"RB","Mia",35.0197469988609,NA
+"Kalif Raymond",2018,"WR","Nyg",0.4,NA
 "Kalif Raymond",2016,"","Den",27.8190846399296,NA
 "Kaluka Maiava",2014,"LB","Oak",24.5901759128452,13.5
 "Kaluka Maiava",2013,"LB","Oak",36.2690389730653,13.5
@@ -5654,10 +5650,10 @@
 "Kan",2016,"DST","Kan",103,166
 "Kan",2015,"DST","Kan",109,188
 "Kan",2014,"DST","Kan",119,118
-"Kapri Bibbs",2018,"RB","Was",15.3851276971237,NA
+"Kapri Bibbs",2018,"RB","Was",11.318461030457,NA
 "Kapri Bibbs",2016,"RB","Den",10.4237458777109,26.4
 "Kareem Huggins",2010,"RB","Tam",70.6,1.8
-"Kareem Hunt",2018,"RB","Kan",196.279675770851,NA
+"Kareem Hunt",2018,"RB","Kan",200.879675770851,NA
 "Kareem Hunt",2017,"RB","Kan",152.559465399987,242.2
 "Kareem Jackson",2018,"DB","Hou",68.9130542031904,NA
 "Kareem Jackson",2017,"DB","Hou",49.8847350929619,80.75
@@ -5687,7 +5683,7 @@
 "Karlos Dansby",2012,"LB","Mia",103.939459426438,131.5
 "Karlos Dansby",2011,"LB","Mia",108.119798786489,117.25
 "Karlos Williams",2015,"RB","Buf",40.465655389615,113.3
-"Kasen Williams",2018,"WR","Ind",22.644334503476,NA
+"Kasen Williams",2018,"WR","Ind",6.64433450347605,NA
 "Kasen Williams",2017,"WR","Cle",0.02,8.4
 "Kasen Williams",2015,"","Sea",51.7803825472994,1.3
 "Kasim Edebali",2017,"","Den",15.18962306469,0.5
@@ -5722,9 +5718,9 @@
 "Kedric Golston",2013,"DE","Was",19.8709320513129,17.5
 "Kedric Golston",2012,"","Was",24.8020726344297,15
 "Kedric Golston",2011,"","Was",28.4750698350963,18.75
-"Keelan Cole",2018,"WR","Jax",48.905269089156,NA
+"Keelan Cole",2018,"WR","Jax",48.955269089156,NA
 "Keelan Cole",2017,"WR","Jax",4.15024639654611,90.8
-"Keenan Allen",2018,"WR","Sdg",129.422962071741,NA
+"Keenan Allen",2018,"WR","Sdg",148.072962071741,NA
 "Keenan Allen",2017,"WR","Sdg",112.192374320012,176.2
 "Keenan Allen",2016,"WR","Sdg",157.694121138598,6.3
 "Keenan Allen",2015,"WR","Sdg",132.111192264197,96.5
@@ -5764,7 +5760,7 @@
 "Keith Toston",2012,"RB","Jax",31.4844887917936,11.5
 "Keith Towbridge",2018,"TE","Buf",-0.589408160649903,NA
 "Keivarae Russell",2018,"CB","Cin",36.3054791000776,NA
-"Keke Coutee",2018,"WR","Hou",27.988963272019,NA
+"Keke Coutee",2018,"WR","Hou",41.488963272019,NA
 "Kelcie Mccray",2018,"S","Buf",11.465238531205,NA
 "Kelcie Mccray",2016,"DB","Sea",27.7931275297222,31.5
 "Kelcie Mccray",2015,"DB","Sea",5.725,32
@@ -5792,7 +5788,7 @@
 "Kelley Washington",2008,"WR","Nwe",22.9,8.3
 "Kelly Gregg",2011,"NT","Kan",37.7337076701331,35.5
 "Kelly Jennings",2011,"LCB","Cin",34.2845122898119,34.5
-"Kelvin Benjamin",2018,"WR","Buf",116.528574748646,NA
+"Kelvin Benjamin",2018,"WR","Buf",107.528574748646,NA
 "Kelvin Benjamin",2017,"WR","Buf/car",118.801119080156,87.2
 "Kelvin Benjamin",2016,"WR","Car",136.793912239516,134.1
 "Kelvin Benjamin",2014,"WR","Car",95.1109352853297,152.8
@@ -5827,7 +5823,7 @@
 "Kendall Reyes",2015,"DL","Sdg",44.6848890338601,42.25
 "Kendall Reyes",2014,"DL","Sdg",45.4486215968055,28
 "Kendall Reyes",2013,"DE","Sdg",56.3618531846348,44
-"Kendall Wright",2018,"WR","Min",60.1886868973147,NA
+"Kendall Wright",2018,"WR","Min",50.9386868973147,NA
 "Kendall Wright",2017,"WR","Chi",63.0669462915417,67.4
 "Kendall Wright",2016,"WR","Ten",67.014879343621,61.1
 "Kendall Wright",2015,"WR","Ten",110.684894234101,60.5
@@ -5835,7 +5831,7 @@
 "Kendall Wright",2013,"WR","Ten",90.192699856575,119.9
 "Kendall Wright",2012,"WR","Ten",78.9706695690828,85
 "Kendell Beckwith",2018,"ILB","Tam",75.3243865171051,NA
-"Kendrick Bourne",2018,"WR","Sfo",34.0549824343965,NA
+"Kendrick Bourne",2018,"WR","Sfo",34.1549824343965,NA
 "Kendrick Bourne",2017,"","Sfo",18.9066022775974,25.7
 "Kendrick Lewis",2018,"DB","Ten",35.0458130743596,NA
 "Kendrick Lewis",2016,"DB","Bal",37.3034940429107,12
@@ -5852,11 +5848,11 @@
 "Kenneth Acker",2016,"DB","Kan",39.8056536105717,18
 "Kenneth Darby",2010,"RB","Lar",41.2,34.8
 "Kenneth Darby",2009,"RB","Lar",13.6,24.8
-"Kenneth Dixon",2018,"RB","Bal",81.921032004717,NA
+"Kenneth Dixon",2018,"RB","Bal",79.6543653380504,NA
 "Kenneth Dixon",2016,"RB","Bal",58.8909497187134,72.4
 "Kenneth Farrow",2016,"RB","Sdg",67.0596252878196,24.2
 "Kenny Bell",2018,"WR","Den",-8.41190645806794,NA
-"Kenny Britt",2018,"WR","Nwe",59.6370115062381,NA
+"Kenny Britt",2018,"WR","Nwe",26.8370115062381,NA
 "Kenny Britt",2017,"WR","Cle/nwe",103.15468533648,37.6
 "Kenny Britt",2016,"WR","Lar",77.6435284292434,128.2
 "Kenny Britt",2015,"WR","Lar",87.0531470411538,86.1
@@ -5869,14 +5865,14 @@
 "Kenny Clark",2018,"DT","Gnb",55.9850954940761,NA
 "Kenny Clark",2017,"DL","Gnb",30.1260059405137,67.25
 "Kenny Demens",2015,"LB","Ari",13.59468059734,2.5
-"Kenny Golladay",2018,"WR","Det",85.9987787783303,NA
+"Kenny Golladay",2018,"WR","Det",97.6487787783303,NA
 "Kenny Golladay",2017,"WR","Det",58.8832299224186,66.6
 "Kenny Moore",2018,"CB","Ind",58.2312669879233,NA
 "Kenny Onatolu",2012,"","Car",1.71127834022827,4.5
 "Kenny Phillips",2015,"FS","Nor",28.7848807902623,10
 "Kenny Phillips",2012,"SS","Nyg",80.2591007293479,22.5
 "Kenny Phillips",2011,"SS","Nyg",74.5917341898922,95
-"Kenny Stills",2018,"WR","Mia",97.8031263033233,NA
+"Kenny Stills",2018,"WR","Mia",102.753126303323,NA
 "Kenny Stills",2017,"WR","Mia",95.7091456605447,116.7
 "Kenny Stills",2016,"WR","Mia",83.4499189278996,126.6
 "Kenny Stills",2015,"WR","Mia",108.862293810686,62
@@ -5894,7 +5890,7 @@
 "Kentrell Brice",2017,"DB","Gnb",40.9156075763439,26.25
 "Kentrell Brothers",2018,"ILB","Min",27.7562214108151,NA
 "Kentrell Brothers",2017,"LB","Min",0.45,11
-"Kenyan Drake",2018,"RB","Mia",112.161753698937,NA
+"Kenyan Drake",2018,"RB","Mia",123.628420365604,NA
 "Kenyan Drake",2017,"RB","Mia",35.4006889170473,108.3
 "Kenyan Drake",2016,"RB","Mia",29.540888762131,40.5
 "Kenyon Coleman",2012,"DT","Dal",35.7695768391262,16.5
@@ -5911,7 +5907,7 @@
 "Kerry Wynn",2017,"DE","Nyg",19.2432404539359,23
 "Kerry Wynn",2016,"DL","Nyg",41.1994975245758,12.25
 "Kerry Wynn",2015,"DL","Nyg",35.9772972781424,51
-"Kerryon Johnson",2018,"RB","Det",98.5709269200086,NA
+"Kerryon Johnson",2018,"RB","Det",98.704260253342,NA
 "Kerwynn Williams",2018,"RB","Kan",8.81248495624714,NA
 "Kerwynn Williams",2017,"RB","Ari",47.4175952755651,57.9
 "Kerwynn Williams",2016,"","Ari",15.0883318059096,28.3
@@ -5984,7 +5980,7 @@
 "Kevin Walter",2010,"WR","Hou",60.5,92.1
 "Kevin Walter",2009,"WR","Hou",111.6,75.7
 "Kevin Walter",2008,"WR","Hou",69.5,140.2
-"Kevin White",2018,"WR","Chi",52.7653518711161,NA
+"Kevin White",2018,"WR","Chi",22.3653518711161,NA
 "Kevin White",2017,"WR","Chi",83.0995654247122,0.6
 "Kevin White",2016,"WR","Chi",90.0544066209756,19.6
 "Kevin Williams",2015,"DL","Nor",32.5834821726409,38.5
@@ -6010,7 +6006,7 @@
 "Kiko Alonso",2017,"LB","Mia",107.550446095687,111.5
 "Kiko Alonso",2016,"LB","Mia",103.109386985239,124.5
 "Kiko Alonso",2015,"LB","Phi",131.44000700052,42.75
-"Kirk Cousins",2018,"QB","Min",270.264626764505,NA
+"Kirk Cousins",2018,"QB","Min",270.691293431172,NA
 "Kirk Cousins",2017,"QB","Was",268.006491866762,298.62
 "Kirk Cousins",2016,"QB","Was",256.157053460881,316.28
 "Kirk Cousins",2015,"QB","Was",178.037708329398,306.44
@@ -6095,7 +6091,7 @@
 "Kyle Fuller",2018,"CB","Chi",72.4796819235937,NA
 "Kyle Fuller",2017,"DB","Chi",49.6330738784462,85.5
 "Kyle Fuller",2015,"DB","Chi",81.2361919478639,63
-"Kyle Juszczyk",2018,"FB","Sfo",37.5,NA
+"Kyle Juszczyk",2018,"FB","Sfo",36.3,NA
 "Kyle Juszczyk",2017,"RB","Sfo",34.4508333333333,36.6
 "Kyle Juszczyk",2016,"RB","Bal",21.8803333333333,34.8
 "Kyle Juszczyk",2015,"RB","Bal",13.9035208333333,56.4
@@ -6161,9 +6157,9 @@
 "Ladarius Gunter",2018,"CB","Car",30.5220140612764,NA
 "Ladell Betts",2008,"RB","Was",81.8,45.6
 "Lamar Atkins",2018,"RB","Jax",42.986406833031,NA
-"Lamar Jackson",2018,"QB","Bal",42.8400661466831,NA
+"Lamar Jackson",2018,"QB","Bal",44.1333994800165,NA
 "Lamar Jordan",2018,"WR","Atl",15.276856394482,NA
-"Lamar Miller",2018,"RB","Hou",143.609327947582,NA
+"Lamar Miller",2018,"RB","Hou",132.742661280916,NA
 "Lamar Miller",2017,"RB","Hou",161.665335456151,157.5
 "Lamar Miller",2016,"RB","Hou",185.292075838661,160.1
 "Lamar Miller",2015,"RB","Mia",161.53047807791,184.9
@@ -6202,7 +6198,7 @@
 "Lance Dunbar",2015,"RB","Dal",49.7852497207376,28.2
 "Lance Dunbar",2014,"RB","Dal",64.98861716991,31.6
 "Lance Dunbar",2013,"RB","Dal",47.9225848715638,18.9
-"Lance Kendricks",2018,"TE","Gnb",14.9931694127816,NA
+"Lance Kendricks",2018,"TE","Gnb",8.39316941278155,NA
 "Lance Kendricks",2017,"TE","Gnb",34.574834675381,26.3
 "Lance Kendricks",2016,"TE","Lar",46.884902923103,59.9
 "Lance Kendricks",2015,"TE","Lar",50.4227755847,36.5
@@ -6227,7 +6223,7 @@
 "Landry Jones",2016,"QB","Pit",16.7128922666919,35.92
 "Landry Jones",2015,"QB","Pit",9.37686215182794,28.02
 "Laquan Williams",2011,"","Bal",26.6742871112963,4.6
-"Laquon Treadwell",2018,"WR","Min",38.1017880538607,NA
+"Laquon Treadwell",2018,"WR","Min",22.6017880538607,NA
 "Laquon Treadwell",2017,"WR","Min",41.464139741639,20
 "Laquon Treadwell",2016,"WR","Min",74.4034197257261,1.5
 "Lar",2018,"FS","Jax",78.9971705725499,NA
@@ -6269,7 +6265,7 @@
 "Larry English",2013,"LB","Sdg",31.8236685055383,21.75
 "Larry English",2012,"","Sdg",23.7087437708688,15.75
 "Larry English",2011,"","Sdg",38.8701862868255,11
-"Larry Fitzgerald",2018,"WR","Ari",122.717012962446,NA
+"Larry Fitzgerald",2018,"WR","Ari",122.217012962446,NA
 "Larry Fitzgerald",2017,"WR","Ari",116.89460909565,150.44
 "Larry Fitzgerald",2016,"WR","Ari",127.453868001606,136.8
 "Larry Fitzgerald",2015,"WR","Ari",108.210618778203,171.5
@@ -6290,7 +6286,7 @@
 "Larry Ogunjobi",2018,"DT","Cle",48.0406501567893,NA
 "Larry Pinkard",2017,"","Jax",-2.74832795201079,0.5
 "Larry Rose",2018,"RB","Lar",10.7006503103375,NA
-"Latavius Murray",2018,"RB","Min",81.0433270113816,NA
+"Latavius Murray",2018,"RB","Min",81.776660344715,NA
 "Latavius Murray",2017,"RB","Min",69.8004000398824,142.5
 "Latavius Murray",2016,"RB","Oak",146.732656110366,175.2
 "Latavius Murray",2015,"RB","Oak",138.509523185771,163.8
@@ -6345,7 +6341,7 @@
 "Lee Smith",2015,"TE","Oak",18.0807617080882,13
 "Lee Smith",2014,"TE","Buf",13.4981180928227,10.2
 "Lee Smith",2013,"TE","Buf",18.1866424279169,7.8
-"Legarrette Blount",2018,"RB","Det",64.1029623880929,NA
+"Legarrette Blount",2018,"RB","Det",64.1696290547596,NA
 "Legarrette Blount",2017,"RB","Phi",106.994014053361,97.6
 "Legarrette Blount",2016,"RB","Nwe",118.964421012457,225.9
 "Legarrette Blount",2015,"RB","Nwe",128.401937489885,116.6
@@ -6389,7 +6385,7 @@
 "Leon Washington",2008,"RB","Nyj",69,132.3
 "Leonard Floyd",2018,"OLB","Chi",64.0558832559263,NA
 "Leonard Floyd",2017,"LB","Chi",73.6079844000102,47.25
-"Leonard Fournette",2018,"RB","Jax",197.570792403302,NA
+"Leonard Fournette",2018,"RB","Jax",194.304125736636,NA
 "Leonard Fournette",2017,"RB","Jax",163.478270279056,194.2
 "Leonard Hankerson",2015,"WR","Atl",57.7146666666667,50.7
 "Leonard Hankerson",2013,"WR","Was",52.8427543074157,55.5
@@ -6409,7 +6405,7 @@
 "Leonard Williams",2018,"DT","Nyj",60.1566227500758,NA
 "Leonard Williams",2017,"DL","Nyj",75.6046128099492,45.75
 "Leonard Williams",2016,"DL","Nyj",68.6761317292908,83.5
-"Leonte Carroo",2018,"WR","Mia",17.0241766955404,NA
+"Leonte Carroo",2018,"WR","Mia",15.2241766955404,NA
 "Leonte Carroo",2017,"WR","Mia",17.8848322497742,6.9
 "Leonte Carroo",2016,"WR","Mia",48.8568179500472,8.9
 "Lerentee Mccray",2018,"LB","Jax",27.8922783687285,NA
@@ -6423,7 +6419,7 @@
 "Leron Mcclain",2009,"RB","Bal",67,44.1
 "Leroy Hill",2012,"LB","Sea",76.162862256865,46.75
 "Leroy Hill",2011,"LB","Sea",70.4669110088933,95.5
-"Lesean Mccoy",2018,"RB","Buf",186.096864334393,NA
+"Lesean Mccoy",2018,"RB","Buf",168.36353100106,NA
 "Lesean Mccoy",2017,"RB","Buf",193.355866785296,204.6
 "Lesean Mccoy",2016,"RB","Buf",177.224845593095,246.3
 "Lesean Mccoy",2015,"RB","Buf",174.878638714828,144.7
@@ -6443,7 +6439,7 @@
 "Letroy Guion",2013,"NT","Min",38.4249148418815,26.5
 "Letroy Guion",2012,"NT","Min",39.596318137297,33
 "Letroy Guion",2011,"DT","Min",44.7780214661749,25.5
-"Leveon Bell",2018,"RB","Pit",241.133738322363,NA
+"Leveon Bell",2018,"RB","Pit",241.533738322363,NA
 "Leveon Bell",2017,"RB","Pit",238.157057568337,256.6
 "Leveon Bell",2016,"RB","Pit",184.00280922518,240.4
 "Leveon Bell",2015,"RB","Pit",220.699656006625,87.2
@@ -6541,7 +6537,7 @@
 "Luke Stocker",2014,"TE","Tam",15.6212851184802,4.1
 "Luke Stocker",2012,"TE","Tam",26.4722535892069,22.5
 "Luke Stocker",2011,"TE","Tam",29.5753030312406,9.2
-"Luke Willson",2018,"TE","Det",39.8578270711968,NA
+"Luke Willson",2018,"TE","Det",39.9078270711968,NA
 "Luke Willson",2017,"TE","Sea",31.3944660542558,39.3
 "Luke Willson",2016,"TE","Sea",44.3504859644074,24.9
 "Luke Willson",2015,"TE","Sea",38.7095906314313,27.3
@@ -6550,7 +6546,7 @@
 "Maake Kemoeatu",2012,"NT","Bal",11.2570263190485,29.5
 "Mack Brown",2018,"RB","Min",11.6246632675753,NA
 "Mack Brown",2016,"","Was",30.3366085284369,14
-"Mack Hollins",2018,"WR","Phi",22.4960377879615,NA
+"Mack Hollins",2018,"WR","Phi",24.7960377879615,NA
 "Mack Hollins",2017,"WR","Phi",27.1638267597009,28.6
 "Mackensie Alexander",2018,"CB","Min",33.2440094104351,NA
 "Madieu Williams",2011,"FS","Sfo",47.7407260505947,7.5
@@ -6559,7 +6555,7 @@
 "Major Wright",2012,"SS","Chi",71.9499396406008,98.5
 "Major Wright",2011,"SS","Chi",62.5386666773972,72.75
 "Malachi Dupre",2018,"WR","Buf",21.7826834996623,NA
-"Malcolm Brown",2018,"RB","Lar",33.5313393325753,NA
+"Malcolm Brown",2018,"RB","Lar",33.598005999242,NA
 "Malcolm Brown",2017,"RB","Lar",31.7738775544295,35.9
 "Malcolm Brown",2016,"RB","Lar",22.36853239637,6.5
 "Malcolm Brown",2015,"RB","Lar",28.5413667818282,1.5
@@ -6578,7 +6574,7 @@
 "Malcolm Johnson",2015,"RB","Cle",2.215,1.5
 "Malcolm Kelly",2009,"WR","Was",55.5,34.7
 "Malcolm Lewis",2018,"WR","Mia",9.61502641649989,NA
-"Malcolm Mitchell",2018,"WR","Nwe",51.9961106612046,NA
+"Malcolm Mitchell",2018,"WR","Nwe",38.0961106612046,NA
 "Malcolm Mitchell",2016,"WR","Nwe",19.650242163599,64.1
 "Malcolm Smith",2016,"LB","Oak",108.962773642772,110.75
 "Malcolm Smith",2015,"LB","Oak",85.877850741551,143.25
@@ -6622,7 +6618,7 @@
 "Marc Mariani",2016,"","Ten",10.8,1.5
 "Marc Mariani",2015,"WR","Chi",11.8469682708269,29.7
 "Marc Mariani",2014,"WR","Chi",2.78,NA
-"Marcedes Lewis",2018,"TE","Gnb",12.6748850078884,NA
+"Marcedes Lewis",2018,"TE","Gnb",13.9874425039442,NA
 "Marcedes Lewis",2017,"TE","Jax",29.6821918126741,61.8
 "Marcedes Lewis",2016,"TE","Jax",28.4243909923428,22.9
 "Marcedes Lewis",2015,"TE","Jax",45.5185931507084,22.6
@@ -6666,11 +6662,11 @@
 "Marcus Gilchrist",2014,"DB","Sdg",68.6813080915156,89.25
 "Marcus Gilchrist",2013,"SS","Sdg",66.4755917837376,87.5
 "Marcus Gilchrist",2012,"CB","Sdg",44.1802256719191,61
-"Marcus Johnson",2018,"WR","Sea",14.1093209282539,NA
+"Marcus Johnson",2018,"WR","Sea",14.1593209282539,NA
 "Marcus Johnson",2017,"WR","Phi",24.9739856207538,2.5
 "Marcus Kemp",2018,"WR","Kan",46.7725990620681,NA
 "Marcus Lucas",2018,"WR","Det",-19.7947243161486,NA
-"Marcus Mariota",2018,"QB","Ten",246.910911938959,NA
+"Marcus Mariota",2018,"QB","Ten",246.830911938959,NA
 "Marcus Mariota",2017,"QB","Ten",277.632975287527,225.48
 "Marcus Mariota",2016,"QB","Ten",255.642786970998,272.94
 "Marcus Mariota",2015,"QB","Ten",248.358703860507,226.02
@@ -6757,7 +6753,7 @@
 "Mark Herzlich",2014,"LB","Nyg",27.3057658653018,51
 "Mark Herzlich",2013,"MLB","Nyg",27.8140216876869,38.5
 "Mark Herzlich",2012,"LB","Nyg",25.8066631677899,26
-"Mark Ingram",2018,"RB","Nor",132.231904907999,NA
+"Mark Ingram",2018,"RB","Nor",132.298571574666,NA
 "Mark Ingram",2017,"RB","Nor",147.667072633325,220
 "Mark Ingram",2016,"RB","Nor",168.021928244469,192.2
 "Mark Ingram",2015,"RB","Nor",149.593765370332,151.4
@@ -6778,7 +6774,7 @@
 "Markus Golden",2017,"LB","Ari",84.0538807793719,12
 "Markus Golden",2016,"LB","Ari",71.4751843814298,98.75
 "Markus Kuhn",2015,"DL","Nyg",18.0905535579603,18.25
-"Markus Wheaton",2018,"WR","Phi",29.2357766199382,NA
+"Markus Wheaton",2018,"WR","Phi",9.68577661993818,NA
 "Markus Wheaton",2017,"WR","Chi",49.3616641137342,5.1
 "Markus Wheaton",2016,"WR","Pit",91.5417100547328,11.1
 "Markus Wheaton",2015,"WR","Pit",86.7598618176195,104.9
@@ -6789,13 +6785,13 @@
 "Marlon Brown",2014,"WR","Bal",68.4185480505001,25.5
 "Marlon Brown",2013,"WR","Bal",37.5012809543624,94.2
 "Marlon Humphrey",2018,"CB","Bal",47.4795000901175,NA
-"Marlon Mack",2018,"RB","Ind",106.148865719535,NA
+"Marlon Mack",2018,"RB","Ind",105.882199052868,NA
 "Marlon Mack",2017,"RB","Ind",62.1768195862382,82.3
 "Marlon Moore",2015,"WR","Cle",5.68450637335264,14.1
 "Marlon Moore",2014,"WR","Cle",15.7333333333333,17
 "Marlon Moore",2013,"","Mia/sfo",27.0106171289428,7.1
 "Marlon Moore",2012,"WR","Mia",28.1186313917612,18.5
-"Marqise Lee",2018,"WR","Jax",86.8888304697601,NA
+"Marqise Lee",2018,"WR","Jax",99.5888304697601,NA
 "Marqise Lee",2017,"WR","Jax",89.9189838831608,89.9
 "Marqise Lee",2016,"WR","Jax",41.7974002110251,117.4
 "Marqise Lee",2015,"WR","Jax",58.0371498092729,28.9
@@ -6822,20 +6818,20 @@
 "Marquess Wilson",2013,"WR","Chi",31.3173602902892,1.3
 "Marqueston Huff",2015,"DB","Ten",22.9322489910503,14
 "Marquez Valdes Scantling",2018,"WR","Gnb",13.6063558276497,NA
-"Marquez Williams",2018,"FB","Cle",1.4,NA
+"Marquez Williams",2018,"FB","Cle",1.5,NA
 "Marquice Cole",2013,"","Nwe",21.8602861820914,20.25
 "Marquice Cole",2012,"DB","Nwe",21.4286974632327,24.25
 "Marquice Cole",2011,"","Nyj",41.8221834630247,11
 "Marquis Bundy",2018,"WR","Nyg",14.2956071803375,NA
 "Marquis Flowers",2018,"OLB","Nwe",37.8465827255737,NA
 "Marquis Flowers",2016,"LB","Cin",4.05,7
-"Marquise Goodwin",2018,"WR","Sfo",85.9572200173651,NA
+"Marquise Goodwin",2018,"WR","Sfo",103.457220017365,NA
 "Marquise Goodwin",2017,"WR","Sfo",63.6697175917453,112.6
 "Marquise Goodwin",2016,"WR","Buf",24.9262354702575,61.1
 "Marquise Goodwin",2015,"WR","Buf",20.5999777338968,2.4
 "Marquise Goodwin",2014,"WR","Buf",45.9967658283426,5
 "Marquise Goodwin",2013,"WR","Buf",39.1497971750615,45.6
-"Marshawn Lynch",2018,"RB","Oak",118.471101591941,NA
+"Marshawn Lynch",2018,"RB","Oak",118.137768258608,NA
 "Marshawn Lynch",2017,"RB","Oak",150.624000460694,144.2
 "Marshawn Lynch",2015,"RB","Sea",212.089840069403,67.7
 "Marshawn Lynch",2014,"RB","Sea",194.938777675324,265.3
@@ -6845,7 +6841,7 @@
 "Marshawn Lynch",2009,"RB","Buf",158.6,72.9
 "Marshawn Lynch",2008,"RB","Buf",218.6,185.6
 "Marshon Lattimore",2018,"CB","Nor",89.0324833118406,NA
-"Martavis Bryant",2018,"WR","Oak",108.610254857394,NA
+"Martavis Bryant",2018,"WR","Oak",93.5102548573936,NA
 "Martavis Bryant",2017,"WR","Pit",127.754246034721,80.5
 "Martavis Bryant",2015,"WR","Pit",98.3898724703955,120.2
 "Martavis Bryant",2014,"WR","Pit",32.9933664590022,104.1
@@ -6867,10 +6863,10 @@
 "Martrell Spaight",2016,"LB","Was",36.45,28.25
 "Marty Booker",2009,"WR","Atl",11.9,24.8
 "Marty Booker",2008,"WR","Chi",69.5,33.4
-"Marvin Hall",2018,"WR","Atl",13.4769256936677,NA
+"Marvin Hall",2018,"WR","Atl",13.5269256936677,NA
 "Marvin Hall",2017,"","Atl",12.5753687909366,12
 "Marvin Harrison",2008,"WR","Ind",111,91.6
-"Marvin Jones",2018,"WR","Det",114.107286120905,NA
+"Marvin Jones",2018,"WR","Det",126.957286120905,NA
 "Marvin Jones",2017,"WR","Det",111.43780955089,164.1
 "Marvin Jones",2016,"WR","Det",114.420164906475,117.3
 "Marvin Jones",2015,"WR","Cin",79.0682349232785,108.9
@@ -6908,7 +6904,7 @@
 "Matthew Barkley",2018,"QB","Cin",15.9002511840895,NA
 "Matthew Barkley",2014,"QB","Phi",-13.2523616027609,NA
 "Matthew Barkley",2013,"QB","Phi",31.3129002605671,7.8
-"Matthew Breida",2018,"RB","Sfo",86.2622228054009,NA
+"Matthew Breida",2018,"RB","Sfo",86.3288894720675,NA
 "Matthew Breida",2017,"RB","Sfo",34.8738291700255,82.5
 "Matthew Bryant",2018,"K","Atl",130.314015859655,NA
 "Matthew Bryant",2017,"K","Atl",142.391824459336,162
@@ -6958,7 +6954,7 @@
 "Matthew Hasselbeck",2009,"QB","Sea",209.9,182.06
 "Matthew Hasselbeck",2008,"QB","Sea",213.2,65.54
 "Matthew Ioannidis",2018,"DT","Was",34.9629503323662,NA
-"Matthew Jones",2018,"RB","Phi",29.4376625604448,NA
+"Matthew Jones",2018,"RB","Phi",29.3709958937781,NA
 "Matthew Jones",2017,"RB","Ind",22.551,1.4
 "Matthew Jones",2016,"RB","Was",134.932070037392,67.3
 "Matthew Jones",2015,"RB","Was",77.3026164980407,95.4
@@ -7001,7 +6997,7 @@
 "Matthew Prater",2012,"K","Den",114.894825646814,146.5
 "Matthew Prater",2011,"K","Den",112.176083823937,97
 "Matthew Roth",2011,"DE","Jax",66.9953500456328,34.75
-"Matthew Ryan",2018,"QB","Atl",254.403649526694,NA
+"Matthew Ryan",2018,"QB","Atl",257.203649526694,NA
 "Matthew Ryan",2017,"QB","Atl",297.173764276961,242.1
 "Matthew Ryan",2016,"QB","Atl",252.415932791935,354.46
 "Matthew Ryan",2015,"QB","Atl",288.616005098882,253.94
@@ -7029,7 +7025,7 @@
 "Matthew Shaughnessy",2011,"DE","Oak",66.502556637897,11
 "Matthew Simms",2013,"","Nyj",17.5679226606539,10.94
 "Matthew Simms",2009,"QB","Den",21.98,-0.48
-"Matthew Slater",2018,"WR","Nwe",-1.15154456363736,NA
+"Matthew Slater",2018,"WR","Nwe",-2.50308912727471,NA
 "Matthew Slater",2016,"WR","Nwe",3.34553780158928,0.5
 "Matthew Slater",2015,"WR","Nwe",2.32604433233742,NA
 "Matthew Slater",2014,"WR","Nwe",0.8,14.5
@@ -7042,7 +7038,7 @@
 "Matthew Spaeth",2011,"TE","Chi",19.3608225476773,17
 "Matthew Spaeth",2010,"TE","Pit",6.9,14
 "Matthew Spaeth",2008,"TE","Pit",13.4,13.6
-"Matthew Stafford",2018,"QB","Det",276.569737966382,NA
+"Matthew Stafford",2018,"QB","Det",276.623071299715,NA
 "Matthew Stafford",2017,"QB","Det",272.402684611274,291.64
 "Matthew Stafford",2016,"QB","Det",279.237431092631,291.78
 "Matthew Stafford",2015,"QB","Det",270.742746276516,306.78
@@ -7063,7 +7059,7 @@
 "Maurice Alexander",2015,"DB","Lar",10.925,44
 "Maurice Canady",2018,"CB","Bal",43.1544829393684,NA
 "Maurice Canady",2017,"DB","Bal",13.225,27
-"Maurice Harris",2018,"WR","Was",15.4150522598847,NA
+"Maurice Harris",2018,"WR","Was",13.4650522598847,NA
 "Maurice Harris",2017,"WR","Was",15.6623663521086,12.2
 "Maurice Harris",2016,"","Was",44.2328877605239,6.6
 "Maurice Jones Drew",2014,"RB","Oak",138.268529299678,16.7
@@ -7090,7 +7086,7 @@
 "Md Jennings",2013,"FS","Gnb",64.0517976221906,73.6
 "Mekale Mckay",2018,"WR","Dal",-0.13175096312254,NA
 "Melvin Bullitt",2011,"SS","Ind",61.1521153727081,12.75
-"Melvin Gordon",2018,"RB","Sdg",186.625229387249,NA
+"Melvin Gordon",2018,"RB","Sdg",186.691896053916,NA
 "Melvin Gordon",2017,"RB","Sdg",180.470483273183,230.1
 "Melvin Gordon",2016,"RB","Sdg",132.44075321378,209.6
 "Melvin Gordon",2015,"RB","Sdg",167.020732740517,75.3
@@ -7104,7 +7100,7 @@
 "Mewelde Moore",2011,"RB","Pit",36.0112032028545,28.1
 "Mewelde Moore",2010,"RB","Pit",50.7,30.4
 "Mewelde Moore",2009,"RB","Pit",61.1,43.34
-"Mia",2018,"DST","Mia",94,NA
+"Mia",2018,"DST","Mia",95,NA
 "Mia",2017,"DST","Mia",89,91
 "Mia",2016,"DST","Mia",94,118
 "Mia",2015,"DST","Mia",110,102
@@ -7156,7 +7152,7 @@
 "Michael Bush",2011,"RB","Oak",111.055994751737,185.5
 "Michael Bush",2010,"RB","Oak",120.5,132.9
 "Michael Bush",2009,"RB","Oak",71.1,83.4
-"Michael Campanaro",2018,"WR","Ten",17.5903972726813,NA
+"Michael Campanaro",2018,"WR","Ten",9.84039727268129,NA
 "Michael Campanaro",2017,"WR","Bal",33.6298885303817,33.5
 "Michael Campanaro",2016,"WR","Bal",26.3617315658128,7.2
 "Michael Campanaro",2015,"WR","Bal",33.5611626374651,11.2
@@ -7168,7 +7164,7 @@
 "Michael Coe",2012,"","Dal/nyg",46.2607397444177,17
 "Michael Cox",2014,"RB","Nyg",5.225,4.2
 "Michael Cox",2013,"RB","Nyg",27.2033103572563,5.5
-"Michael Crabtree",2018,"WR","Bal",115.482519009816,NA
+"Michael Crabtree",2018,"WR","Bal",102.082519009816,NA
 "Michael Crabtree",2017,"WR","Oak",124.893639332349,109.8
 "Michael Crabtree",2016,"WR","Oak",111.248532515073,148.3
 "Michael Crabtree",2015,"WR","Oak",93.7243612906817,146.2
@@ -7185,7 +7181,7 @@
 "Michael Daniels",2014,"DL","Gnb",50.3886326098542,51.75
 "Michael Daniels",2013,"DE","Gnb",37.4586575977423,40.25
 "Michael Davis",2018,"","Sdg",22.744307449532,NA
-"Michael Davis",2018,"RB","Sea",43.7184651973256,NA
+"Michael Davis",2018,"RB","Sea",43.7851318639922,NA
 "Michael Davis",2017,"RB","Sea",62.1467897770372,37.1
 "Michael Davis",2016,"RB","Sfo",23.1852137853991,11.5
 "Michael Davis",2015,"RB","Sfo",10.213604646418,9.6
@@ -7195,7 +7191,7 @@
 "Michael Devito",2012,"T","Nyj",42.7401770070753,51
 "Michael Devito",2011,"T","Nyj",48.1101467692348,40
 "Michael Egnew",2013,"TE","Mia",24.763378856052,6.9
-"Michael Evans",2018,"WR","Tam",156.756467693824,NA
+"Michael Evans",2018,"WR","Tam",143.056467693824,NA
 "Michael Evans",2017,"WR","Tam",169.908670300986,130.1
 "Michael Evans",2016,"WR","Tam",162.801042035758,204.1
 "Michael Evans",2015,"WR","Tam",164.936340218855,136.6
@@ -7208,9 +7204,9 @@
 "Michael Floyd",2012,"WR","Ari",51.9860853510147,66.2
 "Michael Furrey",2009,"WR","Cle",48.9,17
 "Michael Gaines",2008,"TE","Det",33.5,28
-"Michael Gallup",2018,"WR","Dal",50.3456510302589,NA
-"Michael Gesicki",2018,"TE","Mia",60.0644757893171,NA
-"Michael Gillislee",2018,"RB","Nwe",33.3257329945092,NA
+"Michael Gallup",2018,"WR","Dal",50.2456510302589,NA
+"Michael Gesicki",2018,"TE","Mia",59.8644757893171,NA
+"Michael Gillislee",2018,"RB","Nwe",34.5923996611758,NA
 "Michael Gillislee",2017,"RB","Nwe",103.837773281326,67.8
 "Michael Gillislee",2016,"RB","Buf",53.6460119103256,116.7
 "Michael Gillislee",2013,"RB","Mia",34.71306021486,2.1
@@ -7313,7 +7309,7 @@
 "Michael Pittman",2008,"RB","Den",48,67.2
 "Michael Preston",2013,"WR","Ten",3.94,15.7
 "Michael Purcell",2016,"DL","Sfo",24.5050795194272,25.5
-"Michael Roberts",2018,"TE","Det",29.3835924464197,NA
+"Michael Roberts",2018,"TE","Det",29.4335924464197,NA
 "Michael Roberts",2017,"TE","Det",11.0174403500778,4.6
 "Michael Robinson",2013,"RB","Sea",12.94,2.7
 "Michael Robinson",2009,"RB","Sfo",9.2,2.6
@@ -7326,7 +7322,7 @@
 "Michael Sims Walker",2008,"WR","Jax",18.5,21.7
 "Michael Thomas",2018,"WR","Lar",16.9040219860023,NA
 "Michael Thomas",2018,"S","Nyg",35.6017374424215,NA
-"Michael Thomas",2018,"WR","Nor",160.020635995743,NA
+"Michael Thomas",2018,"WR","Nor",159.720635995743,NA
 "Michael Thomas",2017,"WR","Lar",17.6945160028397,9.3
 "Michael Thomas",2017,"WR","Nor",164.008239069445,154.5
 "Michael Thomas",2017,"DB","Mia",41.8556312001626,22
@@ -7356,7 +7352,7 @@
 "Michael Vick",2011,"QB","Phi",261.407480552492,251.02
 "Michael Vick",2010,"QB","Phi",37.34,318.32
 "Michael Vick",2009,"QB","Phi",41.74,28.94
-"Michael Wallace",2018,"WR","Phi",94.8853573270632,NA
+"Michael Wallace",2018,"WR","Phi",81.3353573270632,NA
 "Michael Wallace",2017,"WR","Bal",105.733266609065,99.2
 "Michael Wallace",2016,"WR","Bal",85.0950905200643,128.8
 "Michael Wallace",2015,"WR","Min",115.034202859977,59.9
@@ -7370,7 +7366,7 @@
 "Michael Wilhoite",2016,"LB","Sfo",80.8575505344495,56.75
 "Michael Wilhoite",2015,"LB","Sfo",89.365,80.75
 "Michael Wilhoite",2014,"LB","Sfo",68.7895371420075,95.5
-"Michael Williams",2018,"WR","Sdg",41.9370219536754,NA
+"Michael Williams",2018,"WR","Sdg",53.8870219536754,NA
 "Michael Williams",2017,"WR","Sdg",26.7166492740562,9.5
 "Michael Williams",2014,"","Buf",67.4365511872144,20.2
 "Michael Williams",2013,"WR","Tam",122.044722444951,33.6
@@ -7401,7 +7397,7 @@
 "Min",2014,"DST","Min",99,128
 "Mistral Raymond",2013,"SS","Min",28.9474658776664,13.5
 "Mistral Raymond",2012,"SS","Min",54.9469956486115,15.5
-"Mitchell Trubisky",2018,"QB","Chi",213.80613636865,NA
+"Mitchell Trubisky",2018,"QB","Chi",224.979469701983,NA
 "Mitchell Trubisky",2017,"QB","Chi",52.4847482525134,143.52
 "Mitchell Unrein",2018,"DT","Tam",15.7164269530495,NA
 "Mitchell Unrein",2017,"DL","Chi",25.1511604150193,36.75
@@ -7412,7 +7408,7 @@
 "Mohamed Massaquoi",2012,"WR","Cle",55.1590232797273,25.4
 "Mohamed Massaquoi",2011,"WR","Cle",73.5573254779876,50.4
 "Mohamed Massaquoi",2010,"WR","Cle",100.5,63.16
-"Mohamed Sanu",2018,"WR","Atl",86.7775866714651,NA
+"Mohamed Sanu",2018,"WR","Atl",89.5275866714651,NA
 "Mohamed Sanu",2017,"WR","Atl",87.3593040752035,107.34
 "Mohamed Sanu",2016,"WR","Atl",80.4960349713689,87.8
 "Mohamed Sanu",2015,"WR","Cin",80.0299773578693,58.5
@@ -7515,7 +7511,7 @@
 "Nate Palmer",2017,"LB","Ten",10.85,8.5
 "Nate Palmer",2016,"LB","Ten",32.664560418544,9.5
 "Nate Palmer",2015,"LB","Gnb",61.6367983198792,63
-"Nate Peterman",2018,"QB","Buf",20.4464349800042,NA
+"Nate Peterman",2018,"QB","Buf",42.7797683133375,NA
 "Nate Peterman",2017,"QB","Buf",25.9580762079003,15.38
 "Nate Stupar",2017,"","Nor",30.7183363160569,1
 "Nate Stupar",2016,"MLB","Nor",32.2313055456351,70.25
@@ -7551,7 +7547,7 @@
 "Neiko Thorpe",2018,"DB","Sea",43.9666273732751,NA
 "Neiko Thorpe",2017,"DB","Sea",30.3522710441205,14
 "Neil Rackers",2011,"K","Hou",110.982932174073,149.5
-"Nelson Agholor",2018,"WR","Phi",74.2126283812972,NA
+"Nelson Agholor",2018,"WR","Phi",93.0126283812972,NA
 "Nelson Agholor",2017,"WR","Phi",59.7416932358355,125.5
 "Nelson Agholor",2016,"WR","Phi",66.0532823117202,49.9
 "Nelson Agholor",2015,"WR","Phi",85.9919660299166,32.3
@@ -7572,11 +7568,11 @@
 "Nick Bellore",2015,"LB","Sfo",0.925,14.5
 "Nick Bellore",2014,"","Nyj",24.016481592279,13
 "Nick Bellore",2012,"","Nyj",30.3141834434792,11.3
-"Nick Boyle",2018,"TE","Bal",28.1801332496583,NA
+"Nick Boyle",2018,"TE","Bal",28.2301332496583,NA
 "Nick Boyle",2017,"TE","Bal",40.5524696102271,20.3
 "Nick Boyle",2016,"TE","Bal",10.6397983133034,4.4
 "Nick Boyle",2015,"TE","Bal",14.81368608863,15.3
-"Nick Chubb",2018,"RB","Cle",82.1232887649244,NA
+"Nick Chubb",2018,"RB","Cle",86.6566220982577,NA
 "Nick Collins",2011,"FS","Gnb",80.8175134893634,14
 "Nick Dzubnar",2018,"LB","Sdg",28.4959820432061,NA
 "Nick Dzubnar",2017,"LB","Sdg",20.475,17.5
@@ -7588,7 +7584,7 @@
 "Nick Fairley",2014,"DL","Det",31.502481323424,18.5
 "Nick Fairley",2013,"DT","Det",55.7080702369001,54
 "Nick Fairley",2012,"DT","Det",28.0830382168651,60.75
-"Nick Foles",2018,"QB","Phi",13.5916290333539,NA
+"Nick Foles",2018,"QB","Phi",13.9516290333539,NA
 "Nick Foles",2017,"QB","Phi",25.7830604258364,37.78
 "Nick Foles",2016,"QB","Kan",47.1308879399806,28
 "Nick Foles",2015,"QB","Lar",212.545308800815,106.08
@@ -7616,7 +7612,7 @@
 "Nick Novak",2016,"K","Hou",122.90338331155,142
 "Nick Novak",2014,"K","Sdg",139.157468101829,116
 "Nick Novak",2013,"K","Sdg",121.456887824438,162
-"Nick Oleary",2018,"TE","Buf",27.0163727225214,NA
+"Nick Oleary",2018,"TE","Buf",27.0663727225214,NA
 "Nick Oleary",2017,"TE","Buf",20.928714176987,42.2
 "Nick Oleary",2016,"TE","Buf",12.1347461344938,11.4
 "Nick Oleary",2015,"TE","Buf",6.9906285702911,3.7
@@ -7634,7 +7630,7 @@
 "Nick Stevens",2018,"QB","Den",45.1010492847656,NA
 "Nick Toon",2014,"WR","Nor",23.4265537219429,25.9
 "Nick Toon",2013,"WR","Nor",32.5736219094547,6.8
-"Nick Vannett",2018,"TE","Sea",29.632552472145,NA
+"Nick Vannett",2018,"TE","Sea",29.882552472145,NA
 "Nick Vannett",2017,"TE","Sea",14.7296698157792,18.4
 "Nick Vannett",2016,"TE","Sea",20.644689184477,3.2
 "Nick Vigil",2018,"ILB","Cin",66.0837312127406,NA
@@ -7665,7 +7661,7 @@
 "Nnamdi Asomugha",2013,"","Sfo",33.1334237724808,2.5
 "Nnamdi Asomugha",2012,"RCB","Phi",49.4706754351205,62.75
 "Nnamdi Asomugha",2011,"RCB","Phi",43.22623016524,55.25
-"Noah Brown",2018,"WR","Dal",14.7386192264227,NA
+"Noah Brown",2018,"WR","Dal",14.1886192264227,NA
 "Noah Brown",2017,"WR","Dal",23.7340365453693,3.3
 "Noah Spence",2018,"DE","Tam",32.3162780258621,NA
 "Noah Spence",2017,"DL","Tam",50.9133808164035,13.5
@@ -7675,7 +7671,7 @@
 "Nolan Carroll",2014,"CB","Phi",46.2961965465616,35.5
 "Nolan Carroll",2013,"CB","Mia",45.2518059680082,67.75
 "Nolan Carroll",2012,"CB","Mia",41.6281269758158,58.5
-"Nor",2018,"DST","Nor",108,NA
+"Nor",2018,"DST","Nor",110,NA
 "Nor",2017,"DST","Nor",89,150
 "Nor",2016,"DST","Nor",75,55
 "Nor",2015,"DST","Nor",88,82
@@ -7685,18 +7681,18 @@
 "Nwe",2016,"DST","Nwe",102,127
 "Nwe",2015,"DST","Nwe",104,141
 "Nwe",2014,"DST","Nwe",125,149
-"Nyg",2018,"DST","Nyg",79,NA
+"Nyg",2018,"DST","Nyg",81,NA
 "Nyg",2017,"DST","Nyg",105,89
 "Nyg",2016,"DST","Nyg",93,143
 "Nyg",2015,"DST","Nyg",96,117
 "Nyg",2014,"DST","Nyg",97,111
-"Nyheim Hines",2018,"RB","Ind",77.763433772807,NA
-"Nyj",2018,"DST","Nyj",84,NA
+"Nyheim Hines",2018,"RB","Ind",82.163433772807,NA
+"Nyj",2018,"DST","Nyj",85,NA
 "Nyj",2017,"DST","Nyj",78,71
 "Nyj",2016,"DST","Nyj",100,62
 "Nyj",2015,"DST","Nyj",111,116
 "Nyj",2014,"DST","Nyj",102,74
-"Oak",2018,"DST","Oak",89,NA
+"Oak",2018,"DST","Oak",95,NA
 "Oak",2017,"DST","Oak",94,68
 "Oak",2016,"DST","Oak",92,92
 "Oak",2015,"DST","Oak",83,113
@@ -7706,13 +7702,13 @@
 "Obrien Schofield",2013,"DE","Sea",25.6182415433622,12
 "Obrien Schofield",2012,"LOLB","Ari",62.9540654429192,42
 "Obrien Schofield",2011,"","Ari",39.5328882035178,53.25
-"Odell Beckham",2018,"WR","Nyg",163.332128849946,NA
+"Odell Beckham",2018,"WR","Nyg",154.182128849946,NA
 "Odell Beckham",2017,"WR","Nyg",180.024534024061,49
 "Odell Beckham",2016,"WR","Nyg",204.826836631188,195.6
 "Odell Beckham",2015,"WR","Nyg",204.643866405383,223.3
 "Odell Beckham",2014,"WR","Nyg",65.5654260270323,206
 "Oj Atogwe",2011,"FS","Was",85.8565876838681,64
-"Oj Howard",2018,"TE","Tam",68.2598857330585,NA
+"Oj Howard",2018,"TE","Tam",68.1098857330585,NA
 "Oj Howard",2017,"TE","Tam",66.2538205656826,75.2
 "Olindo Mare",2011,"K","Car",106.613129871915,120
 "Olivier Vernon",2017,"DL","Nyg",84.818973924435,58.75
@@ -7786,7 +7782,7 @@
 "Patrick Dimarco",2015,"RB","Atl",12.6513,23
 "Patrick Dimarco",2014,"RB","Atl",6.636,12.2
 "Patrick Edwards",2013,"WR","Det",31.3653006391471,4.6
-"Patrick Mahomes",2018,"QB","Kan",216.184964058346,NA
+"Patrick Mahomes",2018,"QB","Kan",215.904964058346,NA
 "Patrick Mahomes",2017,"QB","Kan",30.2957852552365,11.36
 "Patrick Murray",2016,"K","Cle",97.8524787997391,7
 "Patrick Murray",2014,"K","Tam",114.117676767677,107
@@ -7834,7 +7830,7 @@
 "Paul Posluszny",2013,"MLB","Jax",122.574575607361,179.5
 "Paul Posluszny",2012,"MLB","Jax",117.216709771622,153.25
 "Paul Posluszny",2011,"MLB","Jax",123.667402001488,119
-"Paul Richardson",2018,"WR","Was",74.9214174840995,NA
+"Paul Richardson",2018,"WR","Was",83.0714174840995,NA
 "Paul Richardson",2017,"WR","Sea",61.3988313993149,106.3
 "Paul Richardson",2016,"WR","Sea",31.4771674790216,35.3
 "Paul Richardson",2015,"WR","Sea",11.7133333333333,4
@@ -7845,7 +7841,7 @@
 "Paul Soliai",2013,"DT","Mia",37.7153821786394,38.5
 "Paul Soliai",2012,"DT","Mia",38.284740111587,38.25
 "Paul Soliai",2011,"NT","Mia",46.9928340114134,26
-"Paul Turner",2018,"WR","Nor",14.4880150363256,NA
+"Paul Turner",2018,"WR","Nor",25.1760300726512,NA
 "Paul Turner",2016,"WR","Phi",29.7393321989761,12.6
 "Paul Worrilow",2017,"LB","Det",35.9790330141047,28.5
 "Paul Worrilow",2016,"LB","Atl",95.7657736264719,24.5
@@ -7880,7 +7876,7 @@
 "Perry Riley",2014,"LB","Was",109.536299273245,89.5
 "Perry Riley",2013,"LB","Was",96.9427860292302,114.75
 "Perry Riley",2012,"LB","Was",82.5574946152551,120.25
-"Peyton Barber",2018,"RB","Tam",54.8894925691827,NA
+"Peyton Barber",2018,"RB","Tam",54.6894925691827,NA
 "Peyton Barber",2017,"RB","Tam",14.7777900736694,69.7
 "Peyton Barber",2016,"RB","Tam",18.5302385959667,31.1
 "Peyton Hillis",2014,"RB","Nyg",38.4262146972095,20.2
@@ -7899,10 +7895,10 @@
 "Peyton Thompson",2017,"DB","Jax",27.9794238326938,10.5
 "Peyton Thompson",2016,"","Jax",32.8637495584647,12
 "Pharaoh Brown",2018,"TE","Oak",1.27624998269955,NA
-"Pharoh Cooper",2018,"WR","Lar",26.4294291286261,NA
+"Pharoh Cooper",2018,"WR","Lar",21.4294291286261,NA
 "Pharoh Cooper",2017,"WR","Lar",22.3694005402256,15
 "Pharoh Cooper",2016,"WR","Lar",45.5463242333523,9.6
-"Phi",2018,"DST","Phi",110,NA
+"Phi",2018,"DST","Phi",117,NA
 "Phi",2017,"DST","Phi",109,168
 "Phi",2016,"DST","Phi",111,141
 "Phi",2015,"DST","Phi",110,136
@@ -7918,7 +7914,7 @@
 "Phil Taylor",2018,"DL","Was",-3.10007532422047,NA
 "Phil Taylor",2014,"DE","Cle",28.1390795355174,10.5
 "Phil Taylor",2013,"NT","Cle",41.8097469066846,30.5
-"Philip Rivers",2018,"QB","Sdg",262.973143543356,NA
+"Philip Rivers",2018,"QB","Sdg",262.946476876689,NA
 "Philip Rivers",2017,"QB","Sdg",280.800973964081,282.4
 "Philip Rivers",2016,"QB","Sdg",280.078276778212,289.94
 "Philip Rivers",2015,"QB","Sdg",273.69966166486,297.48
@@ -7936,7 +7932,7 @@
 "Philip Wheeler",2011,"LB","Ind",37.5419797346393,73
 "Phillip Adams",2015,"DB","Atl",10.55,45.75
 "Phillip Adams",2013,"CB","Oak",40.0774566539017,30.5
-"Phillip Dorsett",2018,"WR","Nwe",18.5928676219314,NA
+"Phillip Dorsett",2018,"WR","Nwe",19.4928676219314,NA
 "Phillip Dorsett",2017,"WR","Nwe",42.60938057041,20.1
 "Phillip Dorsett",2016,"WR","Ind",65.8040628383251,65.8
 "Phillip Dorsett",2015,"WR","Ind",58.2132733236788,30.2
@@ -7957,7 +7953,7 @@
 "Phillip Walker",2018,"QB","Ind",46.0464832245195,NA
 "Pierre Desir",2018,"CB","Ind",25.4495944147077,NA
 "Pierre Desir",2015,"DB","Cle",20.6388900292005,36
-"Pierre Garcon",2018,"WR","Sfo",103.687539573247,NA
+"Pierre Garcon",2018,"WR","Sfo",105.937539573247,NA
 "Pierre Garcon",2017,"WR","Sfo",113.093850795591,50
 "Pierre Garcon",2016,"WR","Was",94.9178881810561,122.1
 "Pierre Garcon",2015,"WR","Was",102.394241322822,113.7
@@ -7974,7 +7970,7 @@
 "Pierre Thomas",2010,"RB","Nor",182.4,59
 "Pierre Thomas",2009,"RB","Nor",178.6,155.5
 "Pierre Thomas",2008,"RB","Nor",40.5,160.9
-"Pit",2018,"DST","Pit",120,NA
+"Pit",2018,"DST","Pit",122,NA
 "Pit",2017,"DST","Pit",96,139
 "Pit",2016,"DST","Pit",107,106
 "Pit",2015,"DST","Pit",93,151
@@ -8003,7 +7999,7 @@
 "Prince Amukamara",2013,"RCB","Nyg",68.2401068395141,101.25
 "Prince Amukamara",2012,"RCB","Nyg",42.6949027588639,57.25
 "Quadree Henderson",2018,"WR","Pit",19.4838460061853,NA
-"Quan Bray",2018,"WR","Buf",11.2739010120022,NA
+"Quan Bray",2018,"WR","Buf",8.47390101200216,NA
 "Quan Bray",2017,"WR","Ind",5.45333333333333,3.9
 "Quan Bray",2016,"WR","Ind",40.052,4.3
 "Quandre Diggs",2018,"CB","Det",51.4769562265035,NA
@@ -8015,10 +8011,10 @@
 "Quentin Jammer",2013,"RCB","Den",34.8838357823116,16.5
 "Quentin Jammer",2012,"LCB","Sdg",54.5094611107653,93.25
 "Quentin Jammer",2011,"LCB","Sdg",63.0473051440857,56.5
-"Quincy Adeboyejo",2018,"WR","Bal",15.4211537470514,NA
+"Quincy Adeboyejo",2018,"WR","Bal",30.1423074941028,NA
 "Quincy Black",2012,"LB","Tam",71.5187241887175,36.5
 "Quincy Black",2011,"LB","Tam",67.5803780473742,66.75
-"Quincy Enunwa",2018,"WR","Nyj",82.9835969805242,NA
+"Quincy Enunwa",2018,"WR","Nyj",83.7335969805242,NA
 "Quincy Enunwa",2016,"WR","Nyj",45.5236983981665,110.9
 "Quincy Enunwa",2015,"WR","Nyj",26.4976470229742,31.5
 "Quincy Wilson",2018,"CB","Ind",65.3939453251562,NA
@@ -8074,7 +8070,7 @@
 "Ramon Humber",2015,"LB","Nor",26.5936811796076,42
 "Ramon Humber",2014,"LB","Nor",33.7533948796467,48
 "Ramon Humber",2013,"LB","Nor",28.0364937928654,27.25
-"Randall Cobb",2018,"WR","Gnb",102.254972079613,NA
+"Randall Cobb",2018,"WR","Gnb",100.004972079613,NA
 "Randall Cobb",2017,"WR","Gnb",120.468779258219,91.4
 "Randall Cobb",2016,"WR","Gnb",134.535530474407,88.3
 "Randall Cobb",2015,"WR","Gnb",168.418042072759,123.9
@@ -8100,11 +8096,11 @@
 "Randy Starks",2013,"DT","Mia",37.7415327064298,64
 "Randy Starks",2012,"DT","Mia",46.7662811840702,40.5
 "Randy Starks",2011,"DE","Mia",51.6144164008181,56.75
-"Rashaad Penny",2018,"RB","Sea",129.548538075169,NA
+"Rashaad Penny",2018,"RB","Sea",129.881871408502,NA
 "Rashaan Melvin",2018,"CB","Oak",31.029166051922,NA
 "Rashaan Melvin",2017,"DB","Ind",44.1021191629047,51.75
 "Rashaan Melvin",2015,"","Bal/nwe",45.8503444759042,6
-"Rashad Greene",2018,"WR","Jax",15.3786869830644,NA
+"Rashad Greene",2018,"WR","Jax",22.4573739661288,NA
 "Rashad Greene",2016,"WR","Jax",39.7095268566929,3.2
 "Rashad Greene",2015,"WR","Jax",38.6003635381936,27.3
 "Rashad Jennings",2016,"RB","Nyg",127.987656250311,103.4
@@ -8124,7 +8120,7 @@
 "Rashad Ross",2016,"WR","Was",10.082,0.8
 "Rashad Ross",2015,"","Was",7.2,30.4
 "Rashard Davis",2018,"WR","Phi",27.2059011688859,NA
-"Rashard Higgins",2018,"WR","Cle",31.3941989683445,NA
+"Rashard Higgins",2018,"WR","Cle",31.7941989683445,NA
 "Rashard Higgins",2017,"WR","Cle",27.1375513800842,41.6
 "Rashard Higgins",2016,"WR","Cle",24.1482041372129,7.7
 "Rashard Mendenhall",2013,"RB","Ari",131.559275996138,124.1
@@ -8225,7 +8221,7 @@
 "Reshad Jones",2012,"S","Mia",69.2190960025512,119.5
 "Reshad Jones",2011,"FS","Mia",40.5932002866678,69.75
 "Reuben Droughns",2008,"RB","Nyg",44.7,8.5
-"Rex Burkhead",2018,"RB","Nwe",109.982334058784,NA
+"Rex Burkhead",2018,"RB","Nwe",112.449000725451,NA
 "Rex Burkhead",2017,"RB","Nwe",72.9195822017135,99.8
 "Rex Burkhead",2016,"RB","Cin",12.1473037393567,58.9
 "Rex Burkhead",2015,"RB","Cin",13.9225021914774,13.8
@@ -8256,7 +8252,7 @@
 "Ricardo Lockette",2015,"WR","Sea",23.0980967992911,12.9
 "Ricardo Lockette",2014,"WR","Sea",13.9,31.7
 "Ricardo Lockette",2013,"WR","Sea",3.27,8
-"Ricardo Louis",2018,"WR","Cle",36.6294889755727,NA
+"Ricardo Louis",2018,"WR","Cle",27.7794889755727,NA
 "Ricardo Louis",2017,"WR","Cle",34.3953014888186,35.7
 "Ricardo Louis",2016,"WR","Cle",14.180262267587,20.5
 "Ricardo Mathews",2016,"DL","Pit",14.9287787832941,14.5
@@ -8313,7 +8309,7 @@
 "Riley Cooper",2012,"WR","Phi",35.1049462800302,42.8
 "Riley Cooper",2011,"WR","Phi",23.4898571523616,37.5
 "Riley Mccarron",2018,"WR","Nwe",18.2622197752418,NA
-"Rishard Matthews",2018,"WR","Ten",103.692219993042,NA
+"Rishard Matthews",2018,"WR","Ten",104.642219993042,NA
 "Rishard Matthews",2017,"WR","Ten",105.928031544064,103.2
 "Rishard Matthews",2016,"WR","Ten",94.8610972587723,146.5
 "Rishard Matthews",2015,"WR","Mia",26.5023791011192,90.6
@@ -8328,7 +8324,7 @@
 "Robbie Gould",2013,"K","Chi",125.260929094105,135
 "Robbie Gould",2012,"K","Chi",121.078218451675,107
 "Robbie Gould",2011,"K","Chi",110.357221250714,139
-"Robby Anderson",2018,"WR","Nyj",106.551058073562,NA
+"Robby Anderson",2018,"WR","Nyj",113.701058073562,NA
 "Robby Anderson",2017,"WR","Nyj",93.1329745391112,137
 "Robby Anderson",2016,"WR","Nyj",14.3550746076109,72.9
 "Robenson Therezie",2016,"DB","Atl",23.0290545045147,2.5
@@ -8351,7 +8347,7 @@
 "Robert Blanton",2015,"DB","Min",74.9047591762688,32.5
 "Robert Blanton",2014,"SS","Min",59.9479467973513,97.25
 "Robert Blanton",2013,"DB","Min",31.7117138504669,49.5
-"Robert Davis",2018,"WR","Was",25.7156731672619,NA
+"Robert Davis",2018,"WR","Was",44.4313463345238,NA
 "Robert Francois",2013,"","Gnb",21.6579952542378,7.5
 "Robert Francois",2012,"","Gnb",29.4573333363496,12.5
 "Robert Geathers",2014,"DL","Cin",21.589577669828,24.25
@@ -8367,7 +8363,7 @@
 "Robert Griffin",2014,"QB","Was",270.010126752514,97.36
 "Robert Griffin",2013,"QB","Was",264.032441079302,227.02
 "Robert Griffin",2012,"QB","Was",260.868503861053,322.5
-"Robert Gronkowski",2018,"TE","Nwe",142.750957120304,NA
+"Robert Gronkowski",2018,"TE","Nwe",141.750957120304,NA
 "Robert Gronkowski",2017,"TE","Nwe",139.445537472959,156.4
 "Robert Gronkowski",2016,"TE","Nwe",157.52801315627,72
 "Robert Gronkowski",2015,"TE","Nwe",154.220460012591,183.6
@@ -8425,13 +8421,13 @@
 "Robert Thomas",2018,"NT","Nyg",15.2591198118561,NA
 "Robert Thomas",2017,"DL","Nyg",4.65,13.5
 "Robert Tonyan",2018,"TE","Gnb",4.28828906116918,NA
-"Robert Turbin",2018,"RB","Ind",38.4393241294217,NA
+"Robert Turbin",2018,"RB","Ind",38.0393241294217,NA
 "Robert Turbin",2017,"RB","Ind",66.6090106519688,16.9
 "Robert Turbin",2016,"RB","Ind",46.1109939594913,82.3
 "Robert Turbin",2014,"RB","Sea",61.0699586733956,59.6
 "Robert Turbin",2013,"RB","Sea",68.7235514572277,32.4
 "Robert Turbin",2012,"RB","Sea",59.490765288241,53.5
-"Robert Woods",2018,"WR","Lar",86.7712957624232,NA
+"Robert Woods",2018,"WR","Lar",105.771295762423,NA
 "Robert Woods",2017,"WR","Lar",79.2862580526695,107.3
 "Robert Woods",2016,"WR","Buf",86.4858777892762,67.9
 "Robert Woods",2015,"WR","Buf",89.8971758997908,71.2
@@ -8450,7 +8446,7 @@
 "Rod Smith",2018,"RB","Dal",50.3052793931997,NA
 "Rod Smith",2017,"RB","Dal",4.66666666666667,73.4
 "Rod Smith",2016,"RB","Dal",2.7625,1.4
-"Rod Streater",2018,"WR","Buf",15.7321337208146,NA
+"Rod Streater",2018,"WR","Buf",1.23213372081458,NA
 "Rod Streater",2016,"WR","Sfo",18.07,31.1
 "Rod Streater",2015,"WR","Oak",60.2589333333333,0.8
 "Rod Streater",2014,"WR","Oak",102.952594657247,14.4
@@ -8473,7 +8469,7 @@
 "Rodney Mcleod",2014,"DB","Lar",69.3652314041501,90.5
 "Rodney Mcleod",2013,"FS","Lar",39.2796369936774,99
 "Rodney Smith",2014,"WR","Cle",4.99,NA
-"Roger Lewis",2018,"WR","Nyg",38.1677260924713,NA
+"Roger Lewis",2018,"WR","Nyg",42.6177260924713,NA
 "Roger Lewis",2017,"WR","Nyg",32.4246287694991,53.6
 "Roger Lewis",2016,"WR","Nyg",14.429682709298,21.7
 "Rolando Mcclain",2015,"LB","Dal",40.0139731408752,89.25
@@ -8497,7 +8493,7 @@
 "Ron Darby",2017,"DB","Phi",75.5093329921456,47.75
 "Ron Darby",2016,"DB","Buf",85.6770749342001,71.5
 "Ron Edwards",2012,"NT","Car",24.0480432666047,13
-"Ron Jones",2018,"RB","Tam",96.314451319912,NA
+"Ron Jones",2018,"RB","Tam",95.1811179865787,NA
 "Ron Parker",2017,"DB","Kan",77.2097852324634,76
 "Ron Parker",2016,"DB","Kan",86.5554388038268,73.25
 "Ron Parker",2015,"DB","Kan",73.9605102259728,107.25
@@ -8534,7 +8530,7 @@
 "Ross Cockrell",2016,"DB","Pit",72.4773648417409,66.5
 "Ross Cockrell",2015,"DB","Pit",7.65,57
 "Ross Dwelley",2018,"TE","Sfo",-2.5809804422242,NA
-"Ross Travis",2018,"TE","Ind",11.2812753797049,NA
+"Ross Travis",2018,"TE","Ind",11.4312753797049,NA
 "Ross Travis",2017,"","Ind/kan",14.3617528585303,7.6
 "Ross Travis",2016,"TE","Kan",15.5827132121109,1.5
 "Roy Hall",2008,"WR","Ind",15.5,2.9
@@ -8555,7 +8551,7 @@
 "Roy Williams",2010,"WR","Cin",59.5,64.25
 "Roy Williams",2009,"WR","Cin",152,24.5
 "Roy Williams",2008,"WR","Dal",153.5,5
-"Royce Freeman",2018,"RB","Den",112.470332580878,NA
+"Royce Freeman",2018,"RB","Den",112.603665914211,NA
 "Rueben Randle",2015,"WR","Nyg",106.68937516338,127.7
 "Rueben Randle",2014,"WR","Nyg",110.436189589402,111.8
 "Rueben Randle",2013,"WR","Nyg",81.0748892565894,97.1
@@ -8565,12 +8561,12 @@
 "Russell Allen",2011,"LB","Jax",37.4157727197214,54.5
 "Russell Gage",2018,"WR","Atl",14.3013693791718,NA
 "Russell Hansbrough",2018,"RB","Sdg",13.1821196108067,NA
-"Russell Shepard",2018,"WR","Nyg",21.1766847877143,NA
+"Russell Shepard",2018,"WR","Nyg",11.7266847877143,NA
 "Russell Shepard",2017,"WR","Car",33.537563890854,28.1
 "Russell Shepard",2016,"WR","Tam",12.2406911220805,47
 "Russell Shepard",2015,"WR","Tam",19.7007969828762,8.8
 "Russell Shepard",2014,"WR","Tam",2.8,6.3
-"Russell Wilson",2018,"QB","Sea",300.793092100107,NA
+"Russell Wilson",2018,"QB","Sea",300.819758766774,NA
 "Russell Wilson",2017,"QB","Sea",283.081663941174,360.92
 "Russell Wilson",2016,"QB","Sea",312.891377173051,277.06
 "Russell Wilson",2015,"QB","Sea",290.192555117275,348.26
@@ -8593,7 +8589,7 @@
 "Ryan Davis",2015,"DL","Jax",32.2327989699033,23.25
 "Ryan Davis",2014,"","Jax",21.7840725041976,45.75
 "Ryan Delaire",2016,"DL","Car",14.7434433132951,7.5
-"Ryan Fitzpatrick",2018,"QB","Tam",30.131864202796,NA
+"Ryan Fitzpatrick",2018,"QB","Tam",54.7051975361293,NA
 "Ryan Fitzpatrick",2017,"QB","Tam",36.7021178723097,76.92
 "Ryan Fitzpatrick",2016,"QB","Nyj",250.059168359066,152.4
 "Ryan Fitzpatrick",2015,"QB","Nyj",160.008183086627,304.2
@@ -8604,7 +8600,7 @@
 "Ryan Fitzpatrick",2009,"QB","Buf",13.14,102.98
 "Ryan Fitzpatrick",2008,"QB","Cin",2.18,139.3
 "Ryan Glasgow",2018,"DT","Cin",22.1962192791366,NA
-"Ryan Grant",2018,"WR","Ind",46.9088567463471,NA
+"Ryan Grant",2018,"WR","Ind",73.1588567463471,NA
 "Ryan Grant",2017,"WR","Was",21.5924664753292,81.3
 "Ryan Grant",2016,"WR","Was",29.1933369814663,7.6
 "Ryan Grant",2015,"WR","Was",23.2417173813581,38.8
@@ -8613,8 +8609,8 @@
 "Ryan Grant",2010,"RB","Gnb",202,4.5
 "Ryan Grant",2009,"RB","Gnb",206,209
 "Ryan Grant",2008,"RB","Gnb",209.1,155.9
-"Ryan Griffin",2018,"TE","Hou",56.6632788014837,NA
-"Ryan Griffin",2018,"QB","Tam",-17.2731776714916,NA
+"Ryan Griffin",2018,"TE","Hou",56.7132788014837,NA
+"Ryan Griffin",2018,"QB","Tam",-0.504392557163855,NA
 "Ryan Griffin",2017,"TE","Hou",40.2404683437309,21.8
 "Ryan Griffin",2016,"TE","Hou",40.4586692129482,54.2
 "Ryan Griffin",2015,"TE","Hou",18.3544807428263,37.1
@@ -8672,9 +8668,9 @@
 "Ryan Succop",2013,"K","Kan",115.417205365038,127
 "Ryan Succop",2012,"K","Kan",112.314081871115,117
 "Ryan Succop",2011,"K","Kan",107.198144149852,106
-"Ryan Switzer",2018,"WR","Oak",22.38295612651,NA
+"Ryan Switzer",2018,"WR","Oak",22.88295612651,NA
 "Ryan Switzer",2017,"WR","Dal",30.4249865718943,10.6
-"Ryan Tannehill",2018,"QB","Mia",232.851196828085,NA
+"Ryan Tannehill",2018,"QB","Mia",233.091196828085,NA
 "Ryan Tannehill",2016,"QB","Mia",266.220796264096,204.2
 "Ryan Tannehill",2015,"QB","Mia",273.538959957791,273.32
 "Ryan Tannehill",2014,"QB","Mia",245.957095883921,292.5
@@ -8703,7 +8699,7 @@
 "Sam Acho",2012,"ROLB","Ari",72.3235170985341,69.5
 "Sam Barrington",2015,"LB","Gnb",87.7267893075841,1
 "Sam Barrington",2014,"LB","Gnb",87.75,51.5
-"Sam Bradford",2018,"QB","Ari",116.617089672404,NA
+"Sam Bradford",2018,"QB","Ari",116.563756339071,NA
 "Sam Bradford",2017,"QB","Min",205.774951966189,26.98
 "Sam Bradford",2016,"QB","Min",206.64475,235.88
 "Sam Bradford",2015,"QB","Phi",233.277182465083,210.9
@@ -8711,7 +8707,7 @@
 "Sam Bradford",2012,"QB","Lar",188.985878632094,237.48
 "Sam Bradford",2011,"QB","Lar",219.420008645509,103.16
 "Sam Bradford",2010,"QB","Lar",140.34,209.78
-"Sam Darnold",2018,"QB","Nyj",74.3978906790231,NA
+"Sam Darnold",2018,"QB","Nyj",75.8112240123565,NA
 "Sam Ficken",2018,"K","Lar",104.048277369991,NA
 "Sam Hurd",2011,"","Chi",14.5072505542307,10.9
 "Sam Hurd",2010,"WR","Dal",8.9,12
@@ -8723,7 +8719,7 @@
 "Sam Shields",2013,"RCB","Gnb",63.0136348684068,79
 "Sam Shields",2012,"RCB","Gnb",51.8399594090921,44.25
 "Sam Shields",2011,"CB","Gnb",46.5218465713803,67.5
-"Samaje Perine",2018,"RB","Was",37.0379937594352,NA
+"Samaje Perine",2018,"RB","Was",37.1046604261019,NA
 "Samaje Perine",2017,"RB","Was",64.4781429935937,86.5
 "Samkon Gado",2009,"RB","Lar",30.9,5.1
 "Sammie Coates",2018,"WR","Hou",11.8290129561886,NA
@@ -8741,7 +8737,7 @@
 "Sammy Morris",2010,"RB","Nwe",59.1,13.3
 "Sammy Morris",2009,"RB","Nwe",67.6,59.9
 "Sammy Morris",2008,"RB","Nwe",48,128.8
-"Sammy Watkins",2018,"WR","Kan",109.174846854004,NA
+"Sammy Watkins",2018,"WR","Kan",107.024846854004,NA
 "Sammy Watkins",2017,"WR","Lar",119.685761591986,107.3
 "Sammy Watkins",2016,"WR","Buf",156.288630595813,55
 "Sammy Watkins",2015,"WR","Buf",134.763541871613,158.8
@@ -8761,7 +8757,7 @@
 "Santonio Holmes",2010,"WR","Nyj",73.6,108.3
 "Santonio Holmes",2009,"WR","Pit",139.9,154.4
 "Santonio Holmes",2008,"WR","Pit",154.5,111
-"Saquon Barkley",2018,"RB","Nyg",183.846870162539,NA
+"Saquon Barkley",2018,"RB","Nyg",191.380203495872,NA
 "Scott Chandler",2015,"TE","Nwe",42.2831511571414,49.9
 "Scott Chandler",2014,"TE","Buf",70.5226265404164,67.7
 "Scott Chandler",2013,"TE","Buf",63.4829392695221,75.5
@@ -8781,14 +8777,14 @@
 "Sdg",2016,"DST","Sdg",92,120
 "Sdg",2015,"DST","Sdg",87,93
 "Sdg",2014,"DST","Sdg",92,98
-"Sea",2018,"DST","Sea",96,NA
+"Sea",2018,"DST","Sea",98,NA
 "Sea",2017,"DST","Sea",104,136
 "Sea",2016,"DST","Sea",113,119
 "Sea",2015,"DST","Sea",127,166
 "Sea",2014,"DST","Sea",128,145
 "Sealver Siliga",2015,"DL","Nwe",36.9220913497509,20.5
 "Sealver Siliga",2014,"DL","Nwe",38.6214439367602,32.75
-"Sean Culkin",2018,"TE","Sdg",6.72233525440213,NA
+"Sean Culkin",2018,"TE","Sdg",17.3611676272011,NA
 "Sean Davis",2018,"FS","Pit",81.9092854023687,NA
 "Sean Davis",2017,"DB","Pit",85.2059048838931,108.25
 "Sean Jones",2011,"SS","Tam",68.4375744671346,97
@@ -8828,7 +8824,7 @@
 "Sean Weatherspoon",2013,"LB","Atl",87.146114155269,43.75
 "Sean Weatherspoon",2012,"LB","Atl",89.4316545027375,104.75
 "Sean Weatherspoon",2011,"LB","Atl",65.0788688928751,124.5
-"Seantavius Jones",2018,"WR","Ind",12.4,NA
+"Seantavius Jones",2018,"WR","Ind",3,NA
 "Seantavius Jones",2015,"WR","Nor",32.7096732434863,NA
 "Sebastian Janikowski",2018,"K","Sea",117.460220086276,NA
 "Sebastian Janikowski",2016,"K","Oak",120.140701590556,140
@@ -8859,7 +8855,7 @@
 "Seth Devalve",2018,"TE","Cle",22.1532428461382,NA
 "Seth Devalve",2017,"TE","Cle",34.5586245393281,43.5
 "Seth Devalve",2016,"TE","Cle",8.02418818218841,24.7
-"Seth Roberts",2018,"WR","Oak",58.8130937295423,NA
+"Seth Roberts",2018,"WR","Oak",54.2130937295423,NA
 "Seth Roberts",2017,"WR","Oak",58.3523240312514,47.5
 "Seth Roberts",2016,"WR","Oak",66.0066347944868,69.7
 "Seth Roberts",2015,"WR","Oak",22.9472398512863,78
@@ -8890,7 +8886,7 @@
 "Shane Vereen",2012,"RB","Nwe",77.6719416595924,62
 "Shane Vereen",2011,"RB","Nwe",62.2395688245393,11.7
 "Shane Wimann",2018,"TE","Nwe",3.42757270495458,NA
-"Shane Wynn",2018,"WR","Jax",10.0716224163243,NA
+"Shane Wynn",2018,"WR","Jax",9.82162241632429,NA
 "Shane Wynn",2016,"","Jax",15.9321289151691,2.4
 "Shaq Barrett",2018,"OLB","Den",48.5068768090194,NA
 "Shaq Barrett",2017,"LB","Den",46.9533698570198,60
@@ -8961,7 +8957,7 @@
 "Sheldon Richardson",2016,"DL","Nyj",69.3155638326918,74.75
 "Sheldon Richardson",2015,"DL","Nyj",67.477070894482,50
 "Sheldon Richardson",2014,"DL","Nyj",74.0165524245348,84.5
-"Shelton Gibson",2018,"WR","Phi",16.2469321758207,NA
+"Shelton Gibson",2018,"WR","Phi",16.0469321758207,NA
 "Shelton Gibson",2017,"WR","Phi",20.9690741429258,1.1
 "Sherman Badie",2018,"RB","Ari",26.966436318042,NA
 "Sherrick Mcmanis",2018,"DB","Chi",16.5874386815353,NA
@@ -8997,7 +8993,7 @@
 "Sione Pouha",2012,"NT","Nyj",44.1892021232659,27.5
 "Sione Pouha",2011,"NT","Nyj",43.8692584937828,64.5
 "Solomon Thomas",2018,"DE","Sfo",64.2117847516545,NA
-"Sony Michel",2018,"RB","Nwe",108.295608968373,NA
+"Sony Michel",2018,"RB","Nwe",104.895608968373,NA
 "Spencer Johnson",2012,"","Buf",29.4958997269778,24.5
 "Spencer Johnson",2011,"LB","Buf",37.4410298599922,54
 "Spencer Paysinger",2016,"LB","Mia",16.6692279974024,54
@@ -9005,10 +9001,10 @@
 "Spencer Paysinger",2014,"LB","Nyg",27.1329138058599,13.5
 "Spencer Paysinger",2013,"LB","Nyg",60.384815531943,75.5
 "Spencer Paysinger",2012,"LB","Nyg",21.9138767132876,42
-"Spencer Ware",2018,"RB","Kan",78.169839939074,NA
+"Spencer Ware",2018,"RB","Kan",77.8365066057406,NA
 "Spencer Ware",2016,"RB","Kan",74.3713475366239,160.8
 "Spencer Ware",2015,"RB","Kan",0.6,76.8
-"Stacy Coley",2018,"WR","Min",5.6,NA
+"Stacy Coley",2018,"WR","Min",0.1,NA
 "Stacy Coley",2017,"WR","Min",7.87595091011781,NA
 "Stacy Mcgee",2018,"DT","Was",43.7776705081773,NA
 "Stacy Mcgee",2017,"DL","Was",25.8144435728725,35.5
@@ -9032,7 +9028,7 @@
 "Stefan Charles",2014,"DT","Buf",22.9631469712064,30
 "Stefan Logan",2012,"","Det",-15.4182565503489,4.5
 "Stefan Logan",2011,"RB","Det",13.8636549056581,5.1
-"Stefon Diggs",2018,"WR","Min",124.557338899179,NA
+"Stefon Diggs",2018,"WR","Min",131.107338899179,NA
 "Stefon Diggs",2017,"WR","Min",127.022212015796,134.2
 "Stefon Diggs",2016,"WR","Min",119.491130442043,109.3
 "Stefon Diggs",2015,"WR","Min",29.6530953764746,97.3
@@ -9094,7 +9090,7 @@
 "Sterling Moore",2015,"DB","Tam",26.2869611337371,59.75
 "Sterling Moore",2014,"DB","Dal",42.7487561853507,55
 "Sterling Moore",2012,"","Dal/nwe",43.5833690681231,26
-"Sterling Shepard",2018,"WR","Nyg",105.376851968731,NA
+"Sterling Shepard",2018,"WR","Nyg",107.276851968731,NA
 "Sterling Shepard",2017,"WR","Nyg",95.2341296592037,85.5
 "Sterling Shepard",2016,"WR","Nyg",93.2377411897415,119.4
 "Stevan Ridley",2018,"RB","Pit",3.99581816693341,NA
@@ -9186,7 +9182,7 @@
 "Tahir Whitehead",2015,"LB","Det",58.1449771749804,62.25
 "Tahir Whitehead",2014,"LB","Det",48.9547741642559,89.5
 "Tahir Whitehead",2013,"","Det",34.033478928215,14
-"Taiwan Jones",2018,"RB","Buf",6.75403070567612,NA
+"Taiwan Jones",2018,"RB","Buf",6.82069737234279,NA
 "Taiwan Jones",2017,"RB","Buf",2.72083333333333,4.1
 "Taiwan Jones",2016,"RB","Oak",25.9072053558441,3.5
 "Taiwan Jones",2015,"DB","Oak",10.9029118124536,24
@@ -9198,7 +9194,7 @@
 "Takeo Spikes",2012,"LB","Sdg",88.2688804005943,71.25
 "Takeo Spikes",2011,"LB","Sdg",92.0233393589217,96.75
 "Takkarist Mckinley",2018,"OLB","Atl",44.6026418756699,NA
-"Tam",2018,"DST","Tam",89,NA
+"Tam",2018,"DST","Tam",85,NA
 "Tam",2017,"DST","Tam",99,104
 "Tam",2016,"DST","Tam",95,133
 "Tam",2015,"DST","Tam",99,110
@@ -9218,11 +9214,11 @@
 "Tank Carradine",2017,"DL","Sfo",43.2755264754244,20.25
 "Tank Carradine",2016,"DL","Sfo",45.2036776141521,15
 "Tank Carradine",2015,"DL","Sfo",34.236289702026,23.5
-"Tanner Gentry",2018,"WR","Chi",16.7467385042088,NA
+"Tanner Gentry",2018,"WR","Chi",16.9967385042088,NA
 "Tanner Gentry",2017,"WR","Chi",14.7177700337451,3.5
 "Tanner Hudson",2018,"TE","Tam",15.3195439692128,NA
 "Tanner Lee",2018,"QB","Jax",45.6097743114213,NA
-"Tanner Mcevoy",2018,"WR","Sea",20.6477259978581,NA
+"Tanner Mcevoy",2018,"WR","Sea",23.7477259978581,NA
 "Tanner Mcevoy",2017,"WR","Sea",22.4700375673826,8.3
 "Tanner Mcevoy",2016,"","Sea",8.10994548964941,27.72
 "Tanoh Kpassagnon",2018,"DE","Kan",30.8995203928547,NA
@@ -9234,7 +9230,7 @@
 "Tarell Brown",2013,"RCB","Sfo",63.6345663271714,37.5
 "Tarell Brown",2012,"RCB","Sfo",60.5478994139521,72
 "Tarell Brown",2011,"RCB","Sfo",60.3961230218076,61.5
-"Tarik Cohen",2018,"RB","Chi",93.2824129052337,NA
+"Tarik Cohen",2018,"RB","Chi",99.8157462385671,NA
 "Tarik Cohen",2017,"RB","Chi",51.1440946263295,99.14
 "Tarvaris Jackson",2015,"QB","Sea",6.6657967998082,0.68
 "Tarvaris Jackson",2014,"","Sea",14.4705332156234,NA
@@ -9253,11 +9249,11 @@
 "Tashaun Gipson",2014,"DB","Cle",82.8359399618928,79.5
 "Tashaun Gipson",2013,"FS","Cle",65.1112482411443,112.25
 "Tavares Gooden",2012,"","Sfo",24.7781331339573,8
-"Tavarres King",2018,"WR","Min",9.48717258717008,NA
+"Tavarres King",2018,"WR","Min",7.68717258717008,NA
 "Tavarres King",2017,"WR","Nyg",16.1677983196136,42.3
 "Tavarres King",2016,"WR","Nyg",15.8075,5
 "Tavarres King",2014,"WR","Tam",22.2,1.3
-"Tavon Austin",2018,"WR","Dal",55.7529946627755,NA
+"Tavon Austin",2018,"WR","Dal",44.5029946627755,NA
 "Tavon Austin",2017,"WR","Lar",71.2082244118173,35.7
 "Tavon Austin",2016,"WR","Lar",108.53012187291,88.8
 "Tavon Austin",2015,"WR","Lar",76.0969693983148,148.7
@@ -9270,7 +9266,7 @@
 "Tavon Wilson",2014,"","Nwe",35.1250727611372,22.5
 "Tavon Wilson",2013,"","Nwe",49.3103021914428,13.25
 "Tavon Young",2018,"CB","Bal",42.1633148168074,NA
-"Taylor Gabriel",2018,"WR","Chi",71.6336170465458,NA
+"Taylor Gabriel",2018,"WR","Chi",57.0336170465458,NA
 "Taylor Gabriel",2017,"WR","Atl",72.8239787960464,48.7
 "Taylor Gabriel",2016,"WR","Atl",20.2,105
 "Taylor Gabriel",2015,"WR","Cle",60.5382180917455,22.1
@@ -9285,9 +9281,9 @@
 "Taylor Thompson",2013,"TE","Ten",19.2866666666667,7.3
 "Taylor Thompson",2012,"TE","Ten",18.4851140399405,4.6
 "Taysom Hill",2018,"QB","Nor",-49.2148088028571,NA
-"Taywan Taylor",2018,"WR","Ten",47.0992666982427,NA
+"Taywan Taylor",2018,"WR","Ten",55.3992666982427,NA
 "Taywan Taylor",2017,"WR","Ten",40.8839459422014,33.4
-"Ted Ginn",2018,"WR","Nor",95.4586242257493,NA
+"Ted Ginn",2018,"WR","Nor",90.2086242257493,NA
 "Ted Ginn",2017,"WR","Nor",98.9364794738932,106.6
 "Ted Ginn",2016,"WR","Car",89.4386866288262,109
 "Ted Ginn",2015,"WR","Car",46.384751653907,139.9
@@ -9298,7 +9294,7 @@
 "Ted Ginn",2010,"WR","Sfo",30.6,29.4
 "Ted Ginn",2009,"WR","Mia",105.5,68.2
 "Ted Ginn",2008,"WR","Mia",89.5,110.3
-"Teddy Bridgewater",2018,"QB","Nyj",46.8498098319752,NA
+"Teddy Bridgewater",2018,"QB","Nyj",46.8764764986418,NA
 "Teddy Bridgewater",2017,"QB","Min",26.1294943437584,-1.3
 "Teddy Bridgewater",2015,"QB","Min",239.376133184003,211.44
 "Teddy Bridgewater",2014,"QB","Min",97.6315203073686,187.66
@@ -9344,7 +9340,7 @@
 "Terrance West",2017,"RB","Bal",125.933598697621,26.1
 "Terrance West",2016,"RB","Bal",70.0953949101994,137
 "Terrance West",2014,"RB","Cle",105.13237855235,101.7
-"Terrance Williams",2018,"WR","Dal",71.1675240651939,NA
+"Terrance Williams",2018,"WR","Dal",77.0175240651939,NA
 "Terrance Williams",2017,"WR","Dal",78.5792743140766,58.3
 "Terrance Williams",2016,"WR","Dal",96.8493001028386,81.4
 "Terrance Williams",2015,"WR","Dal",102.188368735098,102
@@ -9366,7 +9362,7 @@
 "Terrell Suggs",2011,"LB","Bal",85.2170050239744,136.5
 "Terrell Thomas",2013,"CB","Nyg",60.5156768727027,76.25
 "Terrell Watson",2017,"RB","Pit",24.3220566220084,0.8
-"Terrelle Pryor",2018,"QB","Nyj",100.890607589286,NA
+"Terrelle Pryor",2018,"QB","Nyj",55.8906075892856,NA
 "Terrelle Pryor",2017,"WR","Was",123.739091323606,30
 "Terrelle Pryor",2016,"WR","Cle",51.348781966068,134.44
 "Terrelle Pryor",2015,"QB","Cle",1.695,4.1
@@ -9389,13 +9385,13 @@
 "Terron Ward",2016,"RB","Atl",21.2787354910368,16.2
 "Terron Ward",2015,"","Atl",35.690444326944,22.8
 "Terry Swanson",2018,"RB","Hou",31.8605578731554,NA
-"Tevin Coleman",2018,"RB","Atl",126.76900165542,NA
+"Tevin Coleman",2018,"RB","Atl",127.302334988753,NA
 "Tevin Coleman",2017,"RB","Atl",122.631223577579,140.7
 "Tevin Coleman",2016,"RB","Atl",78.126709456619,160.1
 "Tevin Coleman",2015,"RB","Atl",114.877742023953,40.6
 "Tevin Jones",2018,"WR","Pit",4.71351805179424,NA
 "Thaddeus Lewis",2012,"QB","Cle",-47.6707639057777,11.46
-"Theo Riddick",2018,"RB","Det",82.6572242164687,NA
+"Theo Riddick",2018,"RB","Det",82.7238908831354,NA
 "Theo Riddick",2017,"RB","Det",107.753951193986,101
 "Theo Riddick",2016,"RB","Det",92.8845299861527,108.8
 "Theo Riddick",2015,"RB","Det",57.8519385069596,99
@@ -9422,7 +9418,7 @@
 "Thomas Jones",2008,"RB","Nyj",172.4,239.9
 "Thomas Keiser",2014,"LB","Ari",31.8994933300485,2
 "Thomas Keiser",2012,"","Car",31.324715220881,4.25
-"Thomas Rawls",2018,"RB","Nyj",40.1873865064558,NA
+"Thomas Rawls",2018,"RB","Nyj",38.9873865064558,NA
 "Thomas Rawls",2017,"RB","Sea",103.86406965511,23.1
 "Thomas Rawls",2016,"RB","Sea",134.437570613391,62.5
 "Thomas Rawls",2015,"RB","Sea",0.488062530245751,118.6
@@ -9481,7 +9477,7 @@
 "Tj Houshmandzadeh",2010,"WR","Bal",49.4,57.8
 "Tj Houshmandzadeh",2009,"WR","Sea",156.8,107.1
 "Tj Houshmandzadeh",2008,"WR","Cin",148,115.3
-"Tj Jones",2018,"WR","Det",32.6069877178653,NA
+"Tj Jones",2018,"WR","Det",34.6569877178653,NA
 "Tj Jones",2017,"WR","Det",31.5453852931762,45.9
 "Tj Jones",2016,"","Det",29.5528985042192,9.3
 "Tj Jones",2015,"WR","Det",17.8871086202839,18.9
@@ -9503,7 +9499,7 @@
 "Tj Yates",2013,"QB","Hou",7.49866402918426,2.52
 "Tj Yates",2012,"QB","Hou",24.3376350421285,6.42
 "Tj Yates",2011,"QB","Hou",22.378436089331,52.66
-"Tj Yeldon",2018,"RB","Jax",69.5237453723632,NA
+"Tj Yeldon",2018,"RB","Jax",69.3904120390299,NA
 "Tj Yeldon",2017,"RB","Jax",62.6215564839059,57.7
 "Tj Yeldon",2016,"RB","Jax",118.447457018051,87.7
 "Tj Yeldon",2015,"RB","Jax",149.039602566985,119.9
@@ -9518,7 +9514,7 @@
 "Todd Davis",2017,"LB","Den",84.0496368541733,70.5
 "Todd Davis",2016,"LB","Den",71.6787226200339,89.25
 "Todd Davis",2015,"LB","Den",22.8000040448757,22
-"Todd Gurley",2018,"RB","Lar",253.195456102926,NA
+"Todd Gurley",2018,"RB","Lar",253.395456102926,NA
 "Todd Gurley",2017,"RB","Lar",177.111214095417,319.3
 "Todd Gurley",2016,"RB","Lar",208.100409567238,155.2
 "Todd Gurley",2015,"RB","Lar",121.293107022916,187.4
@@ -9527,7 +9523,7 @@
 "Todd Heap",2010,"TE","Bal",76.9,89.9
 "Todd Heap",2009,"TE","Bal",66.5,95.5
 "Todd Heap",2008,"TE","Bal",95.5,56.3
-"Tom Brady",2018,"QB","Nwe",294.401639617829,NA
+"Tom Brady",2018,"QB","Nwe",290.961639617829,NA
 "Tom Brady",2017,"QB","Nwe",310.473112080235,303.88
 "Tom Brady",2016,"QB","Nwe",233.856551384249,258.56
 "Tom Brady",2015,"QB","Nwe",281.710089498759,354.7
@@ -9563,7 +9559,7 @@
 "Tommy Kelly",2013,"DT","Nwe",40.6384329375384,26.25
 "Tommy Kelly",2012,"NT","Oak",48.3134937290191,44.5
 "Tommy Kelly",2011,"DT","Oak",49.5122577504953,68
-"Tommylee Lewis",2018,"WR","Nor",17.0835561582988,NA
+"Tommylee Lewis",2018,"WR","Nor",14.4835561582988,NA
 "Tommylee Lewis",2017,"WR","Nor",15.124855176408,19
 "Tommylee Lewis",2016,"WR","Nor",27.3094039580303,8.7
 "Tony Carter",2014,"","Den",22.2303799405582,7.5
@@ -9615,7 +9611,7 @@
 "Tony Scheffler",2009,"TE","Den",75.5,53.6
 "Tony Scheffler",2008,"TE","Den",85.5,80.4
 "Torell Troup",2011,"","Buf",27.5316393897765,8
-"Torrey Smith",2018,"WR","Car",62.0774945102389,NA
+"Torrey Smith",2018,"WR","Car",38.3774945102389,NA
 "Torrey Smith",2017,"WR","Phi",72.3123906873977,54.7
 "Torrey Smith",2016,"WR","Sfo",106.303360923596,44.7
 "Torrey Smith",2015,"WR","Sfo",115.197903166514,90.3
@@ -9653,7 +9649,7 @@
 "Tramon Williams",2013,"LCB","Gnb",70.1282711174162,108
 "Tramon Williams",2012,"LCB","Gnb",75.0256414709633,73
 "Tramon Williams",2011,"RCB","Gnb",74.419878014165,94.5
-"Travaris Cadet",2018,"RB","Buf",13.5759459023209,NA
+"Travaris Cadet",2018,"RB","Buf",43.3092792356543,NA
 "Travaris Cadet",2016,"RB","Nor",9.73158696506953,54
 "Travaris Cadet",2015,"RB","Nor/nwe/sfo",44.733902969955,28.2
 "Travaris Cadet",2014,"RB","Nor",28.2970386166548,34.8
@@ -9662,7 +9658,7 @@
 "Travin Dural",2018,"WR","Nor",20.7957981439907,NA
 "Travis Beckum",2011,"TE","Nyg",64.3137368935461,15.3
 "Travis Beckum",2010,"TE","Nyg",16.5,23.6
-"Travis Benjamin",2018,"WR","Sdg",63.1410785020453,NA
+"Travis Benjamin",2018,"WR","Sdg",69.7910785020453,NA
 "Travis Benjamin",2017,"WR","Sdg",68.2236001337809,96.3
 "Travis Benjamin",2016,"WR","Sdg",107.730254202148,87.4
 "Travis Benjamin",2015,"WR","Cle",39.313755963811,131.8
@@ -9672,7 +9668,7 @@
 "Travis Coons",2015,"K","Cle",87.5024904214559,113
 "Travis Daniels",2012,"","Kan",29.5949853791857,15
 "Travis Daniels",2011,"","Kan",26.5943452056939,22.5
-"Travis Kelce",2018,"TE","Kan",123.637977927934,NA
+"Travis Kelce",2018,"TE","Kan",123.687977927934,NA
 "Travis Kelce",2017,"TE","Kan",125.286741020262,151.5
 "Travis Kelce",2016,"TE","Kan",112.395628327035,136
 "Travis Kelce",2015,"TE","Kan",117.589009130636,113.5
@@ -9687,7 +9683,7 @@
 "Tre Madden",2018,"RB","Sea",3.84111540736693,NA
 "Tre Mason",2015,"RB","Lar",117.854873189005,33.5
 "Tre Mason",2014,"RB","Lar",49.3952550973125,119.3
-"Tre Mcbride",2018,"WR","Nyj",10.0001370829916,NA
+"Tre Mcbride",2018,"WR","Nyj",7.4501370829916,NA
 "Tre Mcbride",2017,"WR","Chi",6.28333333333333,14.4
 "Tre Mcbride",2015,"WR","Ten",15.3196296136587,7.6
 "Tredavious White",2018,"CB","Buf",85.0918177682384,NA
@@ -9709,14 +9705,14 @@
 "Trent Richardson",2013,"RB","Cle/ind",174.356978849708,109.9
 "Trent Richardson",2012,"RB","Cle",168.52759520896,203.7
 "Trent Robinson",2015,"DB","Was",12.9144828584938,49.25
-"Trent Taylor",2018,"WR","Sfo",54.6262198016924,NA
+"Trent Taylor",2018,"WR","Sfo",64.4262198016924,NA
 "Trent Taylor",2017,"WR","Sfo",29.9871765945071,55
-"Trequan Smith",2018,"WR","Nor",58.7013343088159,NA
+"Trequan Smith",2018,"WR","Nor",58.9013343088159,NA
 "Trevin Wade",2016,"DB","Nyg",25.1997656132569,28.5
 "Trevin Wade",2015,"DB","Nyg",17.3158693671281,58.5
 "Trevon Coley",2018,"DL","Cle",49.4306246237015,NA
 "Trevone Boykin",2016,"QB","Sea",27.6438587401404,8.9
-"Trevor Davis",2018,"WR","Gnb",21.7523650003124,NA
+"Trevor Davis",2018,"WR","Gnb",20.7523650003124,NA
 "Trevor Davis",2017,"WR","Gnb",15.8866265573688,8.3
 "Trevor Davis",2016,"WR","Gnb",15.678818914098,8.4
 "Trevor Laws",2011,"RDT","Phi",25.70905135561,22.5
@@ -9728,11 +9724,11 @@
 "Trevor Siemian",2016,"QB","Den",100.351595811817,203.74
 "Trevor Williams",2018,"CB","Sdg",50.2755630057762,NA
 "Trevor Williams",2017,"DB","Sdg",61.0938281888248,68
-"Trey Burton",2018,"TE","Chi",65.8771543342913,NA
+"Trey Burton",2018,"TE","Chi",65.9771543342913,NA
 "Trey Burton",2017,"TE","Phi",32.9075171554379,54.8
 "Trey Burton",2016,"TE","Phi",17.5021666129227,38.7
 "Trey Burton",2015,"TE","Phi",5.872,5.4
-"Trey Edmunds",2018,"RB","Nor",12.398869118881,NA
+"Trey Edmunds",2018,"RB","Nor",4.998869118881,NA
 "Trey Edmunds",2017,"","Nor",10.8761110863641,10.8
 "Trey Flowers",2018,"DE","Nwe",68.9583808864152,NA
 "Trey Flowers",2017,"DL","Nwe",69.0718652217789,80.25
@@ -9772,7 +9768,7 @@
 "Trumaine Mcbride",2013,"LCB","Nyg",18.1696248099166,56.5
 "Turk Mcbride",2012,"","Nor",44.9214375043408,6.5
 "Turk Mcbride",2011,"DE","Nor",58.5407999893225,11.5
-"Ty Hilton",2018,"WR","Ind",136.981357640958,NA
+"Ty Hilton",2018,"WR","Ind",138.831357640958,NA
 "Ty Hilton",2017,"WR","Ind",154.135356027767,118.6
 "Ty Hilton",2016,"WR","Ind",150.714741077544,180.8
 "Ty Hilton",2015,"WR","Ind",164.846215324322,142.4
@@ -9780,7 +9776,7 @@
 "Ty Hilton",2013,"WR","Ind",124.033905690228,138.9
 "Ty Hilton",2012,"WR","Ind",32.1370941454034,137
 "Ty Mcgill",2016,"","Ind",24.4838628816333,14.5
-"Ty Montgomery",2018,"WR/RB","Gnb",75.7,NA
+"Ty Montgomery",2018,"WR/RB","Gnb",88.1,NA
 "Ty Montgomery",2017,"RB","Gnb",141.831106799745,68.6
 "Ty Montgomery",2016,"WR","Gnb",29.1000250346603,96.5
 "Ty Montgomery",2015,"WR","Gnb",54.0903726186809,27
@@ -9790,7 +9786,7 @@
 "Tyeler Davison",2018,"DT","Nor",37.5608184543948,NA
 "Tyeler Davison",2017,"DL","Nor",21.3695881006852,36
 "Tyeler Davison",2016,"DL","Nor",33.7237086117285,18
-"Tyler Boyd",2018,"WR","Cin",49.5522073843313,NA
+"Tyler Boyd",2018,"WR","Cin",31.6522073843313,NA
 "Tyler Boyd",2017,"WR","Cin",66.2307150061492,34.5
 "Tyler Boyd",2016,"WR","Cin",73.4641552070178,70.1
 "Tyler Bray",2018,"QB","Chi",1.94187339852652,NA
@@ -9800,7 +9796,7 @@
 "Tyler Clutts",2014,"RB","Dal",8.35,0.1
 "Tyler Clutts",2013,"RB","Dal",2.07,-0.1
 "Tyler Conklin",2018,"TE","Min",4.1,NA
-"Tyler Eifert",2018,"TE","Cin",68.2505258842713,NA
+"Tyler Eifert",2018,"TE","Cin",64.2005258842713,NA
 "Tyler Eifert",2017,"TE","Cin",93.7281783581323,4.6
 "Tyler Eifert",2016,"TE","Cin",89.6569727436539,69.4
 "Tyler Eifert",2015,"TE","Cin",71.5406765588369,139.5
@@ -9813,11 +9809,11 @@
 "Tyler Higbee",2017,"TE","Lar",44.8357424733659,35.5
 "Tyler Higbee",2016,"TE","Lar",35.0881200509746,14.5
 "Tyler Hoppes",2018,"TE","Min",-0.815886778107547,NA
-"Tyler Kroft",2018,"TE","Cin",31.0661108394513,NA
+"Tyler Kroft",2018,"TE","Cin",34.8161108394513,NA
 "Tyler Kroft",2017,"TE","Cin",18.4317094287843,82.4
 "Tyler Kroft",2016,"TE","Cin",31.5950085447306,9.2
 "Tyler Kroft",2015,"TE","Cin",29.8468178599276,18.9
-"Tyler Lockett",2018,"WR","Sea",97.2195833481675,NA
+"Tyler Lockett",2018,"WR","Sea",94.1695833481675,NA
 "Tyler Lockett",2017,"WR","Sea",91.6255310069715,79.3
 "Tyler Lockett",2016,"WR","Sea",112.852005823067,83.1
 "Tyler Lockett",2015,"WR","Sea",62.5740213651325,116.4
@@ -9836,16 +9832,16 @@
 "Tyrann Mathieu",2016,"DB","Ari",103.853286814112,48.25
 "Tyrann Mathieu",2015,"DB","Ari",88.6659890157074,132.25
 "Tyrann Mathieu",2014,"DB","Ari",81.27625065789,45.75
-"Tyreek Hill",2018,"WR","Kan",148.260956679482,NA
+"Tyreek Hill",2018,"WR","Kan",155.660956679482,NA
 "Tyreek Hill",2017,"WR","Kan",137.794604653669,171.2
 "Tyreek Hill",2016,"WR","Kan",19.751073280265,158
 "Tyrell Adams",2018,"LB","Ind",8.13433712261573,NA
 "Tyrell Sutton",2010,"RB","Car",8.5,14.1
-"Tyrell Williams",2018,"WR","Sdg",97.7497575579263,NA
+"Tyrell Williams",2018,"WR","Sdg",85.0997575579263,NA
 "Tyrell Williams",2017,"WR","Sdg",111.91169276728,94.8
 "Tyrell Williams",2016,"WR","Sdg",36.8645674196388,147.9
 "Tyrell Williams",2015,"WR","Sdg",29.3700100099401,15
-"Tyrod Taylor",2018,"QB","Cle",207.879172346275,NA
+"Tyrod Taylor",2018,"QB","Cle",229.692505679608,NA
 "Tyrod Taylor",2017,"QB","Buf",237.744683967314,230.66
 "Tyrod Taylor",2016,"QB","Buf",233.510602670436,274.92
 "Tyrod Taylor",2015,"QB","Buf",165.445081780109,276.6
@@ -9893,7 +9889,7 @@
 "Valentino Blake",2016,"DB","Ten",31.6088095220442,40.8
 "Valentino Blake",2015,"DB","Pit",24.8606072456381,98.5
 "Valentino Blake",2013,"","Pit",22.4792577045509,9.5
-"Vance Mcdonald",2018,"TE","Pit",54.8410340477601,NA
+"Vance Mcdonald",2018,"TE","Pit",54.7910340477601,NA
 "Vance Mcdonald",2017,"TE","Pit",50.7670875714379,24.8
 "Vance Mcdonald",2016,"TE","Sfo",58.6445565342849,63.1
 "Vance Mcdonald",2015,"TE","Sfo",17.2652561055732,50.6
@@ -9975,7 +9971,7 @@
 "Vinny Curry",2016,"DL","Phi",50.87474070943,33.25
 "Vinny Curry",2015,"DL","Phi",45.2407191711431,20.25
 "Vinny Curry",2014,"DL","Phi",40.6664636175328,55.5
-"Virgil Green",2018,"","Sdg",55.4,NA
+"Virgil Green",2018,"","Sdg",51.2,NA
 "Virgil Green",2017,"TE","Den",39.7624498747871,25.1
 "Virgil Green",2016,"TE","Den",48.3278527217539,29.7
 "Virgil Green",2015,"TE","Den",34.8293487359404,23.3
@@ -10028,12 +10024,12 @@
 "Walter Thurmond",2014,"DB","Nyg",35.7448255515947,3
 "Walter Thurmond",2011,"LCB","Sea",64.8377604239043,13.5
 "Warrick Dunn",2008,"RB","Tam",76.8,123.6
-"Was",2018,"DST","Was",105,NA
+"Was",2018,"DST","Was",114,NA
 "Was",2017,"DST","Was",92,111
 "Was",2016,"DST","Was",94,93
 "Was",2015,"DST","Was",80,132
 "Was",2014,"DST","Was",111,66
-"Wayne Gallman",2018,"RB","Nyg",50.0967330522013,NA
+"Wayne Gallman",2018,"RB","Nyg",49.2300663855347,NA
 "Wayne Gallman",2017,"RB","Nyg",25.876965349372,70.9
 "Wendall Williams",2016,"","Hou",2.22696783097005,7.5
 "Wendell Smallwood",2018,"RB","Phi",34.3862976121225,NA
@@ -10086,9 +10082,9 @@
 "Will Compton",2014,"LB","Was",32.5,51.5
 "Will Davis",2016,"DB","Bal",10.975,6.75
 "Will Davis",2014,"DB","Mia",32,18
-"Will Dissly",2018,"TE","Sea",19.3,NA
+"Will Dissly",2018,"TE","Sea",19.6,NA
 "Will Franklin",2008,"WR","Kan",10.4,8.3
-"Will Fuller",2018,"WR","Hou",83.6600679731463,NA
+"Will Fuller",2018,"WR","Hou",106.860067973146,NA
 "Will Fuller",2017,"WR","Hou",85.1050870769616,85.2
 "Will Fuller",2016,"WR","Hou",65.8323291262434,81.2
 "Will Gay",2018,"DB","Nyg",29.0227298863163,NA
@@ -10149,7 +10145,7 @@
 "Willie Henry",2018,"DT","Bal",35.2341470365083,NA
 "Willie Parker",2009,"RB","Pit",144.6,49.3
 "Willie Parker",2008,"RB","Pit",172.5,110.4
-"Willie Snead",2018,"WR","Bal",80.8748109390201,NA
+"Willie Snead",2018,"WR","Bal",67.02481093902,NA
 "Willie Snead",2017,"WR","Nor",101.490144228974,9.2
 "Willie Snead",2016,"WR","Nor",106.12539322738,119.5
 "Willie Snead",2015,"WR","Nor",38.4657991314056,114.4
@@ -10198,7 +10194,7 @@
 "Zach Brown",2015,"LB","Ten",107.991596231201,80.25
 "Zach Brown",2013,"LB","Ten",96.800986089979,107.75
 "Zach Cunningham",2018,"OLB","Hou",88.4682520178524,NA
-"Zach Ertz",2018,"TE","Phi",118.737078977339,NA
+"Zach Ertz",2018,"TE","Phi",118.687078977339,NA
 "Zach Ertz",2017,"TE","Phi",108.193758571326,128.4
 "Zach Ertz",2016,"TE","Phi",89.7445770249785,105.6
 "Zach Ertz",2015,"TE","Phi",82.223217564661,95.3
@@ -10245,7 +10241,7 @@
 "Zane Gonzalez",2017,"K","Cle",99.8426142636344,78
 "Zaviar Gooden",2016,"","Ari/det",33.5956503813361,5.5
 "Zaviar Gooden",2014,"LB","Ten",33.0017570607647,22.5
-"Zay Jones",2018,"WR","Buf",72.6381593041019,NA
+"Zay Jones",2018,"WR","Buf",66.3881593041019,NA
 "Zay Jones",2017,"WR","Buf",87.4727288255251,43.6
 "Zurlon Tipton",2015,"RB","Ind",17.7553041419687,7.7
 "Zurlon Tipton",2014,"RB","Ind",15.0815075144253,14.6

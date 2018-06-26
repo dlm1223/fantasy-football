@@ -1,6 +1,6 @@
 # load("Misc Data/2017 NFL Data.RData")
 
-#analyze errors~projections+position
+#ERROR ANALYSIS####
 
 projections<-read.csv(paste(c("Projections_HALF.csv" ), collapse=""))
 colnames(projections)[colnames(projections)=="PosFFA"]<-"Pos"
@@ -11,15 +11,18 @@ projections$Pos[grepl("FB", projections$Pos)]<-"RB"
 projections$Pos<-gsub("[/]", ";", projections$Pos)
 projections$fantPts_bin<-cut(projections$fantPts_agg, breaks=c(-50, 50, 100, 150, 200, 250, 400))
 
-errors<-ddply(projections[which(projections$Season>=2012& !is.na(projections$fantPts_bin) & projections$Pos!=""),], .(fantPts_bin, Pos),summarize,  
-              mean=mean(fantPts-fantPts_agg, na.rm=T),
-              median=median(fantPts-fantPts_agg, na.rm=T),
-              sd=sd(fantPts-fantPts_agg, na.rm=T), 
-              n=sum(!is.na(fantPts-fantPts_agg)))
+errors<-ddply(projections[which(projections$Season>=2012& projections$fantPts_agg>=50& !is.na(projections$fantPts_bin) & projections$Pos!=""),], .(fantPts_bin, Pos),summarize,  
+              meanError=mean(fantPts_agg-fantPts, na.rm=T),
+              medianError=median(fantPts_agg-fantPts, na.rm=T),
+              meanRelativeError=mean((fantPts_agg-fantPts)/fantPts_agg, na.rm=T),
+              sdError=sd(fantPts_agg-fantPts, na.rm=T), 
+              n=sum(!is.na(fantPts_agg-fantPts)))
 errors<-errors[errors$n>10,]
 errors<-errors[order(errors$Pos),]
 errors[which(errors$Pos=="DB"),]
 errors[order(errors$Pos),]
+
+###SIM-SEASON FUNCTIONS####
 
 
 # plot(adp$HALF^.4~adp$HALF)
