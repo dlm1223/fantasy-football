@@ -305,7 +305,7 @@ The optimal solution for the base case does not change anything. Thinking about 
 
 ![](HALF2%20scoring-base%20case%20parameters.jpeg)
 
-The results are similar. The only difference is that it makes more sense to take an extra WR instead of an RB because it will have a greater chance of being useful in the final starting lineup flex spot. These results make sense and back up many of the initial findings.
+The results are similar and back up many of the initial findings.
 
 ------------------------------------------------------------------------
 
