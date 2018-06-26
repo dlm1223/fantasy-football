@@ -164,8 +164,8 @@ head(adp, 15)
 ###DRAFT PICK OPTIMIZATION#####
 
 getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, numFLEX=1, numDST=1, shift=0,
-                   out=c(), fix=c(), scoring="HALF", strategy=c(),adpCol="ADP_Rank"){
-  # slot<-"Slot4";numRB<-2;numWR<-3;numTE<-1;numQB<-1;numK<-1;numFLEX<-1;numDST<-1;shift<-0;out<-c();fix<-c();scoring<-"HALF"
+                   out=c(), fix=c(), scoring="HALF", strategy=c(),adpCol="ADP_Rank", outPos=c(),onePos=c()){
+  # slot<-"Slot4";numRB<-5;numWR<-5;numTE<-1;numQB<-1;numK<-1;numFLEX<-1;numDST<-1;shift<-0;out<-c();fix<-c();scoring<-"HALF";numTeams<-12
   #1qb, 3wr, 2rb, 1te, 1def, 1k, 1flex, 7 bench
   #dataframe of snake draft
   
@@ -206,16 +206,28 @@ getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, 
   A[q, adp$Player%in% out]<-1; model$sense[q]<-"<="; model$rhs[q]<-0;q<-q+1 #constrain total numPicks
   A[q, adp$Player%in% fix]<-1; model$sense[q]<-">="; model$rhs[q]<-sum( adp$Player%in% fix);q<-q+1 #constrain total numPicks
   
-  #must take at least 1 player above each threshold
-  
+
   #1st pick needs 10 players with ADPs above its slot, 2nd pick needs 9 players, etc.
-  #
   tot<-numPicks
   for(i in 1:numPicks){
     storePick<-pickDF[i, slot]
     A[q, which(adp[,adpCol]*(1-shift)>=storePick)]<-1; model$sense[q]<-">="; model$rhs[q]<-tot;q<-q+1  #must include a player with adp greater than or equal to pick number
     tot<-tot-1 #first pick needs to have every pick be after it, each subsequent pick needs one less to be after it
   }
+  
+  if(length(onePos)>=1){
+    storePick<-pickDF[length(onePos)+1, slot]
+    # numPos<-get(paste0("num", onePos[1])) #need to take at least numPos-1 players at 
+    A[q, which(adp[,adpCol]*(1-shift)<storePick& adp$Pos==onePos[1])]<-1; model$sense[q]<-"<="; model$rhs[q]<-1;q<-q+1  #must include a player with adp greater than or equal to pick number
+  }
+  
+  if(length(outPos)>=1){
+    storePick<-pickDF[length(outPos)+1, slot]
+    # numPos<-get(paste0("num", outPos[1])) #need to take at least numPos-1 players at 
+    A[q, which(adp[,adpCol]*(1-shift)<storePick& adp$Pos==outPos$Pos[1])]<-1; model$sense[q]<-"<="; model$rhs[q]<-0;q<-q+1  #must include a player with adp greater than or equal to pick number
+  }
+  
+  
   
   model$vtype   <- 'B'
   params <- list(OutputFlag=0)
@@ -237,9 +249,9 @@ adp$HALF2<-ifelse(adp$Pos=="RB"& adp$HALF>=100, adp$HALF-20,
                          ifelse(grepl("WR", adp$Pos)& adp$HALF>100, adp$HALF-15, 
                                 ifelse(adp$Pos%in% "DST", adp$HALF+10, adp$HALF   )))) 
 
-pickDF<- getPicks(slot="Slot4", numRB=5, numWR =5 , numFLEX = 0,numQB=2,shift=0,numDST=1, numK=1,numTE=1,
-                  out=c(), fix=c(), scoring='HALF')
-pickDF
+picks<- getPicks(slot="Slot4", numRB=5, numWR =5 , numFLEX = 0,numQB=2,shift=0,numDST=1, numK=1,numTE=1,
+                  out=c(), fix=c(), scoring='HALF', onePos=rep("RB", 6))
+picks
 
 #expected points for each team:
 numTeams<-12

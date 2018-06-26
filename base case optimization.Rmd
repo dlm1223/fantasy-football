@@ -75,9 +75,10 @@ head(adp, 25)
 
 ```{r include=T, eval=T , echo=F}
 
+
 getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, numFLEX=1, numDST=1, shift=0,
-                   out=c(), fix=c(), scoring="HALF", strategy=c(),adpCol="ADP_Rank"){
-  # slot<-"Slot4";numRB<-2;numWR<-3;numTE<-1;numQB<-1;numK<-1;numFLEX<-1;numDST<-1;shift<-0;out<-c();fix<-c();scoring<-"HALF"
+                   out=c(), fix=c(), scoring="HALF", strategy=c(),adpCol="ADP_Rank", outPos=c(),onePos=c()){
+  # slot<-"Slot4";numRB<-5;numWR<-5;numTE<-1;numQB<-1;numK<-1;numFLEX<-1;numDST<-1;shift<-0;out<-c();fix<-c();scoring<-"HALF";numTeams<-12
   #1qb, 3wr, 2rb, 1te, 1def, 1k, 1flex, 7 bench
   #dataframe of snake draft
   
@@ -118,16 +119,28 @@ getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, 
   A[q, adp$Player%in% out]<-1; model$sense[q]<-"<="; model$rhs[q]<-0;q<-q+1 #constrain total numPicks
   A[q, adp$Player%in% fix]<-1; model$sense[q]<-">="; model$rhs[q]<-sum( adp$Player%in% fix);q<-q+1 #constrain total numPicks
   
-  #must take at least 1 player above each threshold
   
   #1st pick needs 10 players with ADPs above its slot, 2nd pick needs 9 players, etc.
-  #
   tot<-numPicks
   for(i in 1:numPicks){
     storePick<-pickDF[i, slot]
     A[q, which(adp[,adpCol]*(1-shift)>=storePick)]<-1; model$sense[q]<-">="; model$rhs[q]<-tot;q<-q+1  #must include a player with adp greater than or equal to pick number
     tot<-tot-1 #first pick needs to have every pick be after it, each subsequent pick needs one less to be after it
   }
+  
+  if(length(onePos)>=1){
+    storePick<-pickDF[length(onePos)+1, slot]
+    # numPos<-get(paste0("num", onePos[1])) #need to take at least numPos-1 players at 
+    A[q, which(adp[,adpCol]*(1-shift)<storePick& adp$Pos==onePos[1])]<-1; model$sense[q]<-"<="; model$rhs[q]<-1;q<-q+1  #must include a player with adp greater than or equal to pick number
+  }
+  
+  if(length(outPos)>=1){
+    storePick<-pickDF[length(outPos)+1, slot]
+    # numPos<-get(paste0("num", outPos[1])) #need to take at least numPos-1 players at 
+    A[q, which(adp[,adpCol]*(1-shift)<storePick& adp$Pos==outPos$Pos[1])]<-1; model$sense[q]<-"<="; model$rhs[q]<-0;q<-q+1  #must include a player with adp greater than or equal to pick number
+  }
+  
+  
   
   model$vtype   <- 'B'
   params <- list(OutputFlag=0)
@@ -143,20 +156,26 @@ getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, 
   picks$Slot<-pickDF[, slot]
   picks[,c("Player", "ADP_est", adpCol, "Pos",scoring, "Slot")]
 }
-
 ```
 
 ```{r include=T, eval=T , echo=T}
 getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')
 ```
 
-<br />The parameters of getPicks() specify number of players at each position to take. I also added the shift parameter which can shift everyone's ADP by a given fraction i.e. shift=.1 would subtract 10% from everyone's ADP. Rotoviz [already has an app](http://rotoviz.com/2017/08/using-the-rotoviz-draft-optimizer-to-dominate-your-ppr-draft/) which does a similar optimization. The results do seem to suggest certain things like how you should often take RB's early. Looking at the optimal first two picks for each draft slot, you can see how RB's are usually suggested for the early picks:
+<br />The parameters of getPicks() specify number of players at each position to take. I also added the shift parameter which can shift everyone's ADP by a given fraction i.e. shift=.1 would subtract 10% from everyone's ADP. I can also make adjustments like constraining to only select 1QB in the first 10 rounds.
+
+```{r include=T, eval=T , echo=T}
+getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF', onePos=rep("QB", 10))
+```
+
+
+Rotoviz [already has an app](http://rotoviz.com/2017/08/using-the-rotoviz-draft-optimizer-to-dominate-your-ppr-draft/) which does a similar optimization. The results do seem to suggest certain things like how you should often take RB's early. Looking at the optimal first two picks for each draft slot, you can see how RB's are usually suggested for the early picks:
 
 ```{r include=T, eval=T , echo=T}
 sapply(paste0("Slot", 1:12), function(x) getPicks(slot=x, numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')[1:2,],simplify = FALSE,USE.NAMES = TRUE)
 ```
 
-<br />There are some shortcomings with using this basic optimization to inform your strategy. First of all, the thing you want to optimize is not all of your picks' points--**a more appropriate objective would be to draft in a way that will give you the eventual best starting lineup**. This would ideally take into account the uncertainty of the projections, the fact that you need to start different number of positions, and the possibility of getting waiver wire adds. I'll show how I account for this below.
+<br />There are some shortcomings with using this basic optimization to inform your strategy. First of all, the thing you want to optimize is not all of your picks' points--**a more appropriate objective would be to draft in a way that will give you the eventual best starting lineup**. This would ideally take into account the uncertainty of the projections, the fact that you can only start a limited number of each position, and the possibility of getting waiver wire adds. I'll show how I account for this below.
 
 
 ---
@@ -266,7 +285,7 @@ getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFL
 ```
 
 
-The optimal solution for the base case does not change anything Thinking about it, it makes sense. I need to take a fixed number at each position and so am basically judging each position independently and shifting it doesn't have an effect. Next I repeat the parameter optimization to see the effect of my projections' bias on that.
+The optimal solution for the base case does not change anything. Thinking about it, it makes sense. I need to take a fixed number at each position and so am basically judging each position independently and shifting it doesn't have an effect. Next I repeat the parameter optimization to see the effect of my projections' bias on that.
 
 
 ![](HALF2 scoring-base case parameters.jpeg)

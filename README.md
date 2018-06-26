@@ -69,7 +69,30 @@ getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFL
     ## 548                 Pit  163.35    186.0 DST 122.0000  165
     ## 283     Harrison Butker      NA    500.0   K 145.3158  172
 
-<br />The parameters of getPicks() specify number of players at each position to take. I also added the shift parameter which can shift everyone's ADP by a given fraction i.e. shift=.1 would subtract 10% from everyone's ADP. Rotoviz [already has an app](http://rotoviz.com/2017/08/using-the-rotoviz-draft-optimizer-to-dominate-your-ppr-draft/) which does a similar optimization. The results do seem to suggest certain things like how you should often take RB's early. Looking at the optimal first two picks for each draft slot, you can see how RB's are usually suggested for the early picks:
+<br />The parameters of getPicks() specify number of players at each position to take. I also added the shift parameter which can shift everyone's ADP by a given fraction i.e. shift=.1 would subtract 10% from everyone's ADP. I can also make adjustments like constraining to only select 1QB in the first 10 rounds.
+
+``` r
+getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF', onePos=rep("QB", 10))
+```
+
+    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
+    ## 27         Alvin Kamara    6.00      6.0  RB 244.1499    4
+    ## 341     Jerick Mckinnon   20.60     22.0  RB 190.1646   21
+    ## 681         Tyreek Hill   29.65     29.0  WR 196.4085   28
+    ## 384 Juju Smith Schuster   42.35     45.0  WR 178.8367   45
+    ## 585      Russell Wilson   57.10     57.5  QB 300.8192   52
+    ## 629         Tarik Cohen   75.80     78.0  RB 128.4949   69
+    ## 201      Delanie Walker   79.15     80.0  TE 133.6574   76
+    ## 152         Cooper Kupp  100.70    100.0  WR 147.1439   93
+    ## 569      Robby Anderson  104.65    107.0  WR 144.4480  100
+    ## 407     Kelvin Benjamin  112.70    117.0  WR 137.3654  117
+    ## 620    Sterling Shepard  119.10    125.0  WR 139.7624  124
+    ## 22      Alexander Smith  148.65    152.0  QB 265.3228  141
+    ## 314         James White  149.30    155.0  RB 136.0711  148
+    ## 548                 Pit  163.35    186.0 DST 122.0000  165
+    ## 283     Harrison Butker      NA    500.0   K 145.3158  172
+
+Rotoviz [already has an app](http://rotoviz.com/2017/08/using-the-rotoviz-draft-optimizer-to-dominate-your-ppr-draft/) which does a similar optimization. The results do seem to suggest certain things like how you should often take RB's early. Looking at the optimal first two picks for each draft slot, you can see how RB's are usually suggested for the early picks:
 
 ``` r
 sapply(paste0("Slot", 1:12), function(x) getPicks(slot=x, numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')[1:2,],simplify = FALSE,USE.NAMES = TRUE)
@@ -135,7 +158,7 @@ sapply(paste0("Slot", 1:12), function(x) getPicks(slot=x, numRB=4, numWR = 6,num
     ## 167         Dalvin Cook   12.90       13  RB 201.3612   12
     ## 133 Christian Mccaffrey   20.15       20  RB 210.7556   13
 
-<br />There are some shortcomings with using this basic optimization to inform your strategy. First of all, the thing you want to optimize is not all of your picks' points--**a more appropriate objective would be to draft in a way that will give you the eventual best starting lineup**. This would ideally take into account the uncertainty of the projections, the fact that you need to start different number of positions, and the possibility of getting waiver wire adds. I'll show how I account for this below.
+<br />There are some shortcomings with using this basic optimization to inform your strategy. First of all, the thing you want to optimize is not all of your picks' points--**a more appropriate objective would be to draft in a way that will give you the eventual best starting lineup**. This would ideally take into account the uncertainty of the projections, the fact that you can only start a limited number of each position, and the possibility of getting waiver wire adds. I'll show how I account for this below.
 
 ------------------------------------------------------------------------
 
@@ -204,16 +227,16 @@ First I get the optimal picks at Slot=4/12, same as in base case:
 
 Then I can get the top starting lineup from 1 simulation, Projected Points=HALF. Simulated Points=Sim:
 
-    ##                 Player ADP_est ADP_Rank Pos      HALF Slot     Score  ScoreSD      Sim
-    ## 2      Jerick Mckinnon   20.60     22.0  RB 190.16459   21 190.16459 77.38360 296.4178
-    ## 3          Tyreek Hill   29.65     29.0  WR 196.40852   28 196.40852 61.96128 215.3891
-    ## 4  Juju Smith Schuster   42.35     45.0  WR 178.83668   45 178.83668 59.32550 145.9657
-    ## 5       Russell Wilson   57.10     57.5  QB 300.81921   52 300.81921 70.00000 283.2456
-    ## 7       Delanie Walker   79.15     80.0  TE 133.65744   76 133.65744 48.04862 161.4991
-    ## 10    Sterling Shepard  119.10    125.0  WR 139.76239  117 139.76239 53.46436 143.8670
-    ## 14                 Pit  163.35    186.0 DST 122.00000  165 122.00000 30.00000 171.3776
-    ## 17      Elijah Mcguire      NA    500.0  RB  76.81232   NA  76.81232 47.15255 109.5217
-    ## 21      Adam Vinatieri      NA    500.0   K 123.51287   NA 123.51287 30.00000 161.3289
+    ##                 Player ADP_est ADP_Rank Pos     HALF Slot    Score  ScoreSD      Sim
+    ## 1         Alvin Kamara    6.00        6  RB 244.1499    4 244.1499 91.78148 205.3284
+    ## 2      Jerick Mckinnon   20.60       22  RB 190.1646   21 190.1646 77.38360 275.1923
+    ## 3          Tyreek Hill   29.65       29  WR 196.4085   28 196.4085 61.96128 168.7159
+    ## 4  Juju Smith Schuster   42.35       45  WR 178.8367   45 178.8367 59.32550 192.1313
+    ## 6           Cam Newton   74.05       76  QB 284.7175   69 284.7175 70.00000 314.8126
+    ## 7       Delanie Walker   79.15       80  TE 133.6574   76 133.6574 48.04862 131.7747
+    ## 13         James White  149.30      155  RB 136.0711  148 136.0711 62.95685 211.9616
+    ## 14                 Pit  163.35      186 DST 122.0000  165 122.0000 30.00000 145.3094
+    ## 21     Steven Hauschka      NA      500   K 125.3427   NA 125.3427 30.00000 174.7781
 
 Finally, I can repeat this a large number of times to get the mean-simulated optimal lineup from a set of picks.
 
@@ -278,7 +301,7 @@ getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFL
     ## 548                 Pit  163.35    186.0 DST 132.00000  165
     ## 283     Harrison Butker      NA    500.0   K 145.31579  172
 
-The optimal solution for the base case does not change anything Thinking about it, it makes sense. I need to take a fixed number at each position and so am basically judging each position independently and shifting it doesn't have an effect. Next I repeat the parameter optimization to see the effect of my projections' bias on that.
+The optimal solution for the base case does not change anything. Thinking about it, it makes sense. I need to take a fixed number at each position and so am basically judging each position independently and shifting it doesn't have an effect. Next I repeat the parameter optimization to see the effect of my projections' bias on that.
 
 ![](HALF2%20scoring-base%20case%20parameters.jpeg)
 
