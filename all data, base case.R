@@ -7,7 +7,7 @@ library(XML)
 library(lpSolve)
 library(zoo)
 library(MASS)
-options(stringsAsFactors = F)
+options(stringsAsFactors = F, scipen =999)
 source('functions.R', encoding = 'UTF-8')
 
 ###SCRAPE DRAFT DATA####
