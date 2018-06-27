@@ -1,5 +1,3 @@
-Optimization for Fantasy Football Snake Drafts
----------
 -   [Base Case](#base-case)
 -   [More Complex Case](#more-complex-case)
     -   [Error Analysis](#error-analysis)
@@ -227,16 +225,16 @@ First I get the optimal picks at Slot=4/12, same as in base case:
 
 Then I can get the top starting lineup from 1 simulation, Projected Points=HALF. Simulated Points=Sim:
 
-    ##                 Player ADP_est ADP_Rank Pos     HALF Slot    Score  ScoreSD      Sim
-    ## 1         Alvin Kamara    6.00        6  RB 244.1499    4 244.1499 91.78148 205.3284
-    ## 2      Jerick Mckinnon   20.60       22  RB 190.1646   21 190.1646 77.38360 275.1923
-    ## 3          Tyreek Hill   29.65       29  WR 196.4085   28 196.4085 61.96128 168.7159
-    ## 4  Juju Smith Schuster   42.35       45  WR 178.8367   45 178.8367 59.32550 192.1313
-    ## 6           Cam Newton   74.05       76  QB 284.7175   69 284.7175 70.00000 314.8126
-    ## 7       Delanie Walker   79.15       80  TE 133.6574   76 133.6574 48.04862 131.7747
-    ## 13         James White  149.30      155  RB 136.0711  148 136.0711 62.95685 211.9616
-    ## 14                 Pit  163.35      186 DST 122.0000  165 122.0000 30.00000 145.3094
-    ## 21     Steven Hauschka      NA      500   K 125.3427   NA 125.3427 30.00000 174.7781
+    ##                 Player ADP_est ADP_Rank Pos      HALF Slot      Sim
+    ## 1         Alvin Kamara    6.00        6  RB 244.14990    4 409.6098
+    ## 2      Jerick Mckinnon   20.60       22  RB 190.16459   21 248.3665
+    ## 16      Ryan Tannehill      NA      500  QB 233.10286   NA 246.2360
+    ## 4  Juju Smith Schuster   42.35       45  WR 178.83668   45 205.2203
+    ## 12    Rishard Matthews  142.75      146  WR 132.92460  141 199.2251
+    ## 9       Robby Anderson  104.65      107  WR 144.44804  100 197.3481
+    ## 15     Harrison Butker      NA      500   K 145.31579  172 176.5661
+    ## 19         Jesse James      NA      500  TE  56.72271   NA 141.9709
+    ## 20                 Sfo      NA      500 DST  93.00000   NA 132.7847
 
 Finally, I can repeat this a large number of times to get the mean-simulated optimal lineup from a set of picks.
 

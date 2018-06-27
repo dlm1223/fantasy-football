@@ -1,13 +1,11 @@
 ---
 title: "Optimization for Fantasy Football Snake Drafts"
 output:  
-  html_document:
-    toc: true
-    highlight: tango  # specifies the syntax highlighting style
   md_document:
     toc: true
-    highlight: tango  # specifies the syntax highlighting style
     variant: markdown_github
+  html_document:
+    toc: true
 ---
 
 ---
