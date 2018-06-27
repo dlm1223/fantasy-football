@@ -1,11 +1,13 @@
 ---
 title: "Optimization for Fantasy Football Snake Drafts"
 output:  
-  md_document:
-    toc: true
-    variant: markdown_github
   html_document:
     toc: true
+    highlight: tango  # specifies the syntax highlighting style
+  md_document:
+    toc: true
+    highlight: tango  # specifies the syntax highlighting style
+    variant: markdown_github
 ---
 
 ---
@@ -249,7 +251,7 @@ picks
 Then I can get the top starting lineup from 1 simulation, Projected Points=HALF. Simulated Points=Sim:
 
 ```{r  include=T, eval=T , echo=F}
-topLineup<-simSeason(picks,numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="HALF", returnLineup = T)
+topLineup<-simSeason(adp, scoring = "HALF") %>% getTopLineup(., picks, returnLineup = T  )
 topLineup
 ```
 

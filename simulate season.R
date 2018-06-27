@@ -26,43 +26,34 @@ errors[order(errors$Pos),]
 
 
 # plot(adp$HALF^.4~adp$HALF)
-simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="HALF", optmode="lpsolve", returnLineup=F){
+simSeason<-function(picks, scoring="HALF"){
   #numRB<-2; numWR<-3; numTE<-1; numQB<-1; numK<-1; numDST<-1; numFLEX<-1
-  picks$Score<-picks[, scoring]  
   picks$ScoreSD<-ifelse(picks$Pos%in% c("K"), 30,
                         ifelse(picks$Pos%in% c("DST"), 30,
-                               ifelse(grepl("WR" ,picks$Pos), 32.50+.15*picks$Score, 
-                                      ifelse(grepl("TE" ,picks$Pos),28+.15*picks$Score,
-                                             ifelse(grepl("RB", picks$Pos), 26.6667+0.2667*picks$Score, 
+                               ifelse(grepl("WR" ,picks$Pos), 32.50+.15*picks[, scoring], 
+                                      ifelse(grepl("TE" ,picks$Pos),28+.15*picks[, scoring],
+                                             ifelse(grepl("RB", picks$Pos), 26.6667+0.2667*picks[, scoring], 
                                                     ifelse(grepl("QB", picks$Pos), 70, 
-                                                           ifelse(grepl("LB", picks$Pos),23+.125*picks$Score, 
-                                                                  ifelse(grepl("DL",picks$Pos ), 17+.1*picks$Score, 
-                                                                         ifelse(grepl("DB",picks$Pos ),23+.1*picks$Score, 
+                                                           ifelse(grepl("LB", picks$Pos),23+.125*picks[, scoring], 
+                                                                  ifelse(grepl("DL",picks$Pos ), 17+.1*picks[, scoring], 
+                                                                         ifelse(grepl("DB",picks$Pos ),23+.1*picks[, scoring], 
                                                                                 NA
                                                                          )))))))))
-  picks$Sim<-rnorm(nrow(picks), mean=picks$Score, sd=picks$ScoreSD)
+  picks$Sim<-rnorm(nrow(picks), mean=picks[, scoring], sd=picks$ScoreSD)
   picks$Sim[picks$Sim<0]<-0
+  picks
+}
+
+#get optimal starting lineup based on picks & sims
+getTopLineup<-function(sims,picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1,  optmode="lpsolve", returnLineup=F){
+  # numRB<-2;numRB<-2;numWR<-2;numWR<-2;numTE<-1;numQB<-1;numK<-1;numDST<-1;numFLEX<-1
   
-  undrafted<-adp[is.na(adp$ADP_est)& !adp$Pos=='',]
-  undrafted$Score<-undrafted[, scoring]  
-  undrafted$ScoreSD<-ifelse(undrafted$Pos%in% c("K"), 30,
-                            ifelse(undrafted$Pos%in% c("DST"), 30,
-                                   ifelse(grepl("WR" ,undrafted$Pos), 32.50+.15*undrafted$Score, 
-                                          ifelse(grepl("TE" ,undrafted$Pos), 28+.15*undrafted$Score, 
-                                                 ifelse(grepl("RB", undrafted$Pos), 26.6667+0.2667*undrafted$Score, 
-                                                        ifelse(grepl("QB", undrafted$Pos), 70, 
-                                                               ifelse(grepl("LB", undrafted$Pos),23+.125*undrafted$Score, 
-                                                                      ifelse(grepl("DL",undrafted$Pos ),17+.1*undrafted$Score, 
-                                                                             ifelse(grepl("DB",undrafted$Pos ),23+.1*undrafted$Score, 
-                                                                                    NA
-                                                                             )))))))))
-  undrafted$Sim<-rnorm(nrow(undrafted), mean=undrafted$Score, sd=undrafted$ScoreSD)
-  undrafted$Sim[undrafted$Sim<0]<-0
-  undrafted<-undrafted[order(undrafted$Sim, decreasing = T),]
+  #match Sim score to picks
+  picks$Sim<-sims$Sim[match(picks$Player, sims$Player)]
   
-  #assuming these are the players I can get through free agency 
-  #should allow me to not have to draft a backup kicker
-  #assuming i can get the 3-rd best player at each position 
+  #get undrafted players, assume can get 2rd best undrafted FA at each position
+  undrafted<-sims[which(sims$ADP_Rank==500), ]
+  undrafted<-undrafted[order(undrafted$Sim, decreasing = T), ]
   freeAgent<-c(which(grepl("QB", undrafted$Pos))[3],
                which(grepl("RB", undrafted$Pos))[3],
                which(grepl("WR", undrafted$Pos))[3],
@@ -71,82 +62,61 @@ simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1,
                which(grepl("K", undrafted$Pos))[3])
   
   picks<-rbind.fill(picks, undrafted[freeAgent,colnames(undrafted)%in% colnames(picks)])
-  topLineup<-getTopLineup(picks,    numRB=numRB, numWR=numWR, numTE=numTE, numQB=numQB, numK=numK, numDST=numDST, numFLEX=numDST)#,optmode=optmode
-  if(returnLineup==F){
-    sum(topLineup$Sim)
+  picks<-picks[!duplicated(picks$Player), ]
+  
+  #get top lineup from Sims
+  picks<-picks[order(picks$Sim, decreasing = T),]
+  for(i in c("RB", "WR", "TE", "QB", "DST", "K")){
+    picks[, i]<-ifelse(grepl(i, picks$Pos), cumsum(grepl(i, picks$Pos)), NA)
+  }
+  starters<-picks[which(picks$RB<=numRB| picks$WR<=numWR| picks$QB<=numQB|picks$DST<=numDST| picks$TE<=numTE| picks$K<=numK),] #starters
+  flex<-picks[which(!picks$Player%in% starters$Player&grepl("RB|WR|TE", picks$Pos)),][1,] #flex
+  
+  result<-list(x=as.numeric(picks$Player%in% c(starters$Player, flex$Player)))
+  
+  # model <- list()
+  # A<-matrix(0, ncol=nrow(picks), nrow=20) #cols=decision variables, rows=constraints on variables
+  # model$obj<-picks$Sim  #goal to maximize sum of FPTS for chosen variables
+  # model$modelsense <- "max"
+  # numPicks<-numRB+numQB+numWR+numTE+numFLEX+numDST+numK
+  # 
+  # #position constraints
+  # q<-1
+  # A[q, grep("RB", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numRB;q<-q+1 #>=2 RBs
+  # A[q, grep("WR", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numWR;q<-q+1 #>=3 WRs
+  # A[q, grep("TE", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numTE;q<-q+1 
+  # A[q, grep("QB", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numQB;q<-q+1
+  # A[q, grep("K", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numK;q<-q+1 
+  # A[q, grep("DST", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numDST;q<-q+1
+  # A[q, grep("WR|RB|TE", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numRB+numWR+numTE+numFLEX;q<-q+1
+  # 
+  # A[q, 1:nrow(picks)]<-1; model$sense[q]<-"<="; model$rhs[q]<-numPicks;q<-q+1 #constrain total numPicks
+  # 
+  # model$vtype   <- 'B'
+  # params <- list(OutputFlag=0)
+  # model$A<-A[1:(q-1),]
+  # 
+  # if(optmode=="lpsolve") {
+  #   result<-lp ("max", objective.in=model$obj, const.mat=A[1:(q-1),],
+  #               const.dir=model$sense, const.rhs=model$rhs, all.bin=TRUE )
+  #   result$x<-result$solution
+  # }else if (optmode=="Rsymphony"){
+  #   model$sense[model$sense=="="]<-"=="
+  #   result<-Rsymphony_solve_LP(max=T, obj=model$obj, mat=A[1:(q-1),], types=rep("B",ncol(A)),
+  #                              rhs=model$rhs, dir = model$sense, time_limit = 20, gap_limit = .02 )
+  #   result$x<-result$solution
+  # }  else if(optmode=="RCplex"){
+  #   model$sense[model$sense=="="]<-"E"
+  #   model$sense[model$sense=="<="]<-"L"
+  #   model$sense[model$sense==">="]<-"G"
+  #   result<-Rcplex(cvec=model$obj,Amat=A[1:(q-1),],  bvec=model$rhs,sense = model$sense,
+  #                  objsense = model$modelsense,vtype="B" ,control = list(trace=0) )
+  #   result$x<- round(result$xopt, 1)
+  # } 
+  if(returnLineup){
+    picks[as.logical(result$x),!colnames(picks)%in% c("RB", "WR", "TE", "QB", "DST", "K")]
   } else{
-    topLineup
-  }  
-  # picks
+    sum(picks[as.logical(result$x),"Sim"])
+    
+  }
 }
-
-#get top lineup--faster function---doesn't handle multiple eligible players
-# getTopLineup2<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="Sim"){
-#   picks<-picks[order(picks[, scoring], decreasing = T),]
-#   
-#   for(i in c("RB", "WR", "TE", "QB", "DST", "K")){
-#     picks[, i]<-ifelse(grepl(i, picks$Pos), cumsum(grepl(i, picks$Pos)), NA)
-#   }
-#   test<-picks[which(picks$RB<=numRB| picks$WR<=numWR| picks$QB<=numQB|picks$DST<=numDST| picks$TE<=numTE| picks$K<=numK),] #starters
-#   flex<-picks[which(!picks$Player%in% test$Player&grepl("RB|WR|TE", picks$Pos)),][1,] #flex
-#   test<-rbind(test, flex)
-#   test[, !colnames(test)%in%  c("RB", "WR", "TE", "QB", "DST", "K", "RB|WR|TE"),]
-# }
-
-
-#get optimal starting lineup
-getTopLineup<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="Sim", optmode="lpsolve"){
-  
-  model <- list()
-  A<-matrix(0, ncol=nrow(picks), nrow=20) #cols=decision variables, rows=constraints on variables
-  model$obj<-picks[, scoring]  #goal to maximize sum of FPTS for chosen variables
-  model$modelsense <- "max"
-  numPicks<-numRB+numQB+numWR+numTE+numFLEX+numDST+numK
-  
-  #position constraints
-  q<-1
-  A[q, grep("RB", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numRB;q<-q+1 #>=2 RBs
-  A[q, grep("WR", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numWR;q<-q+1 #>=3 WRs
-  A[q, grep("TE", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numTE;q<-q+1 
-  A[q, grep("QB", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numQB;q<-q+1
-  A[q, grep("K", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numK;q<-q+1 
-  A[q, grep("DST", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numDST;q<-q+1
-  A[q, grep("WR|RB|TE", picks$Pos)]<-1; model$sense[q]<-">="; model$rhs[q]<-numRB+numWR+numTE+numFLEX;q<-q+1
-  
-  A[q, 1:nrow(picks)]<-1; model$sense[q]<-"<="; model$rhs[q]<-numPicks;q<-q+1 #constrain total numPicks
-  
-  model$vtype   <- 'B'
-  params <- list(OutputFlag=0)
-  model$A<-A[1:(q-1),]
-  
-  if(optmode=="lpsolve") {
-    result<-lp ("max", objective.in=model$obj, const.mat=A[1:(q-1),],
-                const.dir=model$sense, const.rhs=model$rhs, all.bin=TRUE )
-    result$x<-result$solution
-  }else if (optmode=="Rsymphony"){
-    model$sense[model$sense=="="]<-"=="
-    result<-Rsymphony_solve_LP(max=T, obj=model$obj, mat=A[1:(q-1),], types=rep("B",ncol(A)),
-                               rhs=model$rhs, dir = model$sense, time_limit = 20, gap_limit = .02 )
-    result$x<-result$solution
-  }  else if(optmode=="RCplex"){
-    model$sense[model$sense=="="]<-"E"
-    model$sense[model$sense=="<="]<-"L"
-    model$sense[model$sense==">="]<-"G"
-    result<-Rcplex(cvec=model$obj,Amat=A[1:(q-1),],  bvec=model$rhs,sense = model$sense,
-                   objsense = model$modelsense,vtype="B" ,control = list(trace=0) )
-    result$x<- round(result$xopt, 1)
-  } 
-  picks[as.logical(result$x),]
-}
-
-#the amount of players you take at a position is a function of the amount you need to start at the position, and 
-# the expected decrease in value of starting a replacement level player
-# x<-""
-# sd(simScores)
-
-# sd(simScores)
-# sapply(paste("Slot", 1:numTeams, sep=""), function(x) {
-# })
-
-
-

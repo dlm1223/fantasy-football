@@ -114,7 +114,9 @@ ffpros<-Reduce(function(x, y) merge(x, y, all=TRUE, by=c("Player", "Pos")), list
 
 adp<-merge(ffcalc[ffcalc$Year==2018, c("Player", "ADP_est", "ADPSD_est")], ffpros, by=c("Player"), all=T)
 
-adp$Pos[adp$Player=="Chris Thompson"& adp$Pos=="WR;RB"]<-"RB"
+adp$Pos[adp$Player%in%c("Chris Thompson", "Jd Mckissic", "Byron Marshall")& adp$Pos=="WR;RB"]<-"RB"
+adp$Pos[adp$Player%in%c("Ryan Hewitt")]<-"TE"
+adp$Pos[adp$Player%in%c("Tavon Austin")]<-"TE"
 
 
 save(list=c("adp", "ffcalc", "ffpros"), file="Draft Data.RData")
@@ -159,6 +161,7 @@ adp$PPR<-ifelse(is.na(adp$PPR.y), adp$PPR.x, adp$PPR.y)
 adp<-adp[, !grepl("[.]", colnames(adp))]
 adp<-adp[order(adp$ADP_est, decreasing = F),]
 
+adp[duplicated(adp$Player), ] #check if duplicates--if so will need to change getTopLineup() in simseason.R
 head(adp, 15)
 
 ###DRAFT PICK OPTIMIZATION#####
@@ -241,7 +244,7 @@ getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, 
   
   picks<-adp[as.logical(result$x),]
   picks$Slot<-pickDF[, slot]
-  picks[,c("Player", "ADP_est", adpCol, "Pos",scoring, "Slot")]
+  picks[,c( "Player", "ADP_est", adpCol, "Pos",scoring, "Slot")]
 }
 #shift means shift everyone's ADP to be x% earlier i.e. if someone''s adp is 100, need to take them at 80
 adp$HALF2<-ifelse(adp$Pos=="RB"& adp$HALF>=100, adp$HALF-20,
@@ -250,7 +253,7 @@ adp$HALF2<-ifelse(adp$Pos=="RB"& adp$HALF>=100, adp$HALF-20,
                                 ifelse(adp$Pos%in% "DST", adp$HALF+10, adp$HALF   )))) 
 
 picks<- getPicks(slot="Slot4", numRB=5, numWR =5 , numFLEX = 0,numQB=2,shift=0,numDST=1, numK=1,numTE=1,
-                  out=c(), fix=c(), scoring='HALF', onePos=rep("RB", 6))
+                  out=c(), fix=c(), scoring='HALF', onePos=rep("RB", 1))
 picks
 
 #expected points for each team:
@@ -273,7 +276,7 @@ nrow(picks)
 getPicks(slot="Slot4", numRB=5, numWR = 3,numTE=2,numK=1,numQB=2,
          numDST=1,numFLEX = 1,shift=0,  out=adp$Player[adp$ADP_Rank<=51& adp$Pos=="RB"], fix=c(), scoring='HALF')
 
-simScores<-replicate(2500, simSeason(picks,numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="HALF"))
-quantile(simScores)
+allSims<-replicate(2500,  simSeason(adp), simplify = F) #repeat simulation several times
+simScores<-sapply(allSims,function(x) getTopLineup(x, picks))
 
 
