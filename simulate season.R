@@ -26,7 +26,7 @@ errors[order(errors$Pos),]
 
 
 # plot(adp$HALF^.4~adp$HALF)
-simSeason<-function(picks, scoring="HALF"){
+simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="HALF", optmode="lpsolve", returnLineup=F){
   #numRB<-2; numWR<-3; numTE<-1; numQB<-1; numK<-1; numDST<-1; numFLEX<-1
   picks$ScoreSD<-ifelse(picks$Pos%in% c("K"), 30,
                         ifelse(picks$Pos%in% c("DST"), 30,
@@ -41,19 +41,26 @@ simSeason<-function(picks, scoring="HALF"){
                                                                          )))))))))
   picks$Sim<-rnorm(nrow(picks), mean=picks[, scoring], sd=picks$ScoreSD)
   picks$Sim[picks$Sim<0]<-0
-  picks
-}
-
-#get optimal starting lineup based on picks & sims
-getTopLineup<-function(sims,picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1,  optmode="lpsolve", returnLineup=F){
-  # numRB<-2;numRB<-2;numWR<-2;numWR<-2;numTE<-1;numQB<-1;numK<-1;numDST<-1;numFLEX<-1
   
-  #match Sim score to picks
-  picks$Sim<-sims$Sim[match(picks$Player, sims$Player)]
+  undrafted<-adp[is.na(adp$ADP_est)& !adp$Pos=='',]
+  undrafted$ScoreSD<-ifelse(undrafted$Pos%in% c("K"), 30,
+                            ifelse(undrafted$Pos%in% c("DST"), 30,
+                                   ifelse(grepl("WR" ,undrafted$Pos), 32.50+.15*undrafted[, scoring] , 
+                                          ifelse(grepl("TE" ,undrafted$Pos), 28+.15*undrafted[, scoring]  , 
+                                                 ifelse(grepl("RB", undrafted$Pos), 26.6667+0.2667*undrafted[, scoring]  , 
+                                                        ifelse(grepl("QB", undrafted$Pos), 70, 
+                                                               ifelse(grepl("LB", undrafted$Pos),23+.125*undrafted[, scoring]  , 
+                                                                      ifelse(grepl("DL",undrafted$Pos ),17+.1*undrafted[, scoring]  , 
+                                                                             ifelse(grepl("DB",undrafted$Pos ),23+.1*undrafted[, scoring]  , 
+                                                                                    NA
+                                                                             )))))))))
+  undrafted$Sim<-rnorm(nrow(undrafted), mean=undrafted[, scoring] , sd=undrafted$ScoreSD)
+  undrafted$Sim[undrafted$Sim<0]<-0
+  undrafted<-undrafted[order(undrafted$Sim, decreasing = T),]
   
-  #get undrafted players, assume can get 2rd best undrafted FA at each position
-  undrafted<-sims[which(sims$ADP_Rank==500), ]
-  undrafted<-undrafted[order(undrafted$Sim, decreasing = T), ]
+  #assuming these are the players I can get through free agency 
+  #should allow me to not have to draft a backup kicker
+  #assuming i can get the 3-rd best player at each position 
   freeAgent<-c(which(grepl("QB", undrafted$Pos))[3],
                which(grepl("RB", undrafted$Pos))[3],
                which(grepl("WR", undrafted$Pos))[3],
@@ -63,6 +70,19 @@ getTopLineup<-function(sims,picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, n
   
   picks<-rbind.fill(picks, undrafted[freeAgent,colnames(undrafted)%in% colnames(picks)])
   picks<-picks[!duplicated(picks$Player), ]
+  topLineup<-getTopLineup(picks, numRB=numRB, numWR=numWR, numTE=numTE, numQB=numQB, numK=numK, numDST=numDST, numFLEX=numFLEX)#,optmode=optmode
+  
+  if(returnLineup==F){
+    sum(topLineup$Sim)
+  } else{
+    topLineup
+  }  
+  
+}
+
+#get optimal starting lineup based on picks & sims
+getTopLineup<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1,  optmode="lpsolve"){
+  # numRB<-2;numRB<-2;numWR<-2;numWR<-2;numTE<-1;numQB<-1;numK<-1;numDST<-1;numFLEX<-1
   
   #get top lineup from Sims
   picks<-picks[order(picks$Sim, decreasing = T),]
@@ -113,10 +133,5 @@ getTopLineup<-function(sims,picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, n
   #                  objsense = model$modelsense,vtype="B" ,control = list(trace=0) )
   #   result$x<- round(result$xopt, 1)
   # } 
-  if(returnLineup){
-    picks[as.logical(result$x),!colnames(picks)%in% c("RB", "WR", "TE", "QB", "DST", "K")]
-  } else{
-    sum(picks[as.logical(result$x),"Sim"])
-    
-  }
+  picks[as.logical(result$x),!colnames(picks)%in% c("RB", "WR", "TE", "QB", "DST", "K")]
 }

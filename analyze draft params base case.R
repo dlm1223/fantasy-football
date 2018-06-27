@@ -50,52 +50,50 @@ source("simulate season.R")
 
 scoring<-"HALF2"
 
-allSims<-lapply(1:10000, function(x) simSeason(adp, scoring = scoring)) #repeat simulation several times
-
 picks1<-getPicks(slot="Slot4", numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
-simScores1<-sapply(allSims, function(x) getTopLineup(x, picks1))
+simScores1<-replicate(10000, simSeason(picks1, scoring=scoring))
 
 #rb heavy?
 picks1A<-getPicks(slot="Slot4", numRB=6, numWR = 4,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
-simScores1A<-sapply(allSims, function(x) getTopLineup(x, picks1A ))
+simScores1A<-replicate(10000, simSeason(picks1A , scoring=scoring))
 
 
 picks1B<-getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
-simScores1B<-sapply(allSims, function(x) getTopLineup(x, picks1B ))
+simScores1B<-replicate(10000, simSeason(picks1B , scoring=scoring))
 
 
 #take 2 TEs/QBs?
 picks2<-getPicks(slot="Slot4", numRB=5, numWR = 4,numTE=2,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
-simScores2<-sapply(allSims, function(x) getTopLineup(x, picks2 ))
+simScores2<-replicate(10000, simSeason(picks2 , scoring=scoring))
 
 #take 2 TEs, DST and QB?
 picks3<-getPicks(slot="Slot4", numRB=4, numWR = 4,numTE=2,numK=1,numQB=2, numDST=2,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
-simScores3<-sapply(allSims, function(x) getTopLineup(x, picks3 ))
+simScores3<-replicate(10000, simSeason(picks3 , scoring=scoring))
 
 
 #take 1QB and 2 DST/TE?
 picks4<-getPicks(slot="Slot4", numRB=5, numWR = 4,numTE=2,numK=1,numQB=1, numDST=2,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
-simScores4<-sapply(allSims, function(x) getTopLineup(x, picks4 ))
+simScores4<-replicate(10000, simSeason(picks4 , scoring=scoring))
 
 #2 TE/QB + take Antonio Brown at pick 1?
 picks5<-getPicks(slot="Slot4", numRB=5, numWR =5 ,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix="Antonio Brown", scoring=scoring)
-simScores5<-sapply(allSims, function(x) getTopLineup(x, picks5 ))
+simScores5<-replicate(10000, simSeason(picks5 , scoring=scoring))
 
 # #Antonio Brown + RB heavy?
 # picks6<-getPicks(slot="Slot4", numRB=6, numWR = 4,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix="Antonio Brown", scoring=scoring)
-# simScores6<-replicate(10000, simSeason(picks6, scoring=scoring))
+# simScores6<-replicate(10000, simSeason(picks6, scoring=scoring, scoring=scoring))
 
 #zero-RB in R1-4?
 picks7<-getPicks(slot="Slot4", numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=adp$Player[adp$ADP_Rank<=51& adp$Pos=="RB"], fix=c(), scoring=scoring)
-simScores7<-sapply(allSims, function(x) getTopLineup(x, picks7 ))
+simScores7<-replicate(10000, simSeason(picks7 , scoring=scoring))
 
 #TE in R2?
 picks8<-getPicks(slot="Slot4", numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=, fix="Robert Gronkowski", scoring=scoring)
-simScores8<-sapply(allSims, function(x) getTopLineup(x, picks8 ))
+simScores8<-replicate(10000, simSeason(picks8 , scoring=scoring))
 summary(simScores6)
 
 picks9<-getPicks(slot="Slot4", onePos=rep("QB", 10), numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
-simScores9<-sapply(allSims, function(x) getTopLineup(x, picks9 ))
+simScores9<-replicate(10000, simSeason(picks9 , scoring=scoring))
 
 
 Parameters<-c("1. RBx5,WRx5,QBx2,K/DST/TEx1", "2. RBx6,WRx4,QBx2,K/DST/TEx1","3. RBx4,WRx6,QBx2,K/DST/TEx1",

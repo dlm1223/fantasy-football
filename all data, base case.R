@@ -275,8 +275,6 @@ picks
 nrow(picks)
 getPicks(slot="Slot4", numRB=5, numWR = 3,numTE=2,numK=1,numQB=2,
          numDST=1,numFLEX = 1,shift=0,  out=adp$Player[adp$ADP_Rank<=51& adp$Pos=="RB"], fix=c(), scoring='HALF')
-
-allSims<-replicate(2500,  simSeason(adp), simplify = F) #repeat simulation several times
-simScores<-sapply(allSims,function(x) getTopLineup(x, picks))
+simScores<-replicate(2500, simSeason(picks))
 
 
