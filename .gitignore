@@ -2,6 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+*.html
+*.Rmd
 model fitting.R
 organize player data.R
 scrape player data.R
@@ -21,3 +23,4 @@ archived links.txt
 cache/
 figure/
 wordpress upload.R
+
