@@ -94,11 +94,18 @@ simScores_allSlots<-lapply(drafts_allSlots, function(x){lapply(x, function(y)rep
 #results
 lapply(simScores_allSlots, function(x)quantile(unlist(x)))
 
+
+#loop through every draft slot--may take a while
+drafts_allSlots_zeroRB<-lapply(paste("Slot", 1:12, sep=""), function(x)
+  lapply(1:numDrafts,function(y) simDraft(alpha=.85,numRB=4, numWR=5, numTE=2, numQB=2, numK=1, numDST=1 , slot = x, outPos=rep("RB", 1)))
+)
+simScores_allSlots_zeroRB<-lapply(drafts_allSlots_zeroRB, function(x){lapply(x, function(y)replicate(numSims,simSeason(y)))})
+
 save(list=ls()[grepl("simScores|drafts",ls())], file="analyze draft params by round.RData")
 
-pos<-4
+pos<-9
 freqs<-as.data.frame.matrix(table(unlist(lapply(drafts_allSlots[[pos]], function(x) x$Player)), unlist(lapply(drafts_allSlots[[pos]], function(x) 1:nrow(x)))))
-freqs[ order(freqs[,1], freqs[, 2], freqs[,3], freqs[, 4], freqs[, 5], freqs[, 5], freqs[, 5], freqs[, 6], freqs[, 7], freqs[, 8], decreasing = T),]
+freqs[ order(freqs[,1], freqs[, 2], freqs[,3], freqs[, 4], freqs[, 5], freqs[, 5], freqs[, 5], freqs[, 6], freqs[, 7], freqs[, 8], decreasing = T),][1:10,]
 quantile(unlist(allSlotSims[[pos]][sapply(allSlots[[pos]], function(x) sum(x$Pos[1:4]%in% c( "WR"))==0)]))
 
 
@@ -153,5 +160,47 @@ freqs$Player<-row.names(freqs)
 freqs$Pos<-adp$Pos[match(freqs$Player, adp$Player)]
 row.names(freqs)<-NULL
 mostCommon<-lapply(1:15, function(x) freqs[order(freqs[, x], decreasing = T),c(x, "Player", "Pos") ][1:3,])
+
+
+#####PLOT#####
+
+
+
+load("analyze draft params by round.RData")
+
+Slot<-paste0("Slot", 1:12)
+Sims<-unlist(simScores_allSlots)
+
+
+Sims<-data.frame(Sim=Sims, Slot=rep(Slot, each=40000))
+Sims$Slot<-factor(Sims$Slot, levels=unique(Sims$Slot))
+Sims<-ddply(Sims, .(Slot), summarize, 
+            N    = length(Sim),
+            mean = mean(Sim),
+            sd   = sd(Sim),
+            se   = sd / sqrt(N) )
+library(ggplot2)
+head(Sims)
+
+ggplot(Sims, aes(x=Slot, y=mean, fill=Slot)) + 
+  geom_bar(position=position_dodge(), stat="identity",
+           colour="black", # Use black outlines,
+           size=.3) +      # Thinner lines
+  theme(axis.text.x=element_blank(), 
+        axis.title.x = element_blank()
+  )+
+  coord_cartesian(ylim=c(1800, 1900))+
+  geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
+                size=.3,    # Thinner lines
+                width=.2,
+                position=position_dodge(.9)) +
+  xlab("Slot") +
+  ylab("Mean-Simulated Starting Lineup (40,000 sims)") +
+  ggtitle("Simulation Results for Different Draft Slots--Case 10")
+
+scoring<-"HALF"
+ggsave(paste0(scoring, " scoring-by round slots.jpeg"),width = 7, height=4 , units = "in")
+
+
 
 

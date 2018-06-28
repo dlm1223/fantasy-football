@@ -184,7 +184,7 @@ getPick<-function(slot, pickNum, alreadyChosen,numRB=5, numWR=5, numTE=1, numQB=
 simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST=1,  numFLEX=0, alpha=1, numTeams=12,
                    out=c(), outPos=c(),  onePos=c(), optmode="lpsolve"){
   
-  # slot<-"Slot4";numRB<-4;numWR<-5;numTE<-1;numQB<-2;numK<-1;numFLEX<-1;numDST<-1;out<-c();fix<-c();scoring<-"HALF";numTeams<-12;alpha<-1;outPos<-c();onePos<-c();optmode<-"lpsolve"
+  # slot<-"Slot1";numRB<-4;numWR<-5;numTE<-1;numQB<-2;numK<-1;numFLEX<-1;numDST<-1;out<-c();fix<-c();scoring<-"HALF";numTeams<-12;alpha<-1;outPos<-c();onePos<-c();optmode<-"lpsolve"
   
   adp$ADP_sim[!is.na(adp$ADP_est)]<-rnorm(sum(!is.na(adp$ADP_est)), mean = adp$ADP_est[!is.na(adp$ADP_est)], sd=adp[!is.na(adp$ADP_est), "ADPSD_est"])
   adp$ADP_sim[is.na(adp$ADP_sim)]<-500
@@ -199,7 +199,7 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
       pickDF[i, ]<-(last+1):(last+numTeams)
     }else{
       pickDF[i, ]<-(last+numTeams):(last+1)
-
+      
     }
     last<-last+numTeams
   }
@@ -219,7 +219,11 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
     
     #get next-players chosen from adp-simulation
     players<-adp$Player[order(adp$ADP_sim, decreasing = F)]
-    players<-players[!players%in% c(alreadyChosen, storePick$Player)][1:numPlayers]
+    if(numPlayers>0){
+      players<-players[!players%in% c(alreadyChosen, storePick$Player)][1:numPlayers]
+    } else{
+      players<-c()
+    }
     alreadyChosen<-c(alreadyChosen, players) %>% unique()
     fix<-storePick$Player[!is.na(storePick$Player)]
     
