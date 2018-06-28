@@ -1,11 +1,11 @@
 ---
 title: "Optimization for Fantasy Football Snake Drafts"
 output:  
-  html_document:
-    toc: true
   md_document:
     toc: true
     variant: markdown_github
+  html_document:
+    toc: true
 ---
 
 ---

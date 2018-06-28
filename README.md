@@ -225,16 +225,16 @@ First I get the optimal picks at Slot=4/12, same as in base case:
 
 Then I can get the top starting lineup from 1 simulation, Projected Points=HALF. Simulated Points=Sim:
 
-    ##                 Player ADP_est ADP_Rank Pos      HALF Slot      Sim
-    ## 1         Alvin Kamara    6.00        6  RB 244.14990    4 409.6098
-    ## 2      Jerick Mckinnon   20.60       22  RB 190.16459   21 248.3665
-    ## 16      Ryan Tannehill      NA      500  QB 233.10286   NA 246.2360
-    ## 4  Juju Smith Schuster   42.35       45  WR 178.83668   45 205.2203
-    ## 12    Rishard Matthews  142.75      146  WR 132.92460  141 199.2251
-    ## 9       Robby Anderson  104.65      107  WR 144.44804  100 197.3481
-    ## 15     Harrison Butker      NA      500   K 145.31579  172 176.5661
-    ## 19         Jesse James      NA      500  TE  56.72271   NA 141.9709
-    ## 20                 Sfo      NA      500 DST  93.00000   NA 132.7847
+    ##                 Player ADP_est ADP_Rank Pos     HALF Slot  ScoreSD      Sim
+    ## 1         Alvin Kamara    6.00      6.0  RB 244.1499    4 91.78148 406.2991
+    ## 5       Russell Wilson   57.10     57.5  QB 300.8192   52 70.00000 384.5143
+    ## 2      Jerick Mckinnon   20.60     22.0  RB 190.1646   21 77.38360 227.6390
+    ## 3          Tyreek Hill   29.65     29.0  WR 196.4085   28 61.96128 185.9254
+    ## 9       Robby Anderson  104.65    107.0  WR 144.4480  100 54.16721 182.7845
+    ## 4  Juju Smith Schuster   42.35     45.0  WR 178.8367   45 59.32550 167.9582
+    ## 15     Harrison Butker      NA    500.0   K 145.3158  172 30.00000 159.8173
+    ## 14                 Pit  163.35    186.0 DST 122.0000  165 30.00000 129.8193
+    ## 7       Delanie Walker   79.15     80.0  TE 133.6574   76 48.04862 118.2814
 
 Finally, I can repeat this a large number of times to get the mean-simulated optimal lineup from a set of picks.
 
