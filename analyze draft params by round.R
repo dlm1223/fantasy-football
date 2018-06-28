@@ -150,7 +150,7 @@ ggplot(Sims, aes(x=Parameter, y=mean, fill=Parameter)) +
   ggtitle("Simulation Results for Different Draft Parameters")
 
 scoring<-"HALF"
-ggsave(paste0(scoring, " scoring-by round parameters.jpeg"),width = 7, height=4 , units = "in")
+ggsave(paste0(scoring, " scoring-by round parameters.jpeg"),width = 7, height=3.4 , units = "in")
 
 
 
@@ -168,13 +168,13 @@ mostCommon<-lapply(1:15, function(x) freqs[order(freqs[, x], decreasing = T),c(x
 
 load("analyze draft params by round.RData")
 
-Slot<-paste0("Slot", 1:12)
-Sims<-unlist(simScores_allSlots)
+Slot<-c( paste0("Slot", 1:12), paste0("Slot", 1:12))
+Sims<-unlist(c(simScores_allSlots, simScores_allSlots_zeroRB))
 
 
-Sims<-data.frame(Sim=Sims, Slot=rep(Slot, each=40000))
+Sims<-data.frame(Sim=Sims, Slot=rep(Slot, each=40000), Parameter=rep(c("Case 10", "Case 10 + ZeroRB in R1"), each=length(Sims)/2))
 Sims$Slot<-factor(Sims$Slot, levels=unique(Sims$Slot))
-Sims<-ddply(Sims, .(Slot), summarize, 
+Sims<-ddply(Sims, .(Slot, Parameter), summarize, 
             N    = length(Sim),
             mean = mean(Sim),
             sd   = sd(Sim),
@@ -182,13 +182,13 @@ Sims<-ddply(Sims, .(Slot), summarize,
 library(ggplot2)
 head(Sims)
 
-ggplot(Sims, aes(x=Slot, y=mean, fill=Slot)) + 
+ggplot(Sims, aes(x=Slot, y=mean, fill=Parameter)) + 
   geom_bar(position=position_dodge(), stat="identity",
            colour="black", # Use black outlines,
            size=.3) +      # Thinner lines
-  theme(axis.text.x=element_blank(), 
-        axis.title.x = element_blank()
-  )+
+  # theme(axis.text.x=element_blank(), 
+        # axis.title.x = element_blank()
+  # )+
   coord_cartesian(ylim=c(1800, 1900))+
   geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
                 size=.3,    # Thinner lines
@@ -196,10 +196,10 @@ ggplot(Sims, aes(x=Slot, y=mean, fill=Slot)) +
                 position=position_dodge(.9)) +
   xlab("Slot") +
   ylab("Mean-Simulated Starting Lineup (40,000 sims)") +
-  ggtitle("Simulation Results for Different Draft Slots--Case 10")
+  ggtitle("Simulation Results for All Draft Slots")
 
 scoring<-"HALF"
-ggsave(paste0(scoring, " scoring-by round slots.jpeg"),width = 7, height=4 , units = "in")
+ggsave(paste0(scoring, " scoring-by round slots.jpeg"),width = 7, height=3.4 , units = "in")
 
 
 

@@ -1,3 +1,5 @@
+library(png)
+library(grid)
 library(doSNOW)
 library(plyr)
 library(dplyr)
