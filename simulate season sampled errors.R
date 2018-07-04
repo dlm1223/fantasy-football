@@ -16,7 +16,7 @@ projections<-projections[which(projections$Season%in%2009:2017& projections$fant
 errors<-ddply(projections, .(fantPts_bin, Pos),summarize,  
               meanError=mean(error, na.rm=T),
               medianError=median(error, na.rm=T),
-              meanRelativeError=mean((error)/fantPts_agg, na.rm=T),
+              # meanRelativeError=mean((error)/fantPts_agg, na.rm=T),
               sdError=sd(error, na.rm=T), 
               n=sum(!is.na(error)))
 errors<-errors[errors$n>5,]
@@ -28,25 +28,6 @@ errors
 projections<-merge(projections, errors[, c("Pos", "fantPts_bin", "meanError")], by=c("Pos", "fantPts_bin"))
 projections$error_adj<-projections$error-projections$meanError 
 projections$fantPts_bin<-as.character(projections$fantPts_bin)
-
-# 
-# par(mfrow=c(5,5),mar=c(3,1,3,1))
-# for(i in which(errors$n>10)){
-#   pos<-errors$Pos[i];bin<-errors$fantPts_bin[i]
-#   bool<-projections$Pos==pos& projections$Season%in% 2010:2017& as.character(projections$fantPts_bin)==as.character(bin)
-#   data<-(projections$error[bool])#/projections$fantPts_agg[bool]
-# 
-#   hist(data,  main=paste0(pos, ", ",bin, ", n= ", sum(bool)))
-#   abline(v=mean(data, na.rm=T), col="red")
-# }
-# plot(NULL,xaxt='n',yaxt='n',bty='n',ylab='',xlab='',
-#      xlim=c(0,1), ylim=c(0,1))
-# text(0,0.75, pos=4,"<--Underperformed")
-# text(0,0.2, pos=4,"Overperformed-->")
-
-# head(projections[projections$Pos==pos& projections$Season==2017,][order(projections$fantPts_agg[projections$Pos==pos& projections$Season==2017], decreasing = T),], 45)
-# qqnorm(data)
-# qqline(data)
 
 
 ###SIM-SEASON FUNCTIONS####

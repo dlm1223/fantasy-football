@@ -167,35 +167,35 @@ For the more complicated case, my methodology will be to get an optimal lineup, 
 
 ### Error Analysis
 
-I summarize below the projection error (actual-projected) for 2009-2017, grouped by projection range and position.
+I summarize below the projection error (actual-projected) for 2009-2017, grouped by projection range and position. A negative mean-value means players have underperformed for that subgroup. A high SD value means players; performance has been more volatile in that subgroup:
 
-    ##    fantPts_bin Pos  meanError medianError meanRelativeError  sdError   n
-    ## 4      (25,75] DST   7.666667   -3.500000       0.113947762 33.10992   6
-    ## 13    (75,125] DST  17.542373   12.000000       0.176923028 29.61336 118
-    ## 5      (25,75]   K  13.788522   15.425605       0.237220526 42.57718  11
-    ## 14    (75,125]   K  14.556467   16.501889       0.133371327 28.48010 198
-    ## 22   (125,175]   K  -8.139669   -8.531961      -0.058900694 28.08898  50
-    ## 7      (25,75]  QB   7.924877   -9.800000       0.165962581 51.62458 125
-    ## 16    (75,125]  QB   8.771959   -9.153795       0.109510615 84.60471  34
-    ## 24   (125,175]  QB -20.094962  -49.006279      -0.148405224 83.69827  52
-    ## 28   (175,225]  QB   1.696868   16.909655       0.007557043 77.97935  83
-    ## 32   (225,400]  QB   4.746088   17.668665       0.021795696 68.98852 142
-    ## 8      (25,75]  RB   2.842122   -8.079204       0.066437149 42.24322 360
-    ## 17    (75,125]  RB  -3.965397  -13.923055      -0.033455222 59.31428 218
-    ## 25   (125,175]  RB -24.732960  -23.050371      -0.171443185 64.53592 184
-    ## 29   (175,225]  RB -20.815804  -22.195431      -0.105891213 80.09488 103
-    ## 33   (225,400]  RB -52.632221  -40.454483      -0.212944473 91.39643  37
-    ## 9      (25,75]  TE  -2.415085  -10.941867      -0.069464645 33.11226 343
-    ## 18    (75,125]  TE  -4.810404   -3.372042      -0.051323742 42.56975 164
-    ## 26   (125,175]  TE -18.583065   -8.739259      -0.128258390 52.57490  65
-    ## 30   (175,225]  TE -18.295723  -22.789903      -0.088882719 61.48846   8
-    ## 10     (25,75]  WR   3.406541   -7.491818       0.089207766 42.56455 593
-    ## 19    (75,125]  WR  -6.952610  -11.369156      -0.056877250 51.59724 330
-    ## 27   (125,175]  WR -11.229153  -10.060463      -0.073578875 55.86669 233
-    ## 31   (175,225]  WR -12.854190   -8.263119      -0.065901904 57.03709 115
-    ## 34   (225,400]  WR -21.528408  -10.719617      -0.092229989 64.93034  23
+    ##    fantPts_bin Pos  meanError medianError  sdError   n
+    ## 4      (25,75] DST   7.666667   -3.500000 33.10992   6
+    ## 13    (75,125] DST  17.542373   12.000000 29.61336 118
+    ## 5      (25,75]   K  13.788522   15.425605 42.57718  11
+    ## 14    (75,125]   K  14.556467   16.501889 28.48010 198
+    ## 22   (125,175]   K  -8.139669   -8.531961 28.08898  50
+    ## 7      (25,75]  QB   7.924877   -9.800000 51.62458 125
+    ## 16    (75,125]  QB   8.771959   -9.153795 84.60471  34
+    ## 24   (125,175]  QB -20.094962  -49.006279 83.69827  52
+    ## 28   (175,225]  QB   1.696868   16.909655 77.97935  83
+    ## 32   (225,400]  QB   4.746088   17.668665 68.98852 142
+    ## 8      (25,75]  RB   2.842122   -8.079204 42.24322 360
+    ## 17    (75,125]  RB  -3.965397  -13.923055 59.31428 218
+    ## 25   (125,175]  RB -24.732960  -23.050371 64.53592 184
+    ## 29   (175,225]  RB -20.815804  -22.195431 80.09488 103
+    ## 33   (225,400]  RB -52.632221  -40.454483 91.39643  37
+    ## 9      (25,75]  TE  -2.415085  -10.941867 33.11226 343
+    ## 18    (75,125]  TE  -4.810404   -3.372042 42.56975 164
+    ## 26   (125,175]  TE -18.583065   -8.739259 52.57490  65
+    ## 30   (175,225]  TE -18.295723  -22.789903 61.48846   8
+    ## 10     (25,75]  WR   3.406541   -7.491818 42.56455 593
+    ## 19    (75,125]  WR  -6.952610  -11.369156 51.59724 330
+    ## 27   (125,175]  WR -11.229153  -10.060463 55.86669 233
+    ## 31   (175,225]  WR -12.854190   -8.263119 57.03709 115
+    ## 34   (225,400]  WR -21.528408  -10.719617 64.93034  23
 
-Plotting the above standard deviations of the errors by position:
+</br> Plotting the above standard deviations of the errors by position:
 
 <img src="base_case_optimization_files/figure-markdown_github/fig1-1.png" style="display: block; margin: auto;" />
 
@@ -233,15 +233,15 @@ First I get the optimal picks at Slot=4/12, same as in base case:
 Then I can get the top starting lineup from 1 simulation, determining simulated points by sampling from players' error bin. Projected Points=HALF. Simulated Points=Sim:
 
     ##    Pos              Player ADP_est ADP_Rank     HALF Slot fantPts_bin     error      Sim
-    ## 5   QB      Russell Wilson   57.10     57.5 291.4859   52   (225,400]  29.55691 321.0428
-    ## 1   RB        Alvin Kamara    6.00      6.0 245.4832    4   (225,400]  51.16772 296.6509
-    ## 4   WR Juju Smith Schuster   42.35     45.0 179.3604   45   (175,225]  46.71074 226.0712
-    ## 13  RB         James White  149.30    155.0 137.4044  148   (125,175]  39.98791 177.3923
-    ## 21   K  Chandler Catanzaro      NA    500.0 120.6367   NA    (75,125]  52.77177 173.4085
-    ## 12  WR    Rishard Matthews  142.75    146.0 133.4577  141   (125,175]  36.80103 170.2588
-    ## 2   RB     Jerick Mckinnon   20.60     22.0 194.1646   21   (175,225] -24.26548 169.8991
-    ## 7   TE      Delanie Walker   79.15     80.0 132.7886   76   (125,175]  28.84297 161.6316
-    ## 20 DST                 Nyj      NA    500.0  85.0000   NA    (75,125]  53.45763 138.4576
+    ## 6   QB          Cam Newton   74.05       76 274.0508   69   (225,400] 39.587705 313.6385
+    ## 2   RB     Jerick Mckinnon   20.60       22 194.1646   21   (175,225] 59.978128 254.1427
+    ## 1   RB        Alvin Kamara    6.00        6 245.4832    4   (225,400] -3.346949 242.1363
+    ## 3   WR         Tyreek Hill   29.65       29 184.3552   28   (175,225] 29.139210 213.4944
+    ## 4   WR Juju Smith Schuster   42.35       45 179.3604   45   (175,225] 33.399064 212.7595
+    ## 12  WR    Rishard Matthews  142.75      146 133.4577  141   (125,175] 73.225546 206.6833
+    ## 21   K     Steven Hauschka      NA      500 125.3427   NA   (125,175] 43.875056 169.2177
+    ## 19  TE          Eric Ebron      NA      500 100.6777   NA    (75,125] 26.622588 127.3003
+    ## 20 DST                 Cle      NA      500  79.0000   NA    (75,125] 44.457627 123.4576
 
 Undrafted players can end up in the top lineup for a given simulation if their HALF+error is better than the players I drafted. Finally, I repeat the simulation a large number of times to get the mean-simulated optimal lineup from a set of picks. The sum of the top lineup will stabilize to a given value as I repeat the top-lineup simulation a large number of times.
 
