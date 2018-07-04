@@ -22,3 +22,5 @@ cache/
 figure/
 wordpress upload.R
 simScores by round 1.RData
+base case optimization.Rmd
+base_case_optimization.html

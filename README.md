@@ -1,5 +1,3 @@
-Optimization for Fantasy Football Snake Drafts
----------
 -   [Base Case](#base-case)
 -   [More Complex Case](#more-complex-case)
     -   [Error Analysis](#error-analysis)
@@ -16,35 +14,35 @@ Base Case
 Optimizing your strategy for a fantasy football draft is an interesting problem. Should you should go RB early? Wait on RB's? Should you do something productive with your free time instead of fantasy football? (probably). Optimizing your draft picks can be viewed as an optimization where you try to maximize the projected points of your selected players. In this post I will go through my optimization methodology. To start, I have a dataframe of players and their projected points and their ADPs (Average draft positions).
 
 ``` r
-head(adp, 25)
+head(adp[, c("Player", "Pos", "ADP_est", "ADPSD_est", "ADP_Rank", "HALF", "STD", "PPR")], 25)
 ```
 
-    ##                  Player ADP_est ADPSD_est Pos ADP_Rank     HALF      STD      PPR
-    ## 649         Todd Gurley    1.85      0.90  RB        1 282.9787 253.3955 312.6844
-    ## 440         Leveon Bell    2.25      1.00  RB        2 280.2661 241.5337 318.9930
-    ## 258     Ezekiel Elliott    3.40      1.35  RB        3 243.0664 225.0725 261.2155
-    ## 188       David Johnson    3.90      1.10  RB        4 231.0491 200.2815 261.8184
-    ## 39        Antonio Brown    5.10      1.40  WR        5 249.9520 197.1996 302.7505
-    ## 27         Alvin Kamara    6.00      1.25  RB        6 244.1499 210.1303 278.2076
-    ## 599      Saquon Barkley    6.80      1.80  RB        7 217.0454 191.3802 242.7106
-    ## 193     Deandre Hopkins    8.80      1.90  WR        8 217.0354 172.1881 261.9242
-    ## 400         Kareem Hunt    9.30      1.75  RB        9 225.6042 200.8797 250.3842
-    ## 437   Leonard Fournette   10.00      1.80  RB       10 211.9753 194.3041 229.7181
-    ## 494       Melvin Gordon   10.45      2.05  RB       11 210.7663 186.6919 234.8665
-    ## 533       Odell Beckham   11.50      2.05  WR       12 196.6366 154.1821 239.0949
-    ## 167         Dalvin Cook   12.90      2.00  RB       13 201.3612 181.3044 221.4412
-    ## 386         Julio Jones   14.10      2.15  WR       14 217.1109 172.4447 261.8512
-    ## 507      Michael Thomas   15.90      2.30  WR       15 205.7079 159.7206 251.8222
-    ## 223     Devonta Freeman   17.55      2.50  RB       16 200.1333 178.9294 221.3382
-    ## 186       Davante Adams   18.10      2.40  WR       17 179.4036 141.6187 217.2282
-    ## 403        Keenan Allen   18.40      2.50  WR       18 190.3322 148.0730 232.4604
-    ## 439        Lesean Mccoy   18.85      2.90  RB       19 194.0505 168.3635 219.7331
-    ## 133 Christian Mccaffrey   20.15      3.10  RB       20 210.7556 174.8497 246.5142
-    ## 10             Aj Green   20.55      2.25  WR       21 181.8014 143.4386 220.1942
-    ## 341     Jerick Mckinnon   20.60      3.50  RB       22 190.1646 163.1598 217.0976
-    ## 359       Jordan Howard   22.10      3.05  RB       23 168.6739 155.7119 181.6984
-    ## 500       Michael Evans   23.55      2.75  WR       24 179.9113 143.0565 216.8329
-    ## 571   Robert Gronkowski   23.70      3.65  TE       25 174.9817 141.7510 208.1159
+    ##                  Player Pos ADP_est ADPSD_est ADP_Rank     HALF      STD      PPR
+    ## 120         Todd Gurley  RB    1.85      0.90        1 286.9787 278.7288 295.3511
+    ## 119         Leveon Bell  RB    2.25      1.00        2 285.5994 276.2004 294.9930
+    ## 118     Ezekiel Elliott  RB    3.40      1.35        3 245.7330 240.7392 250.8822
+    ## 117       David Johnson  RB    3.90      1.10        4 237.7158 232.9482 242.4851
+    ## 123       Antonio Brown  WR    5.10      1.40        5 244.1744 220.2120 268.1369
+    ## 122        Alvin Kamara  RB    6.00      1.25        6 245.4832 235.7970 255.2076
+    ## 82       Saquon Barkley  RB    6.80      1.80        7 221.9244 216.4002 227.4485
+    ## 87      Deandre Hopkins  WR    8.80      1.90        8 217.1364 196.1761 238.0967
+    ## 121         Kareem Hunt  RB    9.30      1.75        9 229.6042 222.5463 236.7176
+    ## 78    Leonard Fournette  RB   10.00      1.80       10 213.3087 207.6375 219.0514
+    ## 79        Melvin Gordon  RB   10.45      2.05       11 212.0997 205.3586 218.8665
+    ## 89        Odell Beckham  WR   11.50      2.05       12 196.8351 178.9319 214.7382
+    ## 76          Dalvin Cook  RB   12.90      2.00       13 204.0279 199.3044 208.7746
+    ## 93          Julio Jones  WR   14.10      2.15       14 224.4879 202.2329 246.7428
+    ## 85       Michael Thomas  WR   15.90      2.30       15 208.1782 188.1379 228.2185
+    ## 81      Devonta Freeman  RB   17.55      2.50       16 202.7999 196.5961 209.0049
+    ## 94        Davante Adams  WR   18.10      2.40       17 176.9410 161.1901 192.6918
+    ## 95         Keenan Allen  WR   18.40      2.50       18 193.9841 176.8953 211.0729
+    ## 80         Lesean Mccoy  RB   18.85      2.90       19 195.3838 189.0302 201.7331
+    ## 83  Christian Mccaffrey  RB   20.15      3.10       20 213.4223 203.1830 223.5142
+    ## 96             Aj Green  WR   20.55      2.25       21 185.0449 168.3994 201.6903
+    ## 77      Jerick Mckinnon  RB   20.60      3.50       22 194.1646 187.8265 200.4310
+    ## 26        Jordan Howard  RB   22.10      3.05       23 170.0072 166.0453 174.0318
+    ## 86        Michael Evans  WR   23.55      2.75       24 182.9814 164.8576 201.1052
+    ## 84    Robert Gronkowski  TE   23.70      3.65       25 176.8560 160.0528 193.6592
 
 <br />For league settings, I am using Yahoo's defaults[1]. I can then easily set up an optimization where I say to maximize the sum of the projected points of the 15 players taken. Given the slot I am picking at, which for this example I will say is slot 4, I just constrain it to take 15 players with ADP&gt;=4, 14 players with ADP&gt;=21, etc. The end result is a function which takes different parameters for the optimization and returns the optimal draft picks.
 
@@ -52,22 +50,22 @@ head(adp, 25)
 getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')
 ```
 
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 27         Alvin Kamara    6.00      6.0  RB 244.1499    4
-    ## 341     Jerick Mckinnon   20.60     22.0  RB 190.1646   21
-    ## 681         Tyreek Hill   29.65     29.0  WR 196.4085   28
-    ## 384 Juju Smith Schuster   42.35     45.0  WR 178.8367   45
-    ## 585      Russell Wilson   57.10     57.5  QB 300.8192   52
-    ## 98           Cam Newton   74.05     76.0  QB 284.7175   69
-    ## 201      Delanie Walker   79.15     80.0  TE 133.6574   76
-    ## 152         Cooper Kupp  100.70    100.0  WR 147.1439   93
-    ## 569      Robby Anderson  104.65    107.0  WR 144.4480  100
-    ## 620    Sterling Shepard  119.10    125.0  WR 139.7624  117
-    ## 224     Devontae Booker  119.40    126.0  RB 119.9492  124
-    ## 567    Rishard Matthews  142.75    146.0  WR 132.9246  141
-    ## 314         James White  149.30    155.0  RB 136.0711  148
-    ## 548                 Pit  163.35    186.0 DST 122.0000  165
-    ## 283     Harrison Butker      NA    500.0   K 145.3158  172
+    ##     Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 122  RB        Alvin Kamara    6.00      6.0 245.4832    4
+    ## 77   RB     Jerick Mckinnon   20.60     22.0 194.1646   21
+    ## 88   WR         Tyreek Hill   29.65     29.0 184.3552   28
+    ## 90   WR Juju Smith Schuster   42.35     45.0 179.3604   45
+    ## 106  QB      Russell Wilson   57.10     57.5 291.4859   52
+    ## 109  QB          Cam Newton   74.05     76.0 274.0508   69
+    ## 32   TE      Delanie Walker   79.15     80.0 132.7886   76
+    ## 61   WR         Cooper Kupp  100.70    100.0 149.4343   93
+    ## 42   WR      Robby Anderson  104.65    107.0 145.7251  100
+    ## 62   WR    Sterling Shepard  119.10    125.0 139.7021  117
+    ## 387  RB     Devontae Booker  119.40    126.0 122.6159  124
+    ## 40   WR    Rishard Matthews  142.75    146.0 133.4577  141
+    ## 30   RB         James White  149.30    155.0 137.4044  148
+    ## 315 DST                 Pit  163.35    186.0 122.0000  165
+    ## 5     K     Harrison Butker      NA    500.0 145.3158  172
 
 <br />The parameters of getPicks() specify number of players at each position to take. I also added the shift parameter which can shift everyone's ADP by a given fraction i.e. shift=.1 would subtract 10% from everyone's ADP. I can also make adjustments like constraining to only select 1QB in the first 10 rounds.
 
@@ -75,22 +73,22 @@ getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFL
 getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF', onePos=rep("QB", 10))
 ```
 
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 27         Alvin Kamara    6.00      6.0  RB 244.1499    4
-    ## 341     Jerick Mckinnon   20.60     22.0  RB 190.1646   21
-    ## 681         Tyreek Hill   29.65     29.0  WR 196.4085   28
-    ## 384 Juju Smith Schuster   42.35     45.0  WR 178.8367   45
-    ## 585      Russell Wilson   57.10     57.5  QB 300.8192   52
-    ## 629         Tarik Cohen   75.80     78.0  RB 128.4949   69
-    ## 201      Delanie Walker   79.15     80.0  TE 133.6574   76
-    ## 152         Cooper Kupp  100.70    100.0  WR 147.1439   93
-    ## 569      Robby Anderson  104.65    107.0  WR 144.4480  100
-    ## 407     Kelvin Benjamin  112.70    117.0  WR 137.3654  117
-    ## 620    Sterling Shepard  119.10    125.0  WR 139.7624  124
-    ## 22      Alexander Smith  148.65    152.0  QB 265.3228  141
-    ## 314         James White  149.30    155.0  RB 136.0711  148
-    ## 548                 Pit  163.35    186.0 DST 122.0000  165
-    ## 283     Harrison Butker      NA    500.0   K 145.3158  172
+    ##     Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 122  RB        Alvin Kamara    6.00      6.0 245.4832    4
+    ## 77   RB     Jerick Mckinnon   20.60     22.0 194.1646   21
+    ## 88   WR         Tyreek Hill   29.65     29.0 184.3552   28
+    ## 90   WR Juju Smith Schuster   42.35     45.0 179.3604   45
+    ## 106  QB      Russell Wilson   57.10     57.5 291.4859   52
+    ## 15   RB         Tarik Cohen   75.80     78.0 132.4949   69
+    ## 32   TE      Delanie Walker   79.15     80.0 132.7886   76
+    ## 61   WR         Cooper Kupp  100.70    100.0 149.4343   93
+    ## 42   WR      Robby Anderson  104.65    107.0 145.7251  100
+    ## 39   WR     Kelvin Benjamin  112.70    117.0 137.0975  117
+    ## 62   WR    Sterling Shepard  119.10    125.0 139.7021  124
+    ## 107  QB     Alexander Smith  148.65    152.0 259.3228  141
+    ## 30   RB         James White  149.30    155.0 137.4044  148
+    ## 315 DST                 Pit  163.35    186.0 122.0000  165
+    ## 5     K     Harrison Butker      NA    500.0 145.3158  172
 
 Rotoviz [already has an app](http://rotoviz.com/2017/08/using-the-rotoviz-draft-optimizer-to-dominate-your-ppr-draft/) which does a similar optimization. The results do seem to suggest certain things like how you should often take RB's early. Looking at the optimal first two picks for each draft slot, you can see how RB's are usually suggested for the early picks:
 
@@ -99,64 +97,64 @@ sapply(paste0("Slot", 1:12), function(x) getPicks(slot=x, numRB=4, numWR = 6,num
 ```
 
     ## $Slot1
-    ##                Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 649       Todd Gurley    1.85        1  RB 282.9787    1
-    ## 571 Robert Gronkowski   23.70       25  TE 174.9817   24
+    ##     Pos            Player ADP_est ADP_Rank     HALF Slot
+    ## 120  RB       Todd Gurley    1.85        1 286.9787    1
+    ## 84   TE Robert Gronkowski   23.70       25 176.8560   24
     ## 
     ## $Slot2
-    ##                Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 440       Leveon Bell    2.25        2  RB 280.2661    2
-    ## 571 Robert Gronkowski   23.70       25  TE 174.9817   23
+    ##     Pos            Player ADP_est ADP_Rank     HALF Slot
+    ## 119  RB       Leveon Bell    2.25        2 285.5994    2
+    ## 84   TE Robert Gronkowski   23.70       25 176.8560   23
     ## 
     ## $Slot3
-    ##              Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 27     Alvin Kamara     6.0        6  RB 244.1499    3
-    ## 341 Jerick Mckinnon    20.6       22  RB 190.1646   22
+    ##     Pos          Player ADP_est ADP_Rank     HALF Slot
+    ## 118  RB Ezekiel Elliott     3.4        3 245.7330    3
+    ## 77   RB Jerick Mckinnon    20.6       22 194.1646   22
     ## 
     ## $Slot4
-    ##              Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 27     Alvin Kamara     6.0        6  RB 244.1499    4
-    ## 341 Jerick Mckinnon    20.6       22  RB 190.1646   21
+    ##     Pos          Player ADP_est ADP_Rank     HALF Slot
+    ## 122  RB    Alvin Kamara     6.0        6 245.4832    4
+    ## 77   RB Jerick Mckinnon    20.6       22 194.1646   21
     ## 
     ## $Slot5
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 27         Alvin Kamara    6.00        6  RB 244.1499    5
-    ## 133 Christian Mccaffrey   20.15       20  RB 210.7556   20
+    ##     Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 122  RB        Alvin Kamara    6.00        6 245.4832    5
+    ## 83   RB Christian Mccaffrey   20.15       20 213.4223   20
     ## 
     ## $Slot6
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 27         Alvin Kamara    6.00        6  RB 244.1499    6
-    ## 133 Christian Mccaffrey   20.15       20  RB 210.7556   19
+    ##     Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 122  RB        Alvin Kamara    6.00        6 245.4832    6
+    ## 83   RB Christian Mccaffrey   20.15       20 213.4223   19
     ## 
     ## $Slot7
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 400         Kareem Hunt    9.30        9  RB 225.6042    7
-    ## 133 Christian Mccaffrey   20.15       20  RB 210.7556   18
+    ##     Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 121  RB         Kareem Hunt    9.30        9 229.6042    7
+    ## 83   RB Christian Mccaffrey   20.15       20 213.4223   18
     ## 
     ## $Slot8
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 400         Kareem Hunt    9.30        9  RB 225.6042    8
-    ## 133 Christian Mccaffrey   20.15       20  RB 210.7556   17
+    ##     Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 121  RB         Kareem Hunt    9.30        9 229.6042    8
+    ## 83   RB Christian Mccaffrey   20.15       20 213.4223   17
     ## 
     ## $Slot9
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 400         Kareem Hunt    9.30        9  RB 225.6042    9
-    ## 133 Christian Mccaffrey   20.15       20  RB 210.7556   16
+    ##     Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 121  RB         Kareem Hunt    9.30        9 229.6042    9
+    ## 83   RB Christian Mccaffrey   20.15       20 213.4223   16
     ## 
     ## $Slot10
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 437   Leonard Fournette   10.00       10  RB 211.9753   10
-    ## 133 Christian Mccaffrey   20.15       20  RB 210.7556   15
+    ##    Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 78  RB   Leonard Fournette   10.00       10 213.3087   10
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223   15
     ## 
     ## $Slot11
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 494       Melvin Gordon   10.45       11  RB 210.7663   11
-    ## 133 Christian Mccaffrey   20.15       20  RB 210.7556   14
+    ##    Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 79  RB       Melvin Gordon   10.45       11 212.0997   11
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223   14
     ## 
     ## $Slot12
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 167         Dalvin Cook   12.90       13  RB 201.3612   12
-    ## 133 Christian Mccaffrey   20.15       20  RB 210.7556   13
+    ##    Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 93  WR         Julio Jones   14.10       14 224.4879   12
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223   13
 
 <br />There are some shortcomings with using this basic optimization to inform your strategy. First of all, the thing you want to optimize is not all of your picks' points--**a more appropriate objective would be to draft in a way that will give you the eventual best starting lineup**. This would ideally take into account the uncertainty of the projections, the fact that you can only start a limited number of each position, and the possibility of getting waiver wire adds. I'll show how I account for this below.
 
@@ -169,38 +167,45 @@ For the more complicated case, my methodology will be to get an optimal lineup, 
 
 ### Error Analysis
 
-I summarize below the projection error (projected-actual) for 2012-2017, grouped by projection range and position.
+I summarize below the projection error (actual-projected) for 2010-2017, grouped by projection range and position.
 
-    ##    fantPts_bin Pos    meanError medianError meanRelativeError  sdError   n
-    ## 3     (50,100] DST -16.50746269  -11.000000     -0.1844335833 29.04822  67
-    ## 12   (100,150] DST -17.42622951  -15.000000     -0.1576234275 30.41297  61
-    ## 13   (100,150]   K   1.92049545   -2.837514      0.0124510067 32.26448 166
-    ## 6     (50,100]  QB -12.96164604    6.422376     -0.1817914902 68.02034  35
-    ## 22   (150,200]  QB   3.71707735   32.152760      0.0188133054 87.13484  24
-    ## 26   (200,250]  QB  11.83994287    2.326052      0.0557565726 70.04558  58
-    ## 30   (250,400]  QB   9.22522616   -3.942264      0.0285062558 70.68462  93
-    ## 7     (50,100]  RB  -2.79001375    6.711252     -0.0498555836 53.26364 194
-    ## 16   (100,150]  RB  22.09952819   23.166367      0.1751427011 62.26261 138
-    ## 23   (150,200]  RB  19.30728640   12.515446      0.1175076305 71.29497  86
-    ## 27   (200,250]  RB  35.07334805   34.657404      0.1543440065 93.87923  42
-    ## 8     (50,100]  TE   4.80893126    6.406903      0.0566032083 39.81488 149
-    ## 17   (100,150]  TE  11.41815408    4.492884      0.0893742868 46.09589  78
-    ## 9     (50,100]  WR   0.05253393   10.493952      0.0005048886 48.37551 279
-    ## 18   (100,150]  WR  14.58023486   17.667796      0.1216905776 52.90124 190
-    ## 25   (150,200]  WR  12.30101110   13.345315      0.0693436514 55.85909 125
-    ## 29   (200,250]  WR  20.18237638   12.716619      0.0962855543 67.41880  44
+    ##    fantPts_bin Pos  meanError medianError meanRelativeError  sdError   n
+    ## 4      (25,75] DST   7.666667   -3.500000       0.113947762 33.10992   6
+    ## 13    (75,125] DST  17.542373   12.000000       0.176923028 29.61336 118
+    ## 5      (25,75]   K  13.788522   15.425605       0.237220526 42.57718  11
+    ## 14    (75,125]   K  14.556467   16.501889       0.133371327 28.48010 198
+    ## 22   (125,175]   K  -8.139669   -8.531961      -0.058900694 28.08898  50
+    ## 7      (25,75]  QB   7.924877   -9.800000       0.165962581 51.62458 125
+    ## 16    (75,125]  QB   8.771959   -9.153795       0.109510615 84.60471  34
+    ## 24   (125,175]  QB -20.094962  -49.006279      -0.148405224 83.69827  52
+    ## 28   (175,225]  QB   1.696868   16.909655       0.007557043 77.97935  83
+    ## 32   (225,400]  QB   4.746088   17.668665       0.021795696 68.98852 142
+    ## 8      (25,75]  RB   2.842122   -8.079204       0.066437149 42.24322 360
+    ## 17    (75,125]  RB  -3.965397  -13.923055      -0.033455222 59.31428 218
+    ## 25   (125,175]  RB -24.732960  -23.050371      -0.171443185 64.53592 184
+    ## 29   (175,225]  RB -20.815804  -22.195431      -0.105891213 80.09488 103
+    ## 33   (225,400]  RB -52.632221  -40.454483      -0.212944473 91.39643  37
+    ## 9      (25,75]  TE  -2.415085  -10.941867      -0.069464645 33.11226 343
+    ## 18    (75,125]  TE  -4.810404   -3.372042      -0.051323742 42.56975 164
+    ## 26   (125,175]  TE -18.583065   -8.739259      -0.128258390 52.57490  65
+    ## 30   (175,225]  TE -18.295723  -22.789903      -0.088882719 61.48846   8
+    ## 10     (25,75]  WR   3.406541   -7.491818       0.089207766 42.56455 593
+    ## 19    (75,125]  WR  -6.952610  -11.369156      -0.056877250 51.59724 330
+    ## 27   (125,175]  WR -11.229153  -10.060463      -0.073578875 55.86669 233
+    ## 31   (175,225]  WR -12.854190   -8.263119      -0.065901904 57.03709 115
+    ## 34   (225,400]  WR -21.528408  -10.719617      -0.092229989 64.93034  23
 
 Plotting the above standard deviations of the errors by position:
 
 <img src="base_case_optimization_files/figure-markdown_github/fig1-1.png" style="display: block; margin: auto;" />
 
-I can also look at an example plot of one of these subgroups ex: WRs with projections between 150-200:
+</br> I can also look at the plots of the actual data by subgroup:
 
 <img src="base_case_optimization_files/figure-markdown_github/fig2-1.png" style="display: block; margin: auto;" />
 
-Looking at the above data and plots, I see how error variance is a function of position and projection. Looking at the example histogram above, the errors do appear pretty normally distributed. I should mention that in the table I do see that there appears to be bias in my projections for certain positions (positive mean/median value implies projections that are overprojecting), I will revisit this at another time and for now assume unbiased errors. Below is an overview of the assumptions I am making when I simulate the seasons.
+Looking at the above data and plots, I see how different positions have different error distributions. I initially was going to assume all errors are normally distributed, but looking at all plots I see that many of the subgroups are skewed right (ex: RBs 75-125) and some are normally distributed (WRs 125-175). In addition, there appears to be some bias as top RBs have seem to underperformed their projections and DSTs have overperformed my projections. For the bias, I can ignore it and chalk it up to sample size or I can un-bias my projections. This is definitely an important question because it would determine whether I take off points from the projections of the top RBs. I will first assume the projections are not biased and so shift all errors to be centered at 0. I outline the assumptions below.
 
-**Assumption 1.** For simplicity I am assuming that errors are normally distributed with mean 0 and a standard deviation based on the SD for their position and projection.<br /> **Assumption 2.** I also assume that you will be able to pick up undrafted players. I assume you will be able to get the third highest performing undrafted player at each position. This may be aggressive but it's likely that if you only need DST and TE mid-season, you will be able to get a strong one at both.
+**Assumption 1.** I will assume the error of a player is randomly sampled from their corresponding error-bin, and I will add a constant to each error bin so that the errors of each bin have mean 0.<br /> **Assumption 2.** I also assume that you will be able to pick up undrafted players. I assume you will be able to get the third highest performing undrafted player at each position. This may be aggressive but it's likely that if you only need DST and TE mid-season, you will be able to get a strong one at both.
 
 ### Simulation
 
@@ -208,37 +213,37 @@ Finally, I am ready to simulate a season from my optimal lineup.
 
 First I get the optimal picks at Slot=4/12, same as in base case:
 
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 27         Alvin Kamara    6.00      6.0  RB 244.1499    4
-    ## 341     Jerick Mckinnon   20.60     22.0  RB 190.1646   21
-    ## 681         Tyreek Hill   29.65     29.0  WR 196.4085   28
-    ## 384 Juju Smith Schuster   42.35     45.0  WR 178.8367   45
-    ## 585      Russell Wilson   57.10     57.5  QB 300.8192   52
-    ## 98           Cam Newton   74.05     76.0  QB 284.7175   69
-    ## 201      Delanie Walker   79.15     80.0  TE 133.6574   76
-    ## 152         Cooper Kupp  100.70    100.0  WR 147.1439   93
-    ## 569      Robby Anderson  104.65    107.0  WR 144.4480  100
-    ## 620    Sterling Shepard  119.10    125.0  WR 139.7624  117
-    ## 224     Devontae Booker  119.40    126.0  RB 119.9492  124
-    ## 567    Rishard Matthews  142.75    146.0  WR 132.9246  141
-    ## 314         James White  149.30    155.0  RB 136.0711  148
-    ## 548                 Pit  163.35    186.0 DST 122.0000  165
-    ## 283     Harrison Butker      NA    500.0   K 145.3158  172
+    ##     Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 122  RB        Alvin Kamara    6.00      6.0 245.4832    4
+    ## 77   RB     Jerick Mckinnon   20.60     22.0 194.1646   21
+    ## 88   WR         Tyreek Hill   29.65     29.0 184.3552   28
+    ## 90   WR Juju Smith Schuster   42.35     45.0 179.3604   45
+    ## 106  QB      Russell Wilson   57.10     57.5 291.4859   52
+    ## 109  QB          Cam Newton   74.05     76.0 274.0508   69
+    ## 32   TE      Delanie Walker   79.15     80.0 132.7886   76
+    ## 61   WR         Cooper Kupp  100.70    100.0 149.4343   93
+    ## 42   WR      Robby Anderson  104.65    107.0 145.7251  100
+    ## 62   WR    Sterling Shepard  119.10    125.0 139.7021  117
+    ## 387  RB     Devontae Booker  119.40    126.0 122.6159  124
+    ## 40   WR    Rishard Matthews  142.75    146.0 133.4577  141
+    ## 30   RB         James White  149.30    155.0 137.4044  148
+    ## 315 DST                 Pit  163.35    186.0 122.0000  165
+    ## 5     K     Harrison Butker      NA    500.0 145.3158  172
 
-Then I can get the top starting lineup from 1 simulation, Projected Points=HALF. Simulated Points=Sim:
+Then I can get the top starting lineup from 1 simulation, determining simulated points by sampling from players' error bin. Projected Points=HALF. Simulated Points=Sim:
 
-    ##                 Player ADP_est ADP_Rank Pos     HALF Slot  ScoreSD      Sim
-    ## 1         Alvin Kamara    6.00      6.0  RB 244.1499    4 91.78148 406.2991
-    ## 5       Russell Wilson   57.10     57.5  QB 300.8192   52 70.00000 384.5143
-    ## 2      Jerick Mckinnon   20.60     22.0  RB 190.1646   21 77.38360 227.6390
-    ## 3          Tyreek Hill   29.65     29.0  WR 196.4085   28 61.96128 185.9254
-    ## 9       Robby Anderson  104.65    107.0  WR 144.4480  100 54.16721 182.7845
-    ## 4  Juju Smith Schuster   42.35     45.0  WR 178.8367   45 59.32550 167.9582
-    ## 15     Harrison Butker      NA    500.0   K 145.3158  172 30.00000 159.8173
-    ## 14                 Pit  163.35    186.0 DST 122.0000  165 30.00000 129.8193
-    ## 7       Delanie Walker   79.15     80.0  TE 133.6574   76 48.04862 118.2814
+    ##    Pos          Player ADP_est ADP_Rank      HALF Slot fantPts_bin     error      Sim
+    ## 5   QB  Russell Wilson   57.10     57.5 291.48588   52   (225,400]  47.90763 339.3935
+    ## 1   RB    Alvin Kamara    6.00      6.0 245.48323    4   (225,400]  91.42356 336.9068
+    ## 13  RB     James White  149.30    155.0 137.40439  148   (125,175] 143.26753 280.6719
+    ## 2   RB Jerick Mckinnon   20.60     22.0 194.16459   21   (175,225]  49.18324 243.3478
+    ## 3   WR     Tyreek Hill   29.65     29.0 184.35515   28   (175,225]  23.49837 207.8535
+    ## 18  WR    Chris Conley      NA    500.0  61.08365   NA     (25,75] 124.62010 185.7037
+    ## 14 DST             Pit  163.35    186.0 122.00000  165    (75,125]  61.45763 183.4576
+    ## 21   K     Ryan Succop      NA    500.0 117.57787   NA    (75,125]  36.65529 154.2332
+    ## 19  TE   Austin Hooper      NA    500.0  97.70611   NA    (75,125]  13.75061 111.4567
 
-Finally, I can repeat this a large number of times to get the mean-simulated optimal lineup from a set of picks.
+Undrafted players can end up in the top lineup for a given simulation if their HALF+error is better than the players I drafted. Finally, I can repeat the simulation a large number of times to get the mean-simulated optimal lineup from a set of picks.
 
 ### Optimizing Parameters
 
@@ -252,66 +257,142 @@ The last step of the system is to test different parameters. I can specify thing
 getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF')
 ```
 
-    ##                  Player ADP_est ADP_Rank Pos     HALF Slot
-    ## 27         Alvin Kamara    6.00      6.0  RB 244.1499    4
-    ## 341     Jerick Mckinnon   20.60     22.0  RB 190.1646   21
-    ## 681         Tyreek Hill   29.65     29.0  WR 196.4085   28
-    ## 384 Juju Smith Schuster   42.35     45.0  WR 178.8367   45
-    ## 585      Russell Wilson   57.10     57.5  QB 300.8192   52
-    ## 98           Cam Newton   74.05     76.0  QB 284.7175   69
-    ## 201      Delanie Walker   79.15     80.0  TE 133.6574   76
-    ## 152         Cooper Kupp  100.70    100.0  WR 147.1439   93
-    ## 569      Robby Anderson  104.65    107.0  WR 144.4480  100
-    ## 620    Sterling Shepard  119.10    125.0  WR 139.7624  117
-    ## 224     Devontae Booker  119.40    126.0  RB 119.9492  124
-    ## 567    Rishard Matthews  142.75    146.0  WR 132.9246  141
-    ## 314         James White  149.30    155.0  RB 136.0711  148
-    ## 548                 Pit  163.35    186.0 DST 122.0000  165
-    ## 283     Harrison Butker      NA    500.0   K 145.3158  172
+    ##     Pos              Player ADP_est ADP_Rank     HALF Slot
+    ## 122  RB        Alvin Kamara    6.00      6.0 245.4832    4
+    ## 77   RB     Jerick Mckinnon   20.60     22.0 194.1646   21
+    ## 88   WR         Tyreek Hill   29.65     29.0 184.3552   28
+    ## 90   WR Juju Smith Schuster   42.35     45.0 179.3604   45
+    ## 106  QB      Russell Wilson   57.10     57.5 291.4859   52
+    ## 109  QB          Cam Newton   74.05     76.0 274.0508   69
+    ## 32   TE      Delanie Walker   79.15     80.0 132.7886   76
+    ## 61   WR         Cooper Kupp  100.70    100.0 149.4343   93
+    ## 42   WR      Robby Anderson  104.65    107.0 145.7251  100
+    ## 62   WR    Sterling Shepard  119.10    125.0 139.7021  117
+    ## 387  RB     Devontae Booker  119.40    126.0 122.6159  124
+    ## 40   WR    Rishard Matthews  142.75    146.0 133.4577  141
+    ## 30   RB         James White  149.30    155.0 137.4044  148
+    ## 315 DST                 Pit  163.35    186.0 122.0000  165
+    ## 5     K     Harrison Butker      NA    500.0 145.3158  172
 
 ### Analyzing Bias
 
-Before I mentioned that the projections I am using have been biased for certain positions. For the last part of my analysis I'd like to see how the bias might affect my results. Looking at the errors, I'm going to create a shifted projection "HALF2" that accounts for bias and then I will repeat the previous analysis.
+Before I mentioned that the projections I am using have been biased for certain positions. For the last part of my analysis I'd like to see how the bias might affect my results. Looking at the errors, I'm going to create a shifted projection "HALF2" that accounts for bias:
 
 ``` r
-#shift RB-20, TE-10, QB-10, WR-15, DST+10:
-adp$HALF2<-ifelse(adp$Pos=="RB"& adp$HALF>=100, adp$HALF-20,
-                  ifelse(adp$Pos%in% c("TE", "QB")& adp$HALF>100, adp$HALF-10, 
-                         ifelse(grepl("WR", adp$Pos)& adp$HALF>100, adp$HALF-15, 
-                                ifelse(adp$Pos%in% "DST", adp$HALF+10, adp$HALF   )))) 
+head(adp[, !grepl("STD|PPR", colnames(adp))], 10)
+```
 
+    ##     fantPts_bin Pos            Player ADP_est ADPSD_est ADP_Rank     HALF meanError    HALF2
+    ## 120   (225,400]  RB       Todd Gurley    1.85      0.90        1 286.9787 -52.63222 234.3465
+    ## 119   (225,400]  RB       Leveon Bell    2.25      1.00        2 285.5994 -52.63222 232.9672
+    ## 118   (225,400]  RB   Ezekiel Elliott    3.40      1.35        3 245.7330 -52.63222 193.1008
+    ## 117   (225,400]  RB     David Johnson    3.90      1.10        4 237.7158 -52.63222 185.0835
+    ## 123   (225,400]  WR     Antonio Brown    5.10      1.40        5 244.1744 -21.52841 222.6460
+    ## 122   (225,400]  RB      Alvin Kamara    6.00      1.25        6 245.4832 -52.63222 192.8510
+    ## 82    (175,225]  RB    Saquon Barkley    6.80      1.80        7 221.9244 -20.81580 201.1086
+    ## 87    (175,225]  WR   Deandre Hopkins    8.80      1.90        8 217.1364 -12.85419 204.2822
+    ## 121   (225,400]  RB       Kareem Hunt    9.30      1.75        9 229.6042 -52.63222 176.9720
+    ## 78    (175,225]  RB Leonard Fournette   10.00      1.80       10 213.3087 -20.81580 192.4929
+
+From the error analysis, top-rated RB's have underperformed greatly, based on a sample size of around 40. With the bias-adjusted projections, I am now projecting Antonio Brown to do much better than some of the top RBs. I'll now redo the initial optimization, using these new projections:
+
+``` r
 #getPicks() with "HALF2" scoring
 getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF2')
 ```
 
-    ##                  Player ADP_est ADP_Rank Pos     HALF2 Slot
-    ## 27         Alvin Kamara    6.00      6.0  RB 224.14990    4
-    ## 341     Jerick Mckinnon   20.60     22.0  RB 170.16459   21
-    ## 681         Tyreek Hill   29.65     29.0  WR 181.40852   28
-    ## 384 Juju Smith Schuster   42.35     45.0  WR 163.83668   45
-    ## 585      Russell Wilson   57.10     57.5  QB 290.81921   52
-    ## 98           Cam Newton   74.05     76.0  QB 274.71751   69
-    ## 201      Delanie Walker   79.15     80.0  TE 123.65744   76
-    ## 152         Cooper Kupp  100.70    100.0  WR 132.14390   93
-    ## 569      Robby Anderson  104.65    107.0  WR 129.44804  100
-    ## 407     Kelvin Benjamin  112.70    117.0  WR 122.36538  117
-    ## 620    Sterling Shepard  119.10    125.0  WR 124.76239  124
-    ## 530        Nyheim Hines  136.80    142.0  RB  95.92697  141
-    ## 314         James White  149.30    155.0  RB 116.07105  148
-    ## 548                 Pit  163.35    186.0 DST 132.00000  165
-    ## 283     Harrison Butker      NA    500.0   K 145.31579  172
+    ##     Pos              Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 123  WR       Antonio Brown    5.10      5.0 244.1744 222.6460    4
+    ## 77   RB     Jerick Mckinnon   20.60     22.0 194.1646 173.3488   21
+    ## 88   WR         Tyreek Hill   29.65     29.0 184.3552 171.5010   28
+    ## 90   WR Juju Smith Schuster   42.35     45.0 179.3604 166.5063   45
+    ## 106  QB      Russell Wilson   57.10     57.5 291.4859 296.2320   52
+    ## 109  QB          Cam Newton   74.05     76.0 274.0508 278.7969   69
+    ## 61   WR         Cooper Kupp  100.70    100.0 149.4343 138.2051   76
+    ## 42   WR      Robby Anderson  104.65    107.0 145.7251 134.4959   93
+    ## 384  RB        Duke Johnson  106.70    109.0 121.1553 117.1899  100
+    ## 387  RB     Devontae Booker  119.40    126.0 122.6159 118.6505  117
+    ## 396  TE          Jack Doyle  127.25    131.5 117.6762 112.8658  124
+    ## 40   WR    Rishard Matthews  142.75    146.0 133.4577 122.2286  141
+    ## 30   RB         James White  149.30    155.0 137.4044 112.6714  148
+    ## 315 DST                 Pit  163.35    186.0 122.0000 139.5424  165
+    ## 356   K      Matthew Prater  169.30    196.0 124.8721 139.4285  172
 
-The optimal solution for the base case does not change anything. Thinking about it, it makes sense. I need to take a fixed number at each position and so am basically judging each position independently and shifting it doesn't have an effect. Next I repeat the parameter optimization to see the effect of my projections' bias on that.
+The optimal solution for the base case changes in favor of picking Antonio Brown in Round 1. Next I repeat the parameter optimization to see the effect of my projections' bias on that:
 
 ![](Parameter%20Testing/HALF2%20scoring-base%20case%20parameters.jpeg)
 
-The results are similar and back up many of the initial findings.
+The results now are less clear on whether to pick an WR in Round 1, although some conclusions remain the same such as to take a backup QB, and don't go zero-RB. Looking at the top 2 picks by round for the bias-adjusted projections, you can see how the suggested picks changed from before, and the first two rounds suggest more of a mix of picks:
+
+``` r
+sapply(paste0("Slot", 1:12), function(x) getPicks(slot=x, numRB=6, numWR = 4,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring='HALF2')[1:2,],simplify = FALSE,USE.NAMES = TRUE)
+```
+
+    ## $Slot1
+    ##     Pos            Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 120  RB       Todd Gurley    1.85        1 286.9787 234.3465    1
+    ## 84   TE Robert Gronkowski   23.70       25 176.8560 158.5603   24
+    ## 
+    ## $Slot2
+    ##     Pos            Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 119  RB       Leveon Bell    2.25        2 285.5994 232.9672    2
+    ## 84   TE Robert Gronkowski   23.70       25 176.8560 158.5603   23
+    ## 
+    ## $Slot3
+    ##     Pos          Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 123  WR   Antonio Brown     5.1        5 244.1744 222.6460    3
+    ## 77   RB Jerick Mckinnon    20.6       22 194.1646 173.3488   22
+    ## 
+    ## $Slot4
+    ##     Pos          Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 123  WR   Antonio Brown     5.1        5 244.1744 222.6460    4
+    ## 77   RB Jerick Mckinnon    20.6       22 194.1646 173.3488   21
+    ## 
+    ## $Slot5
+    ##    Pos              Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 82  RB      Saquon Barkley    6.80        7 221.9244 201.1086    5
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223 192.6065   20
+    ## 
+    ## $Slot6
+    ##    Pos              Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 82  RB      Saquon Barkley    6.80        7 221.9244 201.1086    6
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223 192.6065   19
+    ## 
+    ## $Slot7
+    ##    Pos              Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 82  RB      Saquon Barkley    6.80        7 221.9244 201.1086    7
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223 192.6065   18
+    ## 
+    ## $Slot8
+    ##    Pos              Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 78  RB   Leonard Fournette   10.00       10 213.3087 192.4929    8
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223 192.6065   17
+    ## 
+    ## $Slot9
+    ##    Pos              Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 78  RB   Leonard Fournette   10.00       10 213.3087 192.4929    9
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223 192.6065   16
+    ## 
+    ## $Slot10
+    ##    Pos              Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 78  RB   Leonard Fournette   10.00       10 213.3087 192.4929   10
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223 192.6065   15
+    ## 
+    ## $Slot11
+    ##    Pos              Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 79  RB       Melvin Gordon   10.45       11 212.0997 191.2839   11
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223 192.6065   14
+    ## 
+    ## $Slot12
+    ##    Pos              Player ADP_est ADP_Rank     HALF    HALF2 Slot
+    ## 93  WR         Julio Jones   14.10       14 224.4879 211.6337   12
+    ## 83  RB Christian Mccaffrey   20.15       20 213.4223 192.6065   13
 
 ------------------------------------------------------------------------
 
 Conclusion
 ----------
 
-In conclusion, I created a system that optimizes to get the best eventual starting lineup for fantasy football. In testing different strategies, it seems you should definitely draft 2 QBs, you should probably draft RB first, and you should most likely not do zero-RB. I also looked at bias in my projections and found that having projections that are biased for a certain position does not have much effect on the results. The main flaw still remaining in all of this is the uncertainty in opponent picks. If an optimal strategy depends on getting a high value QB in round 10 for example, it should factor in what happens if someone else takes the QB. I will talk about that in a future post. <br /><br />
+In conclusion, I created a system that optimizes to get the best eventual starting lineup for fantasy football. In testing different strategies, it seems you should definitely draft 2 QBs, you should not do zero-RB, and it is unclear if you should draft RB first. The main flaw still remaining in all of this is the uncertainty in opponent picks. If an optimal strategy depends on getting a high value QB in round 10 for example, it should factor in what happens if someone else takes the QB. I will talk about that in a future post. <br /><br />
 
-[1] 12-team league with 15 picks per team. Positions=1 QB, 2 WR, 2 RB, 1 TE, 1 FLEX, 1 DST, 1 K. Scoring = .5 PPR
+[1] Yahoo default is 12-team league with 15 picks per team. Positions=1 QB, 2 WR, 2 RB, 1 TE, 1 FLEX, 1 DST, 1 K. Scoring = .5 PPR

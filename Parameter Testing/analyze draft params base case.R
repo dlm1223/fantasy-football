@@ -7,6 +7,7 @@ scoring<-"HALF2"
 fixPlayer<-"Alvin Kamara"
 
 picks1<-getPicks(slot="Slot4", numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
+picks1
 simScores1<-replicate(8000, simSeason(picks1, scoring=scoring))
 
 plot(cummean(simScores1), ylim=c(1800, 1900))
