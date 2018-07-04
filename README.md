@@ -1,3 +1,5 @@
+Optimization for Fantasy Football Snake Drafts
+---------
 -   [Base Case](#base-case)
 -   [More Complex Case](#more-complex-case)
     -   [Error Analysis](#error-analysis)
