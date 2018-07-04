@@ -1,51 +1,5 @@
-#need to have getPicks() defined
+source("all data, base case.R")
 
-load("Draft Data.RData")
-
-
-# adp$ADP_sim<-rnorm(nrow(adp), mean = adp$ADP_est, sd=adp$ADPSD_est)
-
-adp<-adp[order(adp$ADP_est, decreasing = F),]
-
-adp$ADP_Rank[!is.na(adp$ADP_est)]<-rank(adp$ADP_est[!is.na(adp$ADP_est)])
-adp$ADP_Rank[is.na(adp$ADP_Rank)]<-500 #undrafted
-
-adp[, c("HALF", "PPR","STD")][is.na(adp[, c("HALF", "PPR","STD")])]<-0 #no projection
-
-
-customProj<-function(type="STD"){
-  proj<-read.csv(paste(c("Projections_", type,".csv" ), collapse=""))
-  proj<-proj[proj$Season==2018& proj$Player%in% adp$Player, c("Player","PosFFA", "Season", "Team", "fantPts_agg")]
-  colnames(proj)[colnames(proj)=="fantPts_agg"]<-type
-  colnames(proj)[colnames(proj)=="PosFFA"]<-"Pos"
-  proj$Pos<-ifelse(grepl("LB", proj$Pos), "LB",
-                   ifelse(grepl("DT|DL|DE|NT", proj$Pos)| proj$Pos%in% "T", "DL", 
-                          ifelse(grepl("SS|FS|DB|CB", proj$Pos)| proj$Pos%in% "S", "DB", proj$Pos)))
-  proj$Pos[grepl("FB", proj$Pos)]<-"RB"
-  proj$Pos<-gsub("[/]", ";", proj$Pos)
-  proj<-proj[, c("Player","Pos", "Team",type)]
-  proj
-}
-projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "STD", "PPR"), customProj))
-projections<-projections[!projections$Pos%in% c("LB", "DL", "DB"),, ]
-projections<-projections[order(projections$STD,decreasing = T), ]
-projections<-projections[!duplicated(projections$Player), ]
-
-adp<-merge(adp, projections[, c("Player", "HALF", "STD", "PPR")], by=c("Player"), all.x=T)
-adp$HALF<-ifelse(is.na(adp$HALF.y), adp$HALF.x, adp$HALF.y)
-adp$STD<-ifelse(is.na(adp$STD.y), adp$STD.x, adp$STD.y)
-adp$PPR<-ifelse(is.na(adp$PPR.y), adp$PPR.x, adp$PPR.y)
-adp<-adp[, !grepl("[.]", colnames(adp))]
-adp<-adp[order(adp$ADP_est, decreasing = F),]
-
-head(adp, 15)
-
-source("simulate season sampled errors.R")
-
-adp$fantPts_bin<-as.character(cut(adp$HALF, breaks=c(-50, 25, 75, 125, 175, 225, 400)))
-adp<-merge(adp[, !grepl("meanError", colnames(adp))], errors[, c("meanError", "fantPts_bin", "Pos")], by=c("fantPts_bin", "Pos"))
-adp$HALF2<-adp$HALF+adp$meanError
-adp<-adp[order(adp$ADP_est, decreasing = F),]
 
 #analyze parameters
 

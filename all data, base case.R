@@ -10,121 +10,10 @@ library(MASS)
 options(stringsAsFactors = F, scipen =999)
 source('functions.R', encoding = 'UTF-8')
 
-###SCRAPE DRAFT DATA####
-
-getProj<-function(pos, scoring="HALF"){
-  print(pos)
-  page<-read_html(paste(c("https://www.fantasypros.com/nfl/projections/",tolower(pos), ".php?scoring=", scoring,"&week=draft"), collapse=""))
-  data<-page%>% html_table()
-  data<-data[[1]]
-  if(!"Player"%in%colnames(data) ){
-    store<-as.character(data[2, ])
-    colnames(data)<-store
-  }
-  names<-page%>% html_nodes("#data .player-name") %>% html_text()
-  data<-data[!is.na(data$FPTS)& !grepl(paste(c(letters, LETTERS), collapse="|"), data$FPTS)& !data$FPTS=="", c("Player", "FPTS")]
-  data$Player<-names
-  data$Pos<-toupper(pos)
-  data
-}
-projections<-ldply(lapply(c("QB", "WR", "RB", "TE", "DST", "K"), getProj), data.frame)
-projections$FPTS<-as.numeric(projections$FPTS)
-projections<-projections[!projections$Player%in% c("", " ", "Player") & !is.na(projections$FPTS)& !projections$FPTS==0,]
-projections<-ddply(projections, .(Player), summarize, FPTS=sum(FPTS), Pos=paste(Pos, collapse=";"))
-projections[grep(";", projections$Pos),]
-colnames(projections)[colnames(projections)=="FPTS"]<-"HALF"
-
-
-ppr<-ldply(lapply(c("QB", "WR", "RB", "TE", "DST", "K"), function(x) getProj(x, scoring="PPR")), data.frame)
-ppr$FPTS<-as.numeric(ppr$FPTS)
-ppr<-ppr[!ppr$Player%in% c("", " ", "Player") & !is.na(ppr$FPTS)& !ppr$FPTS==0,]
-ppr<-ddply(ppr, .(Player), summarize, FPTS=sum(FPTS), Pos=paste(Pos, collapse=";"))
-ppr[grep(";", ppr$Pos),]
-colnames(ppr)[colnames(ppr)=="FPTS"]<-"PPR"
-
-std<-ldply(lapply(c("QB", "WR", "RB", "TE", "DST", "K"), function(x) getProj(x, scoring="STD")), data.frame)
-std$FPTS<-as.numeric(std$FPTS)
-std<-std[!std$Player%in% c("", " ", "Player") & !is.na(std$FPTS)& !std$FPTS==0,]
-std<-ddply(std, .(Player), summarize, FPTS=sum(FPTS), Pos=paste(Pos, collapse=";"))
-std[grep(";", std$Pos),]
-colnames(std)[colnames(std)=="FPTS"]<-"STD"
-
-readffcalc<-function(year, scoring="standard"){
-  url<-paste(c("https://fantasyfootballcalculator.com/adp?format=", scoring, "&year=", year,"&teams=12&view=graph&pos=all"), sep="", collapse="")
-  page<-read_html(url)
-  stats<-page%>%html_table(fill=T)
-  stats<-stats[[1]]
-  if(ncol(stats)==12){
-    colnames(stats)<-c("Rk", "Round", "Player", "Pos", "Team",  "ADP", "ADPSD","High", "Low", "TimesDrafted", "Graph", "Graph2" )
-    
-  } else{
-    colnames(stats)<-c("Rk", "Round", "Player", "Pos", "Team", "Bye", "ADP", "ADPSD","High", "Low", "TimesDrafted", "Graph", "Graph2" )
-    
-  }
-  stats<-stats[, !grepl("High|Low|TimesDrafted|Graph|Rk|Round|Bye", colnames(stats))]
-  stats$Year<-year
-  stats
-}
-ffcalc_ppr<-ldply(lapply(2015:2018, function(x) readffcalc(x, scoring="ppr")), data.frame)
-ffcalc<-ldply(lapply(2015:2018, readffcalc), data.frame)
-
-ffcalc$Player<-coordName(ffcalc$Player)
-ffcalc_ppr$Player<-coordName(ffcalc_ppr$Player)
-ffcalc$Pos[ffcalc$Pos=="PK"]<-"K"
-ffcalc_ppr$Pos[ffcalc_ppr$Pos=="PK"]<-"K"
-ffcalc_ppr<-ffcalc_ppr[!duplicated(ffcalc_ppr[, c("Player", "Year")]), ]
-ffcalc<-ffcalc[!duplicated(ffcalc[, c("Player", "Year")]), ]
-
-colnames(ffcalc_ppr)[colnames(ffcalc_ppr)%in% c("ADP", "ADPSD")]<-c("ADP2", "ADPSD2")
-ffcalc<-merge(ffcalc, ffcalc_ppr, by=c("Player", "Year", "Team", "Pos"), all=T)
-
-ffcalc$ADP_est<-rowMeans(ffcalc[, c("ADP", "ADP2")], na.rm=T)
-ffcalc$ADPSD_est<-rowMeans(ffcalc[, c("ADPSD", "ADPSD2")], na.rm=T)
-plot(ffcalc$ADPSD_est~ffcalc$ADP_est)
-ffcalc<-ffcalc[order(ffcalc$Year, ffcalc$ADP_est, decreasing = F), ]
-ffcalc[ffcalc$Year==2018,][1:20,]
-
-
-#load adp
-# https://www.fantasypros.com/nfl/adp/ppr-overall.php
-
-adp_alt<-read_html("https://www.fantasypros.com/nfl/adp/overall.php")
-names<-adp_alt%>% html_nodes("#data .player-name")%>% html_text()
-adp_alt<- html_table(adp_alt)[[1]]
-adp_alt<-adp_alt[!is.na(adp_alt$Rank),]
-adp_alt$Player<-names[1:nrow(adp_alt)]
-adp_alt$Player<-gsub(" DST", "", adp_alt$Player)
-adp_alt<-adp_alt[, c("Player", "AVG")]
-colnames(adp_alt)<-c("Player","ADP")
-adp_alt$ADP<-as.numeric(adp_alt$ADP)
-adp_alt$Player<-coordName(adp_alt$Player)
-
-ffcalc$Player<-coordName(ffcalc$Player)
-projections$Player<-coordName(projections$Player)
-ppr$Player<-coordName(ppr$Player)
-std$Player<-coordName(std$Player)
-setdiff(adp_alt$Player, projections$Player)
-setdiff(ffcalc$Player[ffcalc$Year==2018], ppr$Player)
-
-table(projections$Pos)
-table(ppr$Pos)
-table(std$Pos)
-
-ffpros<-Reduce(function(x, y) merge(x, y, all=TRUE, by=c("Player", "Pos")), list(projections, ppr, std))
-
-adp<-merge(ffcalc[ffcalc$Year==2018, c("Player", "ADP_est", "ADPSD_est")], ffpros, by=c("Player"), all=T)
-
-adp$Pos[adp$Player%in%c("Chris Thompson", "Jd Mckissic", "Byron Marshall")& adp$Pos=="WR;RB"]<-"RB"
-adp$Pos[adp$Player%in%c("Ryan Hewitt")]<-"TE"
-adp$Pos[adp$Player%in%c("Tavon Austin")]<-"TE"
-
-
-save(list=c("adp", "ffcalc", "ffpros"), file="Draft Data.RData")
-
 
 ####PREPARE DRAFT DATA#####
 
-load("Draft Data.RData")
+load("Player Data/Draft Data.RData")
 
 # adp$ADP_sim<-rnorm(nrow(adp), mean = adp$ADP_est, sd=adp$ADPSD_est)
 
@@ -261,26 +150,28 @@ sapply(paste("Slot", 1:numTeams, sep=""), function(x)
 
 
 source("simulate season sampled errors.R")
+
+
 adp$fantPts_bin<-as.character(cut(adp$HALF, breaks=c(-50, 25, 75, 125, 175, 225, 400)))
 adp<-merge(adp[, !grepl("meanError", colnames(adp))], errors[, c("meanError", "fantPts_bin", "Pos")], by=c("fantPts_bin", "Pos"))
 adp$HALF2<-adp$HALF+adp$meanError
 adp<-adp[order(adp$ADP_est, decreasing = F),]
 
 
-picks<-getPicks(slot="Slot4", numRB=4, numWR =4,numFLEX=1,numQB=2,numTE=2,numDST=1,numK=1,
-                strategy=c(),shift=0,
-                scoring='HALF', fix=c(),
-                out=c(#"Doug Baldwin"
-                  # adp$Player[adp$Pos=="QB"& adp$ADP_Rank<69]
-                  # ,adp$Player[adp$Pos=="WR"& adp$ADP_Rank<52]
-                  # ,adp$Player[adp$Pos=="DST"& adp$ADP_Rank<141]
-                ))
-picks
-nrow(picks)
-scoring<-"HALF2"
-picks<-getPicks(slot="Slot4", numRB=5, numWR = 6,numTE=1,numK=1,numQB=2,fix=c("Alvin Kamara"),onePos=rep("QB", 12),
-         numDST=1,numFLEX = 0, scoring=scoring, shift=0)
-picks
-simScores<-replicate(5000, simSeason(picks, scoring = scoring, numWR=3))
-hist(simScores)
-quantile(simScores)
+# picks<-getPicks(slot="Slot4", numRB=4, numWR =4,numFLEX=1,numQB=2,numTE=2,numDST=1,numK=1,
+#                 strategy=c(),shift=0,
+#                 scoring='HALF', fix=c(),
+#                 out=c(#"Doug Baldwin"
+#                   # adp$Player[adp$Pos=="QB"& adp$ADP_Rank<69]
+#                   # ,adp$Player[adp$Pos=="WR"& adp$ADP_Rank<52]
+#                   # ,adp$Player[adp$Pos=="DST"& adp$ADP_Rank<141]
+#                 ))
+# picks
+# nrow(picks)
+# scoring<-"HALF2"
+# picks<-getPicks(slot="Slot4", numRB=5, numWR = 6,numTE=1,numK=1,numQB=2,fix=c("Alvin Kamara"),onePos=rep("QB", 12),
+#          numDST=1,numFLEX = 0, scoring=scoring, shift=0)
+# picks
+# simScores<-replicate(5000, simSeason(picks, scoring = scoring, numWR=3))
+# hist(simScores)
+# quantile(simScores)
