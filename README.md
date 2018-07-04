@@ -244,7 +244,7 @@ Finally, I can repeat this a large number of times to get the mean-simulated opt
 
 The last step of the system is to test different parameters. I can specify things like number of players to take at each position or whether I should lock in a certain player. I repeat the above simulation many times and I want to find the parameters that result in the best mean-simulated optimal lineup. Below I plot the simulation results for different parameter combinations. <br /> <br />
 
-![](HALF%20scoring-base%20case%20parameters.jpeg)
+![](Parameter%20Testing/HALF%20scoring-base%20case%20parameters.jpeg)
 
 <br /> In the plot you can see the effect of different actions. For example, it suggests you should definitely take 2 QBs, as the 1 QB test (case 6) performs very poorly. Taking Antonio Brown instead of Kamara in round 1 slightly decreases the median-simulated starting lineup, despite Antonio Brown's raw projection actually being higher than Kamara's. The planned draft from the optimal parameter combo (case 3) is shown below.
 
