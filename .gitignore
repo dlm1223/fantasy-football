@@ -4,6 +4,8 @@
 .Ruserdata
 *.html
 *.Rmd
+base case optimization.Rmd
+base_case_optimization.html
 model fitting.R
 organize player data.R
 scrape player data.R
@@ -22,5 +24,3 @@ cache/
 figure/
 wordpress upload.R
 simScores by round 1.RData
-base case optimization.Rmd
-base_case_optimization.html

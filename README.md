@@ -1,5 +1,3 @@
-Optimization for Fantasy Football Snake Drafts
----------
 -   [Base Case](#base-case)
 -   [More Complex Case](#more-complex-case)
     -   [Error Analysis](#error-analysis)
@@ -169,7 +167,7 @@ For the more complicated case, my methodology will be to get an optimal lineup, 
 
 ### Error Analysis
 
-I summarize below the projection error (actual-projected) for 2010-2017, grouped by projection range and position.
+I summarize below the projection error (actual-projected) for 2009-2017, grouped by projection range and position.
 
     ##    fantPts_bin Pos  meanError medianError meanRelativeError  sdError   n
     ## 4      (25,75] DST   7.666667   -3.500000       0.113947762 33.10992   6
@@ -234,18 +232,18 @@ First I get the optimal picks at Slot=4/12, same as in base case:
 
 Then I can get the top starting lineup from 1 simulation, determining simulated points by sampling from players' error bin. Projected Points=HALF. Simulated Points=Sim:
 
-    ##    Pos          Player ADP_est ADP_Rank      HALF Slot fantPts_bin     error      Sim
-    ## 5   QB  Russell Wilson   57.10     57.5 291.48588   52   (225,400]  47.90763 339.3935
-    ## 1   RB    Alvin Kamara    6.00      6.0 245.48323    4   (225,400]  91.42356 336.9068
-    ## 13  RB     James White  149.30    155.0 137.40439  148   (125,175] 143.26753 280.6719
-    ## 2   RB Jerick Mckinnon   20.60     22.0 194.16459   21   (175,225]  49.18324 243.3478
-    ## 3   WR     Tyreek Hill   29.65     29.0 184.35515   28   (175,225]  23.49837 207.8535
-    ## 18  WR    Chris Conley      NA    500.0  61.08365   NA     (25,75] 124.62010 185.7037
-    ## 14 DST             Pit  163.35    186.0 122.00000  165    (75,125]  61.45763 183.4576
-    ## 21   K     Ryan Succop      NA    500.0 117.57787   NA    (75,125]  36.65529 154.2332
-    ## 19  TE   Austin Hooper      NA    500.0  97.70611   NA    (75,125]  13.75061 111.4567
+    ##    Pos              Player ADP_est ADP_Rank     HALF Slot fantPts_bin     error      Sim
+    ## 5   QB      Russell Wilson   57.10     57.5 291.4859   52   (225,400]  29.55691 321.0428
+    ## 1   RB        Alvin Kamara    6.00      6.0 245.4832    4   (225,400]  51.16772 296.6509
+    ## 4   WR Juju Smith Schuster   42.35     45.0 179.3604   45   (175,225]  46.71074 226.0712
+    ## 13  RB         James White  149.30    155.0 137.4044  148   (125,175]  39.98791 177.3923
+    ## 21   K  Chandler Catanzaro      NA    500.0 120.6367   NA    (75,125]  52.77177 173.4085
+    ## 12  WR    Rishard Matthews  142.75    146.0 133.4577  141   (125,175]  36.80103 170.2588
+    ## 2   RB     Jerick Mckinnon   20.60     22.0 194.1646   21   (175,225] -24.26548 169.8991
+    ## 7   TE      Delanie Walker   79.15     80.0 132.7886   76   (125,175]  28.84297 161.6316
+    ## 20 DST                 Nyj      NA    500.0  85.0000   NA    (75,125]  53.45763 138.4576
 
-Undrafted players can end up in the top lineup for a given simulation if their HALF+error is better than the players I drafted. Finally, I can repeat the simulation a large number of times to get the mean-simulated optimal lineup from a set of picks.
+Undrafted players can end up in the top lineup for a given simulation if their HALF+error is better than the players I drafted. Finally, I repeat the simulation a large number of times to get the mean-simulated optimal lineup from a set of picks. The sum of the top lineup will stabilize to a given value as I repeat the top-lineup simulation a large number of times.
 
 ### Optimizing Parameters
 
