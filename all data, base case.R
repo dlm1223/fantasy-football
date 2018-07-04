@@ -244,13 +244,11 @@ getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, 
   
   picks<-adp[as.logical(result$x),]
   picks$Slot<-pickDF[, slot]
-  picks[,c( "Player", "ADP_est", adpCol, "Pos",scoring, "Slot")]
+  picks[,colnames(picks) %in% c( "Player", "ADP_est", "HALF", adpCol, "Pos",scoring, "Slot")]
 }
 #shift means shift everyone's ADP to be x% earlier i.e. if someone''s adp is 100, need to take them at 80
-adp$HALF2<-ifelse(adp$Pos=="RB"& adp$HALF>=100, adp$HALF-20,
-                  ifelse(adp$Pos%in% c("TE", "QB")& adp$HALF>100, adp$HALF-10, 
-                         ifelse(grepl("WR", adp$Pos)& adp$HALF>100, adp$HALF-15, 
-                                ifelse(adp$Pos%in% "DST", adp$HALF+10, adp$HALF   )))) 
+
+
 
 picks<- getPicks(slot="Slot4", numRB=5, numWR =5 , numFLEX = 0,numQB=2,shift=0,numDST=1, numK=1,numTE=1,
                   out=c(), fix=c(), scoring='HALF', onePos=rep("RB", 1))
@@ -262,7 +260,13 @@ sapply(paste("Slot", 1:numTeams, sep=""), function(x)
   sum(getPicks(slot=x,numTeams = numTeams,    numRB=4, numWR = 6, numFLEX = 0,numQB=2,shift=0,numDST=1, scoring='HALF', out=c(), fix=c())$HALF))
 
 
-source("simulate season.R")
+source("simulate season sampled errors.R")
+adp$fantPts_bin<-as.character(cut(adp$HALF, breaks=c(-50, 25, 75, 125, 175, 225, 400)))
+adp<-merge(adp[, !grepl("meanError", colnames(adp))], errors[, c("meanError", "fantPts_bin", "Pos")], by=c("fantPts_bin", "Pos"))
+adp$HALF2<-adp$HALF+adp$meanError
+adp<-adp[order(adp$ADP_est, decreasing = F),]
+
+
 picks<-getPicks(slot="Slot4", numRB=4, numWR =4,numFLEX=1,numQB=2,numTE=2,numDST=1,numK=1,
                 strategy=c(),shift=0,
                 scoring='HALF', fix=c(),
@@ -273,8 +277,10 @@ picks<-getPicks(slot="Slot4", numRB=4, numWR =4,numFLEX=1,numQB=2,numTE=2,numDST
                 ))
 picks
 nrow(picks)
-getPicks(slot="Slot4", numRB=5, numWR = 3,numTE=2,numK=1,numQB=2,
-         numDST=1,numFLEX = 1,shift=0,  out=adp$Player[adp$ADP_Rank<=51& adp$Pos=="RB"], fix=c(), scoring='HALF')
-simScores<-replicate(2500, simSeason(picks))
-
-
+scoring<-"HALF2"
+picks<-getPicks(slot="Slot4", numRB=5, numWR = 6,numTE=1,numK=1,numQB=2,fix=c("Alvin Kamara"),onePos=rep("QB", 12),
+         numDST=1,numFLEX = 0, scoring=scoring, shift=0)
+picks
+simScores<-replicate(5000, simSeason(picks, scoring = scoring, numWR=3))
+hist(simScores)
+quantile(simScores)

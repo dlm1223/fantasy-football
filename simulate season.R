@@ -22,6 +22,15 @@ errors<-errors[order(errors$Pos),]
 errors[which(errors$Pos=="DB"),]
 errors[order(errors$Pos),]
 
+# pos<-"QB";bin<-"(200,250]"
+# data<-projections$fantPts_agg[projections$Pos==pos& projections$Season%in% 2012:2017& as.character(projections$fantPts_bin)==bin]-
+#   projections$fantPts[projections$Pos==pos& projections$Season%in% 2012:2017& as.character(projections$fantPts_bin)==bin]
+# hist(data,  main=paste0(pos," Projected-Actual, ",bin," FPTS projected"), xlab="<-Underprojected, Overprojected->")
+
+# head(projections[projections$Pos==pos& projections$Season==2017,][order(projections$fantPts_agg[projections$Pos==pos& projections$Season==2017], decreasing = T),], 45)
+# qqnorm(data)
+# qqline(data)
+
 ###SIM-SEASON FUNCTIONS####
 
 

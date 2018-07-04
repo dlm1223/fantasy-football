@@ -183,16 +183,8 @@ getPick<-function(slot, pickNum, alreadyChosen,numRB=5, numWR=5, numTE=1, numQB=
 #getting picks for the whole draft
 #specify the number of picks to take of each position
 
-simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST=1,  numFLEX=0, alpha=1, numTeams=12,
-                   out=c(), outPos=c(),  onePos=c(), optmode="lpsolve"){
-  
-  # slot<-"Slot1";numRB<-4;numWR<-5;numTE<-1;numQB<-2;numK<-1;numFLEX<-1;numDST<-1;out<-c();fix<-c();scoring<-"HALF";numTeams<-12;alpha<-1;outPos<-c();onePos<-c();optmode<-"lpsolve"
-  
-  adp$ADP_sim[!is.na(adp$ADP_est)]<-rnorm(sum(!is.na(adp$ADP_est)), mean = adp$ADP_est[!is.na(adp$ADP_est)], sd=adp[!is.na(adp$ADP_est), "ADPSD_est"])
-  adp$ADP_sim[is.na(adp$ADP_sim)]<-500
-  # alpha<-1;outPos<-c();onePos<-c();out<-c();optmode<-"lpsolve"
-  
-  numPicks<-numRB+numWR+numTE+numQB+numK+numDST+numFLEX
+#returns pickDF, allowing for customPicks inserted at given slot i.e. if want to test a draft pick trade
+getPickDF<-function(slot="Slot4", numPicks=15, numTeams=12, customPicks=c()){
   pickDF<-data.frame(matrix(NA, ncol=numTeams, nrow=numPicks))
   colnames(pickDF)<-paste("Slot", 1:numTeams, sep="")
   last<-0
@@ -205,7 +197,22 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
     }
     last<-last+numTeams
   }
+  if(length(customPicks)>0){
+    pickDF[, slot]<-customPicks
+  }
+  pickDF
+}
+simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST=1,  numFLEX=0, alpha=1, numTeams=12,scoring="HALF",
+                   out=c(), outPos=c(),  onePos=c(), optmode="lpsolve", customPicks=c()){
   
+  # slot<-"Slot4";numRB<-4;numWR<-5;numTE<-1;numQB<-2;numK<-1;numFLEX<-1;numDST<-1;out<-c();fix<-c();scoring<-"HALF";numTeams<-12;alpha<-1;outPos<-c();onePos<-c();optmode<-"lpsolve"
+  
+  adp$ADP_sim[!is.na(adp$ADP_est)]<-rnorm(sum(!is.na(adp$ADP_est)), mean = adp$ADP_est[!is.na(adp$ADP_est)], sd=adp[!is.na(adp$ADP_est), "ADPSD_est"])
+  adp$ADP_sim[is.na(adp$ADP_sim)]<-500
+  # alpha<-1;outPos<-c();onePos<-c();out<-c();optmode<-"lpsolve"
+  
+  numPicks<-numRB+numWR+numTE+numQB+numK+numDST+numFLEX
+  pickDF<-getPickDF(slot=slot, numTeams=numTeams, numPicks=numPicks, customPicks = customPicks)
   
   storePick<-data.frame(matrix(NA, nrow=numPicks, ncol=ncol(adp)))
   colnames(storePick)<-colnames(adp)
@@ -231,9 +238,9 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
     
     # head(adp[!adp$Player%in% c(alreadyChosen, storePick$Player),])
     #optimize rest of picks based on projected adp & store top pick from it
-    storePick[pickNum, ]<-getPick(slot=slot, pickNum=pickNum, alreadyChosen=alreadyChosen,
+    storePick[pickNum, ]<-getPick(slot=slot, pickNum=pickNum, alreadyChosen=alreadyChosen,scoring=scoring,
                                   numRB=numRB, numWR=numWR, numTE=numTE, numQB=numQB,numK=numK, numFLEX=numFLEX, numDST=numDST,
-                                  alpha=alpha, out=out, fix=fix, scoring="HALF", adpCol="ADP_Rank", outPos=outPos, onePos = onePos, optmode=optmode, 
+                                  alpha=alpha, out=out, fix=fix,  adpCol="ADP_Rank", outPos=outPos, onePos = onePos, optmode=optmode, 
                                   adp=adp, pickDF=pickDF)
     
   }
@@ -245,5 +252,5 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
 #simDraft() simulations draft w. specified strategy. 
 #strategy parameters include: # of players per position, alpha (how conservate to plan future picks, default=1), whether to wait on certain positions
 
-source("simulate season.R")
+source("simulate season sampled errors.R")
 
