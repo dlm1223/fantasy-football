@@ -303,7 +303,7 @@ getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFL
 
 The optimal solution for the base case does not change anything. Thinking about it, it makes sense. I need to take a fixed number at each position and so am basically judging each position independently and shifting it doesn't have an effect. Next I repeat the parameter optimization to see the effect of my projections' bias on that.
 
-![](HALF2%20scoring-base%20case%20parameters.jpeg)
+![](Parameter%20Testing/HALF2%20scoring-base%20case%20parameters.jpeg)
 
 The results are similar and back up many of the initial findings.
 
