@@ -36,65 +36,65 @@ scoring<-"HALF2"
 cl<-makeCluster(2, type = "SOCK")
 registerDoSNOW(cl)
 
-#alpha=1
-drafts<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1)) 
+#shift=0
+drafts<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0)) 
 simScores<-foreach(x=drafts, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 
-#alpha=1.25
-drafts2<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1.25)) 
+#shift=.25
+drafts2<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=.25)) 
 simScores2<-foreach(x=drafts2, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 
-#alpha=1
-drafts3<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=.85)) 
+#shift=0
+drafts3<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=-.15)) 
 simScores3<-foreach(x=drafts3, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 
 quantile(unlist(simScores))
 
-#alpha=1, WR in R1
-drafts4<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1,outPos = c(rep("RB", 1)))) #draft 1 qb in midrounds
+#shift=0, WR in R1
+drafts4<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0,outPos = c(rep("RB", 1)))) #draft 1 qb in midrounds
 simScores4<-foreach(x=drafts4, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 
-#alpha=1, zeroRB in R1-4sim
-drafts5<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1,outPos = c(rep("WR", 1))))  #draft 1 qb in midrounds
+#shift=0, zeroRB in R1-4sim
+drafts5<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0,outPos = c(rep("WR", 1))))  #draft 1 qb in midrounds
 simScores5<-foreach(x=drafts5, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 
 #alpha=85, <=1 QB in R1-11
-drafts6<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1, onePos = rep("QB", 11))) #waiting on QB and DEF
+drafts6<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0, onePos = rep("QB", 11))) #waiting on QB and DEF
 simScores6<-foreach(x=drafts6, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 quantile(unlist(simScores6))
 
-#alpha=1, heavyWR
-drafts7<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1, numRB=4, numWR=6, numTE=1, numQB=2,numK=1, numFLEX=0, numDST=1))
+#shift=0, heavyWR
+drafts7<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0, numRB=4, numWR=6, numTE=1, numQB=2,numK=1, numFLEX=0, numDST=1))
 simScores7<-foreach(x=drafts7, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 quantile(unlist(simScores7))
 
-#alpha=1, heavyRB, <=1 QB in r1-11
-drafts8<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1, numRB=6, numWR=4, numTE=1, numQB=2,numK=1, numFLEX=0, numDST=1)) 
+#shift=0, heavyRB, <=1 QB in r1-11
+drafts8<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0, numRB=6, numWR=4, numTE=1, numQB=2,numK=1, numFLEX=0, numDST=1)) 
 simScores8<-foreach(x=drafts8, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 quantile(unlist(simScores8))
 
-#alpha=1, no QB backup
-drafts9<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1, numRB=5, numWR=5, numTE=2, numQB=1,numK=1, numFLEX=0, numDST=1))
+#shift=0, no QB backup
+drafts9<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0, numRB=5, numWR=5, numTE=2, numQB=1,numK=1, numFLEX=0, numDST=1))
 simScores9<-foreach(x=drafts9, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 quantile(unlist(simScores9))
 
-#alpha=1, QB+TE backup, <=1 QB in R1-11
-drafts10<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1,numRB=4, numWR=5, numTE=2, numQB=2, numK=1, numDST=1 )) #onePos = rep("QB", 11)
+#shift=0, QB+TE backup, <=1 QB in R1-11
+drafts10<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0,numRB=4, numWR=5, numTE=2, numQB=2, numK=1, numDST=1 )) #onePos = rep("QB", 11)
 simScores10<-foreach(x=drafts10, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
 quantile(unlist(simScores10))
 
 #zero WR
-drafts11<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,alpha=1,numRB=6, numWR=4, numTE=1, numQB=2, numK=1, numDST=1,
+drafts11<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0,numRB=6, numWR=4, numTE=1, numQB=2, numK=1, numDST=1,
                                                  onePos = rep("QB", 11), outPos=rep("RB", 4) )) #onePos = rep("QB", 11)
 simScores11<-foreach(x=drafts11, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring)) }
@@ -110,7 +110,7 @@ table(unlist(lapply(drafts10, function(x) x$Player[3])))
 
 #loop through every draft slot--may take a while
 drafts_allSlots<-lapply(paste("Slot", 1:12, sep=""), function(x)
-  lapply(1:numDrafts,function(y) simDraft(scoring=scoring,alpha=1,numRB=4, numWR=7, numTE=1, numQB=2, numK=1, numDST=1 , slot = x))
+  lapply(1:numDrafts,function(y) simDraft(scoring=scoring,shift=0,numRB=4, numWR=7, numTE=1, numQB=2, numK=1, numDST=1 , slot = x))
 )
 simScores_allSlots<-foreach(x=drafts_allSlots,.packages = c("data.table", "dplyr" ,"plyr"))%dopar%{
   lapply(x, function(y)replicate(numSims,simSeason(y, scoring=scoring, numWR=3)))}
@@ -120,7 +120,7 @@ lapply(simScores_allSlots, function(x)quantile(unlist(x)))
 
 #loop through every draft slot--may take a while
 drafts_allSlots_zeroRB<-lapply(paste("Slot", 1:12, sep=""), function(x)
-  lapply(1:numDrafts,function(y) simDraft(scoring=scoring,alpha=1,numRB=4, numWR=7, numTE=1, numQB=2, numK=1, numDST=1 , slot = x, outPos=rep("RB", 1)))
+  lapply(1:numDrafts,function(y) simDraft(scoring=scoring,shift=0,numRB=5, numWR=5, numTE=1, numQB=2, numK=1, numDST=1 , slot = x, outPos=rep("RB", 1)))
 )
 simScores_allSlots_zeroRB<-foreach(x=drafts_allSlots_zeroRB,.packages = c("data.table", "dplyr" ,"plyr"))%dopar%{
   lapply(x, function(y)replicate(numSims,simSeason(y, scoring=scoring, numWR=3)))}
@@ -128,12 +128,12 @@ simScores_allSlots_zeroRB<-foreach(x=drafts_allSlots_zeroRB,.packages = c("data.
 
 #loop through every draft slot--may take a while
 drafts_allSlots_zeroWR<-lapply(paste("Slot", 1:12, sep=""), function(x)
-  lapply(1:numDrafts,function(y) simDraft(scoring=scoring,alpha=1,numRB=4, numWR=7, numTE=1, numQB=2, numK=1, numDST=1 , slot = x, outPos=rep("WR", 1)))
+  lapply(1:numDrafts,function(y) simDraft(scoring=scoring,shift=0,numRB=5, numWR=5, numTE=1, numQB=2, numK=1, numDST=1 , slot = x, outPos=rep("WR", 1)))
 )
 simScores_allSlots_zeroWR<-foreach(x=drafts_allSlots_zeroWR,.packages = c("data.table", "dplyr" ,"plyr"))%dopar%{
   lapply(x, function(y)replicate(numSims,simSeason(y, scoring=scoring, numWR=3)))}
 
-save(list=ls()[grepl("simScores|drafts",ls())], file=paste0(scoring," analyze draft params by round.RData"))
+save(list=ls()[grepl("simScores|drafts",ls())], file=paste0("Parameter Testing/" ,scoring," analyze draft params by round.RData"))
 
 pos<-5
 draft<-drafts_allSlots[[pos]]
@@ -151,13 +151,13 @@ mostCommon[,c("Player", "Pos", "Round", "Times")]
 
 #####PLOT#####
 
-load(paste0(scoring," analyze draft params by round.RData"))
+load(paste0("Parameter Testing/" ,scoring," analyze draft params by round.RData"))
 
-Parameters<-c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (default)", "2. default, alpha=1.25","3. default, alpha=.85",
-              "4. zero RB in R1, alpha=1", "5. zero WR in R1, alpha=1",  "6. \u2264 1QB in R1-11, alpha=1", 
-              "7. RBx4, WRx6, alpha=1", "8. RBx6, WRx4, \u2264 1QB in R1-11, alpha=1",
-              "9. RBx5,WRx5,TEx2,QB/DST/Kx1, alpha=1", "10. RBx4,WRx5,QB/TEx2,DST/Kx1, alpha=1", 
-              "11. Zero RB in R1-4, \u2264 1QB in R1-11,  alpha=1" )
+Parameters<-c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (default)", "2. default, shift=.25","3. default, shift=-.15",
+              "4. zero RB in R1, shift=0", "5. zero WR in R1, shift=0",  "6. \u2264 1QB in R1-11, shift=0", 
+              "7. RBx4, WRx6, shift=0", "8. RBx6, WRx4, \u2264 1QB in R1-11, shift=0",
+              "9. RBx5,WRx5,TEx2,QB/DST/Kx1, shift=0", "10. RBx4,WRx5,QB/TEx2,DST/Kx1, shift=0", 
+              "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" )
 
 Sims<-list(simScores,simScores2, simScores3, simScores4, simScores5,
            simScores6, simScores7, simScores8, simScores9, simScores10, simScores11) %>% unlist(recursive = T)
@@ -189,7 +189,7 @@ ggplot(Sims, aes(x=Parameter, y=mean, fill=Parameter)) +
   ylab("Mean-Simulated Starting Lineup (25,000 sims)") +
   ggtitle("Simulation Results for Different Draft Parameters")
 
-ggsave(paste0(scoring, " scoring-by round parameters.jpeg"),width = 7, height=3.4 , units = "in")
+ggsave(paste0("Parameter Testing/" ,scoring, " scoring-by round parameters.jpeg"),width = 7, height=3.4 , units = "in")
 
 
 
@@ -205,13 +205,13 @@ mostCommon<-lapply(1:15, function(x) freqs[order(freqs[, x], decreasing = T),c(x
 
 
 
-load(paste0(scoring," analyze draft params by round.RData"))
+load(paste0("Parameter Testing/" ,scoring," analyze draft params by round.RData"))
 
 Slot<-rep( paste0("Slot", 1:12), 3)
 Sims<-unlist(c(simScores_allSlots, simScores_allSlots_zeroRB, simScores_allSlots_zeroWR))
 
 
-Sims<-data.frame(Sim=Sims, Slot=rep(Slot, each=40000), Parameter=rep(c("Case 10", "Case 10 + ZeroRB in R1", "Case10 + ZeroWR in R1"), each=length(Sims)/3))
+Sims<-data.frame(Sim=Sims, Slot=rep(Slot, each=25000), Parameter=rep(c("Case 1", "Case 1 + ZeroRB in R1", "Case1 + ZeroWR in R1"), each=length(Sims)/3))
 Sims$Slot<-factor(Sims$Slot, levels=unique(Sims$Slot))
 Sims<-ddply(Sims, .(Slot, Parameter), summarize, 
             N    = length(Sim),
@@ -228,14 +228,14 @@ ggplot(Sims, aes(x=Slot, y=mean, fill=Parameter)) +
   # theme(axis.text.x=element_blank(), 
         # axis.title.x = element_blank()
   # )+
-  coord_cartesian(ylim=c(1750, 1850))+
+  coord_cartesian(ylim=c(min(Sims$mean)-10, max(Sims$mean+20)))+
   geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
                 size=.3,    # Thinner lines
                 width=.2,
                 position=position_dodge(.9)) +
   xlab("Slot") +
-  ylab("Mean-Simulated Starting Lineup (40,000 sims)") +
+  ylab("Mean-Simulated Starting Lineup (25,000 sims)") +
   ggtitle("Simulation Results for All Draft Slots")
 
-ggsave(paste0(scoring, " scoring-by round slots.jpeg"),width = 7, height=3.4 , units = "in")
+ggsave(paste0("Parameter Testing/" ,scoring, " scoring-by round slots.jpeg"),width = 7, height=3.4 , units = "in")
 

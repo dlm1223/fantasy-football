@@ -62,10 +62,10 @@ head(adp, 15)
 ####OPTIMIZATION FUNCTIONS#####
 
 #getting pick for a given round, number of positions specifies how much of each position to plan out to take
-getPick<-function(slot, pickNum, alreadyChosen,numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST=1,  numFLEX=0, alpha=1, 
+getPick<-function(slot, pickNum, alreadyChosen,numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST=1,  numFLEX=0, shift=0, 
                   out=c(), fix=c(), scoring="HALF", adpCol="ADP_Rank",  outPos=c(), onePos=c(), optmode="lpsolve", adp=adp, pickDF=pickDF){
   
-  #alpha=how conservative you want to be in planning future picks. larger alpha will lead you to reach less on players you want and assume you can get them later
+  #shift=how conservative you want to be in planning future picks
   #outPos is a vector of positions you want to wait on ex outPos=c("QB", "QB", "QB") means draft 0 qb in first 3 rounds
   #onePos is vector of positions you want to draft at most 1 of so c("QB", "QB", "QB") means draft at most 1 in first 3 rounds
   #right now can only specify one vector for outPos and onePos
@@ -100,21 +100,20 @@ getPick<-function(slot, pickNum, alreadyChosen,numRB=5, numWR=5, numTE=1, numQB=
   #ex:current pick-4th. next-pick=21th, pick after=28th
   #assume can take at most 1-player from top 17 remaining
   # can take at most 2-players from top 28-4=24 remainnig
-  #alpha is the parameter that controls how conservative want to be i.e. can make it larger to account more for worst-case scenario
+  #shift is the parameter that controls how conservative want to be
   
   picks<-pickDF[, slot][pickNum:nrow(pickDF)]
   pickDelta<-picks[-1]-picks[1] 
   topRemaining<-which(!adp$Player%in% c(alreadyChosen, fix))  
   
-  if(length(alpha)>0){
+  if(length(shift)>0){
+    
     #constraining ADP of future picks
     if(length(pickDelta)>=1){
-      #uncertainy set 1: only 1 player can be taken from this set
-      # adp[topRemaining[1:(pickDelta[1]*alpha)],]
       
       #constraining future players taken based on uncertainty sets and number of picks  
       for(i  in 1:length(pickDelta) ){
-        A[q,topRemaining[1:(pickDelta[i]*alpha)]]<-1; model$sense[q]<-"<="; model$rhs[q]<-i;q<-q+1 
+        A[q,topRemaining[1:(pickDelta[i]*(1+shift))]]<-1; model$sense[q]<-"<="; model$rhs[q]<-i;q<-q+1 
       }
     }
   }
@@ -132,7 +131,7 @@ getPick<-function(slot, pickNum, alreadyChosen,numRB=5, numWR=5, numTE=1, numQB=
     if(length(x)>=pickNum){ 
       
       i<-length(x)-pickNum+1 #number of future picks to constrain
-      out<-adp$Player[which(adp$Player%in%adp$Player[topRemaining[1:(pickDelta[i]*alpha)]] & grepl(x[length(x)], adp$Pos))] #players to constrain
+      out<-adp$Player[which(adp$Player%in%adp$Player[topRemaining[1:(pickDelta[i]*(1+shift))]] & grepl(x[length(x)], adp$Pos))] #players to constrain
       
       A[q,adp$Player%in% out]<-1; model$sense[q]<-"<="; model$rhs[q]<-0;q<-q+1 #constrain
       
@@ -147,7 +146,7 @@ getPick<-function(slot, pickNum, alreadyChosen,numRB=5, numWR=5, numTE=1, numQB=
       #onePos<-rep("QB", 8)
       
       i<-length(x)-pickNum+1 #number of future picks to constrain
-      out<-adp$Player[which(adp$Player%in%adp$Player[1:(topRemaining[round(pickDelta[i]*alpha)])]&  grepl(x[length(x)], adp$Pos) )] 
+      out<-adp$Player[which(adp$Player%in%adp$Player[1:(topRemaining[round(pickDelta[i]*(1+shift))])]&  grepl(x[length(x)], adp$Pos) )] 
       
       A[q,(adp$Player%in% out ) ]<-1 ;model$sense[q]<-"<="; model$rhs[q]<-1;q<-q+1 #constrain players
       
@@ -202,14 +201,14 @@ getPickDF<-function(slot="Slot4", numPicks=15, numTeams=12, customPicks=c()){
   }
   pickDF
 }
-simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST=1,  numFLEX=0, alpha=1, numTeams=12,scoring="HALF",
+simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST=1,  numFLEX=0, shift=0, numTeams=12,scoring="HALF",
                    out=c(), outPos=c(),  onePos=c(), optmode="lpsolve", customPicks=c()){
   
-  # slot<-"Slot4";numRB<-4;numWR<-5;numTE<-1;numQB<-2;numK<-1;numFLEX<-1;numDST<-1;out<-c();fix<-c();scoring<-"HALF";numTeams<-12;alpha<-1;outPos<-c();onePos<-c();optmode<-"lpsolve"
+  # slot<-"Slot4";numRB<-4;numWR<-5;numTE<-1;numQB<-2;numK<-1;numFLEX<-1;numDST<-1;out<-c();fix<-c();customPicks<-c();scoring<-"HALF";numTeams<-12;shift<-0;outPos<-c();onePos<-c();optmode<-"lpsolve"
   
   adp$ADP_sim[!is.na(adp$ADP_est)]<-rnorm(sum(!is.na(adp$ADP_est)), mean = adp$ADP_est[!is.na(adp$ADP_est)], sd=adp[!is.na(adp$ADP_est), "ADPSD_est"])
   adp$ADP_sim[is.na(adp$ADP_sim)]<-500
-  # alpha<-1;outPos<-c();onePos<-c();out<-c();optmode<-"lpsolve"
+  # shift<-0;outPos<-c();onePos<-c();out<-c();optmode<-"lpsolve"
   
   numPicks<-numRB+numWR+numTE+numQB+numK+numDST+numFLEX
   pickDF<-getPickDF(slot=slot, numTeams=numTeams, numPicks=numPicks, customPicks = customPicks)
@@ -220,10 +219,10 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
   for(pickNum in 1:numPicks){
     
     if(pickNum==1){
-      numPlayers<-pickDF[pickNum, slot]-1
+      numPlayers<-pickDF[pickNum, slot]-1 #number of players to sim
       alreadyChosen<-c()
     } else{
-      numPlayers<-pickDF[pickNum, slot]-pickDF[pickNum-1, slot]-1
+      numPlayers<-pickDF[pickNum, slot]-pickDF[pickNum-1, slot]-1 #number of players to sim
     }
     
     #get next-players chosen from adp-simulation
@@ -240,7 +239,7 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
     #optimize rest of picks based on projected adp & store top pick from it
     storePick[pickNum, ]<-getPick(slot=slot, pickNum=pickNum, alreadyChosen=alreadyChosen,scoring=scoring,
                                   numRB=numRB, numWR=numWR, numTE=numTE, numQB=numQB,numK=numK, numFLEX=numFLEX, numDST=numDST,
-                                  alpha=alpha, out=out, fix=fix,  adpCol="ADP_Rank", outPos=outPos, onePos = onePos, optmode=optmode, 
+                                  shift=shift, out=out, fix=fix,  adpCol="ADP_Rank", outPos=outPos, onePos = onePos, optmode=optmode, 
                                   adp=adp, pickDF=pickDF)
     
   }
@@ -250,7 +249,7 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
 
 
 #simDraft() simulations draft w. specified strategy. 
-#strategy parameters include: # of players per position, alpha (how conservate to plan future picks, default=1), whether to wait on certain positions
+#strategy parameters include: # of players per position, shift (how conservate to plan future picks, default=1), whether to wait on certain positions
 
 source("simulate season sampled errors.R")
 

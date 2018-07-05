@@ -102,4 +102,4 @@ ggplot(Sims, aes(x=Parameter, y=mean, fill=Parameter)) +
   ylab("Mean-Simulated Starting Lineup (8,000 sims)") +
   ggtitle("Simulation Results for Different Draft Parameters")
 
-ggsave(paste0(scoring, " scoring-base case parameters.jpeg"),width = 7, height=4 , units = "in")
+ggsave(paste0("Parameter Testing/" ,scoring, " scoring-base case parameters.jpeg"),width = 7, height=4 , units = "in")
