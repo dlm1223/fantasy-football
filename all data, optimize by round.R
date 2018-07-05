@@ -18,7 +18,7 @@ source('functions.R', encoding = 'UTF-8')
 #ORGANIZE ADPS AND PROJECTIONS####
 
 
-load("Draft Data.RData")
+load("Player Data/Draft Data.RData")
 
 # adp$ADP_sim<-rnorm(nrow(adp), mean = adp$ADP_est, sd=adp$ADPSD_est)
 
