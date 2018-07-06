@@ -155,36 +155,7 @@ Parameters<-c("1. RBx5,WRx6,QBx2,K/DST/TEx1 (default)", "2. default, shift=.25",
               "7. RBx4, WRx7, shift=0", "8. RBx6, WRx5, \u2264 1QB in R1-11, shift=0",
               "9. RBx5,WRx6,TEx2,QB/DST/Kx1, shift=0", "10. RBx4,WRx6,QB/TEx2,DST/Kx1, shift=0", 
               "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" )
-
-Sims<-list(simScores,simScores2, simScores3, simScores4, simScores5,
-           simScores6, simScores7, simScores8, simScores9, simScores10, simScores11) %>% unlist(recursive = T)
-
-
-Sims<-data.frame(Sim=Sims, Parameter=rep(Parameters, each=25000))
-Sims$Parameter<-factor(Sims$Parameter, levels=unique(Sims$Parameter))
-Sims<-ddply(Sims, .(Parameter), summarize, 
-            N    = length(Sim),
-            mean = mean(Sim),
-            sd   = sd(Sim),
-            se   = sd / sqrt(N) )
-library(ggplot2)
-head(Sims)
-
-ggplot(Sims, aes(x=Parameter, y=mean, fill=Parameter)) + 
-  geom_bar(position=position_dodge(), stat="identity",
-           colour="black", # Use black outlines,
-           size=.3) +      # Thinner lines
-  theme(axis.text.x=element_blank(), 
-        axis.title.x = element_blank()
-  )+
-  coord_cartesian(ylim=c(min(Sims$mean)-10, max(Sims$mean+20)))+
-  geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
-                size=.3,    # Thinner lines
-                width=.2,
-                position=position_dodge(.9)) +
-  xlab("Parameter") +
-  ylab("Mean-Simulated Starting Lineup (25,000 sims)") +
-  ggtitle("Simulation Results for Different Draft Parameters")
+makeParamPlot(Parameters=Parameters, Title="Simulation Results for Different Draft Parameters - 3WR League, Regular Scoring")
 
 ggsave(paste0("Parameter Testing/" , scoring, " scoring-by round parameters.jpeg"),width = 7, height=3.4 , units = "in")
 
@@ -201,36 +172,7 @@ mostCommon<-lapply(1:15, function(x) freqs[order(freqs[, x], decreasing = T),c(x
 #####PLOT#####
 
 load(paste0("Parameter Testing/" ,scoring," analyze draft params by round 3WR.RData"))
-
-Slot<-rep( paste0("Slot", 1:12), 3)
-Sims<-unlist(c(simScores_allSlots, simScores_allSlots_zeroRB, simScores_allSlots_zeroWR))
-
-
-Sims<-data.frame(Sim=Sims, Slot=rep(Slot, each=25000), Parameter=rep(c("Case 10", "Case 10 + ZeroRB in R1", "Case10 + ZeroWR in R1"), each=length(Sims)/3))
-Sims$Slot<-factor(Sims$Slot, levels=unique(Sims$Slot))
-Sims<-ddply(Sims, .(Slot, Parameter), summarize, 
-            N    = length(Sim),
-            mean = mean(Sim),
-            sd   = sd(Sim),
-            se   = sd / sqrt(N) )
-library(ggplot2)
-head(Sims)
-
-ggplot(Sims, aes(x=Slot, y=mean, fill=Parameter)) + 
-  geom_bar(position=position_dodge(), stat="identity",
-           colour="black", # Use black outlines,
-           size=.3) +      # Thinner lines
-  # theme(axis.text.x=element_blank(), 
-  # axis.title.x = element_blank()
-  # )+
-  coord_cartesian(ylim=c(min(Sims$mean)-10, max(Sims$mean+20)))+
-  geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
-                size=.3,    # Thinner lines
-                width=.2,
-                position=position_dodge(.9)) +
-  xlab("Slot") +
-  ylab("Mean-Simulated Starting Lineup (25,000 sims)") +
-  ggtitle("Simulation Results for All Draft Slots")
-
+makeSlotPlot(Title = "Results by Draft Slot, 3WR League, Regular Scoring", 
+             Parameters = )
 ggsave(paste0("Parameter Testing/" ,scoring, " scoring-by round slots.jpeg"),width = 7, height=3.4 , units = "in")
 

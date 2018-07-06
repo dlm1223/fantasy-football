@@ -110,10 +110,10 @@ table(unlist(lapply(drafts10, function(x) x$Player[3])))
 
 #loop through every draft slot--may take a while
 drafts_allSlots<-lapply(paste("Slot", 1:12, sep=""), function(x)
-  lapply(1:numDrafts,function(y) simDraft(scoring=scoring,shift=0,numRB=4, numWR=7, numTE=1, numQB=2, numK=1, numDST=1 , slot = x))
+  lapply(1:numDrafts,function(y) simDraft(scoring=scoring,shift=0,numRB=5, numWR=5, numTE=1, numQB=2, numK=1, numDST=1 , slot = x))
 )
 simScores_allSlots<-foreach(x=drafts_allSlots,.packages = c("data.table", "dplyr" ,"plyr"))%dopar%{
-  lapply(x, function(y)replicate(numSims,simSeason(y, scoring=scoring, numWR=3)))}
+  lapply(x, function(y)replicate(numSims,simSeason(y, scoring=scoring)))}
 #results
 lapply(simScores_allSlots, function(x)quantile(unlist(x)))
 
@@ -123,7 +123,7 @@ drafts_allSlots_zeroRB<-lapply(paste("Slot", 1:12, sep=""), function(x)
   lapply(1:numDrafts,function(y) simDraft(scoring=scoring,shift=0,numRB=5, numWR=5, numTE=1, numQB=2, numK=1, numDST=1 , slot = x, outPos=rep("RB", 1)))
 )
 simScores_allSlots_zeroRB<-foreach(x=drafts_allSlots_zeroRB,.packages = c("data.table", "dplyr" ,"plyr"))%dopar%{
-  lapply(x, function(y)replicate(numSims,simSeason(y, scoring=scoring, numWR=3)))}
+  lapply(x, function(y)replicate(numSims,simSeason(y, scoring=scoring)))}
 
 
 #loop through every draft slot--may take a while
@@ -131,12 +131,12 @@ drafts_allSlots_zeroWR<-lapply(paste("Slot", 1:12, sep=""), function(x)
   lapply(1:numDrafts,function(y) simDraft(scoring=scoring,shift=0,numRB=5, numWR=5, numTE=1, numQB=2, numK=1, numDST=1 , slot = x, outPos=rep("WR", 1)))
 )
 simScores_allSlots_zeroWR<-foreach(x=drafts_allSlots_zeroWR,.packages = c("data.table", "dplyr" ,"plyr"))%dopar%{
-  lapply(x, function(y)replicate(numSims,simSeason(y, scoring=scoring, numWR=3)))}
+  lapply(x, function(y)replicate(numSims,simSeason(y, scoring=scoring)))}
 
 save(list=ls()[grepl("simScores|drafts",ls())], file=paste0("Parameter Testing/" ,scoring," analyze draft params by round.RData"))
 
-pos<-5
-draft<-drafts_allSlots[[pos]]
+pos<-1
+draft<-drafts_allSlots_zeroRB[[pos]]
 freqs<-as.data.frame.matrix(table(unlist(lapply(draft, function(x) x$Player)), unlist(lapply(draft, function(x) 1:nrow(x)))))
 freqs[ order(freqs[,1], freqs[, 2], freqs[,3], freqs[, 4], freqs[, 5], freqs[, 5], freqs[, 5], freqs[, 6], freqs[, 7], freqs[, 8], decreasing = T),][1:30,]
 
@@ -158,40 +158,9 @@ Parameters<-c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (default)", "2. default, shift=.25",
               "7. RBx4, WRx6, shift=0", "8. RBx6, WRx4, \u2264 1QB in R1-11, shift=0",
               "9. RBx5,WRx5,TEx2,QB/DST/Kx1, shift=0", "10. RBx4,WRx5,QB/TEx2,DST/Kx1, shift=0", 
               "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" )
-
-Sims<-list(simScores,simScores2, simScores3, simScores4, simScores5,
-           simScores6, simScores7, simScores8, simScores9, simScores10, simScores11) %>% unlist(recursive = T)
-
-
-Sims<-data.frame(Sim=Sims, Parameter=rep(Parameters, each=25000))
-Sims$Parameter<-factor(Sims$Parameter, levels=unique(Sims$Parameter))
-Sims<-ddply(Sims, .(Parameter), summarize, 
-            N    = length(Sim),
-            mean = mean(Sim),
-            sd   = sd(Sim),
-            se   = sd / sqrt(N) )
-library(ggplot2)
-head(Sims)
-
-ggplot(Sims, aes(x=Parameter, y=mean, fill=Parameter)) + 
-  geom_bar(position=position_dodge(), stat="identity",
-           colour="black", # Use black outlines,
-           size=.3) +      # Thinner lines
-  theme(axis.text.x=element_blank(), 
-        axis.title.x = element_blank()
-  )+
-  coord_cartesian(ylim=c(min(Sims$mean)-10, max(Sims$mean+20)))+
-  geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
-                size=.3,    # Thinner lines
-                width=.2,
-                position=position_dodge(.9)) +
-  xlab("Parameter") +
-  ylab("Mean-Simulated Starting Lineup (25,000 sims)") +
-  ggtitle("Simulation Results for Different Draft Parameters")
+makeRoundPlot(Parameters=Parameters, Title="Simulation Results for Different Draft Parameters")
 
 ggsave(paste0("Parameter Testing/" ,scoring, " scoring-by round parameters.jpeg"),width = 7, height=3.4 , units = "in")
-
-
 
 
 freqs<-as.data.frame.matrix(table(unlist(lapply(drafts10, function(x) x$Player)), unlist(lapply(drafts10, function(x) 1:nrow(x)))))
@@ -202,40 +171,9 @@ mostCommon<-lapply(1:15, function(x) freqs[order(freqs[, x], decreasing = T),c(x
 
 
 #####PLOT#####
-
-
-
 load(paste0("Parameter Testing/" ,scoring," analyze draft params by round.RData"))
 
-Slot<-rep( paste0("Slot", 1:12), 3)
-Sims<-unlist(c(simScores_allSlots, simScores_allSlots_zeroRB, simScores_allSlots_zeroWR))
-
-
-Sims<-data.frame(Sim=Sims, Slot=rep(Slot, each=25000), Parameter=rep(c("Case 1", "Case 1 + ZeroRB in R1", "Case1 + ZeroWR in R1"), each=length(Sims)/3))
-Sims$Slot<-factor(Sims$Slot, levels=unique(Sims$Slot))
-Sims<-ddply(Sims, .(Slot, Parameter), summarize, 
-            N    = length(Sim),
-            mean = mean(Sim),
-            sd   = sd(Sim),
-            se   = sd / sqrt(N) )
-library(ggplot2)
-head(Sims)
-
-ggplot(Sims, aes(x=Slot, y=mean, fill=Parameter)) + 
-  geom_bar(position=position_dodge(), stat="identity",
-           colour="black", # Use black outlines,
-           size=.3) +      # Thinner lines
-  # theme(axis.text.x=element_blank(), 
-        # axis.title.x = element_blank()
-  # )+
-  coord_cartesian(ylim=c(min(Sims$mean)-10, max(Sims$mean+20)))+
-  geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
-                size=.3,    # Thinner lines
-                width=.2,
-                position=position_dodge(.9)) +
-  xlab("Slot") +
-  ylab("Mean-Simulated Starting Lineup (25,000 sims)") +
-  ggtitle("Simulation Results for All Draft Slots")
-
+p<-makeSlotPlot()
+p
 ggsave(paste0("Parameter Testing/" ,scoring, " scoring-by round slots.jpeg"),width = 7, height=3.4 , units = "in")
 
