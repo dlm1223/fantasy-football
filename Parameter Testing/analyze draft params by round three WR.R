@@ -7,7 +7,7 @@ adp<-adp[order(adp$ADP_est, decreasing = F),]
 
 numDrafts<-250
 numSims<-100
-scoring<-"HALF2"
+scoring<-"HALF"
 
 #default parameters
 # drafts<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring))  #get picks going round by round,players taken probabilistically based on adp
@@ -42,12 +42,12 @@ simScores<-foreach(x=drafts, .packages = c("data.table", "dplyr", "plyr"))%dopar
   replicate(numSims, simSeason(x, scoring=scoring, numWR = 3)) }
 
 #shift=.25
-drafts2<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=.25, numWR=6 )) 
+drafts2<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring, numWR=5, numRB=6 ,outPos=rep("RB", 1), onePos=rep("QB", 11))) 
 simScores2<-foreach(x=drafts2, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring, numWR = 3)) }
 
 #shift=0
-drafts3<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=-.15, numWR=6)) 
+drafts3<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,numWR=5, numRB=6,outPos=rep("RB", 1) )) 
 simScores3<-foreach(x=drafts3, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring, numWR = 3)) }
 
@@ -150,9 +150,9 @@ mostCommon[,c("Player", "Pos", "Round", "Times")]
 
 load(paste0("Parameter Testing/" ,scoring," analyze draft params by round 3WR.RData"))
 
-Parameters<-c("1. RBx5,WRx6,QBx2,K/DST/TEx1 (default)", "2. default, shift=.25","3. default, shift=-.15",
+Parameters<-c("1. RBx5,WRx6,QBx2,K/DST/TEx1 (default)", "2. zero RB in R1, 6 RBs,  \u2264 1 QB in 1-11","3. zero RB in R1, 6 RBs",
               "4. zero RB in R1, shift=0", "5. zero WR in R1, shift=0",  "6. \u2264 1QB in R1-11, shift=0", 
-              "7. RBx4, WRx7, shift=0", "8. RBx6, WRx5, \u2264 1QB in R1-11, shift=0",
+              "7. RBx4, WRx7, shift=0", "8. RBx6, WRx5, shift=0",
               "9. RBx5,WRx6,TEx2,QB/DST/Kx1, shift=0", "10. RBx4,WRx6,QB/TEx2,DST/Kx1, shift=0", 
               "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" )
 makeParamPlot(Parameters=Parameters, Title="Simulation Results for Different Draft Parameters - 3WR League, Regular Scoring")

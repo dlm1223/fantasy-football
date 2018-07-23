@@ -7,7 +7,7 @@ adp<-adp[order(adp$ADP_est, decreasing = F),]
 
 numDrafts<-250
 numSims<-100
-scoring<-"HALF2"
+scoring<-"HALF"
 
 #default parameters
 # drafts<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring))  #get picks going round by round,players taken probabilistically based on adp
@@ -158,7 +158,7 @@ Parameters<-c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (default)", "2. default, shift=.25",
               "7. RBx4, WRx6, shift=0", "8. RBx6, WRx4, \u2264 1QB in R1-11, shift=0",
               "9. RBx5,WRx5,TEx2,QB/DST/Kx1, shift=0", "10. RBx4,WRx5,QB/TEx2,DST/Kx1, shift=0", 
               "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" )
-makeRoundPlot(Parameters=Parameters, Title="Simulation Results for Different Draft Parameters")
+makeParamPlot(Parameters=Parameters, Title="Simulation Results for Different Draft Parameters")
 
 ggsave(paste0("Parameter Testing/" ,scoring, " scoring-by round parameters.jpeg"),width = 7, height=3.4 , units = "in")
 

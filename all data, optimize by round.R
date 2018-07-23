@@ -20,7 +20,11 @@ source('functions.R', encoding = 'UTF-8')
 
 load("Player Data/Draft Data.RData")
 
-# adp$ADP_sim<-rnorm(nrow(adp), mean = adp$ADP_est, sd=adp$ADPSD_est)
+adp<-merge(ffcalc[ffcalc$Year==2018, c("Player", "ADP_est", "ADPSD_est")], ffpros, by=c("Player"), all=T)
+
+adp$Pos[adp$Player%in%c("Chris Thompson", "Jd Mckissic", "Byron Marshall")& adp$Pos=="WR;RB"]<-"RB"
+adp$Pos[adp$Player%in%c("Ryan Hewitt")]<-"TE"
+adp$Pos[adp$Player%in%c("Tavon Austin")]<-"WR"
 
 adp<-adp[order(adp$ADP_est, decreasing = F),]
 
@@ -43,12 +47,12 @@ customProj<-function(type="STD"){
   proj<-proj[, c("Player","Pos", "Team",type)]
   proj
 }
-projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "STD", "PPR"), customProj))
+projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "STD", "PPR", "CUSTOM"), customProj))
 projections<-projections[!projections$Pos%in% c("LB", "DL", "DB"),, ]
 projections<-projections[order(projections$STD,decreasing = T), ]
 projections<-projections[!duplicated(projections$Player), ]
 
-adp<-merge(adp, projections[, c("Player", "HALF", "STD", "PPR")], by=c("Player"), all.x=T)
+adp<-merge(adp, projections[, c("Player", "HALF", "STD", "PPR", "CUSTOM")], by=c("Player"), all.x=T)
 adp$HALF<-ifelse(is.na(adp$HALF.y), adp$HALF.x, adp$HALF.y)
 adp$STD<-ifelse(is.na(adp$STD.y), adp$STD.x, adp$STD.y)
 adp$PPR<-ifelse(is.na(adp$PPR.y), adp$PPR.x, adp$PPR.y)

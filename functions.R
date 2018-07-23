@@ -1,3 +1,17 @@
+library(png)
+library(grid)
+library(doSNOW)
+library(plyr)
+library(dplyr)
+library(rvest)
+library(ggplot2)
+library(data.table)
+library(XML)
+library(lpSolve)
+library(zoo)
+library(MASS)
+options(stringsAsFactors = F, scipen =999)
+
 simpleCap <- function(x) {
   s <- strsplit(x, " ")[[1]]
   paste(toupper(substring(s, 1,1)), tolower(substring(s, 2)),
@@ -33,7 +47,7 @@ coordName<-function(x) {
   x<-chartr(paste(names(unwanted_array), collapse=''),
             paste(unwanted_array, collapse=''),
             x)
-  
+  x<-gsub("^\\s+|\\s+$", "", x)
   x<-gsub(" Jr.| Sr.","",x)
   x<-gsub("*|+|`", "",x)
   x<-gsub("[*]|[`]", "",x)
@@ -46,7 +60,6 @@ coordName<-function(x) {
   x<-gsub(" II", "", x)
   x<-gsub("-", " ", x)
   x<-gsub("  ", " ", x)
-  
   
   x<-gsub("JuJu", "Juju", x)
   x<-gsub("Zac |Zack |Zachary |Zackary ", "Zach ", x)
@@ -125,6 +138,9 @@ coordName<-function(x) {
   x[x==  "Michael A Jones"]<-"Michael Jones"
   x[x==  "T Marcus Spriggs"]<-"Marcus Spriggs"
   x[x==  "Tyrone M Williams"]<-"Tyrone Williams"
+  
+  
+  
   x[x==  "Greg K Jones"]<-"Greg Jones"
   x[x==  "Todd F Collins"]<-"Todd Collins"
   x[x==  "Kevin R Williams"]<-"Kevin Williams"
@@ -198,16 +214,67 @@ coordName<-function(x) {
   x[x==  "Chris Simms" ]<- "Matt Simms"  
   x[x=="Philly Brown"  ]<-"Corey Brown"  
   x[x=="Zachdiles"  ]<-"Zach Diles"  
-  x[x=="NE"]<-"NWE"
+  
+  x<-sapply(x,simpleCap)
+  
+  x[x==  "Samajae Perine"]<-"Samaje Perine"
+  x[x==  "Phillip Rivers"]<-"Philip Rivers"
+  x[x==  "Tedd Ginn"]<-"Ted Ginn"
+  x[x==  "Alexander Ogletree"]<-"Alec Ogletree"
+  x[x==  "Tony Jeffersom"]<-"Tony Jefferson"
+  x[x==  "Vinateri"|x=="vinateri"|x=="Adam Vinateri"]<-"Adam Vinatieri"
+  x[x==  "Khali Mack"]<-"Khalil Mack"
+  x[x==  "Wendall Smallwood"]<-"Wendell Smallwood"
+  x[x==  "Alshon Jeffrey"]<-"Alshon Jeffery"
+  x[x==  "Will Lutz"]<-"Wil Lutz"
+  x[x==  "Risshard Matthews"]<-"Rishard Matthews"
+  x[x==  "Joey Brosa"]<-"Joey Bosa"
+  x[x==  "Giovanni Bernard"]<-"Giovani Bernard"
+  x[x==  "Jim Grahm"]<-"Jim Graham"
+  x[x==  "Hassan Reddick"]<-"Haason Reddick"
+  x[x==  "Dein Jones"]<-"Deion Jones"
+  x[x==  "James Connor"]<-"James Conner"
+  x[x==  "Robbie Anderson"]<-"Robby Anderson"
+  x[x==  "Terrence West"]<-"Terrance West"
+  x[x==  "Jay Ajayii"]<-"Jay Ajayi"
+  x[x==  "Isiah Crowell"]<-"Isaiah Crowell"
+  x[x==  "Bernard Mckinney"]<-"Benardrick Mckinney"
+  x[x==  "Paul Puz"|x=="Paul Posluzsny"]<-"Paul Posluszny"
+  x[x==  "Lagarette Blount"]<-"Legarrette Blount"
+  x[x==  "Erik Decker"]<-"Eric Decker"
+  x[x==  "Bilall Powell"]<-"Bilal Powell"
+  x[x==  "Jedeveon Clowdney"|grepl("eon Clowney", x)]<-"Jadeveon Clowney"
+  x[x==  "Mathew Stafford"]<-"Matthew Stafford"
+  x[x==  "Chandler Carazano"]<-"Chandler Catanzaro"
+  x[x==  "Navarro Bowman"]<-"Navorro Bowman"
+  x[x==  "Emanuel Sanders"]<-"Emmanuel Sanders"
+  x[x==  "Darren Mccfadden"]<-"Darren Mcfadden"
+  x[x==  "James Laurinatis"]<-"James Laurinaitis"
+  x[x==  "Gore"]<-"Frank Gore"
+  x[x==  "Everson Griffin"]<-"Everson Griffen"
+  x[x==  "Buck Allen"]<-"Javorius Allen"
+  x[x==  "Reuben Randle"]<-"Rueben Randle"
+  x[x==  "Derrick Jonhson"]<-"Derrick Johnson"
+  x[x==  "Mo Wilkerson"]<-"Muhammad Wilkerson"
+  x[x==  "Mcmanus"]<-"Brandon Mcmanus"
+  x[x==  "Ryan Shaziwer"]<-"Ryan Shazier"
+  x[x==  "Larry Donnel"]<-"Larry Donnell"
+  x[x==  "Martellus Bennet"]<-"Martellus Bennett"
+  x[x==  "Daniel Herron"]<-"Dan Herron"
+  
+  
+  
+  x[x=="Ne"]<-"NWE"
   x<-gsub(" Defense", "", x)
-  x[x=="NE"| grepl("Patriots", x)]<-"NWE"
-  x[x=="KC"| grepl("Chiefs", x)]<-"KAN"
-  x[x=="GB" | grepl("Packers", x)]<-"GNB"
-  x[x=="SD"| grepl("Chargers", x)| x=="LAC"]<-"SDG"
-  x[x=="NO" |grepl("Saints",x)]<-"NOR"
-  x[x=="TB" | grepl("Buccaneers", x)]<-"TAM"
-  x[x=="SF"| grepl("49ers", x)]<-"SFO"
-  x[x=="LA"|grepl("Rams|STL|St. Louis|St Louis", x)]<-"LAR"
+  x[x=="Ne"| grepl("Patriots", x)]<-"NWE"
+  x[x=="Kc"| grepl("Chiefs", x)]<-"KAN"
+  x[x=="Gb" | grepl("Packers", x)]<-"GNB"
+  x[x=="Sd"| x=="Lac"|x=="LAC"| grepl("Chargers", x)]<-"SDG"
+  x[x=="No" |grepl("Saints",x)]<-"NOR"
+  x[x=="Tb" | grepl("Buccaneers", x)]<-"TAM"
+  x[x=="Sf"| grepl("49ers", x)]<-"SFO"
+  x[x=="La"|grepl("Rams|Stl|St. Louis|St Louis", x)]<-"LAR"
+  x[x=="Jac"]<-"JAX"
   x[grepl("Cardinals", x)]<-"ARI"
   x[grepl("Falcons", x)]<-"ATL"
   x[grepl("Ravens", x)]<-"BAL"

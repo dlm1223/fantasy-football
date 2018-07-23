@@ -38,12 +38,12 @@ customProj<-function(type="STD"){
   proj<-proj[, c("Player","Pos", "Team",type)]
   proj
 }
-projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "STD", "PPR"), customProj))
+projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "STD", "PPR", "CUSTOM"), customProj))
 projections<-projections[!projections$Pos%in% c("LB", "DL", "DB"),, ]
 projections<-projections[order(projections$STD,decreasing = T), ]
 projections<-projections[!duplicated(projections$Player), ]
 
-adp<-merge(adp, projections[, c("Player", "HALF", "STD", "PPR")], by=c("Player"), all.x=T)
+adp<-merge(adp, projections[, c("Player", "HALF", "STD", "PPR", "CUSTOM")], by=c("Player"), all.x=T)
 adp$HALF<-ifelse(is.na(adp$HALF.y), adp$HALF.x, adp$HALF.y)
 adp$STD<-ifelse(is.na(adp$STD.y), adp$STD.x, adp$STD.y)
 adp$PPR<-ifelse(is.na(adp$PPR.y), adp$PPR.x, adp$PPR.y)
@@ -140,7 +140,7 @@ getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, 
 
 
 picks<- getPicks(slot="Slot4", numRB=5, numWR =5 , numFLEX = 0,numQB=2,shift=0,numDST=1, numK=1,numTE=1,
-                  out=c(), fix=c(), scoring='HALF', onePos=rep("RB", 1))
+                  out=c(), fix=c(), scoring='HALF', onePos=rep("QB", 10))
 picks
 
 #expected points for each team:
