@@ -7,7 +7,7 @@ adp<-adp[order(adp$ADP_est, decreasing = F),]
 
 numDrafts<-250
 numSims<-100
-scoring<-"HALF"
+scoring<-"HALF2"
 
 #default parameters
 # drafts<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring))  #get picks going round by round,players taken probabilistically based on adp
@@ -62,7 +62,7 @@ simScores5<-foreach(x=drafts5, .packages = c("data.table", "dplyr", "plyr"))%dop
   replicate(numSims, simSeason(x, scoring=scoring, numWR = 3)) }
 
 #alpha=85, <=1 QB in R1-11
-drafts6<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0, numWR=6, onePos = rep("QB", 11))) #waiting on QB and DEF
+drafts6<-lapply(1:numDrafts,function(x)simDraft(scoring=scoring,shift=0, numWR=6, onePos = rep("QB", 11) ,outPos=rep("WR",1))) #waiting on QB and DEF
 simScores6<-foreach(x=drafts6, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring, numWR = 3)) }
 quantile(unlist(simScores6))
@@ -97,9 +97,10 @@ simScores11<-foreach(x=drafts11, .packages = c("data.table", "dplyr", "plyr"))%d
 
 
 quantile(unlist(simScores11))
-freqs<-as.data.frame.matrix(table(unlist(lapply(drafts, function(x) x$Player)), unlist(lapply(drafts, function(x) 1:nrow(x)))))
+freqs<-as.data.frame.matrix(table(unlist(lapply(drafts8, function(x) x$Player)), unlist(lapply(drafts8, function(x) 1:nrow(x)))))
 freqs[ order(freqs[,1], freqs[, 2], freqs[,3], freqs[, 4], freqs[, 5], freqs[, 5], freqs[, 5], freqs[, 6], freqs[, 7], freqs[, 8], decreasing = T),]
 
+drafts8[[17]]
 
 hist(unlist(simScores))
 table(unlist(lapply(drafts10, function(x) x$Player[3])))
@@ -135,7 +136,7 @@ save(list=ls()[grepl("simScores|drafts",ls())], file=paste0("Parameter Testing/"
 pos<-4
 bool<-drafts_allSlots[[pos]]
 freqs<-as.data.frame.matrix(table(unlist(lapply(bool, function(x) x$Player)), unlist(lapply(bool, function(x) 1:nrow(x)))))
-freqs[ order(freqs[,1], freqs[, 2], freqs[,3], freqs[, 4], freqs[, 5], freqs[, 5], freqs[, 5], freqs[, 6], freqs[, 7], freqs[, 8], decreasing = T),][1:30,]
+freqs[ order(freqs[,1], freqs[, 2], freqs[,3], freqs[, 4], freqs[, 5], freqs[, 5], freqs[, 5], freqs[, 6], freqs[, 7], freqs[, 8], decreasing = T),][1:50,]
 
 freqs<-as.data.frame.matrix(table(unlist(lapply(bool, function(x) x$Player)), unlist(lapply(bool, function(x) 1:nrow(x)))))
 freqs$Player<-row.names(freqs)
@@ -151,11 +152,11 @@ mostCommon[,c("Player", "Pos", "Round", "Times")]
 load(paste0("Parameter Testing/" ,scoring," analyze draft params by round 3WR.RData"))
 
 Parameters<-c("1. RBx5,WRx6,QBx2,K/DST/TEx1 (default)", "2. zero RB in R1, 6 RBs,  \u2264 1 QB in 1-11","3. zero RB in R1, 6 RBs",
-              "4. zero RB in R1, shift=0", "5. zero WR in R1, shift=0",  "6. \u2264 1QB in R1-11, shift=0", 
+              "4. zero RB in R1, shift=0", "5. zero WR in R1, shift=0",  "6. zeroWR in R1, \u2264 1QB in R1-11, shift=0", 
               "7. RBx4, WRx7, shift=0", "8. RBx6, WRx5, shift=0",
               "9. RBx5,WRx6,TEx2,QB/DST/Kx1, shift=0", "10. RBx4,WRx6,QB/TEx2,DST/Kx1, shift=0", 
               "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" )
-makeParamPlot(Parameters=Parameters, Title="Simulation Results for Different Draft Parameters - 3WR League, Regular Scoring")
+makeParamPlot(Parameters=Parameters, Title=paste0("Simulation Results for Different Draft Parameters - 3WR League, ", scoring, " Scoring"))
 
 ggsave(paste0("Parameter Testing/" , scoring, " scoring-by round parameters.jpeg"),width = 7, height=3.4 , units = "in")
 
@@ -172,7 +173,6 @@ mostCommon<-lapply(1:15, function(x) freqs[order(freqs[, x], decreasing = T),c(x
 #####PLOT#####
 
 load(paste0("Parameter Testing/" ,scoring," analyze draft params by round 3WR.RData"))
-makeSlotPlot(Title = "Results by Draft Slot, 3WR League, Regular Scoring", 
-             Parameters = )
+makeSlotPlot(Title = paste0("Results by Draft Slot,  3WR League, ", scoring, " Scoring"))
 ggsave(paste0("Parameter Testing/" ,scoring, " scoring-by round slots.jpeg"),width = 7, height=3.4 , units = "in")
 
