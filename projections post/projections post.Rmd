@@ -8,7 +8,7 @@ output: html_document
 options(width = 10000)
 ```
 
-Statistics have become popular for fantasy football but it's unclear if analytics are necessarily better than just using the eye test, or gut feeling, etc. In this post  I'll compare ADP to outside projections to see where ADP has inefficiencies and where there might be edges in projecting players. I was able to get projections from 2012-present from [fantasyfootballanalytics.net](http://apps.fantasyfootballanalytics.net/projections) and from [fftoday.com](fftoday.com/rankings/playerproj.php?Season=201808&PosID=30&LeagueID=1), and ADP data from [ffcalculator.com](https://fantasyfootballcalculator.com/adp). 
+Statistics have become popular for fantasy football but it's not a guarantee thatanalytics are necessarily better than just using the eye test, or consensus opinion, etc. In this post I'll compare ADP to outside projections to see where ADP has inefficiencies and where there might be edges in projecting players. I was able to get projections from 2012-present from [fantasyfootballanalytics.net](http://apps.fantasyfootballanalytics.net/projections) and from [fftoday.com](fftoday.com/rankings/playerproj.php?Season=201808&PosID=30&LeagueID=1), and ADP data from [ffcalculator.com](https://fantasyfootballcalculator.com/adp). 
 I also have my own aggregated projections. ffanalytics.net is an aggregated projection source where they tried to maximize accuracy and so I think it will be a pretty good source to use. All together I have a dataframe like this:
 
 
@@ -40,7 +40,7 @@ kable(adp[adp$Pos%in% c("WR", "QB", "TE", "RB", "DST")& adp$Year==2017,c("Player
 
 Note: all projections are Half-PPR Yahoo Scoring. Next, I'll plot the accuracy of the projections for players who were drafted:
 
-```{r include=T, eval=T , echo=F, fig.width=8.5, fig.height=4, fig.align="center"}
+```{r include=T, eval=T , echo=F, fig.width=10.5, fig.height=5.5, fig.align="center"}
 
 adp<-ddply(adp, .(Pos, Year), mutate,
            ADP.Rank=rank(ADP_half),
@@ -86,7 +86,7 @@ ggplot(corDF, aes(factor(Pos), COR, fill = Variable)) +
 
 The above plot shows how third-party ranks have performed relative to players' ADP rank. Projections have outperformed draft order for WR/TE/QB, but other positions like RB have been harder to gain an edge. However, while it does look like there is inefficiency in things like WR/TE ADP, anyone who has played fantasy knows that ADP in later rounds is often guided by who has higher upside, and so ADP rank is not exactly a ranking of who will finish highest. To account for this, I'd like to see the effect if I just limit it to top 12 DST/K/QB/TE, top 24 RB, and top 36 WR (ranked by ADP), AKA the starting players, so I do that below:
 
-```{r include=T, eval=T , echo=F, fig.width=8.5, fig.height=4.5, fig.align="center"}
+```{r include=T, eval=T , echo=F, fig.width=10.5, fig.height=5.5, fig.align="center"}
 
 adp$ADP.Starter<-ifelse(adp$Pos=="RB"& adp$ADP.Rank<=24, 1, 
                         ifelse(adp$Pos%in% c("QB", "DST", "K", "TE")  &   adp$ADP.Rank<=12, 1, ifelse(adp$Pos=='WR' & adp$ADP.Rank<=36, 1, 0)))
@@ -133,8 +133,8 @@ Below I show some more plots..Here I examinine the WR projections further to see
 
 
 
-```{r include=T, eval=T , echo=F, fig.width=14, fig.height=8, fig.align="center"}
-makePlot<-function(y, cex=.75){
+```{r include=T, eval=T , echo=F, fig.width=9, fig.height=6, fig.align="center"}
+makePlot<-function(y, cex=.95){
   vars<-c( "My.Rank", "My.Rank")
   bool<-adp$Pos=="WR"& !is.na(adp$My.Rank)  &   (adp$My.Rank%in%1:36|adp$ADP.Rank%in%1:36) 
   plot(adp$ADP.Rank[bool& adp$Year==y]~(rowMeans(adp[bool& adp$Year==y, vars])), xlab="My.Rank", ylab="ADP.Rank (<-Overvalued, Undervalued->)", main=paste0("My.Rank vs ADP.Rank, ",y ," WRs"))
@@ -147,17 +147,18 @@ makePlot<-function(y, cex=.75){
   # lines(1:100, 1:100+7, col="purple", lty=2)
   
 }
-par(mfrow=c(1,2))
-makePlot(2016, cex=1)
-makePlot(2017, cex=1)
+# par(mfrow=c(1,2))
+makePlot(2015, cex=.85)
+makePlot(2016, cex=.85)
+makePlot(2017, cex=.85)
 
 ```
 
 
-The above plots show how projections were able to distinguish players who were undervalued/overvalued. The blue label shows how much they overperformed their ADP. For example, in both years, I had Jarvis Landry as undervalued relative to his ADP and in both years he overperformed his ADP. Obbiously, there are hits and misses, but for the most part it appears that there are much more hits than misses, which is expected based on the higher correlation. Finally, the plot for 2018:
+The above plots show how projections were able to distinguish players who were undervalued/overvalued. The blue label shows how much they overperformed their ADP. For example, in 2016-17, I had Jarvis Landry as undervalued relative to his ADP and in both years he overperformed his ADP. Obviously, there are hits and misses, but for the most part it appears that there are much more hits than misses, which is expected based on the higher correlation. Finally, the plot for 2018:
 
 
-```{r include=T, eval=T , echo=F, fig.width=7, fig.height=5, fig.align="center"}
+```{r include=T, eval=T , echo=F, fig.width=9, fig.height=6.5, fig.align="center"}
 
 par(mfrow=c(1,1))
 makePlot(2018)
@@ -165,8 +166,4 @@ makePlot(2018)
 
 
 ## Conclusion 
-In this post I examined where there might be edges in fantasy football. I found that ADP is hard to beat, but an analytical approach for WR/TE's allows you to gain an edge compared to ADP, while RBs have had less success with analytical approaches. Some guys the stats like relative to their ADP this year include Tyreek Hill, Brandin Cooks, Jamison Crowder, Nelson Agholor, and others. In my next post I'll show the complete projections, but if you want to you can get the data [here](https://github.com/dlm1223/ncaa-preseason/blob/master/misc%20preseason%20conf%20awards.R).
-
-</br>
-[View All Posts->](https://www.brianlefevre.com/archives)
-<br /><br /></br>
+In this post I examined where there might be edges in fantasy football. I found that ADP is hard to beat, but an analytical approach for WR/TE's allows you to gain an edge compared to ADP, while RBs have had less success with analytical approaches. Some guys the stats like relative to their ADP this year include Tyreek Hill, Brandin Cooks, Jamison Crowder, Nelson Agholor, and others. In my next post I'll show the complete projections, but if you want to you can get the data for the analysis [here](https://github.com/dlm1223/fantasy-football/blob/master/projections%20post).
