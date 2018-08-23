@@ -3,7 +3,6 @@
 .RData
 .Ruserdata
 *.html
-*.Rmd
 base case optimization.Rmd
 base_case_optimization.html
 model fitting.R
