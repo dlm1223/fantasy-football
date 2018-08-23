@@ -2,7 +2,7 @@
 
 #ERROR ANALYSIS####
 
-projections<-read.csv(paste(c("Projections_HALF.csv" ), collapse=""))
+projections<-read.csv(paste0("Player Data/Projections_", scoring,".csv" ))
 colnames(projections)[colnames(projections)=="PosFFA"]<-"Pos"
 projections$Pos<-ifelse(grepl("LB", projections$Pos), "LB",
                         ifelse(grepl("DT|DL|DE|NT", projections$Pos)| projections$Pos%in% "T", "DL", 
@@ -37,7 +37,7 @@ projections$fantPts_bin<-as.character(projections$fantPts_bin)
 simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="HALF", returnLineup=F){
   
   #numRB<-2; numWR<-2; numTE<-1; numQB<-1; numK<-1; numDST<-1; numFLEX<-1;scoring<-"HALF"
-  picks$fantPts_bin<-as.character(cut(picks$HALF, breaks=c(-50, 25, 75, 125, 175, 225, 400))) #basing error-bin on HALF projection
+  picks$fantPts_bin<-as.character(cut(picks[, scoring]-picks$meanError, breaks=c(-50, 25, 75, 125, 175, 225, 400))) #basing error-bin on HALF projection
   picks$fantPts_bin[picks$Pos=="DST"& picks$fantPts_bin=="(125,175]"]<-"(75, 125]" 
   #sample bias-adjusted errors from 2010-2017, by player and position
   picks$error<-sapply(1:nrow(picks), function(x){
@@ -48,8 +48,8 @@ simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1,
   picks$Sim[picks$Sim<0]<-0
   
   #undrafted players--sample errors
-  undrafted<-adp[is.na(adp$ADP_est)& !adp$Pos==''& adp[, scoring]>=25,]
-  undrafted$fantPts_bin<-as.character(cut(undrafted$HALF, breaks=c(-50, 25, 75, 125, 175, 225, 400)))
+  undrafted<-adp[is.na(adp$ADP_half)& !adp$Pos==''& adp[, scoring]>=25,]
+  undrafted$fantPts_bin<-as.character(cut(undrafted[, scoring]-undrafted$meanError, breaks=c(-50, 25, 75, 125, 175, 225, 400)))
   undrafted$error<-NA
   #for each "error-bin-type", get errors for undrafted players in that bin
   for(i in 1:nrow(errors)){
@@ -65,13 +65,13 @@ simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1,
   
   #assuming these are the players I can get through free agency 
   #should allow me to not have to draft a backup kicker
-  #assuming i can get the 3-rd best player at each position 
-  freeAgent<-c(which(grepl("QB", undrafted$Pos))[3],
-               which(grepl("RB", undrafted$Pos))[3],
-               which(grepl("WR", undrafted$Pos))[3],
-               which(grepl("TE", undrafted$Pos))[3],
-               which(grepl("DST", undrafted$Pos))[3],
-               which(grepl("K", undrafted$Pos))[3])
+  #assuming i can get the 4-th best player at each position 
+  freeAgent<-c(which(grepl("QB", undrafted$Pos))[4],
+               which(grepl("RB", undrafted$Pos))[4],
+               which(grepl("WR", undrafted$Pos))[4],
+               which(grepl("TE", undrafted$Pos))[4],
+               which(grepl("DST", undrafted$Pos))[4],
+               which(grepl("K", undrafted$Pos))[4])
   
   picks<-rbind.fill(picks, undrafted[freeAgent,colnames(undrafted)%in% colnames(picks)])
   picks<-picks[!duplicated(picks$Player), ]

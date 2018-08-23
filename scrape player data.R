@@ -84,13 +84,13 @@ season.stats<-season.stats[!season.stats$NAME%in% c("Totals", "Opponents"),]
 # table(team.stats$Team)
 
 ###ESPN GAME LOGS####
-ids<-read_html("http://www.espn.com/nfl/standings")%>% html_nodes(".hide-mobile a")%>% html_attr("href")
+ids<-read_html("http://www.espn.com/nfl/standings/_/season/2017")%>% html_nodes(".hide-mobile a")%>% html_attr("href")
 teams<-sapply(strsplit(ids, "/"), `[[`, 6)
 abbrev$Abbrev4<-teams[order(teams)][c(1:16,18:27, 17, 28:32) ]
 abbrev$Abbrev4[abbrev$Abbrev=="Sea"]<-"sea"
 abbrev$Abbrev4[abbrev$Abbrev=="Sfo"]<-"sf"
 
-importGrid<-expand.grid(team=teams,Year=2005:2017, stringsAsFactors = F )
+importGrid<-expand.grid(team=teams,Year=2005:2018, stringsAsFactors = F )
 
 library(lubridate)
 getGameLinks<-function(team, year){
@@ -99,9 +99,14 @@ getGameLinks<-function(team, year){
   sched<-page%>% html_table() 
   sched<-sched[[1]]
   sched$Type<-""
-  sched$Type[1:grep("Regular Season", sched$X1)]<-"Postseason"
-  sched$Type[grep("Regular Season", sched$X1):grep("Preseason", sched$X1)]<-"Regular Season"
-  sched$Type[grep("Preseason", sched$X1):nrow(sched)]<-"Preseason"
+  if(year!=2018){
+    sched$Type[1:grep("Regular Season", sched$X1)]<-"Postseason"
+    sched$Type[grep("Regular Season", sched$X1):grep("Preseason", sched$X1)]<-"Regular Season"
+    sched$Type[grep("Preseason", sched$X1):nrow(sched)]<-"Preseason"
+  } else{
+    sched$Type[1:grep("Regular Season", sched$X1)]<-"Preseason"
+    sched$Type[grep("Regular Season", sched$X1):nrow(sched)]<-"Regular Season"
+  }
   sched<-sched[!grepl("Regular|Preseason|Postseason|DATE", sched$X1)& !grepl("BYE|DATE", sched$X2),]
   sched$DATE<-as.Date(sched$X2, format="%a, %b %d")
   year(sched$DATE)<-ifelse(month(sched$DATE)%in% 1:2, year+1, year)
@@ -114,7 +119,12 @@ getGameLinks<-function(team, year){
   
   sched<-sched[, c(1,8, 9)]
   colnames(sched)[1]<-"Week"
-  sched$GameLink<-page%>% html_nodes("td:nth-child(4) a")%>% html_attr("href") %>% gsub("recap", "boxscore", .)
+  
+  games<-page%>% html_nodes("td:nth-child(4) a")%>% html_attr("href") %>% gsub("recap", "boxscore", .)
+  if(length(games)==0){games<-NA}
+  sched$GameLink<-games
+  sched$GameLink[sched$DATE>=Sys.Date()]<-NA
+  
   sched$Team<-team
   sched$Year<-year
   sched
@@ -201,12 +211,64 @@ importGame<-function(link){
 }
 importGame(importGrid[973])
 
-gameLogs<-list();length(gameLogs)<-length(importGrid)
-for(x in 1:length(gameLogs)){
-  print(x)
-  gameLogs[[x]]<-importGame(importGrid[x])
+if(!exists("gameLogs")){
+  gameLogs<-list();length(gameLogs)<-length(importGrid)
+  for(x in 1:length(gameLogs)){
+    print(x)
+    gameLogs[[x]]<-importGame(importGrid[x])
+  }
+  gameLogs<-ldply(gameLogs, data.frame)
+  
+} else{
+  importGrid<-importGrid[!importGrid%in% teamLogs$GameLink]
+  gameLogs2<-list();length(gameLogs2)<-length(importGrid)
+  for(x in 1:length(gameLogs2)){
+    print(x)
+    gameLogs2[[x]]<-importGame(importGrid[x])
+  }
+  #rbind
+  gameLogs2<-ldply(gameLogs2, data.frame)
+  gameLogs<-rbind(gameLogs[!gameLogs$GameLink%in%gameLogs2$GameLink, ], gameLogs2)
 }
 
+
+
+####TEAM-GAME-LOGS#######
+
+importGrid<-unique(gameLinks$GameLink[gameLinks$Year>=2002])
+
+importGame<-function(link){
+  # link<-importGrid[1251]
+  page<-tryCatch(read_html(paste0("http:", link)), error=function(e){})
+  stats<-tryCatch(page%>%html_table(fill=T), error=function(e) {})
+  if(length(stats)>=1){
+    stats<-stats[1][[1]]
+  }
+  colnames(stats)[1]<-"Team"
+  stats$GameLink<-link
+  stats$TeamLOC<-c("AWAY", "HOME")
+  stats
+}
+if(!exists("teamLogs")){
+  teamLogs<-list();length(teamLogs)<-length(importGrid)
+  for(x in 1:length(teamLogs)){
+    print(x)
+    teamLogs[[x]]<-importGame(importGrid[x])
+  }
+  teamLogs<-ldply(teamLogs, data.frame)
+  
+} else{
+  importGrid<-importGrid[!importGrid%in% teamLogs$GameLink]
+  teamLogs2<-list();length(teamLogs2)<-length(importGrid)
+  for(x in 1:length(teamLogs2)){
+    print(x)
+    teamLogs2[[x]]<-importGame(importGrid[x])
+  }
+  #rbindfill
+  teamLogs2<-ldply(teamLogs2, data.frame)
+  teamLogs2<-teamLogs2[!teamLogs2$GameLink=="//www.espn.com/nfl/boxscore/_/gameId/231019015", ]
+  teamLogs<-rbind(teamLogs[!teamLogs$GameLink%in%teamLogs2$GameLink, ], teamLogs2[, colnames(teamLogs2)%in% colnames(teamLogs)])
+}
 
 
 ###DST STATS#####
@@ -225,6 +287,25 @@ defense.stats[, !colnames(defense.stats)%in% c("Player", "Pos","Team")]<-sapply(
 colnames(defense.stats)[colnames(defense.stats)=="Fantasy.Points"]<-"fantPts"
 
 tail(defense.stats)
+
+#defense.passing
+
+getYear<-function(year){
+  print(year)
+  page<-read_html(paste0("http://www.espn.com/nfl/statistics/team/_/stat/total/position/defense/year/", year))
+  stats<-page%>% html_table(header = T)
+  stats<-stats[[1]]
+  stats<-stats[, c(2, 4, 6, 8, 10)]
+  colnames(stats)<-c("Team", "YDS.Allowed", "PassYDS.Allowed", "RushYDS.Allowed", "Pts.Allowed")
+  stats$Year<-year
+  stats
+  
+}
+defense.passing<-ldply(lapply(2002:2018, getYear), data.frame)
+defense.passing$Team<-coordName(defense.passing$Team)
+setdiff(defense.passing$Team, season.stats$Team)
+defense.passing[, 2:6]<-sapply(defense.passing[, 2:6], as.numeric)
+defense.passing[defense.passing$Year==2018, 2:5]<-NA #current year values are NA
 
 
 #espn ids###
@@ -290,17 +371,18 @@ combine.stats[, c("X40YD","Vertical", "BenchReps", "Broad.Jump","X3Cone", "Shutt
 
 
 #roster data#####
-
+library(RSelenium)
 remDr<-rsDriver(browser = "chrome")
-importGrid<-expand.grid(Team=abbrev$Abbrev3, Season=2000:2018)
+importGrid<-expand.grid(Team=abbrev$Abbrev3, Season=2000:2018, stringsAsFactors = F)
 importGrid<-importGrid[!(importGrid$Team=="htx"& importGrid$Season<2002),]
 
 importRoster<-function(team, season){
   
   remDr$client$navigate(paste0(c("http://www.pro-football-reference.com/teams/", team,"/", season,"_roster.htm"), collapse = ""))
+  Sys.sleep(2)
   players<-readHTMLTable(remDr$client$getPageSource(url)[[1]])  
   players<-players$games_played_team
-  players$Team<-abbrev$Abbrev[abbrev$Abbrev3==team]
+  players$Team<-team
   players$Season<-season
   ids<-read_html(remDr$client$getPageSource(url)[[1]])%>%html_nodes("#games_played_team .left:nth-child(2) a")%>% html_attr("href")
   players$ID<-NA
@@ -308,7 +390,7 @@ importRoster<-function(team, season){
   players
 }
 rostersList<-list();length(rostersList)<-nrow(importGrid)
-for(x in 1:nrow(importGrid)){
+for(x in 12:nrow(importGrid)){
   print(x)
   rostersList[[x]]<-importRoster(as.character(importGrid$Team[x]), importGrid$Season[x])
 }
@@ -319,16 +401,14 @@ rosters$Player?.<-NULL
 rosters$Ht[rosters$Ht%in% c("0-0", "")]<-NA
 rosters$Ht[!is.na(rosters$Ht)]<-as.numeric(sapply(strsplit(rosters$Ht[!is.na(rosters$Ht)], "-"), `[[`, 1))+
   as.numeric(gsub("\"", "",sapply(strsplit(rosters$Ht[!is.na(rosters$Ht)], "-"), `[[`, 2)))/12
-rosters$Wt<-as.numeric(rosters$Wt)
-rosters$Age<-as.numeric(rosters$Age)
-rosters$Ht<-as.numeric(rosters$Ht)
+rosters[, c("Wt", "Ht", "Age")]<-sapply(rosters[, c("Wt", "Ht", "Age")], as.numeric)
 rosters$Yrs[rosters$Yrs%in% c("Rook","-1", "-2", "-3")]<-0
 rosters$Yrs<-as.numeric(rosters$Yrs)
 rosters[, c("Player", "Team")]<-sapply(rosters[, c("Player", "Team")], coordName)
 rosters$Pick[grepl("pick", rosters$Drafted..tm.rnd.yr.)]<-sapply(strsplit(rosters$Drafted..tm.rnd.yr.[grepl("pick", rosters$Drafted..tm.rnd.yr.)], "/" ),`[[`,  3)
 rosters$Pick<-stringr::str_extract_all(rosters$Pick, "[0-9]+") %>% unlist()%>% as.numeric()
 rosters$Pick[rosters$Pick>=250| is.na(rosters$Pick)]<-250
-
+rosters$Team<-coordTeam(rosters$Team)
 
 #player ids
 id_df<-ldply(lapply(paste("Player Data/", list.files("Player Data/", pattern = "rosters"), sep=""), read.csv), data.frame)
@@ -351,7 +431,17 @@ id_df<-merge(id_df, season.stats[, c("NAME", "Year","Team", "ESPNID")], by.x=c("
 id_df<-id_df[!duplicated(id_df[,c("Player", "Season", "Team")])& !duplicated(id_df[, c("Player","Season", "Team")], fromLast = T), ]
 id_df$RookieYear<-id_df$Season-id_df$Yrs
 
-head(id_df)
+#clean IDS
+id_df$ID[id_df$Season==2018& is.na(id_df$ID)]<-1:sum(id_df$Season==2018& is.na(id_df$ID))
+
+test<-unique(id_df[!is.na(id_df$ESPNID)& !is.na(id_df$ID), c("ID", "Player", "ESPNID")])
+test<-test[!duplicated(test$ID), ]
+
+id_df$ESPNID[is.na(id_df$ESPNID)]<-test$ESPNID[match(id_df$ID[is.na(id_df$ESPNID)], test$ID)] #some players missing 2018 ids for some reason
+id_df$ESPNID[id_df$Season==2018& is.na(id_df$ESPNID)]<-1:sum(id_df$Season==2018& is.na(id_df$ESPNID)) #still missing ESPNIDs for rookies
+id_df<-id_df[order(id_df$Season, decreasing = F), ]
+
+id_df[id_df$Player=="Kelvin Benjamin",]
 # id_df<-unique(id_df[!is.na(id_df$GSIS_ID), c("name", "GSIS_ID", "Player","RookieYear","Ht", "Wt", "BirthDate")])
 # id_df[duplicated(id_df$GSIS_ID)| duplicated(id_df$GSIS_ID, fromLast = T),]
 # id_df<-id_df[!duplicated(id_df$GSIS_ID), ]
@@ -360,6 +450,70 @@ combine.stats[duplicated(combine.stats$ID)& !is.na(combine.stats$ID),]
 
 id_df<-merge(id_df, combine.stats[!is.na(combine.stats$ID), c("ID", "X40YD", "Vertical", "BenchReps", "Broad.Jump", "X3Cone", "Shuttle")], 
              by="ID", all.x=T )
+
+
+###RED ZONE DATA#####
+
+
+importRZ<-function(season){
+  
+  page<- read_html(paste0("https://www.pro-football-reference.com/years/", season, "/redzone-receiving.htm"))
+  stats<-page%>%html_table(fill=T)
+  stats<-stats[[1]]
+  colnames(stats)<-c("Player", "Team", "recTAR20", "recREC20", "recCATCH.20", "recYDS20", "recTD20", "recTAR.20", 
+                     "recTAR10", "recREC10", "recCATCH.10", "recYDS10", "recTD10", "recTAR.10", "Info")
+  stats<-stats[!stats$Player=="Player",!colnames(stats)%in% "Info" ]
+  stats$ID<-page%>% html_nodes("th a")%>% html_attr("href")
+  stats$Season<-season
+  stats
+}
+season_receiving_rz<-ldply(lapply(2002:2017, importRZ), data.frame)
+
+
+importRZ<-function(season){
+  
+  page<- read_html(paste0("https://www.pro-football-reference.com/years/", season, "/redzone-rushing.htm"))
+  stats<-page%>%html_table(fill=T)
+  stats<-stats[[1]]
+  colnames(stats)<-c("Player", "Team", "rushATT20", "rushYDS20", "rushTD20", "rushATT.20",  
+                     "rushATT10", "rushYDS10", "rushTD10", "rushATT.10",
+                     "rushATT5", "rushYDS5", "rushTD5", "rushATT.5",
+                     "Info")
+  stats<-stats[!stats$Player=="Player",!colnames(stats)%in% "Info" ]
+  stats$ID<-page%>% html_nodes("th a")%>% html_attr("href")
+  stats$Season<-season
+  stats
+}
+season_rushing_rz<-ldply(lapply(2002:2017, importRZ), data.frame)
+
+
+importRZ<-function(season){
+  
+  page<- read_html(paste0("https://www.pro-football-reference.com/years/", season, "/redzone-passing.htm"))
+  stats<-page%>%html_table(fill=T)
+  stats<-stats[[1]]
+  colnames(stats)<-c("Player", "Team", "passCMP20", "passATT20", "passCMP.20", "passYDS20","passTD20", "passINT20",
+                     "passCMP10", "passATT10", "passCMP.10", "passYDS10","passTD10", "passINT10",                     "Info")
+  stats<-stats[!stats$Player=="Player",!colnames(stats)%in% "Info" ]
+  stats$ID<-page%>% html_nodes("th a")%>% html_attr("href")
+  stats$Season<-season
+  stats
+}
+season_passing_rz<-ldply(lapply(2002:2017, importRZ), data.frame)
+
+
+season_rz_stats<-Reduce(function(x, y) merge(x, y, all=TRUE, by=c("Player", "Team", "ID", "Season")), list(season_passing_rz,season_rushing_rz, season_receiving_rz))
+season_rz_stats[season_rz_stats$Player=="Jay Ajayi",] #teams already merged
+season_rz_stats$Team<-NULL
+season_rz_stats[, !colnames(season_rz_stats)%in% c("ID", "Season", "Player")]<-
+  sapply(season_rz_stats[, !colnames(season_rz_stats)%in% c("ID", "Season", "Player")], function(x) as.numeric(gsub("%", "", x)))
+season_rz_stats<-season_rz_stats[!season_rz_stats$Player=="", ]
+season_rz_stats[, !grepl("recCATCH[.]|passCMP[.]", colnames(season_rz_stats))][is.na(season_rz_stats[, !grepl("recCATCH[.]|passCMP[.]", colnames(season_rz_stats))])]<-0
+
+season_rz_stats[1:2,]
+hist(season_rz_stats$rushATT.10)
+
+
 
 ##historical depth charts####
 
@@ -451,14 +605,605 @@ stats$Year<-2018
 team.futures<-rbind.fill(team.futures[team.futures$Year!=2018,], stats)
 table( team.futures$Team, team.futures$Year)
 
+
+####suspensions data####
+page<-read_html("https://en.wikipedia.org/wiki/List_of_suspensions_in_the_National_Football_League")
+stats<-page%>% html_table(fill=T)
+stats<-stats[[2]]
+stats$`Date suspended`<-as.Date(stats$`Date suspended`,format="%B %d, %Y")
+stats$`Team at the time of suspension`<-coordName(stats$`Team at the time of suspension`)
+stats$`Suspension length`[grepl("later reduced to", stats$`Suspension length`)]<-
+  sapply( strsplit(stats$`Suspension length`[grepl("later reduced to", stats$`Suspension length`)], "later reduced to|\\["),`[[`, 2)
+stats$`Suspension length`[grepl("later changed to", stats$`Suspension length`)]<-
+  sapply( strsplit(stats$`Suspension length`[grepl("later changed to", stats$`Suspension length`)], "later changed to|\\["),`[[`, 2)
+stats$Suspension<-as.numeric(gsub(" games|game|\\(|\\)", "", stats$`Suspension length`))
+stats$Suspension[grepl("Entire|entire", stats$`Suspension length`)& grepl("season|Season", stats$`Suspension length`)]<-16
+
+#filter
+stats<-stats[which(stats$`Date suspended`>=as.Date("2007-02-10")), ]
+stats<-stats[!grepl("overturned", stats$`Suspension length`), ]
+stats<-stats[month(stats$`Date suspended`)%in% 2:9 , ]
+stats<-stats[!(month(stats$`Date suspended`)%in% 9 & lubridate::day(stats$`Date suspended`)>8),] #suspended after week 1
+stats<-stats[!grepl("Indefinite", stats$`Suspension length`), ]
+stats$Name<-coordName(stats$Name)
+stats$Season<-lubridate::year(stats$`Date suspended`)
+stats<-stats[, c("Name", "Team at the time of suspension", "Suspension", "Season")]
+colnames(stats)[2]<-c("Team")
+suspensions<-stats
+
+###game-injury data#####
+importGrid<-expand.grid(Team=abbrev$Abbrev3, Season=2009:2017, stringsAsFactors = F)
+importGrid<-importGrid[!(importGrid$Team=="htx"& importGrid$Season<2002),]
+
+getInjured<-function(team,season){
+  print(c(team, season))
+  page<-read_html(paste0("https://www.pro-football-reference.com/teams/", team,"/",season ,"_injuries.htm"))
+  stats<-html_table(page)[[1]]
+  stats<-stats[stats$Player!="",]
+  stats$ID<-page%>% html_nodes(".left a")%>% html_attr("href")
+  stats<-melt(stats, id.vars =c("Player", "ID"), variable.name = "GameInfo", value.name = "Status")
+  stats$Team<-team
+  stats$Season<-season
+  stats
+}
+game_injuries<-ldply(lapply(1:nrow(importGrid), function(x)getInjured(team=importGrid$Team[x], season=importGrid$Season[x]) ),data.frame)
+game_injuries$GameInfo<-as.character(game_injuries$GameInfo)
+game_injuries$DATE<-sapply(strsplit(game_injuries$GameInfo, "vs"), `[[`, 1)
+game_injuries$DATE<-as.Date(paste(game_injuries$DATE, game_injuries$Season, sep="/"), format="%m/%d/%Y")
+year(game_injuries$DATE)[month(game_injuries$DATE)%in% 1:2]<-game_injuries$Season[month(game_injuries$DATE)%in% 1:2]+1
+
+
+###fref game links###
+
+importGrid<-expand.grid(Team=abbrev$Abbrev3, Season=2003:2017, stringsAsFactors = F)
+getLinks<-function(team,season){
+  print(c(team, season))
+  page<-read_html(paste0("https://www.pro-football-reference.com/teams/", team,"/",season ,".htm"))
+  stats<-html_table(page)[[2]]
+  names<-as.character(stats[1,])
+  colnames(stats)<-names
+  stats<-stats[!stats$Day%in% c("", "Day"),]
+  ids<-page%>% html_nodes(".center a")%>% html_attr("href")
+  stats$GameID<-ids[1:nrow(stats)]
+  stats$Team<-team
+  stats$Season<-season
+  stats
+}
+gameLinks_FREF<-ldply(lapply(1:nrow(importGrid), function(x)getLinks(team=importGrid$Team[x], season=importGrid$Season[x]) ),data.frame)
+head(gameLinks_FREF)
+
+
+###game snaps#####
+
+importGrid<-unique(gameLinks_FREF$GameID[gameLinks_FREF$Season%in% 2012:2017])
+remDr<-rsDriver(browser = "chrome")
+# remDr$client$setImplicitWaitTimeout(milliseconds = 5000)
+#setTimeout(type = "implicit", milliseconds = 5000)
+
+importGame<-function(gameid){
+  
+  #navigate to page & scrape html data
+  url<-paste0("https://www.pro-football-reference.com",gameid)
+  
+  # remDr$client$setTimeout(type = "implicit", milliseconds = 5000)
+  remDr$client$navigate(url)
+  Sys.sleep(1)
+  remDr$client$setTimeout(type = "implicit", milliseconds = 5000)
+  
+  # while(class(try(remDr$client$getPageSource(header = TRUE), silent = TRUE))=="try-error"){try(remDr$client$refresh(), silent = TRUE)}
+  
+  
+  page<-remDr$client$getPageSource()[[1]]
+  page2<-read_html(page)
+  stats<-readHTMLTable(page)
+  
+  #organize snaps data and gameinfo data
+  home_snaps<-stats$home_snap_counts
+  colnames(home_snaps)<-c("Player", "Pos","OffSnaps", "OffPct", "DefSnaps", "DefPct","STSnaps", "STPct")
+  home_snaps$ID<-page2%>% html_nodes("#home_snap_counts a")%>%html_attr("href")
+  home_snaps$GameID<-gameid
+  
+  vis_snaps<-stats$vis_snap_counts
+  colnames(vis_snaps)<-c("Player","Pos" ,"OffSnaps", "OffPct", "DefSnaps", "DefPct","STSnaps", "STPct")
+  vis_snaps$ID<-page2%>% html_nodes("#vis_snap_counts a")%>%html_attr("href")
+  vis_snaps$GameID<-gameid
+  
+  game_info<-stats$game_info
+  colnames(game_info)<-c("Stat", "Value")
+  game_info$GameID<-gameid
+  
+  list(home_snaps=home_snaps, vis_snaps=vis_snaps,game_info=game_info)
+}
+#taking too long to load oh well..
+
+snapLogs2<-list();length(snapLogs2)<-length(importGrid)
+for(x in 4:length(snapLogs2)){
+  print(x)
+  snapLogs2[[x]]<-importGame(gameid = importGrid[x])
+}
+
+##snap counts-alternative scrape
+##
+importGrid<-unique(id_df[id_df$Season%in% 2012:2017, c("ID",  "Season")])
+year<-importGrid$Season[68];id<-importGrid$ID[68]
+
+
+importSnaps<-function(id, year){
+  page<-read_html(paste0("https://www.pro-football-reference.com/",gsub("[.]htm",  "", id) ,"/fantasy/", year))
+  stats<-html_table(page)[[1]]
+  stats<-stats[, stats[2, ]%in% c("Rk", "G#", "Date", "Tm", "Opp", "Result", "Pos","Num", "Pct")]
+  colnames(stats)<-c("Rk", "G#","DATE", "Tm", "OPP", "Result", "Pos", "SnapsOff",
+                     "SnapsOffPct", "SnapsDef","SnapsDefPct", "SnapsST", "SnapsSTPct")
+  stats<-stats[!stats$DATE%in% c("", "Date", "Total"), ]
+  if(nrow(stats)>0){
+    stats$ID<-id
+    stats$Season<-year
+  }
+  stats
+}
+snapLogs<-list();length(snapLogs)<-nrow(importGrid)
+for(x in 1:length(snapLogs)){
+  print(x)
+  snapLogs[[x]]<-importSnaps(id = importGrid$ID[x] ,year=importGrid$Season[x])
+}
+
+
+
+importGrid<-expand.grid(Team=abbrev$Abbrev3, Season=2012:2017, stringsAsFactors = F)
+importGrid<-importGrid[!(importGrid$Team=="htx"& importGrid$Season<2002),]
+
+getSeason<-function(team,season){
+  print(c(team, season))
+  page<-read_html(paste0("https://www.pro-football-reference.com/teams/", team,"/",season ,"-snap-counts.htm"))
+  stats<-html_table(page)[[1]]
+  colnames(stats)<-c("Player", "Pos", "SnapsOff", "SnapsOffPct", "SnapsDef","SnapsDefPct", "SnapsST", "SnapsSTPct", "Description")
+  stats<-stats[!stats$Player=='', !colnames(stats)%in% c("Description")]
+  stats$ID<-page%>% html_nodes(".left a")%>% html_attr("href")
+  stats$Team<-team
+  stats$Season<-season
+  stats
+}
+seasonSnaps<-ldply(lapply(1:nrow(importGrid), function(x) getSeason(team=importGrid$Team[x], season=importGrid$Season[x])), data.frame)
+
+
+####game inactives#######
+importGrid<-expand.grid(season=2011:2017, week=1:21)
+importGrid<-importGrid[!(importGrid$season==2015& importGrid$week>=18),]
+
+nicknames<-sapply(strsplit(abbrev$FullName, " "), function(x)tail(x, 1))
+nicknames<-c(nicknames, 'Bucs')
+nicknames2<-sapply(strsplit(abbrev$FullName, " "), function(x)paste(x[-length(x)],collapse=" "))
+nicknames<-c(nicknames, nicknames2)
+
+getInactive<-function(season, week){
+  #season<-2011;week<-5
+  #season<-2017;week<-9
+  print(c(season, week))
+  url<-paste0("https://fftoday.com/nfl/", substring(season, 3, 4),"_inactives_wk",week,".html")
+  page<-read_html(url)
+  stats<-page%>% html_nodes(".bodycontent li")%>% html_text()
+  # headlines<-page%>% html_nodes(".headline, .largeheadline")%>% html_text()%>% paste(collapse = "|")
+  # headlines<-headlines[headlines!=""]
+  stats<-unlist(strsplit(stats, "\n\n"))
+  stats<-gsub("\t|\n", " ", stats)
+  
+  
+  # if(length(headline)>0){
+  # stats<-gsub(headlines, " ",stats)
+  # }
+  stats<-gsub(paste(c(nicknames, abbrev$Abbrev2, " at "), collapse="|")," ", stats)
+  # 
+  # if(season==2012& week==2){
+  #   stats[1:2]<-c("Denver: QB Caleb Hanie, OL Philip Blake, WR Andre Caldwell, CB Chris Harris, RB Ronnie Hillman, G Chris Kuper, DT Sealver Siliga",
+  #                 "Atlanta: QB Dominique Davis, OG Joe Hawley, OT Lamar Holmes, CB Terrence Johnson, DE Jonathan Massaquoi, DE Cliff Matthews, S Charles Mitchell")
+  # }
+  stats<-stats[grepl(": | - ", stats) &!grepl(" AT | at ", stats)& sapply(stats, nchar)>=10]
+  stats<-strsplit(stats, ", |: | - | and ")
+  stats<-unlist(stats)
+  stats<-stringr::str_replace(gsub("\\s+", " ", stringr::str_trim(stats)), "B", "b")
+  stats<-stats[!stats==""& !grepl(" AM | PM ", stats)]
+  stats<-gsub("linebacker |and ", "", stats)
+  # stats  
+  store<-" ol | c | wr | lb | ot | rb | cb | de | t | fb | qb | olb | lb | te | dt | g | dl | s "
+  
+  error<-stats[grepl(store, tolower(stats))]
+  while(length(error)>0){
+    error<-lapply(error, function(x){
+      split<-gregexpr(store, tolower(x))[[1]][1];
+      c(substring(x, 1, split-1), substring(x, split+1, nchar(x)))
+    }) %>%
+      unlist()%>% unname()
+    stats<-c(stats[!grepl(store, tolower(stats))], error)
+    
+    #recalculate if errors
+    error<-stats[grepl(store, tolower(stats))]
+    
+  }
+  # toDF<-function(x){
+  #   x<-data.frame(Team=x[1], Player=x[-1])
+  #   x
+  # }
+  # stats<-ldply(lapply(stats, toDF), data.frame)
+  stats<-data.frame(Player=stats)
+  stats$Pos<-sapply(strsplit(stats$Player, " "), `[[`, 1)
+  stats$Player<-sapply(strsplit(stats$Player, " "), function(x) paste(x[-1], collapse=" "))
+  stats$Week<-week
+  stats$Season<-season
+  stats
+}
+game_inactives<-ldply(lapply(1:nrow(importGrid), function(x) getInactive(season=importGrid$season[x], week=importGrid$week[x])), data.frame)
+
+game_inactives$Player<-coordName(game_inactives$Player)
+setdiff(game_inactives$Player, rosters$Player)
+
+#####vegas data#####
+
+
+
+
+importGrid<-expand.grid(Team=abbrev$Abbrev3, Season=2003:2017, stringsAsFactors = F)
+importGrid<-importGrid[!(importGrid$Team=="htx"& importGrid$Season<2002),]
+
+getOdds<-function(team,season){
+  print(c(team, season))
+  page<-read_html(paste0("https://www.pro-football-reference.com/teams/", team,"/",season ,"_lines.htm"))
+  stats<-html_table(page)[[1]]
+  stats$GameID<-page%>% html_nodes("td:nth-child(5) a")%>% html_attr("href")
+  stats$Team<-team
+  stats$Season<-season
+  stats
+}
+game_odds<-ldply(lapply(1:nrow(importGrid), function(x) getOdds(team=importGrid$Team[x], season=importGrid$Season[x])), data.frame)
+
+
+###game locations####
+
+importGrid<-expand.grid(Team=abbrev$Abbrev3, Season=2003:2017, stringsAsFactors = F)
+importGrid<-importGrid[!(importGrid$Team=="htx"& importGrid$Season<2002),]
+
+getLocs<-function(team, season){
+  print(c(team, season))
+  page<-read_html(paste0("https://www.pro-football-reference.com/teams/", team, "/", season, "_travel.htm"))
+  stats<-html_table(page)[[1]]
+  stats$Dist<-NULL
+  stats$GameID<-page%>% html_nodes("th a")%>%html_attr("href")
+  stats$Season<-season
+  stats$Team<-team
+  stats
+  
+}
+game_locs<-ldply(lapply(1:nrow(importGrid), function(x) getLocs(team=importGrid$Team[x], season=importGrid$Season[x])), data.frame)
+game_locs$Stadium[game_locs$Stadium=="Mercedes-Benz Stadium"]<-"Mercedes-Benz Superdome"
+game_locs$Stadium[game_locs$Stadium=="Azteca Stadium"]<-"Estadio Azteca"
+
+stadium_df<-read.csv("Misc Data/nfl_stadiums.csv")
+setdiff(game_locs$Stadium, stadium_df$stadium_name)
+game_locs<-merge(game_locs, stadium_df[, c("stadium_type", "stadium_name", "stadium_location", "stadium_weather_type", "LATITUDE", "LONGITUDE", "ELEVATION")], 
+                 by.x="Stadium",by.y="stadium_name", all.x=T )
+game_locs$Team<-coordName(game_locs$Team)
+game_locs$Team_Full<-abbrev$Abbrev2[match(game_locs$Team,  abbrev$Abbrev )]
+game_locs$Team_Full[game_locs$Team_Full%in% c("N.Y. Jets", "N.Y. Giants")]<-"East Rutherford"
+game_locs$Team_Full[game_locs$Team_Full%in% c("Minnesota")]<-"Minneapolis"
+game_locs$Team_Full[game_locs$Team_Full%in% c("Tampa Bay")]<-"Tampa"
+game_locs$Team_Full[game_locs$Team_Full%in% c("Arizona")]<-"Glendale"
+game_locs$Team_Full[game_locs$Team_Full%in% c("Carolina")]<-"Charlotte"
+game_locs$Team_Full[game_locs$Team_Full%in% c("New England")]<-"Foxborough"
+game_locs$Team_Full[game_locs$Team_Full%in% c("Tennessee")]<-"Nashville"
+game_locs$ELEVATION[is.na(game_locs$ELEVATION)]<-0
+us_cities<-read.csv("Misc Data/us_cities.csv")
+us_cities<-us_cities[which((us_cities$population>=90000& us_cities$city%in% game_locs$Team_Full)| us_cities$city%in% c("East Rutherford", "Foxborough")), ]
+us_cities$zips<-NULL
+us_cities<-us_cities[!us_cities$id%in% c(1840008535,1840020483, 1840014653),]
+
+colnames(game_locs)[colnames(game_locs)%in% c("LATITUDE", "LONGITUDE", "ELEVATION")]<-c("GameLat", "GameLong", "GameElevation")
+colnames(us_cities)[colnames(us_cities)%in%c("lat", "lng")]<-c("TeamLat", "TeamLong")
+game_locs<-merge(game_locs, us_cities[, c("city", "TeamLat", "TeamLong")], by.x="Team_Full", by.y="city")
+game_locs$Dist<-geosphere::distHaversine(game_locs[, c( "GameLong", "GameLat")], game_locs[, c( "TeamLong", "TeamLat")])/1000
+
+###madden data####
+files<-list.files("Madden Data/")
+readFile<-function(file){
+  # file<-files[6]
+  print(file)
+  stats<-tryCatch(read.csv(paste0("Madden Data/", file),
+                           quote = "",
+                           row.names = NULL, 
+                           stringsAsFactors = FALSE),
+                  error=function(e){
+                    read.csv(paste0("Madden Data/", file),
+                             # quote = "",
+                             row.names = NULL, 
+                             stringsAsFactors = FALSE)
+                    
+                  }
+  )
+  # print(colnames(stats)[ tolower(colnames(stats))%in% c("position", "pos")])
+  stats<-stats[, !colnames(stats)%in% c("Height")]
+  stats$Pos<-stats[, tolower(colnames(stats))%in% c( "position", "pos")]
+  
+  if("name"%in% tolower(colnames(stats))){
+    stats$Player<-stats$Name
+  }else{
+    stats$Player<-paste(stats[, grepl("first", tolower(colnames(stats)))], stats[, grepl("last", tolower(colnames(stats)))], sep=" ")
+  }
+  #extract team from file
+  team<-sapply(strsplit(file, "_"), function(x) paste(x[1], x[2], collapse=" "))
+  #some problems w. teams that have same city locs
+  if(grepl("giants", file)){ team<-"Giants"} else if (grepl("jets", file)){team<-"Jets"} else if(grepl("rams", file)){team<-"Rams"} else if (grepl("chargers", file)){team<-"Chargers"}
+  stats$Team<-team
+  
+  #extract stats from file
+  stats$Rating<-stats[,grepl("ovr|overall", tolower(colnames(stats)))]
+  file<-gsub("49", "", file)
+  year<-as.numeric(stringr::str_extract_all(file, "[0-9]+")[[1]])
+  if(year==25){year<-2014} else if(year<20){year<-year+2000}
+  stats$Madden.Year<-year
+  stats$Season<-year-1
+  stats<-stats[!stats$Player%in% c("","Name"),]
+  stats[, c("Player", "Pos", "Team", "Rating", "Madden.Year", "Season")]
+}
+madden.data<-ldply(lapply(files, readFile), data.frame)
+madden.data$Team<-coordName(madden.data$Team)
+madden.data$Rating<-as.numeric(madden.data$Rating)
+table(madden.data$Team, madden.data$Season)
+hist(madden.data$Rating)
+
+
+###espn power rankings####
+ids<-read_html("http://www.espn.com/nfl/standings/_/season/2017")%>% html_nodes(".hide-mobile a")%>% html_attr("href")
+teams<-sapply(strsplit(ids, "/"), `[[`, 6)
+
+importGrid<-expand.grid(season=2002:2015, team=teams, stringsAsFactors = F)
+
+
+readESPN<-function(season, team){
+  #season<-2015;team<-"ari"
+  print(c(season, team))
+  url<-paste0("http://www.espn.com/nfl/team/rankings/_/name/",team, "/year/",season)
+  stats<-readHTMLTable(url, header = T, skip.rows = 1)[[1]]
+  stats$COMMENT<-NULL
+  stats$Team<-team
+  stats$Season<-season
+  stats
+  
+}
+espn_pwr<-ldply(lapply(1:nrow(importGrid), function(x) readESPN(season=importGrid$season[x], team=importGrid$team[x])), data.frame)
+table(espn_pwr$WEEK)
+espn_pwr$WEEK[espn_pwr$WEEK=='Preseason']<-0
+espn_pwr[, c("RANK", "WEEK")]<-sapply(espn_pwr[, c("RANK", "WEEK")], function(x) as.numeric(gsub("Week ", "", x)))
+
+#2016 and 2017 annoyingly are sepearte web pages
+
+link<-"/nfl/story/_/id/18395280/nfl-2016-final-regular-season-power-rankings-new-england-patriots-dallas-cowboys-pittsburgh-steelers"
+links16<-read_html(paste0("http://www.espn.com",link))%>% html_nodes("em a")%>% html_attr("href")
+importGrid<-data.frame(week=18:0, link=c(link, links16), season=2016)
+
+link<-"/nfl/story/_/page/NFLpowerrankingsx180102/2017-nfl-power-rankings-final-regular-season-edition-new-england-patriots-pittsburgh-steelers-minnesota-vikings-finish-top"
+links17<-read_html(paste0("http://www.espn.com",link))%>% html_nodes("em a")%>% html_attr("href")
+importGrid2<-data.frame(week=c(18:2, 0), link=c(link, links17), season=2017)
+importGrid<-rbind(importGrid, importGrid2)
+
+readLink<-function(link){
+  # link<-importGrid$link[30]
+  print(link)
+  page<-read_html(paste0("http://www.espn.com",link))
+  text<-page%>% html_nodes("h2")%>% html_text()
+  text<-text[startsWith(text, "1")| startsWith(text, "2")| startsWith(text, "3")| startsWith(text, "4")| startsWith(text, "5")|
+               startsWith(text, "6")| startsWith(text, "7")| startsWith(text, "8")| startsWith(text, "9")]
+  text<-text[!grepl(":", text)& !grepl("NFL", text)& !grepl("[,]", text)]
+  stats<-data.frame(Text=text,Season=importGrid$season[importGrid$link==link], WEEK=importGrid$week[importGrid$link==link] )
+  stats$RANK<-sapply(strsplit(stats$Text, "[.] "), `[[`, 1)
+  stats$Team<-sapply(strsplit(stats$Text, "[.] "), `[[`, 2)
+  stats$Text<-NULL
+  stats
+}
+espn_pwr2<-ldply(lapply(importGrid$link, readLink),data.frame)
+espn_pwr<-rbind.fill(espn_pwr[,!colnames(espn_pwr)=="RECORD"], espn_pwr2)
+espn_pwr$Team<-coordName(espn_pwr$Team)
+espn_pwr$RANK<-as.numeric(espn_pwr$RANK)
+colnames(espn_pwr)<-sapply(colnames(espn_pwr),simpleCap)%>% unname()
+table(espn_pwr$Team)
+
+
+
+elo_rank<-read.csv("C:/Users/David/Documents/NFL/nfl-elo-game-master/Elo Predictions.csv", header=T)
+elo_rank<-elo_rank[elo_rank$season>=2002,]
+elo_rank$date<-as.Date(elo_rank$date)
+elo_rank[, c("team1", "team2")]<-sapply(elo_rank[, c("team1","team2")],coordName)
+
+yahoo_links<-read.csv("Misc Data/yahoo pickem.csv")
+readLink<-function(link){
+  print(link)
+  # link<-yahoo_links$Link[2]
+  page<-read_html(link)
+  stats<-page%>% html_table(fill=T)
+  stats<-stats[[which(sapply(stats, function(x) length(grep("Pick", colnames(x)))>0))]][, 2:3]
+  colnames(stats)<-c("Team", "Yahoo.Pickem")
+  stats$Season<-yahoo_links$Season[yahoo_links$Link==link]
+  stats$Week<-yahoo_links$Week[yahoo_links$Link==link]
+  stats
+}
+yahoo.pickem<-ldply(lapply(yahoo_links$Link, readLink), data.frame)
+yahoo.pickem$Team<-gsub("[@]", "", yahoo.pickem$Team)
+yahoo.pickem$Team<-coordName(yahoo.pickem$Team)
+yahoo.pickem$Yahoo.Pickem<-as.numeric(gsub("%", "", yahoo.pickem$Yahoo.Pickem))
+
+
+###detailed vegas data
+importGrid<-expand.grid(week=1:21, season=2009:2017)
+
+getStats<-function(week, season){
+  #week<-15;season<-2012
+  
+  print(c(week, season))
+  #superbowl is listed as 22
+  if(week==21){
+    week<-22
+  }
+  
+  page<-read_html(paste0("http://www.vegasinsider.com/nfl/matchups/matchups.cfm/week/", week,"/season/", season))
+  stats<- page%>%html_nodes("td")%>% html_text()
+  links<-page%>% html_nodes("td a")%>% html_attr("href")
+  links<-links[sapply(links, function(x) grepl("line-movement", x))]
+  
+  
+  if("Teams"%in% stats){
+    
+    stats<-stats[which(stats=="Teams")[1]:length(stats)]
+    stats<-gsub("[\r\n\t]", "", stats)
+    stats<-stats[!grepl("Tracker|ClosingSpreadMoney", stats)]
+    
+    if("ATS"%in% stats[1:10]){
+      stats<-stats[unlist(lapply(which(stats=="Teams"), function(x) seq(x, x+26, 1)))]
+      stats<-data.frame(matrix(stats, ncol=9, byrow=T))
+      names<-as.character(stats[1,])
+    } else{
+      #for games in future, use:
+      stats<-stats[unlist(lapply(which(stats=="Teams"), function(x) seq(x, x+23, 1)))]
+      stats<-data.frame(matrix(stats, ncol=8, byrow=T))
+      names<-as.character(stats[1,])
+    }
+    #superbowl is listed as 22
+    if(week==22){
+      week<-21
+    }
+    
+    colnames(stats)<-names
+    colnames(stats)[colnames(stats)=="Current"]<-"Closing"
+    
+    stats<-stats[stats$Teams!="Teams", ]
+    stats$Link<-rep(links, each=2)
+    stats$Week<-week
+    stats$Season<-season
+    
+  } else{
+    stats<-data.frame()
+  }
+  stats
+}
+if(!exists("game_odds_detailed")){
+  game_odds_detailed<-ldply(lapply(1:nrow(importGrid), function(x) getStats(week = importGrid$week[x], season=importGrid$season[x])), data.frame)
+} else{
+  test<-game_odds_detailed[!duplicated(game_odds_detailed[, c("Week", "Season")]), ]
+  importGrid<-merge(importGrid, test, all=T, by.x=c("week", "season"), by.y=c("Week", "Season"))
+  importGrid<-importGrid[is.na(importGrid$Teams), c("week", "season")]
+  
+  game_odds_detailed2<-ldply(lapply(1:nrow(importGrid), function(x) getStats(week = importGrid$week[x], season=importGrid$season[x])), data.frame)
+  game_odds_detailed<-rbind.fill(game_odds_detailed, game_odds_detailed2)
+  game_odds_detailed<-game_odds_detailed
+}
+
+
+links<-unique(game_odds_detailed$Link)
+
+
+readLink<-function(link, offshore=T){
+  print(link)
+  #link<-tail(links, 1)
+  link2<-sapply(strsplit(link, "/time"),`[[`, 1)
+  link2<-paste("http://www.vegasinsider.com",link2, sep="")
+  if(offshore==T){
+    link2<-gsub("las-vegas", "offshore", link2)
+  }
+  page<-read_html(link2)
+  
+  #clean data
+  stats<-page%>% html_nodes("td")%>% html_text()
+  stats<-gsub("[\r\n\t]", "", stats)
+  stats<-stats[!grepl("Tracker|ClosingSpreadMoney|Sunday Night|FavDog|Vegas|News", stats)]
+  stats<-stats[!stats%in% c("Money Line", "Spread", "Total", "1st Half", "2nd Half")]
+  if(length(stats)>=100){
+    #save vegas info, remove vegas info
+    gameInfo<-stats[1:(grep("LINE MOVEMENT", stats)[1]-1)]
+    stats<-stats[-c(1:(grep("LINE MOVEMENT", stats)[1]-1))]
+    
+    #save vegas books, remove vegas books
+    books<-stats[grep("LINE MOVEMENTS", stats)]
+    stats<-stats[-c(grep("LINE MOVEMENTS", stats), grep("LINE MOVEMENTS", stats)+1)]
+    
+    #convert to dataframe
+    stats<-stats[1:(length(stats)-length(stats)%%12)] #end of stats has a couple errors
+    stats<-data.frame(matrix(stats, ncol=12, byrow=T))
+    stats<-stats[grepl("/|Date", stats[,1]), ]
+    
+    inds<-c(which(stats[, 1]=="Date"), nrow(stats)+1)
+    stats$Book<-mapply(rep, books, diff(inds)) %>% unlist()
+    stats<-stats[!grepl("Date", stats[, 1]), ]
+    colnames(stats)<-c("DATE", "Time","Fav.Odds", "Dog.Odds","Fav.Spread", "Dog.Spread", "Over.Total", "Under.Total",'Fav.Half1', "Dog.Half1",
+                       "Fav.Half2", "Dog.Half2" , "Book")
+    
+    stats$Link<-link
+    stats
+  } else{
+    data.frame()
+  }
+}
+if(!exists("offshore_line_movement")){
+  #scrape
+  offshore_line_movement<-list();length(offshore_line_movement)<-length(links)
+  for(i in 1:length(links)){
+    offshore_line_movement[[i]]<-readLink(links[i])
+  }
+  
+} else{
+  #get missing links
+  test<- rbindlist(offshore_line_movement)
+  links<-setdiff(links,test$Link)
+  
+  #scrape and append
+  offshore_line_movement2<-list();length(offshore_line_movement2)<-length(links)
+  for(i in 1:length(links)){
+    offshore_line_movement2[[i]]<-readLink(links[i])
+  }
+  offshore_line_movement<-append(offshore_line_movement, offshore_line_movement2) 
+  offshore_line_movement<- offshore_line_movement[!duplicated(offshore_line_movement)]
+}
+
+
+
+if(!exists("vegas_line_movement")){
+  
+  #scrape each link
+  vegas_line_movement<-list();length(vegas_line_movement)<-length(links)
+  for(i in 1811:length(links)){
+    vegas_line_movement[[i]]<-readLink(links[i], offshore = F)
+  }
+  
+} else{
+  #get missing links
+  test<- rbindlist(vegas_line_movement)
+  links<-setdiff(links,test$Link)
+  
+  #scrape and append
+  vegas_line_movement2<-list();length(vegas_line_movement2)<-length(links)
+  for(i in 1:length(links)){
+    vegas_line_movement2[[i]]<-readLink(links[i], offshore = F)
+  }
+  vegas_line_movement<-append(vegas_line_movement, vegas_line_movement2) 
+  vegas_line_movement<- vegas_line_movement[!duplicated(vegas_line_movement)]
+}
+
+
+
 ####save data#####
 
-save(list=c("season_passing_df", "season_rushing_df", "season_receiving_df", 
-            "season.stats", "id_df", "rosters","combine.stats", "depthCharts","defense.stats", 
-            "gameLinks", "gameLogs", "team.futures"
-),
-file="Player Data/NFL Data.RData")
+#seasonal data
+save(list=c("season_passing_df", "season_rushing_df", "season_receiving_df", "season_rz_stats", "season.stats", "id_df", "rosters","combine.stats", "madden.data" ,#player stats
+            "depthCharts","defense.stats", "defense.passing", "team.futures", "seasonSnaps", "suspensions", #season stats
+            "gameLinks","gameLinks_FREF", "gameLogs","teamLogs","snapLogs"
+            
+),file="Player Data/NFL Data.RData")
 
+
+#game data data
+save(list=c(  "game_injuries", "game_inactives", "game_odds","game_odds_detailed","offshore_line_movement","vegas_line_movement",
+              "espn_pwr", "elo_rank" , "game_locs", "yahoo.pickem"#game stats
+), file="Player Data/NFL Game Data.RData")
+
+
+
+#load("Player Data/NFL Data.RData")
+#load("Player Data/NFL Game Data.RData")
 
 ########FFANALYTICS SEASONAL PROJECTIONS######
 
@@ -485,7 +1230,7 @@ getTeam<-function( Season, Team, Pos,Site=5,  postseason=F){
   url<-paste0(c("https://fantasydata.com/nfl-stats/fantasy-football-weekly-projections?position=",Pos, "&team=",Team,"&season=",Season,
                 "&seasontype=", 1+2*postseason,"&scope=1&scoringsystem=",Site), collapse=""   )
   remDr$client$navigate(url)
-  Sys.sleep(2.5)
+  Sys.sleep(3)
   page<-remDr$client$getPageSource()[[1]]
   page<-read_html(page)
   
@@ -505,9 +1250,9 @@ getTeam<-function( Season, Team, Pos,Site=5,  postseason=F){
     colnames(test)<-c("Player", "Team", "Pos", "Gms", "Targets", "Rec", "RecRec.Tgt", "RecYds","RecTD", "RecLong", "RecYds.Tgt", "RecYds.Rec",
                       "RushAtt", "RushYds", "RushAvg", "RushTD",
                       "Fums","FumsLost","PPG", "FantPts"  )
-  } else if (Pos==10){
+  } else if (Pos==6){
     colnames(test)<-c("Player","Team", "Pos", "Gms", "FGM", "FGA", "FGPCT", "FGLong", "XPM", "XPA", "PPG", "FantPts")
-  } else if(Pos==11){
+  } else if(Pos==7){
     colnames(test)<-c("Player","Team", "Pos", "Gms", "TFL", "Sacks", 
                       "QB.Hits", "Def.Int", "Fum.Rec", "Safeties", "Def.TD", "Return.TD","Pts.Allowed" , "PPG", "FantPts")
   }
@@ -517,7 +1262,7 @@ getTeam<-function( Season, Team, Pos,Site=5,  postseason=F){
   test
 }
 #links to import
-testGrid<-expand.grid(Pos=c(2, 3, 4, 5, 10, 11), Team=0:31, Season=2014:2018)
+testGrid<-expand.grid(Pos=c(2, 3, 4, 5, 6, 7), Team=0:31, Season=2014:2018)
 if(exists("FDATA_SEASONAL")){
   testGrid<-testGrid[testGrid$Season==2018,]
 }
@@ -532,7 +1277,7 @@ if(!exists("FDATA_SEASONAL")){
 } else{
   FDATA_SEASONAL2<-data.frame(rbindlist(testList,fill=T ))
   FDATA_SEASONAL<-rbind.fill(FDATA_SEASONAL2[, colnames(FDATA_SEASONAL2)%in% colnames(FDATA_SEASONAL)], 
-                             FDATA_SEASONAL[FDATA_SEASONAL$Season!=2018,])
+                             FDATA_SEASONAL[!(FDATA_SEASONAL$Season==2018),])
 }
 FDATA_SEASONAL<-FDATA_SEASONAL[, !colnames(FDATA_SEASONAL)%in% c("PassPct", "PassYds.Att", "PassRating", "RushAvg", "RecLong", "RushLong",
                                                                  "RecYds.Tgt", "RecYds.Rec")]
@@ -540,16 +1285,109 @@ FDATA_SEASONAL[, !colnames(FDATA_SEASONAL)%in% c("Player", "Pos", "Team", "ID")]
   sapply(FDATA_SEASONAL[, !colnames(FDATA_SEASONAL)%in% c("Player", "Pos", "Team", "ID")], function(x) as.numeric(gsub("[,]", "", x)))
 head(FDATA_SEASONAL)
 
+##FFTODAY###
+importGrid<-expand.grid(Season=2008:2018, PosID=c(seq(10, 70, 10), 99), Page=0:2)
 
+readFFTODAY<-function(Season, PosID, Page){
+  print(c(Season, PosID, Page))
+  
+  if(PosID%in%c(50, 60, 70)){
+    leagueID<-193033 #idp scoring
+  }else{
+    leagueID<-17#yahoo scoring
+  }
+  page<-read_html(paste0("http://fftoday.com/rankings/playerproj.php?Season=",Season ,"&PosID=",PosID ,"&LeagueID=", leagueID, "&order_by=FFPts&sort_order=DESC&cur_page=", Page)) 
+  stats<-page%>% html_table(  fill=T)
+  stats<-stats[[length(stats)-1]]
+  stats<-stats[-c(1:2),-1 ]
+  if(nrow(stats)>1){
+    if(PosID==10){
+      colnames(stats)<-c("Player", "Team", "Bye", "passATT", "passCMP", "passYDS", "passTD", "passINT", "rushATT", "rushYDS", "rushTD", "fantPts")
+      stats$Pos<-"QB"
+    }else if(PosID==20){
+      colnames(stats)<-c("Player", "Team", "Bye","rushATT", "rushYDS", "rushTD", "recREC", 'recYDS',"recTD", "fantPts" )
+      stats$Pos<-"RB"
+    } else if(PosID==30){
+      colnames(stats)<-c("Player", "Team", "Bye", "recREC", 'recYDS',"recTD", "rushATT", "rushYDS", "rushTD","fantPts" )
+      stats$Pos<-"WR"
+    }else if(PosID==40){
+      colnames(stats)<-c("Player", "Team", "Bye", "recREC", 'recYDS',"recTD", "fantPts" )
+      stats$Pos<-"TE"
+    }else if(PosID==50){
+      colnames(stats)<-c("Player", "Team", "Bye", "defSOLO", 'defAST',"defSACK", "defPD" , "defINT", "defFF", "defFR", "fantPts")
+      stats$Pos<-"DL"
+    }else if(PosID==60){
+      colnames(stats)<-c("Player", "Team", "Bye", "defSOLO", 'defAST',"defSACK", "defPD" , "defINT", "defFF", "defFR", "fantPts")
+      stats$Pos<-"LB"
+    }else if(PosID==70){
+      colnames(stats)<-c("Player", "Team", "Bye", "defSOLO", 'defAST',"defSACK", "defPD" , "defINT", "defFF", "defFR", "fantPts")
+      stats$Pos<-"DB"
+    }else if(PosID==99){
+      stats<-stats[, c(1, ncol(stats))]
+      colnames(stats)<-c("Player", "fantPts" )
+      stats$Team<-stats$Player
+      stats$Pos<-"DST"
+    }
+    stats$Season<-Season
+  } else{
+    stats<-data.frame()
+  }
+  stats
+}
+FFTODAY<-ldply(lapply(1:nrow(importGrid), function(x) readFFTODAY(Season = importGrid$Season[x], PosID = importGrid$PosID[x], Page=importGrid$Page[x])), data.frame)
+FFTODAY[, !colnames(FFTODAY)%in% c("Player", "Team", "Pos")]<-sapply(FFTODAY[, !colnames(FFTODAY)%in% c("Player", "Team", "Pos")], function(x) as.numeric(gsub("[,]","", x)))
+FFTODAY$Bye<-NULL
+FFTODAY[is.na(FFTODAY)]<-0
+hist(FFTODAY$fantPts)
+table(FFTODAY$Pos)
 
-save(list=c("FDATA_SEASONAL", "FFANALYTICS"), file="Player Data/Projection Data.RData")
+save(list=c("FDATA_SEASONAL", "FFANALYTICS", "FFTODAY"), file="Player Data/Projection Data.RData")
 
-
+# load("Player Data/Projection Data.RData")
 
 
 
 ###SCRAPE DRAFT DATA####
 
+##misc data##
+year<-2018
+
+readROTO<-function(year){
+  
+  if(year==2018){
+    
+    page<-read.csv(paste0("Rotoworld/",year ,".txt"), header = F, blank.lines.skip = T, sep = "\n")
+    page$Player<-sapply(strsplit(page[, 1], "\\("), `[[`, 1)
+    page$Player<-gsub("[^a-z A-Z]", "", page$Player)
+    page$Player<-coordName(page$Player)
+    page$Rank<-1:nrow(page)
+    
+  }else if(year!=2018){
+    
+    page<-read.csv(paste0("Rotoworld/",year ,"_PPR.txt"), header = F, blank.lines.skip = T, sep = "\n")
+    page$Player<-sapply(strsplit(page[, 1], "\\(|--"), `[[`, 1)
+    page$Player<-gsub("[^a-z A-Z]", "", page$Player)
+    page$Player<-coordName(page$Player)
+    page$Rank_PPR<-1:nrow(page)
+    
+    page2<-read.csv(paste0("Rotoworld/",year ,"_STD.txt"), header = F, blank.lines.skip = T, sep = "\n")
+    page2$Player<-sapply(strsplit(page2[, 1], "\\(|--"), `[[`, 1)
+    page2$Player<-gsub("[^a-z A-Z]", "", page2$Player)
+    page2$Player<-coordName(page2$Player)
+    page2$Rank_STD<-1:nrow(page2)
+    page<-merge(page, page2, by="Player", all=T)
+    page$Rank<-rowMeans(page[, c("Rank_PPR", "Rank_STD")], na.rm=T)
+  }
+  
+  page$Year<-year
+  page[,c("Player","Rank", "Year")]
+  
+}
+rotoworld<-ldply(lapply(c(2014, 2016:2018), readROTO), data.frame)
+
+
+
+##fantasypros data###
 getProj<-function(pos, scoring="HALF"){
   print(pos)
   page<-read_html(paste(c("https://www.fantasypros.com/nfl/projections/",tolower(pos), ".php?scoring=", scoring,"&week=draft"), collapse=""))
@@ -589,6 +1427,11 @@ colnames(std)[colnames(std)=="FPTS"]<-"STD"
 
 readffcalc<-function(year, scoring="standard"){
   url<-paste(c("https://fantasyfootballcalculator.com/adp?format=", scoring, "&year=", year,"&teams=12&view=graph&pos=all"), sep="", collapse="")
+  if(year==2018){
+    
+    url<-paste(c("https://fantasyfootballcalculator.com/adp?format=half-ppr", "&year=", year,"&teams=12&view=graph&pos=all"), sep="", collapse="")
+    
+  }
   page<-read_html(url)
   stats<-page%>%html_table(fill=T)
   stats<-stats[[1]]
@@ -601,43 +1444,30 @@ readffcalc<-function(year, scoring="standard"){
   }
   stats<-stats[, !grepl("High|Low|TimesDrafted|Graph|Rk|Round|Bye", colnames(stats))]
   stats$Year<-year
+  colnames(stats)[colnames(stats)%in% c("ADP","ADPSD")]<-paste(c("ADP", "ADPSD"), gsub("andar", "", scoring), sep="_")
   stats
 }
-ffcalc_ppr<-ldply(lapply(2015:2018, function(x) readffcalc(x, scoring="ppr")), data.frame)
-ffcalc<-ldply(lapply(2015:2018, readffcalc), data.frame)
+ffcalc_ppr<-ldply(lapply(2010:2018, function(x) readffcalc(x, scoring="ppr")), data.frame)
+ffcalc<-ldply(lapply(2007:2018, readffcalc), data.frame)
 
-ffcalc$Player<-coordName(ffcalc$Player)
-ffcalc_ppr$Player<-coordName(ffcalc_ppr$Player)
+ffcalc<-merge(ffcalc, ffcalc_ppr, by=c("Player", "Pos","Team", "Year"), all=T)
 ffcalc$Pos[ffcalc$Pos=="PK"]<-"K"
-ffcalc_ppr$Pos[ffcalc_ppr$Pos=="PK"]<-"K"
-ffcalc_ppr<-ffcalc_ppr[!duplicated(ffcalc_ppr[, c("Player", "Year")]), ]
-ffcalc<-ffcalc[!duplicated(ffcalc[, c("Player", "Year")]), ]
+ffcalc$Pos[ffcalc$Pos=="DEF"]<-"DST"
+ffcalc$Player<-coordName(ffcalc$Player)
 
-colnames(ffcalc_ppr)[colnames(ffcalc_ppr)%in% c("ADP", "ADPSD")]<-c("ADP2", "ADPSD2")
-ffcalc<-merge(ffcalc, ffcalc_ppr, by=c("Player", "Year", "Team", "Pos"), all=T)
-
-ffcalc$ADP_est<-rowMeans(ffcalc[, c("ADP", "ADP2")], na.rm=T)
-ffcalc$ADPSD_est<-rowMeans(ffcalc[, c("ADPSD", "ADPSD2")], na.rm=T)
-plot(ffcalc$ADPSD_est~ffcalc$ADP_est)
-ffcalc<-ffcalc[order(ffcalc$Year, ffcalc$ADP_est, decreasing = F), ]
-ffcalc[ffcalc$Year==2018,][1:20,]
+ffcalc$ADP_half<-rowMeans(ffcalc[, c("ADP_std", "ADP_ppr")], na.rm=T)
+ffcalc$ADPSD_half<-rowMeans(ffcalc[, c("ADPSD_std", "ADPSD_ppr")], na.rm=T)
+ffcalc[ffcalc$Year==2007, grepl("SD", colnames(ffcalc))]<-NA
+plot(ffcalc$ADPSD_half~ffcalc$ADP_half)
+ffcalc$ADPSD_half[ffcalc$ADPSD_half>30]<-30
+ffcalc<-ffcalc[order(ffcalc$Year, ffcalc$ADP_half, decreasing = F), ]
+ffcalc[ffcalc$Year==2007,][1:30,]
 
 
 #load adp
 # https://www.fantasypros.com/nfl/adp/ppr-overall.php
 
-adp_alt<-read_html("https://www.fantasypros.com/nfl/adp/overall.php")
-names<-adp_alt%>% html_nodes("#data .player-name")%>% html_text()
-adp_alt<- html_table(adp_alt)[[1]]
-adp_alt<-adp_alt[!is.na(adp_alt$Rank),]
-adp_alt$Player<-names[1:nrow(adp_alt)]
-adp_alt$Player<-gsub(" DST", "", adp_alt$Player)
-adp_alt<-adp_alt[, c("Player", "AVG")]
-colnames(adp_alt)<-c("Player","ADP")
-adp_alt$ADP<-as.numeric(adp_alt$ADP)
-adp_alt$Player<-coordName(adp_alt$Player)
 
-ffcalc$Player<-coordName(ffcalc$Player)
 projections$Player<-coordName(projections$Player)
 ppr$Player<-coordName(ppr$Player)
 std$Player<-coordName(std$Player)
@@ -650,5 +1480,10 @@ table(std$Pos)
 
 ffpros<-Reduce(function(x, y) merge(x, y, all=TRUE, by=c("Player", "Pos")), list(projections, ppr, std))
 
+ffcalc[, c("Team", "Player")]<-sapply(ffcalc[, c("Team", "Player")], coordName)
 
-save(list=c("ffcalc", "ffpros"), file="Player Data/Draft Data.RData")
+
+save(list=c("ffcalc", "ffpros", "rotoworld"), file="Player Data/Draft Data.RData")
+
+
+#load("Player Data/Draft Data.RData")

@@ -7,9 +7,11 @@ library(rvest)
 library(ggplot2)
 library(data.table)
 library(XML)
+library(lubridate)
 library(lpSolve)
 library(zoo)
 library(MASS)
+library(stringi)
 options(stringsAsFactors = F, scipen =999)
 
 simpleCap <- function(x) {
@@ -23,6 +25,9 @@ abbrev<-read.csv("Misc Data/Abbrev.txt", sep="\t", header=TRUE, row.names = NULL
 abbrev$Abbrev2<-unlist(lapply(strsplit(abbrev$FullName, " "), function(x) paste(x[-length(x)], collapse=" ")))
 abbrev$Abbrev2[abbrev$Abbrev=="NYJ"]<-"N.Y. Jets"
 abbrev$Abbrev2[abbrev$Abbrev=="NYG"]<-"N.Y. Giants"
+abbrev$Abbrev<-sapply(abbrev$Abbrev, simpleCap)
+abbrev$Abbrev[abbrev$Abbrev%in% c("Gb", "Kc", "La", "Ne", "No", "Sd","Sf", "Tb")]<-
+  c("Gnb", "Kan", "Lar", "Nwe", "Nor", "Sdg", "Sfo", "Tam")
 abbrev$Abbrev3<-tolower(abbrev$Abbrev)
 abbrev$Abbrev3[abbrev$Abbrev3=="ari"]<-"crd"
 abbrev$Abbrev3[abbrev$Abbrev3=="bal"]<-"rav"
@@ -30,10 +35,9 @@ abbrev$Abbrev3[abbrev$Abbrev3=="hou"]<-"htx"
 abbrev$Abbrev3[abbrev$Abbrev3=="ind"]<-"clt"
 abbrev$Abbrev3[abbrev$Abbrev3=="oak"]<-"rai"
 abbrev$Abbrev3[abbrev$Abbrev3=="ten"]<-"oti"
-abbrev$Abbrev3[abbrev$Abbrev3=="stl"|abbrev$Abbrev3=="lar"]<-"ram"
-abbrev$Abbrev<-sapply(abbrev$Abbrev, simpleCap)
-abbrev$Abbrev[abbrev$Abbrev%in% c("Gb", "Kc", "La", "Ne", "No", "Sd","Sf", "Tb")]<-
-  c("Gnb", "Kan", "Lar", "Nwe", "Nor", "Sdg", "Sfo", "Tam")
+abbrev$Abbrev3[abbrev$Abbrev3=="stl"|abbrev$Abbrev3=="lar"|abbrev$Abbrev3=="la"]<-"ram"
+
+
 
 #https://stackoverflow.com/questions/20495598/replace-accented-characters-in-r-with-non-accented-counterpart-utf-8-encoding
 
@@ -41,12 +45,18 @@ unwanted_array <- list(    'Š'='S', 'š'='s', 'Ž'='Z', 'ž'='z', 'À'='A', 'Á
                            'Ê'='E', 'Ë'='E', 'Ì'='I', 'Í'='I', 'Î'='I', 'Ï'='I', 'Ñ'='N', 'Ò'='O', 'Ó'='O', 'Ô'='O', 'Õ'='O', 'Ö'='O', 'Ø'='O', 'Ù'='U',
                            'Ú'='U', 'Û'='U', 'Ü'='U', 'Ý'='Y', 'Þ'='B', 'ß'='Ss', 'à'='a', 'á'='a', 'â'='a', 'ã'='a', 'ä'='a', 'å'='a', 'æ'='a', 'ç'='c',
                            'è'='e', 'é'='e', 'ê'='e', 'ë'='e', 'ì'='i', 'í'='i', 'î'='i', 'ï'='i', 'ð'='o', 'ñ'='n', 'ò'='o', 'ó'='o', 'ô'='o', 'õ'='o',
-                           'ö'='o', 'ø'='o', 'ù'='u', 'ú'='u', 'û'='u', 'ý'='y', 'ý'='y', 'é'='e')
+                           'ö'='o', 'ø'='o', 'ù'='u', 'ú'='u', 'û'='u', 'ý'='y', 'ý'='y', 'é'='e', '«'='' )
 
 coordName<-function(x) {
   x<-chartr(paste(names(unwanted_array), collapse=''),
             paste(unwanted_array, collapse=''),
             x)
+  
+  x[x%in% abbrev$Abbrev]<-abbrev$Abbrev[match(x[x%in% abbrev$Abbrev], abbrev$Abbrev)]
+  x[x%in% abbrev$Abbrev2]<-abbrev$Abbrev[match(x[x%in% abbrev$Abbrev2], abbrev$Abbrev2)]
+  x[x%in% abbrev$Abbrev3]<-abbrev$Abbrev[match(x[x%in% abbrev$Abbrev3], abbrev$Abbrev3)]
+  x[x%in% abbrev$FullName]<-abbrev$Abbrev[match(x[x%in% abbrev$FullName], abbrev$FullName)]
+  
   x<-gsub("^\\s+|\\s+$", "", x)
   x<-gsub(" Jr.| Sr.","",x)
   x<-gsub("*|+|`", "",x)
@@ -61,12 +71,20 @@ coordName<-function(x) {
   x<-gsub("-", " ", x)
   x<-gsub("  ", " ", x)
   
-  x<-gsub("JuJu", "Juju", x)
-  x<-gsub("Zac |Zack |Zachary |Zackary ", "Zach ", x)
-  x<-gsub("ArDarius", "Ardarius", x)
-  x<-gsub("Johnathan |Jon |John ", "Jonathan ", x)
+  x<-gsub("R J ", "RJ ", x)
+  x<-gsub("D J ", "DJ ", x)
+  x<-gsub("E J ", "EJ ", x)
+  x<-gsub("T J ", "TJ ", x)
+  x<-gsub("D J ", "DJ ", x)
+  
+  
   x<-gsub("De'Andre", "DeAndre", x)
   x<-gsub("Le'Ron", "LeRon", x)
+  
+  
+  x<-sapply(x,simpleCap)
+  x<-gsub("Zac |Zack |Zachary |Zackary ", "Zach ", x)
+  x<-gsub("Johnathan |Jon |John ", "Jonathan ", x)
   x<-gsub("Christopher ", "Chris ", x)
   x<-gsub("Billy ", "Bill ", x)
   x<-gsub("Deshone", "DeShone", x)
@@ -86,7 +104,7 @@ coordName<-function(x) {
   x<-gsub("Johnnie Lee ", "Johnnielee ", x)
   x<-gsub("Josh ", "Joshua ", x)
   x<-gsub("Rich ", "Richard ", x)
-  x<-gsub("Mike ", "Michael ", x)
+  x<-gsub("Mike |mike ", "Michael ", x)
   x<-gsub("Rob ", "Robert ", x)
   x<-gsub("Samuel ", "Sam ", x)
   x<-gsub("Nicholas |Nicolas |Nic ", "Nick ", x)
@@ -138,7 +156,25 @@ coordName<-function(x) {
   x[x==  "Michael A Jones"]<-"Michael Jones"
   x[x==  "T Marcus Spriggs"]<-"Marcus Spriggs"
   x[x==  "Tyrone M Williams"]<-"Tyrone Williams"
-  
+  x[x=="Eman Sanders"]<-"Emmanuel Sanders"
+  x[x=="Bishop Stankey"]<-"Bishop Sankey"
+  x[x=="Jarret Boykin"]<-"Jarrett Boykin"
+  x[x=="Kadem Carrey"]<-"Kadeem Carey"
+  x[x=="Brendan Lefell"]<-"Brandon Lafell"
+  x[x=="Ezekial Ansah"]<-"Ezekiel Ansah"
+  x[x=="Jarius Byrd"]<-"Jairus Byrd"
+  x[x=="Devis Harris"]<-"David Harris"
+  x[x=="Ryan Matthews"]<-"Ryan Mathews"
+  x[x=="Levonte David"]<-"Lavonte David"
+  x[x=="Gio Bernard"]<-"Giovani Bernard"
+  x[x=="Steven Haushka"]<-"Steven Hauschka"
+  x[x=="Cordarelle Patterson"]<-"Cordarrelle Patterson"
+  x[x=="Luke Kueckly"]<-"Luke Kuechly"
+  x[x=="Paul Worrliow"]<-"Paul Worrilow"
+  x[x=="Micheal Floyd"]<-"Michael Floyd"
+  x[x=="Odell Beckam"]<-"Odell Beckham"
+  x[x=="Kennan Allen"]<-"Keenan Allen"
+  x[x=="Ryan Tannehil"]<-"Ryan Tannehill"
   
   
   x[x==  "Greg K Jones"]<-"Greg Jones"
@@ -211,12 +247,12 @@ coordName<-function(x) {
   x[x==   "Pacman Jones"]<- "Adam Jones"
   x[x==   "Broderick Bunkley"]<- "Brodrick Bunkley"
   x[x== "Evan Dietrich-Smith"  ]<-"Evan Smith" 
-  x[x==  "Chris Simms" ]<- "Matt Simms"  
   x[x=="Philly Brown"  ]<-"Corey Brown"  
   x[x=="Zachdiles"  ]<-"Zach Diles"  
   
-  x<-sapply(x,simpleCap)
   
+  x[x=="Laurinaitis"]<-"James Laurinaitis"
+  x[x=="Bradshaw"]<-"Ahmad Bradshaw"
   x[x==  "Samajae Perine"]<-"Samaje Perine"
   x[x==  "Phillip Rivers"]<-"Philip Rivers"
   x[x==  "Tedd Ginn"]<-"Ted Ginn"
@@ -239,8 +275,8 @@ coordName<-function(x) {
   x[x==  "Jay Ajayii"]<-"Jay Ajayi"
   x[x==  "Isiah Crowell"]<-"Isaiah Crowell"
   x[x==  "Bernard Mckinney"]<-"Benardrick Mckinney"
-  x[x==  "Paul Puz"|x=="Paul Posluzsny"]<-"Paul Posluszny"
-  x[x==  "Lagarette Blount"]<-"Legarrette Blount"
+  x[x==  "Paul Puz"|x=="Paul Posluzsny"|x=="Paul Posluzny"]<-"Paul Posluszny"
+  x[x==  "Lagarette Blount"|x=="Legarette Blount"]<-"Legarrette Blount"
   x[x==  "Erik Decker"]<-"Eric Decker"
   x[x==  "Bilall Powell"]<-"Bilal Powell"
   x[x==  "Jedeveon Clowdney"|grepl("eon Clowney", x)]<-"Jadeveon Clowney"
@@ -251,6 +287,7 @@ coordName<-function(x) {
   x[x==  "Darren Mccfadden"]<-"Darren Mcfadden"
   x[x==  "James Laurinatis"]<-"James Laurinaitis"
   x[x==  "Gore"]<-"Frank Gore"
+  x[x==  "Russel Wilson"]<-"Russell Wilson"
   x[x==  "Everson Griffin"]<-"Everson Griffen"
   x[x==  "Buck Allen"]<-"Javorius Allen"
   x[x==  "Reuben Randle"]<-"Rueben Randle"
@@ -261,7 +298,62 @@ coordName<-function(x) {
   x[x==  "Larry Donnel"]<-"Larry Donnell"
   x[x==  "Martellus Bennet"]<-"Martellus Bennett"
   x[x==  "Daniel Herron"]<-"Dan Herron"
+  x[x==  "Juju Smithschuster"]<-"Juju Smith Schuster"
+  x[x==  "Maurice Jonesdrew"]<-"Maurice Jones Drew"
+  x[x==  "Steve Smith Sr"]<-"Steve Smith"
+  x[x==  "Austin Seferianjenkins"]<-"Austin Seferian Jenkins"
+  x[x==  "Jermain Kearse"]<-"Jermaine Kearse"
   
+  x[endsWith( x," Sr")]<-gsub(" Sr", "", x[endsWith( x," Sr")])
+  
+  #madden data has lots of erors
+  x[x=='Carnell Williams']<-"Cadillac Williams"
+  x[x=='Benjamin Roethlisbergr']<-"Benjamin Roethlisberger"
+  x[x=='Maurice Drew Jones']<-"Maurice Jones Drew"
+  x[x=='Domanick Davis']<-"Domanick Williams"
+  x[x=='Tj Houshmandz']<-"Tj Houshmandzadeh"
+  x[x=='Chris Wells']<-"Tj Houshmandzadeh"
+  x[x%in% c("London Fletcher Baker", "Londom Fletcher")]<-"London Fletcher"
+  x[x=="Chis Long"]<-"Chris Long"
+  x[x=='Arenas Williams']<-"Aeneas Williams"
+  x[x=='Roosevelt Colvin']<-"Rosevelt Colvin"
+  x[x=='Antonie Winfield']<-"Antoine Winfield"
+  x[x=='Aquib Talib']<-"Aqib Talib"
+  x[x=='Michael Barrow']<-"Micheal Barrow"
+  x[x=='Freddie Keiaho']<-"Freddy Keiaho"
+  x[x=='Lethon Flowers']<-"Lee Flowers"
+  x[x=='Marcus Polland']<-"Marcus Pollard"
+  x[x=='Andry Goodman']<-"Andre Goodman"
+  x[x=='Al Singleton']<-"Alshermond Singleton"
+  x[x=='Kimo Voelhoffen']<-"Kimo Von Oelhoffen"
+  x[x=='Johnny Morton']<-"Johnnie Morton"
+  x[x=='Greg White'|x=="Stylez White"]<-"Stylez G White"
+  x[x=='Ndukwe Kalu']<-"Nd Kalu"
+  x[x=='Ryan Lindell']<-"Rian Lindell"
+  x[x=='Benard Pollard']<-"Bernard Pollard"
+  x[x=='Amos Zereque']<-"Amos Zereoue"
+  x[x=='Ryan Lindell']<-"Rian Lindell"
+  x[x=='Donovan Darius']<-"Donovin Darius"
+  x[x=='Willie Green']<-"Will Green"
+  x[x=='Daymeion Hughes']<-"Dante Hughes"
+  x[x=='Gregory Toler']<-"Greg Toler"
+  x[x=='Darney Scott']<-"Darnay Scott"
+  x[x=='Chris Fuamatu Mafala']<-"Chris Fuamatu Maafala"
+  x[x=='Demetrius Bell']<-"Demetress Bell"
+  x[x=='Matthew Mcbriar'|x=='Matt Mcbriar']<-"Mat Mcbriar"
+  x[x=='Willie Henderson']<-"Will Henderson"
+  x[x=='Vonte Leach']<-"Vonta Leach"
+  x[x=='Phillip Wheeler']<-"Philip Wheeler"
+  x[x=='Siitupe Peko']<-"Tupe Peko"
+  x[x=='Chris Fuamatu Ma']<-"Chris Fuamatu Maafala"
+  x[x=='Greg R Randall']<-"Greg Randall"
+  x[x=='Barrett Robbins']<-"Barret Robbins"
+  x[x=='Greg R Randall']<-"Greg Randall"
+  x[x=='Owin Schmitt']<-"Owen Schmitt"
+  x[x=='Jermaine Mayberry']<-"Jermane Mayberry"
+  x[x=='Greg R Randall']<-"Greg Randall"
+  x[x=='Clifton Ryan']<-"Cliff Ryan"
+  x[x=='Marvin Smith']<-"Marvel Smith"
   
   
   x[x=="Ne"]<-"NWE"
@@ -269,12 +361,14 @@ coordName<-function(x) {
   x[x=="Ne"| grepl("Patriots", x)]<-"NWE"
   x[x=="Kc"| grepl("Chiefs", x)]<-"KAN"
   x[x=="Gb" | grepl("Packers", x)]<-"GNB"
-  x[x=="Sd"| x=="Lac"|x=="LAC"| grepl("Chargers", x)]<-"SDG"
+  x[x=="Sd"| x=="Lac"|x=="LAC"| grepl("Chargers", x)| (grepl("ngeles", x)& grepl("LAC|lac|Lac", x))]<-"SDG"
   x[x=="No" |grepl("Saints",x)]<-"NOR"
   x[x=="Tb" | grepl("Buccaneers", x)]<-"TAM"
-  x[x=="Sf"| grepl("49ers", x)]<-"SFO"
-  x[x=="La"|grepl("Rams|Stl|St. Louis|St Louis", x)]<-"LAR"
-  x[x=="Jac"]<-"JAX"
+  x[x=="Sf"| grepl("49ers", x)| grepl("San Francisco", x)]<-"SFO"
+  x[x=="La"]<-"LAR"
+  x[x%in% c("Rams", "St Louis", "Stl Rams", "Saint Louis Rams", "St Louis Rams", "La Rams", "Los Angeles Rams", "STL", "Stl")| 
+      (grepl("ngeles", x)& grepl("lar|Lar|LAR", x))]<-"Lar"
+  x[x=="Jac"|x=="Jacksonville Jagaurs"]<-"JAX"
   x[grepl("Cardinals", x)]<-"ARI"
   x[grepl("Falcons", x)]<-"ATL"
   x[grepl("Ravens", x)]<-"BAL"
@@ -292,19 +386,21 @@ coordName<-function(x) {
   x[grepl("Jaguars", x)| x=="JAC"]<-"JAX"
   x[grepl("Dolphins", x)]<-"MIA"
   x[grepl("Vikings", x)]<-"MIN"
-  x[grepl("Giants", x)]<-"NYG"
-  x[grepl("Jets", x)]<-"NYJ"
+  x[grepl("Giants", x)| grepl("Nyg", x)| grepl("nyg", x)]<-"NYG"
+  x[grepl("Jets", x)| grepl("Nyj", x)| grepl("nyj", x)]<-"NYJ"
   x[grepl("Raiders", x)]<-"OAK"
   x[grepl("Panthers", x)]<-"CAR"
   x[grepl("Eagles", x)]<-"PHI"
   x[grepl("Steelers", x)]<-"PIT"
   x[grepl("Seahawks", x)]<-"SEA"
   x[grepl("Titans", x)]<-"TEN"
-  x[grepl("Redskins", x)]<-"WAS"
+  x[grepl("Redskins", x)|x=='wsh'|x=="Wsh"]<-"WAS"
   x[x%in% c("Arz", "ARZ")]<-"Ari"
+  
+  x[x%in% abbrev$Abbrev]<-abbrev$Abbrev[match(x[x%in% abbrev$Abbrev], abbrev$Abbrev)]
   x[x%in% abbrev$Abbrev2]<-abbrev$Abbrev[match(x[x%in% abbrev$Abbrev2], abbrev$Abbrev2)]
   x[x%in% abbrev$Abbrev3]<-abbrev$Abbrev[match(x[x%in% abbrev$Abbrev3], abbrev$Abbrev3)]
-  x[x%in% abbrev$FullName]<-abbrev$Abbrev[match(x[x%in% abbrev$Abbrev3], abbrev$FullName)]
+  x[x%in% abbrev$FullName]<-abbrev$Abbrev[match(x[x%in% abbrev$FullName], abbrev$FullName)]
   
   x<-sapply(x,simpleCap)
   x
@@ -645,7 +741,7 @@ makeParamPlot<-function(Parameters=c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (default)", "
                                      "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" ),
                         Title="Simulation Results for Different Draft Parameters"){
   Sims<-list(simScores,simScores2, simScores3, simScores4, simScores5,
-             simScores6, simScores7, simScores8, simScores9, simScores10, simScores11) %>% unlist(recursive = T)
+             simScores6, simScores7, simScores8, simScores9, simScores10, simScores11, simScores12)[1:length(Parameters)] %>% unlist(recursive = T)
   
   
   Sims<-data.frame(Sim=Sims, Parameter=rep(as.character(Parameters), each=25000))

@@ -14,53 +14,58 @@ options(stringsAsFactors = F, scipen =999)
 source('functions.R', encoding = 'UTF-8')
 
 
+# year<-2017
 
 #ORGANIZE ADPS AND PROJECTIONS####
 
 
 load("Player Data/Draft Data.RData")
 
-adp<-merge(ffcalc[ffcalc$Year==2018, c("Player", "ADP_est", "ADPSD_est")], ffpros, by=c("Player"), all=T)
+adp<-merge(ffcalc[ffcalc$Year==year, c("Player", "ADP_half", "ADPSD_half")], ffpros, by=c("Player"), all.x=T)
 
 adp$Pos[adp$Player%in%c("Chris Thompson", "Jd Mckissic", "Byron Marshall")& adp$Pos=="WR;RB"]<-"RB"
 adp$Pos[adp$Player%in%c("Ryan Hewitt")]<-"TE"
 adp$Pos[adp$Player%in%c("Tavon Austin")]<-"WR"
 
-adp<-adp[order(adp$ADP_est, decreasing = F),]
+adp<-adp[order(adp$ADP_half, decreasing = F),]
 
-adp$ADP_Rank[!is.na(adp$ADP_est)]<-rank(adp$ADP_est[!is.na(adp$ADP_est)])
+adp$ADP_Rank[!is.na(adp$ADP_half)]<-rank(adp$ADP_half[!is.na(adp$ADP_half)])
 adp$ADP_Rank[is.na(adp$ADP_Rank)]<-500 #undrafted
 
 adp[, c("HALF", "PPR","STD")][is.na(adp[, c("HALF", "PPR","STD")])]<-0 #no projection
 
-
 customProj<-function(type="STD"){
-  proj<-read.csv(paste(c("Projections_", type,".csv" ), collapse=""))
-  proj<-proj[proj$Season==2018& proj$Player%in% adp$Player, c("Player","PosFFA", "Season", "Team", "fantPts_agg")]
+  proj<-read.csv(paste(c("Player Data/Projections_", type,".csv" ), collapse=""))
+  colnames(proj)[colnames(proj)=="DepthTeam"]<-"Team"
+  proj<-proj[proj$Season%in%year, c("Player","PosFFA", "Season", "Team", "fantPts_agg", "fantPts")]
   colnames(proj)[colnames(proj)=="fantPts_agg"]<-type
+  colnames(proj)[colnames(proj)=="fantPts"]<-paste0(type, "_actual")
   colnames(proj)[colnames(proj)=="PosFFA"]<-"Pos"
   proj$Pos<-ifelse(grepl("LB", proj$Pos), "LB",
                    ifelse(grepl("DT|DL|DE|NT", proj$Pos)| proj$Pos%in% "T", "DL", 
                           ifelse(grepl("SS|FS|DB|CB", proj$Pos)| proj$Pos%in% "S", "DB", proj$Pos)))
   proj$Pos[grepl("FB", proj$Pos)]<-"RB"
   proj$Pos<-gsub("[/]", ";", proj$Pos)
-  proj<-proj[, c("Player","Pos", "Team",type)]
+  proj<-proj[, c("Player","Pos", "Team",type, paste0(type, "_actual"))]
   proj
 }
-projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "STD", "PPR", "CUSTOM"), customProj))
+
+projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "CUSTOM"), customProj))
 projections<-projections[!projections$Pos%in% c("LB", "DL", "DB"),, ]
-projections<-projections[order(projections$STD,decreasing = T), ]
+projections<-projections[order(projections$HALF,decreasing = T), ]
 projections<-projections[!duplicated(projections$Player), ]
 
-adp<-merge(adp, projections[, c("Player", "HALF", "STD", "PPR", "CUSTOM")], by=c("Player"), all.x=T)
+adp<-merge(adp, projections[, colnames(projections)%in% c("Player", "Pos", "HALF", "STD", "PPR", "CUSTOM")], by=c("Player"), all=T)
 adp$HALF<-ifelse(is.na(adp$HALF.y), adp$HALF.x, adp$HALF.y)
-adp$STD<-ifelse(is.na(adp$STD.y), adp$STD.x, adp$STD.y)
-adp$PPR<-ifelse(is.na(adp$PPR.y), adp$PPR.x, adp$PPR.y)
+adp$Pos<-ifelse(is.na(adp$Pos.x), adp$Pos.y, adp$Pos.x)
 adp<-adp[, !grepl("[.]", colnames(adp))]
-adp<-adp[order(adp$ADP_est, decreasing = F),]
-
+adp<-adp[order(adp$ADP_half, decreasing = F),]
+adp<-adp[!grepl(";", adp$Pos)& !adp$Pos=="",]
+adp<-adp[!is.na(adp$Player),]
 adp[duplicated(adp$Player), ] #check if duplicates--if so will need to change getTopLineup() in simseason.R
 head(adp, 15)
+
+
 
 
 ####OPTIMIZATION FUNCTIONS#####
@@ -206,11 +211,14 @@ getPickDF<-function(slot="Slot4", numPicks=15, numTeams=12, customPicks=c()){
   pickDF
 }
 simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST=1,  numFLEX=0, shift=0, numTeams=12,scoring="HALF",
-                   out=c(), outPos=c(),  onePos=c(), optmode="lpsolve", customPicks=c()){
+                   out=c(), outPos=c(),  onePos=c(), optmode="lpsolve", customPicks=c(), customADP=F){
   
   # slot<-"Slot4";numRB<-4;numWR<-5;numTE<-1;numQB<-2;numK<-1;numFLEX<-1;numDST<-1;out<-c();fix<-c();customPicks<-c();scoring<-"HALF";numTeams<-12;shift<-0;outPos<-c();onePos<-c();optmode<-"lpsolve"
   
-  adp$ADP_sim[!is.na(adp$ADP_est)]<-rnorm(sum(!is.na(adp$ADP_est)), mean = adp$ADP_est[!is.na(adp$ADP_est)], sd=adp[!is.na(adp$ADP_est), "ADPSD_est"])
+  adp$ADP_sim[!is.na(adp$ADP_half)]<-rnorm(sum(!is.na(adp$ADP_half)), mean = adp$ADP_half[!is.na(adp$ADP_half)], sd=adp[!is.na(adp$ADP_half), "ADPSD_half"])
+  if(customADP){
+    adp$ADP_sim<-adp$customADP
+  }
   adp$ADP_sim[is.na(adp$ADP_sim)]<-500
   # shift<-0;outPos<-c();onePos<-c();out<-c();optmode<-"lpsolve"
   
@@ -225,8 +233,11 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
     if(pickNum==1){
       numPlayers<-pickDF[pickNum, slot]-1 #number of players to sim
       alreadyChosen<-c()
-    } else{
+    } else if(customADP==F){
       numPlayers<-pickDF[pickNum, slot]-pickDF[pickNum-1, slot]-1 #number of players to sim
+    } else{
+      numPlayers<-pickDF[pickNum, slot]-pickDF[pickNum-1, slot] #number of players to sim
+      
     }
     
     #get next-players chosen from adp-simulation
@@ -237,6 +248,7 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
       players<-c()
     }
     alreadyChosen<-c(alreadyChosen, players) %>% unique()
+    alreadyChosen<-alreadyChosen[!is.na(alreadyChosen)]
     fix<-storePick$Player[!is.na(storePick$Player)]
     
     # head(adp[!adp$Player%in% c(alreadyChosen, storePick$Player),])
@@ -251,9 +263,12 @@ simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST
   storePick
 }
 
+source("simulate season sampled errors.R")
 
 #simDraft() simulations draft w. specified strategy. 
 #strategy parameters include: # of players per position, shift (how conservate to plan future picks, default=1), whether to wait on certain positions
 
-source("simulate season sampled errors.R")
-
+adp$fantPts_bin<-as.character(cut(adp[, scoring], breaks=c(-50, 25, 75, 125, 175, 225, 400)))
+adp<-merge(adp[, !grepl("meanError", colnames(adp))], errors[, c("meanError", "fantPts_bin", "Pos")], by=c("fantPts_bin", "Pos"))
+adp[, scoring]<-adp[, scoring]+adp$meanError
+adp<-adp[order(adp$ADP_half, decreasing = F),]

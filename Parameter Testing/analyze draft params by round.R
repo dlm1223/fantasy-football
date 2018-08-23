@@ -27,7 +27,8 @@ scoring<-"HALF"
 
 # bysim[20000]
 # 
-# quantile(unlist(simScores[sapply(drafts, function(x) sum(x$Player[1:4]=="Demaryius Thomas")==1)]))
+quantile(unlist(simScores[sapply(drafts5, function(x) sum(x$Player[1:2]=="Robert Gronkowski")==0)]))
+quantile(unlist(simScores[sapply(drafts5, function(x) sum(x$Pos[2]=="WR")==0)]))
 # median(sapply(drafts[sapply(drafts, function(x) "QB"%in% x$Pos[1:6])], function(x) sum(x$HALF)))
 # table(sapply(drafts2, function(x) sum(x$Pos[1:8]=="QB")))
 # hist(unlist(simScores))
@@ -100,7 +101,7 @@ simScores11<-foreach(x=drafts11, .packages = c("data.table", "dplyr", "plyr"))%d
   replicate(numSims, simSeason(x, scoring=scoring)) }
 
 quantile(unlist(simScores))
-freqs<-as.data.frame.matrix(table(unlist(lapply(drafts, function(x) x$Player)), unlist(lapply(drafts, function(x) 1:nrow(x)))))
+freqs<-as.data.frame.matrix(table(unlist(lapply(drafts8, function(x) x$Player)), unlist(lapply(drafts8, function(x) 1:nrow(x)))))
 freqs[ order(freqs[,1], freqs[, 2], freqs[,3], freqs[, 4], freqs[, 5], freqs[, 5], freqs[, 5], freqs[, 6], freqs[, 7], freqs[, 8], decreasing = T),]
 
 

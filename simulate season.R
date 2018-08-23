@@ -2,7 +2,7 @@
 
 #ERROR ANALYSIS####
 
-projections<-read.csv(paste(c("Projections_HALF.csv" ), collapse=""))
+projections<-read.csv(paste(c("Player Data/Projections_HALF.csv" ), collapse=""))
 colnames(projections)[colnames(projections)=="PosFFA"]<-"Pos"
 projections$Pos<-ifelse(grepl("LB", projections$Pos), "LB",
                         ifelse(grepl("DT|DL|DE|NT", projections$Pos)| projections$Pos%in% "T", "DL", 
@@ -51,7 +51,7 @@ simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1,
   picks$Sim<-rnorm(nrow(picks), mean=picks[, scoring], sd=picks$ScoreSD)
   picks$Sim[picks$Sim<0]<-0
   
-  undrafted<-adp[is.na(adp$ADP_est)& !adp$Pos=='',]
+  undrafted<-adp[is.na(adp$ADP_half)& !adp$Pos=='',]
   undrafted$ScoreSD<-ifelse(undrafted$Pos%in% c("K"), 30,
                             ifelse(undrafted$Pos%in% c("DST"), 30,
                                    ifelse(grepl("WR" ,undrafted$Pos), 32.50+.15*undrafted[, scoring] , 

@@ -15,18 +15,18 @@ source('functions.R', encoding = 'UTF-8')
 
 load("Player Data/Draft Data.RData")
 
-# adp$ADP_sim<-rnorm(nrow(adp), mean = adp$ADP_est, sd=adp$ADPSD_est)
+# adp$ADP_sim<-rnorm(nrow(adp), mean = adp$ADP_half, sd=adp$ADPSD_half)
 
-adp<-adp[order(adp$ADP_est, decreasing = F),]
+adp<-adp[order(adp$ADP_half, decreasing = F),]
 
-adp$ADP_Rank[!is.na(adp$ADP_est)]<-rank(adp$ADP_est[!is.na(adp$ADP_est)])
+adp$ADP_Rank[!is.na(adp$ADP_half)]<-rank(adp$ADP_half[!is.na(adp$ADP_half)])
 adp$ADP_Rank[is.na(adp$ADP_Rank)]<-500 #undrafted
 
 adp[, c("HALF", "PPR","STD")][is.na(adp[, c("HALF", "PPR","STD")])]<-0 #no projection
 
 
 customProj<-function(type="STD"){
-  proj<-read.csv(paste(c("Projections_", type,".csv" ), collapse=""))
+  proj<-read.csv(paste(c("Player Data/Projections_", type,".csv" ), collapse=""))
   proj<-proj[proj$Season==2018& proj$Player%in% adp$Player, c("Player","PosFFA", "Season", "Team", "fantPts_agg")]
   colnames(proj)[colnames(proj)=="fantPts_agg"]<-type
   colnames(proj)[colnames(proj)=="PosFFA"]<-"Pos"
@@ -48,7 +48,7 @@ adp$HALF<-ifelse(is.na(adp$HALF.y), adp$HALF.x, adp$HALF.y)
 adp$STD<-ifelse(is.na(adp$STD.y), adp$STD.x, adp$STD.y)
 adp$PPR<-ifelse(is.na(adp$PPR.y), adp$PPR.x, adp$PPR.y)
 adp<-adp[, !grepl("[.]", colnames(adp))]
-adp<-adp[order(adp$ADP_est, decreasing = F),]
+adp<-adp[order(adp$ADP_half, decreasing = F),]
 
 adp[duplicated(adp$Player), ] #check if duplicates--if so will need to change getTopLineup() in simseason.R
 head(adp, 15)
@@ -133,7 +133,7 @@ getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, 
   
   picks<-adp[as.logical(result$x),]
   picks$Slot<-pickDF[, slot]
-  picks[,colnames(picks) %in% c( "Player", "ADP_est", "HALF", adpCol, "Pos",scoring, "Slot")]
+  picks[,colnames(picks) %in% c( "Player", "ADP_half", "HALF", adpCol, "Pos",scoring, "Slot")]
 }
 #shift means shift everyone's ADP to be x% earlier i.e. if someone''s adp is 100, need to take them at 80
 
@@ -155,7 +155,7 @@ source("simulate season sampled errors.R")
 adp$fantPts_bin<-as.character(cut(adp$HALF, breaks=c(-50, 25, 75, 125, 175, 225, 400)))
 adp<-merge(adp[, !grepl("meanError", colnames(adp))], errors[, c("meanError", "fantPts_bin", "Pos")], by=c("fantPts_bin", "Pos"))
 adp$HALF2<-adp$HALF+adp$meanError
-adp<-adp[order(adp$ADP_est, decreasing = F),]
+adp<-adp[order(adp$ADP_half, decreasing = F),]
 
 
 # picks<-getPicks(slot="Slot4", numRB=4, numWR =4,numFLEX=1,numQB=2,numTE=2,numDST=1,numK=1,
