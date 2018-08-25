@@ -1341,7 +1341,75 @@ FFTODAY[is.na(FFTODAY)]<-0
 hist(FFTODAY$fantPts)
 table(FFTODAY$Pos)
 
-save(list=c("FDATA_SEASONAL", "FFANALYTICS", "FFTODAY"), file="Player Data/Projection Data.RData")
+
+
+library(readxl)
+
+readIDP<-function(year){
+  if(year==2015){
+    file<-"IDP Guru/2015 IDP Redraft Projections_9.8.15.xlsx"
+  } else if (year==2016){
+    file<-"IDP Guru/2016 IDP Redraft Projections_9.7.16.xlsx"
+  } else if (year==2017){
+    file<-"IDP Guru/2017 IDP Redraft Projections_9.6.17.xlsx"
+  } else if (year==2018){
+    file<-"IDP Guru/2018 IDP Redraft Projections_8.21.18.xlsx"
+  }
+  getPos<-function(pos){
+    stats<-read_excel(file, sheet = pos) %>% data.frame()
+    stats$Pos<-pos
+    stats
+  }
+  stats<-ldply(lapply(c("DL", "DB", "LB"), getPos), data.frame)
+  stats$Year<-year
+  stats
+  
+}
+IDPGURU<-ldply(lapply(2015:2018, readIDP), data.frame)
+IDPGURU$Player<-paste(IDPGURU$First.Name, IDPGURU$Last.Name)
+IDPGURU<-IDPGURU[, !colnames(IDPGURU)%in% c("Total.Tackles", "Bye", "Player.Name", "First.Name", "Last.Name", "Projections.Rank", "Position", "Age", "Games")]
+IDPGURU$Team<-sapply(strsplit(IDPGURU$Team, "/"), `[[`,1)
+table(IDPGURU$Year)
+
+
+getIDP<-function(year){
+  if(year==2014){
+    link<-"http://web.archive.org/web/20140825162912/https://www.fantasypros.com/nfl/rankings/idp-cheatsheets.php"
+    stats<-link%>%read_html()%>% html_table(fill=T)
+    stats<-stats[[length(stats)]]
+  }else if(year==2015){
+    link<-"http://web.archive.org/web/20150826073507/https://www.fantasypros.com/nfl/rankings/idp-cheatsheets.php"
+    stats<-link%>%read_html()%>% html_table(fill=T)
+    stats<-stats[[length(stats)]]
+  }else if (year==2017){
+    link<-"http://web.archive.org/web/20170830083409/https://www.fantasypros.com/nfl/rankings/idp-cheatsheets.php"
+    stats<-link%>%read_html()%>% html_table(fill=T)
+    stats<-stats[[1]]
+  }else if(year==2018){
+    link<-"https://www.fantasypros.com/nfl/rankings/idp-cheatsheets.php"
+    stats<-link%>%read_html()%>% html_table(fill=T)
+    stats<-stats[[1]]
+    names<-link%>% read_html()%>% html_nodes(".full-name")%>% html_text()
+    
+  }
+  stats<-stats[, !colnames(stats)%in%'WSID'&  !is.na(colnames(stats))& !grepl("NA[.]", colnames(stats))]
+  colnames(stats)[2]<-"Player"
+  stats<-stats[!grepl("google", stats$Player)& !stats$Player==''& !grepl("nbsp", stats$Player),]
+  stats$Year<-year
+  if(year==2018){
+    stats$Player<-names
+  }
+  stats<-stats[, c("Rank", "Player", "Pos", "Year")]
+  stats
+}
+IDPFPRO<-ldply(lapply(c(2014:2015, 2017:2018), getIDP), data.frame)
+IDPFPRO$Player<-sapply(strsplit(IDPFPRO$Player, " "), function(x) paste(x[1], x[2], sep=" "))
+IDPFPRO$Player<-coordName(IDPFPRO$Player)
+IDPFPRO$Pos<-NULL
+IDPFPRO$Rank<-as.numeric(IDPFPRO$Rank)
+
+
+save(list=c("FDATA_SEASONAL", "FFANALYTICS", "FFTODAY", "IDPGURU", "IDPFPRO"), file="Player Data/Projection Data.RData")
 
 # load("Player Data/Projection Data.RData")
 
@@ -1463,6 +1531,7 @@ ffcalc$ADPSD_half[ffcalc$ADPSD_half>30]<-30
 ffcalc<-ffcalc[order(ffcalc$Year, ffcalc$ADP_half, decreasing = F), ]
 ffcalc[ffcalc$Year==2007,][1:30,]
 
+ffcalc[, c("Team", "Player")]<-sapply(ffcalc[, c("Team", "Player")], coordName)
 
 #load adp
 # https://www.fantasypros.com/nfl/adp/ppr-overall.php
@@ -1480,7 +1549,6 @@ table(std$Pos)
 
 ffpros<-Reduce(function(x, y) merge(x, y, all=TRUE, by=c("Player", "Pos")), list(projections, ppr, std))
 
-ffcalc[, c("Team", "Player")]<-sapply(ffcalc[, c("Team", "Player")], coordName)
 
 
 save(list=c("ffcalc", "ffpros", "rotoworld"), file="Player Data/Draft Data.RData")

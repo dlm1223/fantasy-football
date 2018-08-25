@@ -50,12 +50,12 @@ customProj<-function(type="STD"){
   proj
 }
 
-projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "CUSTOM"), customProj))
+projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "CUSTOM", "STD", "PPR"), customProj))
 projections<-projections[!projections$Pos%in% c("LB", "DL", "DB"),, ]
 projections<-projections[order(projections$HALF,decreasing = T), ]
 projections<-projections[!duplicated(projections$Player), ]
 
-adp<-merge(adp, projections[, colnames(projections)%in% c("Player", "Pos", "HALF", "STD", "PPR", "CUSTOM")], by=c("Player"), all=T)
+adp<-merge(adp, projections[, colnames(projections)%in% c("Player", "Pos", "HALF", scoring, paste0(scoring, "_actual"))], by=c("Player"), all=T)
 adp$HALF<-ifelse(is.na(adp$HALF.y), adp$HALF.x, adp$HALF.y)
 adp$Pos<-ifelse(is.na(adp$Pos.x), adp$Pos.y, adp$Pos.x)
 adp<-adp[, !grepl("[.]", colnames(adp))]
@@ -268,7 +268,7 @@ source("simulate season sampled errors.R")
 #simDraft() simulations draft w. specified strategy. 
 #strategy parameters include: # of players per position, shift (how conservate to plan future picks, default=1), whether to wait on certain positions
 
-adp$fantPts_bin<-as.character(cut(adp[, scoring], breaks=c(-50, 25, 75, 125, 175, 225, 400)))
+adp$fantPts_bin<-as.character(cut(adp[, scoring], breaks=error.breaks))
 adp<-merge(adp[, !grepl("meanError", colnames(adp))], errors[, c("meanError", "fantPts_bin", "Pos")], by=c("fantPts_bin", "Pos"))
 adp[, scoring]<-adp[, scoring]+adp$meanError
 adp<-adp[order(adp$ADP_half, decreasing = F),]

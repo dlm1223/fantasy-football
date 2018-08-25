@@ -1,8 +1,8 @@
 rm(list=ls())
 
-year<-2018
+year<-2014
 scoring<-"CUSTOM"
-
+error.breaks<-c(-50, 25, 75, 125, 225, 400)
 source("all data, optimize by round.R")
 
 
@@ -116,13 +116,13 @@ vec<-c(vec[-c(2:3)], getPickDF(numPicks=16)$Slot10[c(2, 3)] )%>% sort()
 vec<-vec[1:16]
 
 trade1<-lapply(1:numDrafts,function(x)simDraft(slot=slot,scoring=scoring,shift=0,numRB=6, numWR=5, numTE=1, numQB=2, numK=1,
-                                               numDST=1,customPicks = vec, outPos="WR",onePos = rep("QB", 10)
+                                               numDST=1,customPicks = vec, onePos = rep("QB", 10)
                                                )) #
 tradeScores1<-foreach(x=trade1, .packages = c("data.table", "dplyr", "plyr"))%dopar%{
   replicate(numSims, simSeason(x, scoring=scoring, numWR = 3)) }
-trade1[[4]]
+trade1[[17]]
 quantile(unlist(tradeScores1))
-quantile(unlist(simScores3))
+quantile(unlist(simScores2))
 quantile(unlist(simScores3[sapply(drafts3, function(x) sum(x$Player[1:2]=="Jordan Howard")==1)]))
 quantile(unlist(simScores5[sapply(drafts5, function(x) sum(x$Player[1:2]=="Christian Mccaffrey")==1)]))
 

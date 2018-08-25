@@ -8,7 +8,7 @@ output: html_document
 options(width = 10000)
 ```
 
-Statistics have become popular for fantasy football but it's not a guarantee thatanalytics are necessarily better than just using the eye test, or consensus opinion, etc. In this post I'll compare ADP to outside projections to see where ADP has inefficiencies and where there might be edges in projecting players. I was able to get projections from 2012-present from [fantasyfootballanalytics.net](http://apps.fantasyfootballanalytics.net/projections) and from [fftoday.com](fftoday.com/rankings/playerproj.php?Season=201808&PosID=30&LeagueID=1), and ADP data from [ffcalculator.com](https://fantasyfootballcalculator.com/adp). 
+Statistics have become popular for fantasy football but it's not necessarily a guarantee that analytics are better than just using the eye test, or consensus opinion, etc. In this post I'll compare ADP to outside projections to see where ADP has inefficiencies and where there might be edges in projecting players. I was able to get projections from 2012-present from [fantasyfootballanalytics.net](http://apps.fantasyfootballanalytics.net/projections) and from [fftoday.com](fftoday.com/rankings/playerproj.php?Season=201808&PosID=30&LeagueID=1), and ADP data from [ffcalculator.com](https://fantasyfootballcalculator.com/adp). 
 I also have my own aggregated projections. ffanalytics.net is an aggregated projection source where they tried to maximize accuracy and so I think it will be a pretty good source to use. All together I have a dataframe like this:
 
 

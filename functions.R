@@ -230,7 +230,12 @@ coordName<-function(x) {
   x[x==  "Ziggy Hood"]<-"Evander Hood"
   x[x==  "Ziggy Ansah"]<-"Ezekiel Ansah"
   x[x==  "Jacque Cesaire"]<-"Jacques Cesaire"
-  x[x==  "Boobie Dixon"]<-"Anthony Dixon"
+  x[x==  "Boobie Dixon"]<-" AnthonyDixon"
+  x[x==  "Devin Breaux"]<-"Delvin Breaux"
+  x[x==  "Tyron Crawford"]<-"Tyrone Crawford"
+  x[x==  "Cornellius Carradine"]<-"Tank Carradine"
+  x[x==  "Hasean Clinton Dix"]<-"Ha Ha Clinton Dix"
+  x[x==  "Ramon Humbar"]<-"Ramon Humber"
   x[x==  "Chad Ochocinco"]<-"Chad Johnson"
   x[x==  "Philip Rers"]<-"Philip Rivers"
   x[x==  "Tani Tupou"]<-"Taniela Tupou"
@@ -249,7 +254,7 @@ coordName<-function(x) {
   x[x== "Evan Dietrich-Smith"  ]<-"Evan Smith" 
   x[x=="Philly Brown"  ]<-"Corey Brown"  
   x[x=="Zachdiles"  ]<-"Zach Diles"  
-  
+  x[x=="Leighton Vander"  ]<-"Leighton Vander Esch"  
   
   x[x=="Laurinaitis"]<-"James Laurinaitis"
   x[x=="Bradshaw"]<-"Ahmad Bradshaw"
@@ -259,7 +264,7 @@ coordName<-function(x) {
   x[x==  "Alexander Ogletree"]<-"Alec Ogletree"
   x[x==  "Tony Jeffersom"]<-"Tony Jefferson"
   x[x==  "Vinateri"|x=="vinateri"|x=="Adam Vinateri"]<-"Adam Vinatieri"
-  x[x==  "Khali Mack"]<-"Khalil Mack"
+  x[x==  "Khali Mack"|x=="Kahlil Mack"]<-"Khalil Mack"
   x[x==  "Wendall Smallwood"]<-"Wendell Smallwood"
   x[x==  "Alshon Jeffrey"]<-"Alshon Jeffery"
   x[x==  "Will Lutz"]<-"Wil Lutz"
@@ -356,14 +361,15 @@ coordName<-function(x) {
   x[x=='Marvin Smith']<-"Marvel Smith"
   
   
+  
   x[x=="Ne"]<-"NWE"
   x<-gsub(" Defense", "", x)
-  x[x=="Ne"| grepl("Patriots", x)]<-"NWE"
-  x[x=="Kc"| grepl("Chiefs", x)]<-"KAN"
-  x[x=="Gb" | grepl("Packers", x)]<-"GNB"
+  x[x=="Ne"| grepl("Patriots", x)|x=="Nep"|x=="NEP"]<-"NWE"
+  x[x=="Kc"| grepl("Chiefs", x)|x=="Kcc"|x=="KCC"]<-"KAN"
+  x[x=="Gb" | grepl("Packers", x)|x=="GBP"|x=="Gbp"]<-"GNB"
   x[x=="Sd"| x=="Lac"|x=="LAC"| grepl("Chargers", x)| (grepl("ngeles", x)& grepl("LAC|lac|Lac", x))]<-"SDG"
-  x[x=="No" |grepl("Saints",x)]<-"NOR"
-  x[x=="Tb" | grepl("Buccaneers", x)]<-"TAM"
+  x[x=="No" |grepl("Saints",x)|x=="Nos"|x=="NOS"]<-"NOR"
+  x[x=="Tb" | grepl("Buccaneers", x)|x=="Tbb"|x=="TBB"]<-"TAM"
   x[x=="Sf"| grepl("49ers", x)| grepl("San Francisco", x)]<-"SFO"
   x[x=="La"]<-"LAR"
   x[x%in% c("Rams", "St Louis", "Stl Rams", "Saint Louis Rams", "St Louis Rams", "La Rams", "Los Angeles Rams", "STL", "Stl")| 
@@ -371,17 +377,17 @@ coordName<-function(x) {
   x[x=="Jac"|x=="Jacksonville Jagaurs"]<-"JAX"
   x[grepl("Cardinals", x)]<-"ARI"
   x[grepl("Falcons", x)]<-"ATL"
-  x[grepl("Ravens", x)]<-"BAL"
+  x[grepl("Ravens", x)|x%in% c("Blt", "BLT")]<-"BAL"
   x[grepl("Bills", x)]<-"BUF"
   x[grepl("Carolina", x)]<-"CAR"
   x[grepl("Bears", x)]<-"CHI"
   x[grepl("Bengals", x)]<-"CIN"
-  x[grepl("Browns", x)]<-"CLE"
+  x[grepl("Browns", x)|x%in% c("CLV", "Clv")]<-"CLE"
   x[grepl("Cowboys", x)]<-"DAL"
   x[grepl("Broncos", x)]<-"DEN"
   x[grepl("Lions", x)]<-"DET"
   x[grepl("Packers", x)]<-"GNB"
-  x[grepl("Texans", x)]<-"HOU"
+  x[grepl("Texans", x)|x=="Hst"|x=="HST"]<-"HOU"
   x[grepl("Colts", x)]<-"IND"
   x[grepl("Jaguars", x)| x=="JAC"]<-"JAX"
   x[grepl("Dolphins", x)]<-"MIA"
@@ -767,6 +773,89 @@ makeParamPlot<-function(Parameters=c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (default)", "
                   width=.2,
                   position=position_dodge(.9)) +
     xlab("Parameter") +
+    ylab("Mean-Simulated Starting Lineup (25,000 sims)") +
+    ggtitle(Title)
+  p
+}
+makeActualSlotPlot<-function(Title="Actual Results for All Draft Slots",
+                       Parameters=c("Case 1", "Case 1 + ZeroRB in R1", "Case1 + ZeroWR in R1")){
+  
+  Slot<-rep( paste0("Slot", 1:12), 3)
+  Actuals<-unlist(c(actualScores_allSlots, actualScores_allSlots_zeroRB, actualScores_allSlots_zeroWR))
+  
+  
+  Actuals<-data.frame(Actuals=Actuals, Slot=rep(Slot, each=250), Parameter=rep(Parameters, each=length(Actuals)/3))
+  Actuals$Slot<-factor(Actuals$Slot, levels=unique(Actuals$Slot))
+  Actuals<-ddply(Actuals, .(Slot, Parameter), summarize, 
+              N    = length(Actuals),
+              mean = mean(Actuals),
+              sd   = sd(Actuals),
+              se   = sd / sqrt(N) )
+  library(ggplot2)
+  head(Actuals)
+  
+  p<-ggplot(Actuals, aes(x=Slot, y=mean, fill=Parameter)) + 
+    geom_bar(position=position_dodge(), stat="identity",
+             colour="black", # Use black outlines,
+             size=.3) +      # Thinner lines
+    # theme(axis.text.x=element_blank(), 
+    # axis.title.x = element_blank()
+    # )+
+    coord_cartesian(ylim=c(min(Actuals$mean)-10, max(Actuals$mean+20)))+
+    geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
+                  size=.3,    # Thinner lines
+                  width=.2,
+                  position=position_dodge(.9)) +
+    xlab("Slot") +
+    ylab("Mean-Actual Starting Lineup (25,000 sims)") +
+    ggtitle(Title)
+  p
+}
+
+makeActualParamPlot<-function(Parameters=c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (default)", "2. default, shift=.25","3. default, shift=-.15",
+                                     "4. zero RB in R1, shift=0", "5. zero WR in R1, shift=0",  "6. \u2264 1QB in R1-11, shift=0", 
+                                     "7. RBx4, WRx6, shift=0", "8. RBx6, WRx4, \u2264 1QB in R1-11, shift=0",
+                                     "9. RBx5,WRx5,TEx2,QB/DST/Kx1, shift=0", "10. RBx4,WRx5,QB/TEx2,DST/Kx1, shift=0", 
+                                     "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" ),
+                        Title="Actual Results for Different Draft Parameters"){
+  
+  Sims<-list(simScores,simScores2, simScores3, simScores4, simScores5,
+             simScores6, simScores7, simScores8, simScores9, simScores10, simScores11, simScores12)[1:length(Parameters)] %>% unlist(recursive = T)
+  Sims<-data.frame(Sim=Sims, Parameter=rep(as.character(Parameters), each=25000))
+  Sims$Parameter<-factor(Sims$Parameter, levels=unique(Sims$Parameter))
+  Sims<-ddply(Sims, .(Parameter), summarize, 
+              N    = length(Sim),
+              mean = mean(Sim),
+              sd   = sd(Sim),
+              se   = sd / sqrt(N) )
+  Actuals<-list(actualScores,actualScores2, actualScores3, actualScores4, actualScores5,
+                actualScores6, actualScores7, actualScores8, actualScores9, actualScores10, actualScores11, actualScores12)[1:length(Parameters)] %>% unlist(recursive = T)
+  Actuals<-data.frame(Actuals=Actuals, Parameter=rep(as.character(Parameters), each=length(actualScores)))
+  Actuals$Parameter<-factor(Actuals$Parameter, levels=unique(Actuals$Parameter))
+  Actuals<-ddply(Actuals, .(Parameter), summarize, 
+              N    = length(Actuals),
+              mean = mean(Actuals),
+              sd   = sd(Actuals),
+              se   = sd / sqrt(N) )
+  Sims$Type<-"Sims"
+  Actuals$Type<-"Actuals"
+  Sims<-rbind(Sims, Actuals)
+  
+  
+  library(ggplot2)
+  head(Sims)
+  
+  p<-ggplot(Sims, aes(x=Type, y=mean, fill=Parameter)) + 
+    geom_bar(position=position_dodge(), stat="identity",
+             colour="black", # Use black outlines,
+             size=.3) +      # Thinner lines
+
+    coord_cartesian(ylim=c(min(Sims$mean)-10, max(Sims$mean+20)))+
+    geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
+                  size=.3,    # Thinner lines
+                  width=.2,
+                  position=position_dodge(.9)) +
+    xlab("Type") +
     ylab("Mean-Simulated Starting Lineup (25,000 sims)") +
     ggtitle(Title)
   p

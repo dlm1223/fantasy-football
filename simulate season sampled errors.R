@@ -9,7 +9,7 @@ projections$Pos<-ifelse(grepl("LB", projections$Pos), "LB",
                                ifelse(grepl("SS|FS|DB|CB", projections$Pos)| projections$Pos%in% "S", "DB", projections$Pos)))
 projections$Pos[grepl("FB", projections$Pos)]<-"RB"
 projections$Pos<-gsub("[/]", ";", projections$Pos)
-projections$fantPts_bin<-cut(projections$fantPts_agg, breaks=c(-50, 25, 75, 125, 175, 225, 400))
+projections$fantPts_bin<-cut(projections$fantPts_agg, breaks=error.breaks)
 projections$error<-projections$fantPts-projections$fantPts_agg
 projections<-projections[which(projections$Season%in%2009:2017& projections$fantPts_agg>=25& !is.na(projections$fantPts_bin) & projections$Pos!=""),]
 
@@ -34,10 +34,10 @@ projections$fantPts_bin<-as.character(projections$fantPts_bin)
 
 
 # plot(adp$HALF^.4~adp$HALF)
-simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="HALF", returnLineup=F){
+simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1, numFLEX=1, scoring="HALF", returnLineup=F, fa.param=4){
   
-  #numRB<-2; numWR<-2; numTE<-1; numQB<-1; numK<-1; numDST<-1; numFLEX<-1;scoring<-"HALF"
-  picks$fantPts_bin<-as.character(cut(picks[, scoring]-picks$meanError, breaks=c(-50, 25, 75, 125, 175, 225, 400))) #basing error-bin on HALF projection
+  #numRB<-2; numWR<-2; numTE<-1; numQB<-1; numK<-1; numDST<-1; numFLEX<-1
+  picks$fantPts_bin<-as.character(cut(picks[, scoring]-picks$meanError, breaks=error.breaks)) #basing error-bin on HALF projection
   picks$fantPts_bin[picks$Pos=="DST"& picks$fantPts_bin=="(125,175]"]<-"(75, 125]" 
   #sample bias-adjusted errors from 2010-2017, by player and position
   picks$error<-sapply(1:nrow(picks), function(x){
@@ -49,7 +49,7 @@ simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1,
   
   #undrafted players--sample errors
   undrafted<-adp[is.na(adp$ADP_half)& !adp$Pos==''& adp[, scoring]>=25,]
-  undrafted$fantPts_bin<-as.character(cut(undrafted[, scoring]-undrafted$meanError, breaks=c(-50, 25, 75, 125, 175, 225, 400)))
+  undrafted$fantPts_bin<-as.character(cut(undrafted[, scoring]-undrafted$meanError, breaks=error.breaks))
   undrafted$error<-NA
   #for each "error-bin-type", get errors for undrafted players in that bin
   for(i in 1:nrow(errors)){
@@ -66,14 +66,14 @@ simSeason<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST=1,
   #assuming these are the players I can get through free agency 
   #should allow me to not have to draft a backup kicker
   #assuming i can get the 4-th best player at each position 
-  freeAgent<-c(which(grepl("QB", undrafted$Pos))[4],
-               which(grepl("RB", undrafted$Pos))[4],
-               which(grepl("WR", undrafted$Pos))[4],
-               which(grepl("TE", undrafted$Pos))[4],
-               which(grepl("DST", undrafted$Pos))[4],
-               which(grepl("K", undrafted$Pos))[4])
-  
-  picks<-rbind.fill(picks, undrafted[freeAgent,colnames(undrafted)%in% colnames(picks)])
+  fa.players<-c(which(grepl("QB", undrafted$Pos))[fa.param],
+               which(grepl("RB", undrafted$Pos))[fa.param],
+               which(grepl("WR", undrafted$Pos))[fa.param],
+               which(grepl("TE", undrafted$Pos))[fa.param],
+               which(grepl("DST", undrafted$Pos))[fa.param],
+               which(grepl("K", undrafted$Pos))[fa.param])
+  undrafted<-undrafted[fa.players, ]
+  picks<-rbind.fill(picks, undrafted[,colnames(undrafted)%in% colnames(picks)])
   picks<-picks[!duplicated(picks$Player), ]
   topLineup<-getTopLineup(picks, numRB=numRB, numWR=numWR, numTE=numTE, numQB=numQB, numK=numK, numDST=numDST, numFLEX=numFLEX)#,optmode=optmode
   
@@ -101,3 +101,42 @@ getTopLineup<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1, numDST
   
   picks[as.logical(result$x),!colnames(picks)%in% c("RB", "WR", "TE", "QB", "DST", "K")]
 }
+
+###ACTUAL RESULTS######
+
+
+getActualScore<-function(picks, numRB=2, numWR=2, numTE=1, numQB=1, numK=1,  numFLEX=1, scoring="HALF", returnLineup=F, fa.param=4){
+  
+  #numRB<-2; numWR<-2; numTE<-1; numQB<-1; numK<-1; numDST<-1; numFLEX<-1
+  
+  undrafted.actual<-adp[is.na(adp$ADP_half)& !adp$Player%in% picks$Player, ] #undrafted players who also weren't drafted by me
+  undrafted.actual<-undrafted.actual[order(undrafted.actual[,paste0(scoring, "_actual") ], decreasing = T),c("Pos", "Player", paste0(scoring, "_actual")) ]
+  #assuming i can get the 4-th best player at each position 
+  fa.players<-c(which(grepl("QB", undrafted.actual$Pos))[fa.param],
+               which(grepl("RB", undrafted.actual$Pos))[fa.param],
+               which(grepl("WR", undrafted.actual$Pos))[fa.param],
+               which(grepl("TE", undrafted.actual$Pos))[fa.param],
+               which(grepl("DST", undrafted.actual$Pos))[fa.param],
+               which(grepl("K", undrafted.actual$Pos))[fa.param])
+  undrafted.actual<-undrafted.actual[fa.players, ]
+  
+  picks<-rbind.fill(picks, undrafted.actual[, colnames(undrafted.actual)%in% colnames(picks)])
+  
+  #get top lineup from Sims
+  picks<-picks[order(picks[, paste0(scoring, "_actual")], decreasing = T),]
+  for(i in c("RB", "WR", "TE", "QB", "K")){
+    picks[, i]<-ifelse(grepl(i, picks$Pos), cumsum(grepl(i, picks$Pos)), NA)
+  }
+  starters<-picks[which(picks$RB<=numRB| picks$WR<=numWR| picks$QB<=numQB| picks$TE<=numTE| picks$K<=numK),] #starters
+  flex<-picks[which(!picks$Player%in% starters$Player&grepl("RB|WR|TE", picks$Pos)),][1,] #flex
+  
+  result<-list(x=as.numeric(picks$Player%in% c(starters$Player, flex$Player)))
+  
+  if(returnLineup){
+    picks[as.logical(result$x),!colnames(picks)%in% c("RB", "WR", "TE", "QB", "DST", "K")]
+  } else{
+    sum(picks[as.logical(result$x),  paste0(scoring, "_actual")], na.rm=T)
+  }
+  
+}
+
