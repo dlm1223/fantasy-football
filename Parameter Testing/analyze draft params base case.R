@@ -13,6 +13,7 @@ picks1<-getPicks(slot="Slot4", numRB=5, numWR = 5,numTE=1,numK=1,numQB=2, numDST
 picks1
 simScores1<-replicate(4000, simSeason(picks1, scoring=scoring))
 
+plot(cummean(simScores1))
 
 #rb heavy?
 picks1A<-getPicks(slot="Slot4", numRB=6, numWR = 4,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=c(), scoring=scoring)
@@ -49,6 +50,7 @@ simScores4<-replicate(4000, simSeason(picks4 , scoring=scoring))
 lines(cummean(simScores4),col="purple")
 
 #2 TE/QB + take Antonio Brown at pick 1?
+fixPlayer<-"Antonio Brown"
 picks5<-getPicks(slot="Slot4", numRB=5, numWR =5 ,numTE=1,numK=1,numQB=2, numDST=1,numFLEX = 0,shift=0,  out=c(), fix=fixPlayer, scoring=scoring)
 picks5
 simScores5<-replicate(4000, simSeason(picks5 , scoring=scoring))
