@@ -1,6 +1,6 @@
 rm(list=ls())
 
-year<-2014
+year<-2018
 scoring<-"CUSTOM"
 error.breaks<-c(-50, 25, 75, 125, 225, 400)
 source("all data, optimize by round.R")

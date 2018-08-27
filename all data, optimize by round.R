@@ -29,7 +29,7 @@ adp$Pos[adp$Player%in%c("Tavon Austin")]<-"WR"
 
 adp<-adp[order(adp$ADP_half, decreasing = F),]
 
-adp$ADP_Rank[!is.na(adp$ADP_half)]<-rank(adp$ADP_half[!is.na(adp$ADP_half)])
+adp$ADP_Rank[!is.na(adp$ADP_half)]<-rank(adp$ADP_half[!is.na(adp$ADP_half)], ties.method = 'first')
 adp$ADP_Rank[is.na(adp$ADP_Rank)]<-500 #undrafted
 
 adp[, c("HALF", "PPR","STD")][is.na(adp[, c("HALF", "PPR","STD")])]<-0 #no projection

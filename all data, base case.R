@@ -1,3 +1,6 @@
+library(png)
+library(grid)
+library(doSNOW)
 library(plyr)
 library(dplyr)
 library(rvest)
@@ -11,51 +14,63 @@ options(stringsAsFactors = F, scipen =999)
 source('functions.R', encoding = 'UTF-8')
 
 
-####PREPARE DRAFT DATA#####
+# year<-2017
+
+#ORGANIZE ADPS AND PROJECTIONS####
+
 
 load("Player Data/Draft Data.RData")
 
-# adp$ADP_sim<-rnorm(nrow(adp), mean = adp$ADP_half, sd=adp$ADPSD_half)
+adp<-merge(ffcalc[ffcalc$Year==year, c("Player", "ADP_half", "ADPSD_half")], ffpros, by=c("Player"), all.x=T)
+
+adp$Pos[adp$Player%in%c("Chris Thompson", "Jd Mckissic", "Byron Marshall")& adp$Pos=="WR;RB"]<-"RB"
+adp$Pos[adp$Player%in%c("Ryan Hewitt")]<-"TE"
+adp$Pos[adp$Player%in%c("Tavon Austin")]<-"WR"
 
 adp<-adp[order(adp$ADP_half, decreasing = F),]
 
-adp$ADP_Rank[!is.na(adp$ADP_half)]<-rank(adp$ADP_half[!is.na(adp$ADP_half)])
+adp$ADP_Rank[!is.na(adp$ADP_half)]<-rank(adp$ADP_half[!is.na(adp$ADP_half)], ties.method ="first" )
 adp$ADP_Rank[is.na(adp$ADP_Rank)]<-500 #undrafted
 
 adp[, c("HALF", "PPR","STD")][is.na(adp[, c("HALF", "PPR","STD")])]<-0 #no projection
 
-
 customProj<-function(type="STD"){
   proj<-read.csv(paste(c("Player Data/Projections_", type,".csv" ), collapse=""))
-  proj<-proj[proj$Season==2018& proj$Player%in% adp$Player, c("Player","PosFFA", "Season", "Team", "fantPts_agg")]
+  colnames(proj)[colnames(proj)=="DepthTeam"]<-"Team"
+  proj<-proj[proj$Season%in%year, c("Player","PosFFA", "Season", "Team", "fantPts_agg", "fantPts")]
   colnames(proj)[colnames(proj)=="fantPts_agg"]<-type
+  colnames(proj)[colnames(proj)=="fantPts"]<-paste0(type, "_actual")
   colnames(proj)[colnames(proj)=="PosFFA"]<-"Pos"
   proj$Pos<-ifelse(grepl("LB", proj$Pos), "LB",
                    ifelse(grepl("DT|DL|DE|NT", proj$Pos)| proj$Pos%in% "T", "DL", 
                           ifelse(grepl("SS|FS|DB|CB", proj$Pos)| proj$Pos%in% "S", "DB", proj$Pos)))
   proj$Pos[grepl("FB", proj$Pos)]<-"RB"
   proj$Pos<-gsub("[/]", ";", proj$Pos)
-  proj<-proj[, c("Player","Pos", "Team",type)]
+  proj<-proj[, c("Player","Pos", "Team",type, paste0(type, "_actual"))]
   proj
 }
-projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "STD", "PPR", "CUSTOM"), customProj))
+
+projections<-Reduce(function(dtf1, dtf2)  merge(dtf1, dtf2, by =c("Player", "Team", "Pos"), all = TRUE), lapply(c("HALF", "CUSTOM", "STD", "PPR"), customProj))
 projections<-projections[!projections$Pos%in% c("LB", "DL", "DB"),, ]
-projections<-projections[order(projections$STD,decreasing = T), ]
+projections<-projections[order(projections$HALF,decreasing = T), ]
 projections<-projections[!duplicated(projections$Player), ]
 
-adp<-merge(adp, projections[, c("Player", "HALF", "STD", "PPR", "CUSTOM")], by=c("Player"), all.x=T)
+adp<-merge(adp, projections[, colnames(projections)%in% c("Player", "Pos", "HALF", scoring, paste0(scoring, "_actual"))], by=c("Player"), all=T)
 adp$HALF<-ifelse(is.na(adp$HALF.y), adp$HALF.x, adp$HALF.y)
-adp$STD<-ifelse(is.na(adp$STD.y), adp$STD.x, adp$STD.y)
-adp$PPR<-ifelse(is.na(adp$PPR.y), adp$PPR.x, adp$PPR.y)
+adp$Pos<-ifelse(is.na(adp$Pos.x), adp$Pos.y, adp$Pos.x)
 adp<-adp[, !grepl("[.]", colnames(adp))]
 adp<-adp[order(adp$ADP_half, decreasing = F),]
-
+adp<-adp[!grepl(";", adp$Pos)& !adp$Pos=="",]
+adp<-adp[!is.na(adp$Player),]
 adp[duplicated(adp$Player), ] #check if duplicates--if so will need to change getTopLineup() in simseason.R
 head(adp, 15)
 
-###DRAFT PICK OPTIMIZATION#####
 
-getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, numFLEX=1, numDST=1, shift=0,
+
+###DRAFT PICK OPTIMIZATION#####
+#getPicks(), default=slot4
+
+getPicks<-function(slot="Slot4",numTeams=12, numRB=5, numWR=5, numTE=1, numQB=2,numK=1, numFLEX=0, numDST=1, shift=0,
                    out=c(), fix=c(), scoring="HALF", strategy=c(),adpCol="ADP_Rank", outPos=c(),onePos=c()){
   # slot<-"Slot4";numRB<-5;numWR<-5;numTE<-1;numQB<-1;numK<-1;numFLEX<-1;numDST<-1;shift<-0;out<-c();fix<-c();scoring<-"HALF";numTeams<-12
   #1qb, 3wr, 2rb, 1te, 1def, 1k, 1flex, 7 bench
@@ -133,45 +148,20 @@ getPicks<-function(slot,numTeams=12, numRB=2, numWR=2, numTE=1, numQB=1,numK=1, 
   
   picks<-adp[as.logical(result$x),]
   picks$Slot<-pickDF[, slot]
-  picks[,colnames(picks) %in% c( "Player", "ADP_half", "HALF", adpCol, "Pos",scoring, "Slot")]
+  picks
 }
 #shift means shift everyone's ADP to be x% earlier i.e. if someone''s adp is 100, need to take them at 80
 
 
 
-picks<- getPicks(slot="Slot4", numRB=5, numWR =5 , numFLEX = 0,numQB=2,shift=0,numDST=1, numK=1,numTE=1,
-                  out=c(), fix=c(), scoring='HALF', onePos=rep("QB", 10))
-picks
-
-#expected points for each team:
-numTeams<-12
-sapply(paste("Slot", 1:numTeams, sep=""), function(x) 
-  sum(getPicks(slot=x,numTeams = numTeams,    numRB=4, numWR = 6, numFLEX = 0,numQB=2,shift=0,numDST=1, scoring='HALF', out=c(), fix=c())$HALF))
-
-
 source("simulate season sampled errors.R")
 
+#simDraft() simulations draft w. specified strategy. 
+#strategy parameters include: # of players per position, shift (how conservate to plan future picks, default=1), whether to wait on certain positions
 
-adp$fantPts_bin<-as.character(cut(adp$HALF, breaks=c(-50, 25, 75, 125, 175, 225, 400)))
+adp$fantPts_bin<-as.character(cut(adp[, scoring], breaks=error.breaks))
 adp<-merge(adp[, !grepl("meanError", colnames(adp))], errors[, c("meanError", "fantPts_bin", "Pos")], by=c("fantPts_bin", "Pos"))
-adp$HALF2<-adp$HALF+adp$meanError
+adp[, scoring]<-adp[, scoring]+adp$meanError
 adp<-adp[order(adp$ADP_half, decreasing = F),]
 
 
-# picks<-getPicks(slot="Slot4", numRB=4, numWR =4,numFLEX=1,numQB=2,numTE=2,numDST=1,numK=1,
-#                 strategy=c(),shift=0,
-#                 scoring='HALF', fix=c(),
-#                 out=c(#"Doug Baldwin"
-#                   # adp$Player[adp$Pos=="QB"& adp$ADP_Rank<69]
-#                   # ,adp$Player[adp$Pos=="WR"& adp$ADP_Rank<52]
-#                   # ,adp$Player[adp$Pos=="DST"& adp$ADP_Rank<141]
-#                 ))
-# picks
-# nrow(picks)
-# scoring<-"HALF2"
-# picks<-getPicks(slot="Slot4", numRB=5, numWR = 6,numTE=1,numK=1,numQB=2,fix=c("Alvin Kamara"),onePos=rep("QB", 12),
-#          numDST=1,numFLEX = 0, scoring=scoring, shift=0)
-# picks
-# simScores<-replicate(5000, simSeason(picks, scoring = scoring, numWR=3))
-# hist(simScores)
-# quantile(simScores)

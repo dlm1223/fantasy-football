@@ -563,13 +563,48 @@ getStats<-function(date, team){
 }
 importGrid<-expand.grid(date=links$DATE[month(links$DATE)%in% 8:9][!duplicated(year(links$DATE[month(links$DATE)%in% 8:9]))],
                         team=teamLinks)
-if(!exists("depthCharts")){
+if(!exists("depthCharts")){ #if !exists, import all dates
   depthCharts<-ldply(lapply(1:nrow(importGrid), function(x) getStats(date=importGrid$date[x],team=importGrid$team[x] )))
 } else{
+  #if exists, just import dates beyond current date
   depthCharts<-depthCharts[!depthCharts$DATE>=Sys.Date(),]
   depthCharts2<-ldply(lapply(which(!importGrid$date%in% depthCharts$DATE), function(x) getStats(date=importGrid$date[x],team=importGrid$team[x] )))
   depthCharts<-rbind(depthCharts, depthCharts2)
 }
+# 
+# importDepth<-function(year){
+#   if(year==2006){
+#     link<-"http://web.archive.org/web/20060827184701/http://www.thehuddle.com/nfl/NFL_depth_charts.php"
+#   } else if(year==2007){
+#     link<-"http://web.archive.org/web/20070814212205/http://www.thehuddle.com/nfl/NFL_depth_charts.php"
+#   } else if (year==2008){
+#     link<-"http://web.archive.org/web/20080913184421/http://www.thehuddle.com/nfl/NFL_depth_charts.php"
+#   } else if (year==2010){
+#     link<-"http://web.archive.org/web/20100819114317/http://www.thehuddle.com/nfl/NFL_depth_charts.php"
+#   } else if(year==2011){
+#     link<-"http://web.archive.org/web/20110903045135/http://www.thehuddle.com:80/nfl/NFL_depth_charts.php"
+#   } else if (year==2012){
+#     link<-"http://web.archive.org/web/20120802024206/http://www.thehuddle.com:80/2012/nfl/nfl-depth-charts.php"
+#   }else if (year==2013){
+#     link<-"http://web.archive.org/web/20130820221923/http://www.thehuddle.com:80/2013/nfl/nfl-depth-charts.php"
+#   }else if (year==2014){
+#     link<-"http://web.archive.org/web/20140906182404/http://www.thehuddle.com:80/2014/nfl/nfl-depth-charts.php"
+#   }else if (year==2015){
+#     link<-"http://web.archive.org/web/20150905124825/http://www.thehuddle.com/2015/nfl/nfl-depth-charts.php"
+#   }else if (year=2016){
+#     link<-"http://web.archive.org/web/20160830042756/http://www.thehuddle.com:80/2016/nfl/nfl-depth-charts.php"
+#   }else if(year==2017){
+#     link<-"http://web.archive.org/web/20170831102320/http://thehuddle.com:80/2017/nfl/nfl-depth-charts.php"
+#   }else if (year==2018){
+#     link<-"http://thehuddle.com/2018-nfl-depth-charts.php"
+#   }
+#   stats<-readHTMLTable(link)
+#   stats<-stats[ sapply(stats, function(x)  sum(c("RB","WR", "QB", "TE", "PK", "QB1", "TE1", "WR1", "RB1")%in% trimws(colnames(x))))>0]
+#   
+# }
+
+# depthCharts.H<-
+
 
 #PBP derived season stats
 season_passing_df<-data.frame(fread("Player Data/season_passing_df.csv" ))
@@ -1193,6 +1228,7 @@ save(list=c("season_passing_df", "season_rushing_df", "season_receiving_df", "se
             "gameLinks","gameLinks_FREF", "gameLogs","teamLogs","snapLogs"
             
 ),file="Player Data/NFL Data.RData")
+#load("Player Data/NFL Data.RData")
 
 
 #game data data
@@ -1200,9 +1236,6 @@ save(list=c(  "game_injuries", "game_inactives", "game_odds","game_odds_detailed
               "espn_pwr", "elo_rank" , "game_locs", "yahoo.pickem"#game stats
 ), file="Player Data/NFL Game Data.RData")
 
-
-
-#load("Player Data/NFL Data.RData")
 #load("Player Data/NFL Game Data.RData")
 
 ########FFANALYTICS SEASONAL PROJECTIONS######
@@ -1223,6 +1256,7 @@ remDr<-rsDriver(browser = "chrome")
 
 
 getTeam<-function( Season, Team, Pos,Site=5,  postseason=F){
+  print(c(Team, Pos))
   
   #5=yahoo
   # https://fantasydata.com/nfl-stats/fantasy-football-weekly-projections?position=4&team=17&season=2018&seasontype=1&scope=1
@@ -1236,6 +1270,7 @@ getTeam<-function( Season, Team, Pos,Site=5,  postseason=F){
   
   cols<-page%>% html_nodes(".k-link")%>% html_text()
   test<-page%>% html_table(fill=T)
+  test<-lapply(test, head, 10)
   test<-do.call( "cbind", test[3:4])
   test<-test[, -1]
   if(Pos==2){
@@ -1256,9 +1291,9 @@ getTeam<-function( Season, Team, Pos,Site=5,  postseason=F){
     colnames(test)<-c("Player","Team", "Pos", "Gms", "TFL", "Sacks", 
                       "QB.Hits", "Def.Int", "Fum.Rec", "Safeties", "Def.TD", "Return.TD","Pts.Allowed" , "PPG", "FantPts")
   }
-  test$ID<-page%>%html_nodes("td:nth-child(2) a")%>% html_attr("href")
+  ids<-page%>%html_nodes("td:nth-child(2) a")%>% html_attr("href")
+  test$ID<-ids[1:nrow(test)]
   test$Season<-Season
-  print(c(Team, Pos))
   test
 }
 #links to import
