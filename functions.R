@@ -65,9 +65,10 @@ coordName<-function(x) {
   x<-gsub(", Jr.", " Jr.", x)
   x<-gsub("[.]|[']|[,]", "", x)
   x<-gsub(" Jr", "", x)
-  x<-gsub(" III", "", x)
+  x<-gsub(" Sr", "", x)
+  x<-gsub(" III| Iii", "", x)
   x<-gsub(" IV", "", x)
-  x<-gsub(" II", "", x)
+  x<-gsub(" II| Ii", "", x)
   x<-gsub("-", " ", x)
   x<-gsub("  ", " ", x)
   
@@ -141,6 +142,7 @@ coordName<-function(x) {
   x[x==  "Manuel Ramirez"]<-"Manny Ramirez"
   x[x==  "Herbert Taylor"]<-"Herb Taylor"
   x[x==  "Ike Ndukwe"]<-"Ikechuku Ndukwe"
+  x[x==  "Nate Arthur Byham"]<-"Nate Byham"
   x[x==  "Vic Worsley"]<-"Victor Worsley"
   x[x==  "Baba Oshinowo"]<-"Babatunde Oshinowo"
   x[x==  "Bam Childress"]<-"Brandon Childress"
@@ -219,18 +221,34 @@ coordName<-function(x) {
   x[x==  "Joseph Unga"]<-"Jj Unga"
   x[x==  "Jean Phillipe Darche"]<-"Jp Darche"
   x[x==  "Christian Mohr"]<-"Chris Mohr"
+  x[x==  "Corderrelle Patterson"]<-"Cordarrelle Patterson"
   x[grepl( "Dom", x)& grepl("Rodgers", x)& grepl("romartie", x)]<-"Dominique Rodgers Cromartie"
+  x[ grepl("Stallworth", x)& grepl("Donte", x)]<-"Donte Stallworth"
+  x[ grepl("Priest", x)& grepl("Holmes", x)]<-"Priest Holmes"
+  x[ grepl("David", x)& grepl("Givens", x)]<-"David Givens"
+  x[ grepl("Chad", x)& grepl("Ocho", x)]<-"Chad Johnson"
   x[x==  "M White"]<-"Myles White"
   x[x==  "Nickell Robey"]<-"Nickell Robey Coleman"
   x[x==  "Deji Olatoye"]<-"Ayodeji Olatoye"
   x[x==  "Saverio Rocca"]<-"Sav Rocca"
   x[x==  "Travis Carrie"]<-"Tj Carrie"
   x[x==  "Jordan Dizon"]<-"Jordon Dizon"
+  x[x==  "Dj Ware"]<-"Dan Ware"
   x[x==  "Donald Drer"]<-"Donald Driver"
   x[x==  "Ziggy Hood"]<-"Evander Hood"
   x[x==  "Ziggy Ansah"]<-"Ezekiel Ansah"
+  x[x==  "Chris Dwightstone Jones"]<-"Chris Jones"
+  x[x==  "Tony Dewayne Mcdaniel"]<-"Tony Mcdaniel"
+  x[x==  "Don Juan Carey"]<-"Don Carey"
+  x[x==  "Brian Jeffrey Mihalik"]<-"Brian Mihalik"
+  x[x==  "Robert Chevis Nelson"]<-"Robert Nelson"
+  x[x==  "Doug Oneal Middleton"]<-"Doug Middleton"
+  x[x==  "Mickey Charles Shuler"]<-"Mickey Shuler"
+  x[x==  "Lequan Letrell Lewis"]<-"Lequan Lewis"
+  x[x==  "Andre Phillip Smith"]<-"Andre Smith"
   x[x==  "Jacque Cesaire"]<-"Jacques Cesaire"
-  x[x==  "Boobie Dixon"]<-" AnthonyDixon"
+  x[x==  "Boobie Dixon"]<-"Anthony Dixon"
+  x[x==  "Andre Jerome Caldwell"]<-"Andre Caldwell"
   x[x==  "Devin Breaux"]<-"Delvin Breaux"
   x[x==  "Tyron Crawford"]<-"Tyrone Crawford"
   x[x==  "Cornellius Carradine"]<-"Tank Carradine"
@@ -359,6 +377,9 @@ coordName<-function(x) {
   x[x=='Greg R Randall']<-"Greg Randall"
   x[x=='Clifton Ryan']<-"Cliff Ryan"
   x[x=='Marvin Smith']<-"Marvel Smith"
+  x[x==  "David Alexander Gettis"]<-"David Gettis"
+  x[x==  "Caleb Jeffrey Hanie"]<-"Caleb Hanie"
+  x[x=="Willie Snead Iv"|x=="Willie Snead IV"]<-"Willie Snead"
   
   
   
@@ -624,6 +645,7 @@ moving<-function(x, length, operation="mean", include.current=F) {
       
       
     } else if(!all(is.na(x))){
+      
       #fill in first few games with cumulative moving ave
       y[is.na(y) & !is.na(x)][-length( y[is.na(y) & !is.na(x)])]<- 
         rollapplyr(x[is.na(y) & !is.na(x)], rev(seq_along(x[is.na(y) & !is.na(x)])), operationFunc, align="left")[-1]
@@ -685,7 +707,11 @@ trimmed<-function(x) {
   mean(x[-c(which.min(x),which.max(x))], na.rm=T)
 }
 trimmed2<-function(x) {
-  mean(x[-c(which.min(x))], na.rm=T)
+  if(sum(!is.na(x))>1){
+    mean(x[-c(which.max(x))], na.rm=T)
+  } else{
+    x
+  }
 }
 quartile75<-function(x) {
   unname(quantile(x, .75, na.rm=TRUE))
@@ -778,7 +804,7 @@ makeParamPlot<-function(Parameters=c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (default)", "
   p
 }
 makeActualSlotPlot<-function(Title="Actual Results for All Draft Slots",
-                       Parameters=c("Case 1", "Case 1 + ZeroRB in R1", "Case1 + ZeroWR in R1")){
+                             Parameters=c("Case 1", "Case 1 + ZeroRB in R1", "Case1 + ZeroWR in R1")){
   
   Slot<-rep( paste0("Slot", 1:12), 3)
   Actuals<-unlist(c(actualScores_allSlots, actualScores_allSlots_zeroRB, actualScores_allSlots_zeroWR))
@@ -787,10 +813,10 @@ makeActualSlotPlot<-function(Title="Actual Results for All Draft Slots",
   Actuals<-data.frame(Actuals=Actuals, Slot=rep(Slot, each=250), Parameter=rep(Parameters, each=length(Actuals)/3))
   Actuals$Slot<-factor(Actuals$Slot, levels=unique(Actuals$Slot))
   Actuals<-ddply(Actuals, .(Slot, Parameter), summarize, 
-              N    = length(Actuals),
-              mean = mean(Actuals),
-              sd   = sd(Actuals),
-              se   = sd / sqrt(N) )
+                 N    = length(Actuals),
+                 mean = mean(Actuals),
+                 sd   = sd(Actuals),
+                 se   = sd / sqrt(N) )
   library(ggplot2)
   head(Actuals)
   
@@ -813,11 +839,11 @@ makeActualSlotPlot<-function(Title="Actual Results for All Draft Slots",
 }
 
 makeActualParamPlot<-function(Parameters=c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (default)", "2. default, shift=.25","3. default, shift=-.15",
-                                     "4. zero RB in R1, shift=0", "5. zero WR in R1, shift=0",  "6. \u2264 1QB in R1-11, shift=0", 
-                                     "7. RBx4, WRx6, shift=0", "8. RBx6, WRx4, \u2264 1QB in R1-11, shift=0",
-                                     "9. RBx5,WRx5,TEx2,QB/DST/Kx1, shift=0", "10. RBx4,WRx5,QB/TEx2,DST/Kx1, shift=0", 
-                                     "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" ),
-                        Title="Actual Results for Different Draft Parameters"){
+                                           "4. zero RB in R1, shift=0", "5. zero WR in R1, shift=0",  "6. \u2264 1QB in R1-11, shift=0", 
+                                           "7. RBx4, WRx6, shift=0", "8. RBx6, WRx4, \u2264 1QB in R1-11, shift=0",
+                                           "9. RBx5,WRx5,TEx2,QB/DST/Kx1, shift=0", "10. RBx4,WRx5,QB/TEx2,DST/Kx1, shift=0", 
+                                           "11. Zero RB in R1-4, \u2264 1QB in R1-11,  shift=0" ),
+                              Title="Actual Results for Different Draft Parameters"){
   
   Sims<-list(simScores,simScores2, simScores3, simScores4, simScores5,
              simScores6, simScores7, simScores8, simScores9, simScores10, simScores11, simScores12)[1:length(Parameters)] %>% unlist(recursive = T)
@@ -833,10 +859,10 @@ makeActualParamPlot<-function(Parameters=c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (defaul
   Actuals<-data.frame(Actuals=Actuals, Parameter=rep(as.character(Parameters), each=length(actualScores)))
   Actuals$Parameter<-factor(Actuals$Parameter, levels=unique(Actuals$Parameter))
   Actuals<-ddply(Actuals, .(Parameter), summarize, 
-              N    = length(Actuals),
-              mean = mean(Actuals),
-              sd   = sd(Actuals),
-              se   = sd / sqrt(N) )
+                 N    = length(Actuals),
+                 mean = mean(Actuals),
+                 sd   = sd(Actuals),
+                 se   = sd / sqrt(N) )
   Sims$Type<-"Sims"
   Actuals$Type<-"Actuals"
   Sims<-rbind(Sims, Actuals)
@@ -849,7 +875,7 @@ makeActualParamPlot<-function(Parameters=c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (defaul
     geom_bar(position=position_dodge(), stat="identity",
              colour="black", # Use black outlines,
              size=.3) +      # Thinner lines
-
+    
     coord_cartesian(ylim=c(min(Sims$mean)-10, max(Sims$mean+20)))+
     geom_errorbar(aes(ymin=mean-1.96*se, ymax=mean+1.96*se), #add confidence interval (+/-1.96*SE)
                   size=.3,    # Thinner lines
@@ -859,4 +885,13 @@ makeActualParamPlot<-function(Parameters=c("1. RBx5,WRx5,QBx2,K/DST/TEx1 (defaul
     ylab("Mean-Simulated Starting Lineup (25,000 sims)") +
     ggtitle(Title)
   p
+}
+
+Metrics<-function(y, x) {
+  
+  Rsq<-1-sum((y-x)^2)/sum((y-mean(y))^2) #Rsq
+  RMSE<-sqrt(mean((y-x)^2)) #RMSE
+  bias<-mean(y-x) #RMSE
+  
+  paste(c(paste("RSq:", Rsq), paste("RMSE:", RMSE),paste("bias:", bias) ))
 }
