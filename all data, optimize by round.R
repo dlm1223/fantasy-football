@@ -23,7 +23,7 @@ load("Player Data/Draft Data.RData")
 
 adp<-merge(ffcalc[ffcalc$Year==year, c("Player", "ADP_half", "ADPSD_half")], ffpros, by=c("Player"), all.x=T)
 
-adp$Pos[adp$Player%in%c("Chris Thompson", "Jd Mckissic", "Byron Marshall")& adp$Pos=="WR;RB"]<-"RB"
+adp$Pos[adp$Player%in%c("Chris Thompson", "Jd Mckissic", "Byron Marshall")& grepl(";",adp$Pos)]<-"RB"
 adp$Pos[adp$Player%in%c("Ryan Hewitt")]<-"TE"
 adp$Pos[adp$Player%in%c("Tavon Austin")]<-"WR"
 
@@ -114,7 +114,7 @@ getPick<-function(slot, pickNum, alreadyChosen,numRB=5, numWR=5, numTE=1, numQB=
   picks<-pickDF[, slot][pickNum:nrow(pickDF)]
   pickDelta<-picks[-1]-picks[1] 
   topRemaining<-which(!adp$Player%in% c(alreadyChosen, fix))  
-  
+  adp[topRemaining, ][1:20,]
   if(length(shift)>0){
     
     #constraining ADP of future picks
@@ -213,8 +213,8 @@ getPickDF<-function(slot="Slot4", numPicks=15, numTeams=12, customPicks=c()){
 simDraft<-function(slot="Slot4",numRB=5, numWR=5, numTE=1, numQB=2,numK=1,numDST=1,  numFLEX=0, shift=0, numTeams=12,scoring="HALF",
                    out=c(), outPos=c(),  onePos=c(), optmode="lpsolve", customPicks=c(), customADP=F){
   
-  # slot<-"Slot4";numRB<-4;numWR<-5;numTE<-1;numQB<-2;numK<-1;numFLEX<-1;numDST<-1;out<-c();fix<-c();customPicks<-c();scoring<-"HALF";numTeams<-12;shift<-0;outPos<-c();onePos<-c();optmode<-"lpsolve"
-  
+  #customADP<-F; slot<-"Slot4";numRB<-4;numWR<-5;numTE<-1;numQB<-2;numK<-1;numFLEX<-1;numDST<-1;out<-c();fix<-c();customPicks<-c();scoring<-"CUSTOM";numTeams<-12;shift<-0;outPos<-c();onePos<-c();optmode<-"lpsolve"
+  adp<-adp[order(adp$ADP_half, decreasing = F),]
   adp$ADP_sim[!is.na(adp$ADP_half)]<-rnorm(sum(!is.na(adp$ADP_half)), mean = adp$ADP_half[!is.na(adp$ADP_half)], sd=adp[!is.na(adp$ADP_half), "ADPSD_half"])
   if(customADP){
     adp$ADP_sim<-adp$customADP
@@ -271,4 +271,3 @@ source("simulate season sampled errors.R")
 adp$fantPts_bin<-as.character(cut(adp[, scoring], breaks=error.breaks))
 adp<-merge(adp[, !grepl("meanError", colnames(adp))], errors[, c("meanError", "fantPts_bin", "Pos")], by=c("fantPts_bin", "Pos"))
 adp[, scoring]<-adp[, scoring]+adp$meanError
-adp<-adp[order(adp$ADP_half, decreasing = F),]
