@@ -22,7 +22,7 @@ load("Player Data/NFL Game Data.RData")
 # devtools::install_github("ropensci/RSelenium")
 
 
-current.week<-10;current.season<-2018;current.type<-"Regular Season"
+current.week<-12;current.season<-2018;current.type<-"Regular Season"
 
 
 ###game-injury data#####
@@ -143,6 +143,7 @@ if(exists("game_locs2")){
 
 
 ###game snaps#####
+# remDr<-rsDriver(browser = "chrome", port=as.integer(4444))
 
 
 # remDr$client$setImplicitWaitTimeout(milliseconds = 5000)
@@ -205,7 +206,7 @@ snapLogs2<-list();length(snapLogs2)<-length(importGrid)
 
 
 #import
-remDr<-rsDriver(browser = "chrome")
+remDr<-rsDriver(browser = "chrome", port=as.integer(4444))
 for(x in 1:length(snapLogs2)){
   print(x)
   snapLogs2[[x]]<-tryCatch(importGame(gameid = importGrid[x]), error=function(e){list()})
@@ -291,7 +292,7 @@ starterLogs2<-list();length(starterLogs2)<-length(importGrid)
 
 
 #import
-remDr<-rsDriver(browser = "chrome")
+# remDr<-rsDriver(browser = "chrome", port=as.integer(4444))
 for(x in 1:length(starterLogs2)){
   print(x)
   starterLogs2[[x]]<-tryCatch(importGame(gameid = importGrid[x]), error=function(e){list()})
@@ -939,7 +940,7 @@ setdiff(gameLinks_FREF$GameID[gameLinks_FREF$Season>=2012&gameLinks_FREF$Var.5!=
 #use rselenium to get link formats of archived depth charts
 
 
-remDr<-rsDriver(browser = "chrome")
+# remDr<-rsDriver(browser = "chrome", port=as.integer(4444))
 links<-read.csv("Player Data/Depth Chart Links.csv")
 links$DATE<-as.Date(links$DATE)
 
