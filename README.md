@@ -278,7 +278,7 @@ getPicks(slot="Slot4", numRB=4, numWR = 6,numTE=1,numK=1,numQB=2, numDST=1,numFL
 
 ### Analyzing Bias
 
-Before I mentioned that the projections I am using have been biased for certain positions. For the last part of my analysis I'd like to see how the bias might affect my results. Looking at the errors, I'm going to create a shifted projection "HALF2" that accounts for bias:
+Before I mentioned that the projections I am using have been biased for certain positions. For the last part of my analysis I'd like to see how the bias might affect my results. Looking at the errors, I'm going to create a shifted projection "HALF2" below that accounts for bias. Another term for this is sensitivity analysis--I want to see how my parameter optimization changes if I change the projections.
 
 ``` r
 head(adp[, !grepl("STD|PPR", colnames(adp))], 10)
@@ -395,6 +395,6 @@ sapply(paste0("Slot", 1:12), function(x) getPicks(slot=x, numRB=6, numWR = 4,num
 Conclusion
 ----------
 
-In conclusion, I created a system that optimizes to get the best eventual starting lineup for fantasy football. In testing different strategies, it seems you should definitely draft 2 QBs, you should not do zero-RB, and it is unclear if you should draft RB first. The main flaw still remaining in all of this is the uncertainty in opponent picks. If an optimal strategy depends on getting a high value QB in round 10 for example, it should factor in what happens if someone else takes the QB. I will talk about that in a future post. <br /><br />
+In conclusion, I created a system that optimizes to get the best eventual starting lineup for fantasy football. In testing different strategies, it seems you should definitely draft 2 QBs, you should not do zero-RB, and it is unclear if you should draft RB first.  I found these conclusions through parameter optimization and sensitivity analysis. The main flaw still remaining in all of this is the uncertainty in opponent picks. If an optimal strategy depends on getting a high value QB in round 10 for example, it should factor in what happens if someone else takes the QB. I will talk about that in a future post. <br /><br />
 
 [1] Yahoo default is 12-team league with 15 picks per team. Positions=1 QB, 2 WR, 2 RB, 1 TE, 1 FLEX, 1 DST, 1 K. Scoring = .5 PPR
